@@ -1,0 +1,26 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+    function SP2_MARSS_ProcCutInc2
+%% 
+%%  10 point increased apodization of FID from spectrum 1.
+%%
+%%  12-2019, Christoph Juchem
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+global fm marss flag
+
+
+%--- update cut-off value spec 1 ---
+if marss.procCut==1
+    marss.procCut = 64;
+else
+    marss.procCut = marss.procCut + 64;
+end
+set(fm.marss.procCutVal,'String',sprintf('%.0f',marss.procCut))
+
+%--- window update ---
+SP2_MARSS_MARSSWinUpdate
+
+%--- analysis update ---
+SP2_MARSS_ProcAndPlotUpdate
