@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/SP2_Batch": true,
+			"**/SP2_Data_Dicom*": true,
+			"**/SP2_Data_GE*": true,
+			"**/SP2_Data_Jmrui*": true,
+			"**/SP2_Data_Philips*": true,
+			"**/SP2_Data_Siemens*": true,
+			"**/SP2_Data_Vnmr*": true
+		}
+	}
+}

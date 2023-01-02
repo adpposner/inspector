@@ -1,0 +1,74 @@
+/home/russell/INSPECTORflag.OS = 1
+data.defaultDir = /home/russell/MRSData/MartinRestruct/001_Martin/
+SP2_ReadDefaults	pars.usrDefFile=/home/russell/INSPECTOR/SP_DefaultsMac.matINSPECTOR manual located:
+/home/russell/INSPECTOR/INSPECTOR_Manual.pdf
+SP2_ReadDefaults	data.defaultDir C:/home/SP2_CheckDirAccessR ->
+String <C:/home> seems not to be a directory path...
+The general directory <C:/home/>
+is not accessible. Please update.
+
+SP2_ReadDefaults	data.defaultDir C:/home/SP2_CheckDirAccessR ->
+String <C:/Users/Martin/Documents/MR_Data/MR_Studies/MAGNA/MAGNA_01_19_04_11-16_08_34-DST-1_3_12_2_1107_5_2_43_166011> seems not to be a directory path...
+The data directory 2 <C:/Users/Martin/Documents/MR_Data/MR_Studies/MAGNA/MAGNA_01_19_04_11-16_08_34-DST-1_3_12_2_1107_5_2_43_166011/>
+is not accessible. Please update.
+
+SP2_CheckDirAccessR ->
+String <C:/Users/juchem/analysis/MRS_MacroMolecule/STEAM_Moieties> seems not to be a directory path...
+The simulation directory <C:/Users/juchem/analysis/MRS_MacroMolecule/STEAM_Moieties/>
+is not accessible. Please update.
+
+SP2_CheckDirAccessR ->
+String <C:/Users/Martin/Documents/MR_Data/MR_Studies/MRS_Pancreas_Olive/SummedSpins_for_temp> seems not to be a directory path...
+The processing data directory 1
+<C:/Users/Martin/Documents/MR_Data/MR_Studies/MRS_Pancreas_Olive/SummedSpins_for_temp/>
+is not accessible. Please update.
+
+SP2_CheckDirAccessR ->
+String <C:/Users/Martin/Documents/MR_Data/MR_Studies/MAGNA/MAGNA_01_19_04_11-16_08_34-DST-1_3_12_2_1107_5_2_43_166011> seems not to be a directory path...
+The processing data directory 2
+<C:/Users/Martin/Documents/MR_Data/MR_Studies/MAGNA/MAGNA_01_19_04_11-16_08_34-DST-1_3_12_2_1107_5_2_43_166011/>
+is not accessible. Please update.
+
+SP2_CheckDirAccessR ->
+String <C:/Users/Martin/Documents/MR_Data/MR_Studies/MRS_Pancreas_Olive/SummedSpins_for_temp> seems not to be a directory path...
+The processing export directory
+<C:/Users/Martin/Documents/MR_Data/MR_Studies/MRS_Pancreas_Olive/SummedSpins_for_temp/>
+is not accessible. Please update.
+
+SP2_CheckDirAccessR ->
+String <C:/Users/Martin/Documents/MR_Data/MR_Studies/MAGNA/MAGNA_01_19_04_11-16_08_34-DST-1_3_12_2_1107_5_2_43_166011> seems not to be a directory path...
+The LCM data directory
+<C:/Users/Martin/Documents/MR_Data/MR_Studies/MAGNA/MAGNA_01_19_04_11-16_08_34-DST-1_3_12_2_1107_5_2_43_166011/>
+is not accessible. Please update.
+
+SP2_CheckDirAccessR ->
+String <C:/Users/Martin/Documents/MR_Data/MR_Studies/MRS_Pancreas_Olive> seems not to be a directory path...
+The LCM basis directory
+<C:/Users/Martin/Documents/MR_Data/MR_Studies/MRS_Pancreas_Olive/>
+is not accessible. Please update.
+
+SP2_CheckDirAccessR ->
+String <C:/Users> seems not to be a directory path...
+The LCM batch protocol directory
+<C:/Users/>
+is not accessible. Please update.
+
+SP2_CheckDirAccessR ->
+String <C:/Users/Martin/Documents/MR_Data/MR_Studies/MRS_Pancreas_Olive> seems not to be a directory path...
+The LCM export directory
+<C:/Users/Martin/Documents/MR_Data/MR_Studies/MRS_Pancreas_Olive/>
+is not accessible. Please update.
+
+
+---   INSPECTOR   ---
+Magnetic Resonance Spectroscopy Software
+Version 11-2021
+by Christoph Juchem
+MR SCIENCE Laboratory
+Columbia University
+All Rights Reserved
+
+SP2_Data_PvReadNewRawData	reading </home/russell/MRSData/MartinRestruct/001_Martin/rawdata.job0>
+nspec/nRcvrs/nx/ny/ns/ni/nr: 4096/1/1/1/1/1/256 filesize 4096k
+resorting to complex: dim nspecC/nRcvrs/nx/ny/ns/ni/nr: 2048/1/1/1/1/1/256 
+SP2_Data_PvReadNewRawData finished
