@@ -72,3 +72,4 @@ SP2_Data_PvReadNewRawData	reading </home/russell/MRSData/MartinRestruct/001_Mart
 nspec/nRcvrs/nx/ny/ns/ni/nr: 4096/1/1/1/1/1/256 filesize 4096k
 resorting to complex: dim nspecC/nRcvrs/nx/ny/ns/ni/nr: 2048/1/1/1/1/1/256 
 SP2_Data_PvReadNewRawData finished
+

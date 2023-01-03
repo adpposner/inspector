@@ -289,7 +289,8 @@ elseif flag.dataManu==2                                                         
     end
     
     %--- convert parameters to method structure ---
-    if ~SP2_Data_PvParsConversion(method,acqp,1)
+    [ret_succ,data.spec1,flags] = SP2_Data_PvParsConversion(method,acqp,1,data.spec1,flags);
+    if ~ret_succ
         fprintf('%s ->\nParaVision parameter conversion failed. Program aborted.\n',FCTNAME);
         return
     end
