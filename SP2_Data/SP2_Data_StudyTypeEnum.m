@@ -1,17 +1,26 @@
-classdef SP2_Data_StudyTypeEnum
+classdef SP2_Data_StudyTypeEnum < uint32
 
 enumeration
-        Invalid (0),Varian,Bruker,GE,SiemensRda,SiemensDat,DIMCOMIMA,DICOM,PhilipsRaw,PhilipsCollapsed
+        Invalid (0)
+        Varian (1)
+        Bruker (2)
+        GE (3) 
+        SiemensRda (4)
+        SiemensDat (5)
+        DIMCOMIMA (6)
+        DICOM (7)
+        PhilipsRaw (8)
+        PhilipsCollapsed (9)
     end
 
     methods(Static) 
-        function sType = getStudyType(fidFile,fidDir)
+        function sType = getStudyType(fidFile,fidName,fidDir)
             sType = SP2_Data_StudyTypeEnum.Invalid;
             if strcmp(fidDir(end-4:end-1),'fid')
                 fprintf('Data format: Varian\n');
                 sType = SP2_Data_StudyTypeEnum.Varian;
-            elseif strcmp(fidFile,'fid') || strcmp(fidFile,'fid.refscan') || ...  % Bruker
-                strcmp(fidFile,'rawdata.job0') || strcmp(fidFile,'rawdata.job1')
+            elseif strcmp(fidName,'fid') || strcmp(fidName,'fid.refscan') || ...  % Bruker
+                strcmp(fidName,'rawdata.job0') || strcmp(fidName,'rawdata.job1')
                 fprintf('Data format: Bruker\n');
                 sType = SP2_Data_StudyTypeEnum.Bruker;
             elseif endswith(fidFile,'.7')

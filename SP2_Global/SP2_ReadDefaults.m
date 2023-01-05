@@ -65,19 +65,7 @@ end
 fprintf(loggingfile,"flag.OS = %d\n",flag.OS);
 
 %--- default directory ---
-if flag.OS==1            % Linux
-
-    %%DEBUG_RP%%
-    data.defaultDir = '/home/russell/MRSData/MartinRestruct/001_Martin/'
-    %%END_DEBUG_RP%%
-    %%ORIG
-        %data.defaultDir   = '/home/';                   % initialize current default data path
-    %%END ORIG
-elseif flag.OS==2        % Mac
-    data.defaultDir   = '/Users/';
-else                        % PC
-    data.defaultDir   = 'C:\Users\';                % initialize current default data path
-end
+data.defaultDir = SP2_FileHelper.setGetDefaultDir()
 
 fprintf(loggingfile,"data.defaultDir = %s\n",data.defaultDir);
 
@@ -1294,16 +1282,16 @@ if isempty(fmStruct) || ~isfield(fmStruct,'path')
     fprintf(loggingfile,'%s ->\nCouldn''t find the main program file\nCheck folder name/existence <INSPECTOR_v2> and software version...',FCTNAME);
     return
 else
-    pars.specPath   = SP2_SlashWinLin([fmStruct(1).path '/']);
+    pars.specPath   = SP2_FileHelper.inspectorPath();
     
     %--- protocol handling ---
     % update of default protocol file path (in any case)
     if flag.OS==1        % Linux
-        pars.usrDefFile = SP2_SlashWinLin([pars.specPath 'SP_DefaultsMac.mat']);
+        pars.usrDefFile = [pars.specPath filesep 'SP_DefaultsMac.mat'];
     elseif flag.OS==2            % Mac
-        pars.usrDefFile = SP2_SlashWinLin([pars.specPath 'SP_DefaultsMac.mat']);
+        pars.usrDefFile = [pars.specPath filesep 'SP_DefaultsMac.mat'];
     else                            % PC
-        pars.usrDefFile = SP2_SlashWinLin([pars.specPath 'SP_DefaultsWindows.mat']);
+        pars.usrDefFile = [pars.specPath filesep 'SP_DefaultsWindows.mat'];
     end
     fprintf(loggingfile,"%s\tpars.usrDefFile=%s",mfilename,pars.usrDefFile);
     % selection of specific/default protocol file
@@ -1857,7 +1845,7 @@ else
 end
 
 %--- manual location ---
-man.filePath = SP2_SlashWinLin(man.filePath);
+
 if flag.OS==1                   % Linux
     if ~SP2_CheckFileExistenceR(man.filePath,0)             % check default/previous path
         if SP2_CheckFileExistenceR([pars.specPath 'SP2_Manual/INSPECTOR_Manual.pdf'],0)
@@ -1909,82 +1897,13 @@ end
 
 
 %--- string update: OS handling ---
-data.defaultDir          = SP2_PathWinLin(data.defaultDir);
-data.protDir             = SP2_PathWinLin(data.protDir);
-data.protPath            = SP2_PathWinLin(data.protPath);
-data.protPathMat         = SP2_PathWinLin(data.protPathMat);
-data.protPathTxt         = SP2_PathWinLin(data.protPathTxt);
-data.spec1.fidDir        = SP2_PathWinLin(data.spec1.fidDir);
-data.spec1.fidFile       = SP2_PathWinLin(data.spec1.fidFile);
-data.spec1.methFile      = SP2_PathWinLin(data.spec1.methFile);
-data.spec1.acqpFile      = SP2_PathWinLin(data.spec1.acqpFile);
-data.spec2.fidDir        = SP2_PathWinLin(data.spec2.fidDir);
-data.spec2.fidFile       = SP2_PathWinLin(data.spec2.fidFile);
-data.spec2.methFile      = SP2_PathWinLin(data.spec2.methFile);
-data.spec2.acqpFile      = SP2_PathWinLin(data.spec2.acqpFile);
-mm.sim.fidDir            = SP2_PathWinLin(mm.sim.fidDir);
-mm.sim.fidPath           = SP2_PathWinLin(mm.sim.fidPath);
-mm.mmStructDir           = SP2_PathWinLin(mm.mmStructDir);
-mm.mmStructPath          = SP2_PathWinLin(mm.mmStructPath);
+
 %--- basic init ---
 proc.spec1.sf            = 123.2;            % (random) default: 3T
 proc.spec1.sw_h          = 4000;             % (random) default: 4 kHz
-proc.spec1.dataDir       = SP2_PathWinLin(proc.spec1.dataDir);
-proc.spec1.dataPathMat   = SP2_PathWinLin(proc.spec1.dataPathMat);
-proc.spec1.dataPathTxt   = SP2_PathWinLin(proc.spec1.dataPathTxt);
-proc.spec1.dataPathPar   = SP2_PathWinLin(proc.spec1.dataPathPar);
-proc.spec1.dataPathRaw   = SP2_PathWinLin(proc.spec1.dataPathRaw);
-proc.spec1.dataPathCoord = SP2_PathWinLin(proc.spec1.dataPathCoord);
+
 proc.spec2.sf            = 123.2;            % (random) default: 3T
 proc.spec2.sw_h          = 4000;             % (random) default: 4 kHz
-proc.spec2.dataDir       = SP2_PathWinLin(proc.spec2.dataDir);
-proc.spec2.dataPathMat   = SP2_PathWinLin(proc.spec2.dataPathMat);
-proc.spec2.dataPathTxt   = SP2_PathWinLin(proc.spec2.dataPathTxt);
-proc.spec2.dataPathPar   = SP2_PathWinLin(proc.spec2.dataPathPar);
-proc.spec2.dataPathRaw   = SP2_PathWinLin(proc.spec2.dataPathRaw);
-proc.spec2.dataPathCoord = SP2_PathWinLin(proc.spec2.dataPathCoord);
-proc.expt.dataDir        = SP2_PathWinLin(proc.expt.dataDir);
-proc.expt.dataPathMat    = SP2_PathWinLin(proc.expt.dataPathMat);
-proc.expt.dataPathTxt    = SP2_PathWinLin(proc.expt.dataPathTxt);
-proc.expt.dataPathRaw    = SP2_PathWinLin(proc.expt.dataPathRaw);
-marss.spinSys.libDir     = SP2_PathWinLin(marss.spinSys.libDir);
-marss.spinSys.libName    = SP2_PathWinLin(marss.spinSys.libName);
-marss.spinSys.libPath    = SP2_PathWinLin(marss.spinSys.libPath);
-marss.basis.fileDir      = SP2_PathWinLin(marss.basis.fileDir);
-marss.basis.fileName     = SP2_PathWinLin(marss.basis.fileName);
-marss.basis.filePath     = SP2_PathWinLin(marss.basis.filePath);
-mrsi.spec1.dataDir       = SP2_PathWinLin(mrsi.spec1.dataDir);
-mrsi.spec1.dataPathMat   = SP2_PathWinLin(mrsi.spec1.dataPathMat);
-mrsi.spec1.dataPathTxt   = SP2_PathWinLin(mrsi.spec1.dataPathTxt);
-mrsi.spec2.dataDir       = SP2_PathWinLin(mrsi.spec2.dataDir);
-mrsi.spec2.dataPathMat   = SP2_PathWinLin(mrsi.spec2.dataPathMat);
-mrsi.spec2.dataPathTxt   = SP2_PathWinLin(mrsi.spec2.dataPathTxt);
-mrsi.ref.dataDir         = SP2_PathWinLin(mrsi.ref.dataDir);
-mrsi.ref.dataPathMat     = SP2_PathWinLin(mrsi.ref.dataPathMat);
-mrsi.ref.dataPathTxt     = SP2_PathWinLin(mrsi.ref.dataPathTxt);
-mrsi.expt.dataDir        = SP2_PathWinLin(mrsi.expt.dataDir);
-mrsi.expt.dataPathMat    = SP2_PathWinLin(mrsi.expt.dataPathMat);
-mrsi.expt.dataPathTxt    = SP2_PathWinLin(mrsi.expt.dataPathTxt);
-lcm.dataDir              = SP2_PathWinLin(lcm.dataDir);
-lcm.dataPathMat          = SP2_PathWinLin(lcm.dataPathMat);
-lcm.dataPathTxt          = SP2_PathWinLin(lcm.dataPathTxt);
-lcm.dataPathPar          = SP2_PathWinLin(lcm.dataPathPar);
-lcm.dataPathRaw          = SP2_PathWinLin(lcm.dataPathRaw);
-lcm.dataPathJmrui        = SP2_PathWinLin(lcm.dataPathJmrui);
-lcm.basisDir             = SP2_PathWinLin(lcm.basisDir);
-lcm.basisPath            = SP2_PathWinLin(lcm.basisPath);
-lcm.batch.protDir        = SP2_PathWinLin(lcm.batch.protDir);
-lcm.expt.dataDir         = SP2_PathWinLin(lcm.expt.dataDir);
-lcm.expt.dataPathMat     = SP2_PathWinLin(lcm.expt.dataPathMat);
-lcm.expt.datPathTxt      = SP2_PathWinLin(lcm.expt.dataPathTxt);
-lcm.expt.dataPathRaw     = SP2_PathWinLin(lcm.expt.dataPathRaw);
-syn.fidDir               = SP2_PathWinLin(syn.fidDir);
-syn.fidName              = SP2_PathWinLin(syn.fidName);
-syn.fidPath              = SP2_PathWinLin(syn.fidPath);
-syn.fidPathPar           = SP2_PathWinLin(syn.fidPathPar);
-tools.anonFileDir        = SP2_PathWinLin(tools.anonFileDir);
-tools.anonFilePath       = SP2_PathWinLin(tools.anonFilePath);
-tools.anonDir            = SP2_PathWinLin(tools.anonDir);
 
 
 %--- buffer change of flag definition ---

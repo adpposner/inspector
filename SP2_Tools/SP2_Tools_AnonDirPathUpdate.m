@@ -25,7 +25,7 @@ return
 %     set(fm.data.pathStudy,'String',exm.pathStudy)
 %     return
 % end
-% pathStudyTmp = SP2_SlashWinLin(pathStudyTmp);
+% pathStudyTmp = pathStudyTmp;
 % pathStudyTmp = SP2_GuaranteeFinalSlash(pathStudyTmp);
 % 
 % %--- check directory accessibility ---

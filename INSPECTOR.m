@@ -17,6 +17,11 @@ inspectorroot = fileparts(mfilename('fullpath'));
 loggingfile = fopen('logfile.txt','w');
 
 fprintf(loggingfile,"%s",inspectorroot);
+%Add all to path
+genpath('.')
+addpath(genpath('.'));
+
+
 %--- check for open INSPECTOR ---
 % if isfield(pars,'spxOpen')
 %     fprintf(loggingfile,'\nOpen INSPECTOR found. Start of second one aborted.\n\n');

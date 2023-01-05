@@ -18,7 +18,7 @@ FCTNAME = 'SP2_Data_PvParsConversion';
 f_succ = 0;
 
 %warning('dataSpecX has been set in %s',mfilename);
-dataSpecX = dataSpecX;
+
 
 %--- parameter transfer to 'method' struct ---
 if isfield(acqp,'PULPROG')
@@ -905,6 +905,7 @@ dataSpecX.software;
 dataSpecX.protocolName;
 dataSpecX.scanName;
 
+dataSpec = dataSpecX
 
 updatedflags = dataflags;
 

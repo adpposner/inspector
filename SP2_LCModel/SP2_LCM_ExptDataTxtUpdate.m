@@ -18,7 +18,7 @@ f_succ = 0;
 
 %--- fid file assignment ---
 exptFidFileTmp = get(fm.lcm.exptDataPath,'String');
-exptFidFileTmp = SP2_SlashWinLin(exptFidFileTmp);      % substitute / by \
+exptFidFileTmp = exptFidFileTmp;      % substitute / by \
 if isempty(exptFidFileTmp)
     fprintf('%s ->\nAn empty entry is useless.\n',FCTNAME);
     set(fm.lcm.exptDataPath,'String',lcm.expt.dataPathTxt)

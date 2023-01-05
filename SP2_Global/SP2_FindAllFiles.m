@@ -48,7 +48,7 @@ for allCnt = 1:length(allStruct)
     if ~strcmp(allStruct(allCnt).name,'.') && ~strcmp(allStruct(allCnt).name,'..')
         if allStruct(allCnt).isdir          % directory
             dCnt = dCnt + 1;
-            dirCell{dCnt} = SP2_SlashWinLin([parentDir allStruct(allCnt).name '/']);
+            dirCell{dCnt} = [parentDir allStruct(allCnt).name '/'];
         else                                % file
             fCnt = fCnt + 1;
             fileCell{fCnt} = [parentDir allStruct(allCnt).name];

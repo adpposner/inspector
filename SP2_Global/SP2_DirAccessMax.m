@@ -34,7 +34,7 @@ if nargin==2
 end
 
 %--- check for basic length ---
-dirPath = SP2_SlashWinLin(dirPath);
+dirPath = dirPath;
 if flag.OS==1               % Linux
     if length(dirPath)<6
         if f_verbose
@@ -136,7 +136,7 @@ if ~exist(dirPath,'dir')
             if icnt==1
                 dirStr{1} = [INIT subdir{icnt}];
             else
-                dirStr{icnt} = SP2_SlashWinLin([dirStr{icnt-1} '\' subdir{icnt}]);
+                dirStr{icnt} = [dirStr{icnt-1} '\' subdir{icnt}];
             end
             if find(exist(char(dirStr{icnt}))==7)
                 existVec(1,icnt) = 1;
@@ -161,7 +161,7 @@ if ~exist(dirPath,'dir')
                 fprintf('%s ->\n<%s> isn''t accessible,\neven if <%s> is accessible...\n',...
                         FCTNAME,dirPath,dirStr{max(lastField)})
             end
-            dirPathMax = SP2_SlashWinLin([dirStr{max(lastField)} '\']);
+            dirPathMax = [dirStr{max(lastField)} '\'];
         end
     end
 else

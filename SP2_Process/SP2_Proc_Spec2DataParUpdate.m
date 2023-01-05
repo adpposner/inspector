@@ -15,7 +15,7 @@ FCTNAME = 'SP2_Proc_Spec2DataParUpdate';
 
 %--- fid file assignment ---
 dat2FidFileTmp = get(fm.proc.spec2DataPath,'String');
-dat2FidFileTmp = SP2_SlashWinLin(dat2FidFileTmp);
+dat2FidFileTmp = dat2FidFileTmp;
 if isempty(dat2FidFileTmp)
     fprintf('%s ->\nAn empty entry is useless.\n',FCTNAME);
     set(fm.proc.spec2DataPath,'String',proc.spec2.dataPathPar)

@@ -81,7 +81,7 @@ if ~exist(dirPath,'dir')
         if icnt==1
             dirStr{1} = [INIT subdir{icnt}];
         else
-            dirStr{icnt} = SP2_SlashWinLin([dirStr{icnt-1} '\' subdir{icnt}]);
+            dirStr{icnt} = [dirStr{icnt-1} '\' subdir{icnt}];
         end
         if find(exist(char(dirStr{icnt}))==7)
             existVec(1,icnt) = 1;

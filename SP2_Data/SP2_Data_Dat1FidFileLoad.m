@@ -39,35 +39,7 @@ end
 if f_LoadMsgFlag
     fprintf('\nLoading metabolite scan (Data 1):\n');
 end
-if strcmp(data.spec1.fidDir(end-4:end-1),'.fid')                % Varian
-    fprintf('Data format: Varian\n');
-    flag.dataManu = 1;        
-elseif strcmp(data.spec1.fidName,'fid') || strcmp(data.spec1.fidName,'fid.refscan') || ...   % Bruker
-       strcmp(data.spec1.fidName,'rawdata.job0') || strcmp(data.spec1.fidName,'rawdata.job1') 
-    fprintf('Data format: Bruker\n');
-    flag.dataManu = 2;     
-elseif strcmp(data.spec1.fidFile(end-1:end),'.7')               % GE
-    fprintf('Data format: General Electric\n');
-    flag.dataManu = 3;
-elseif strcmp(data.spec1.fidFile(end-3:end),'.rda')             % Siemens / rda
-    fprintf('Data format: Siemens (.rda)\n');
-    flag.dataManu = 4;
-elseif strcmp(data.spec1.fidFile(end-3:end),'.dcm')             % DICOM / dcm
-    fprintf('Data format: DICOM\n');
-    flag.dataManu = 5;
-elseif strcmp(data.spec1.fidFile(end-3:end),'.dat')             % Siemens / dat
-    fprintf('Data format: Siemens (.dat)\n');
-    flag.dataManu = 6;
-elseif strcmp(data.spec1.fidFile(end-3:end),'.raw')             % Philips raw
-    fprintf('Data format: Philips (.raw)\n');
-    flag.dataManu = 7;
-elseif strcmp(data.spec1.fidFile(end-4:end),'.SDAT')            % Philips collapsed
-    fprintf('Data format: Philips (.SDAT)\n');
-    flag.dataManu = 8;
-elseif strcmp(data.spec1.fidFile(end-3:end),'.IMA')             % DICOM / IMA
-    fprintf('Data format: DICOM (.IMA)\n');
-    flag.dataManu = 9;
-end
+flag.dataManu = SP2_Data_StudyTypeEnum.getStudyType(data.spec1.fidFile,data.spec1.fidName,data.spec1.fidDir);
 
 %--- warning if no scan numbering (XXX_) ---
 % SP2_Data_CheckScanIndexFormat(data.spec1)
@@ -289,7 +261,7 @@ elseif flag.dataManu==2                                                         
     end
     
     %--- convert parameters to method structure ---
-    [ret_succ,data.spec1,flags] = SP2_Data_PvParsConversion(method,acqp,1,data.spec1,flags);
+    [ret_succ,data.spec1,flag] = SP2_Data_PvParsConversion(method,acqp,1,data.spec1,flag);
     if ~ret_succ
         fprintf('%s ->\nParaVision parameter conversion failed. Program aborted.\n',FCTNAME);
         return

@@ -15,7 +15,7 @@ FCTNAME = 'SP2_MRSI_Spec1DataTxtUpdate';
 
 %--- fid file assignment ---
 dat1FidFileTmp = get(fm.mrsi.spec1DataPath,'String');
-dat1FidFileTmp = SP2_SlashWinLin(dat1FidFileTmp);
+dat1FidFileTmp = dat1FidFileTmp;
 if isempty(dat1FidFileTmp)
     fprintf('%s ->\nAn empty entry is useless.\n',FCTNAME);
     set(fm.mrsi.spec1DataPath,'String',mrsi.spec1.dataPathTxt)

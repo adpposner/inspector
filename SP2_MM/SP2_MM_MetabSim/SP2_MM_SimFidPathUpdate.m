@@ -16,7 +16,7 @@ FCTNAME = 'SP2_MM_SimFidPathUpdate';
 
 %--- fid file assignment ---
 mmSimFidPathTmp = get(fm.mm.simFidPath,'String');
-mmSimFidPathTmp = SP2_SlashWinLin(mmSimFidPathTmp);
+mmSimFidPathTmp = mmSimFidPathTmp;
 if isempty(mmSimFidPathTmp)
     fprintf('%s ->\nAn empty entry is useless.\n',FCTNAME);
     set(fm.mm.simFidPath,'String',mm.sim.fidPath)

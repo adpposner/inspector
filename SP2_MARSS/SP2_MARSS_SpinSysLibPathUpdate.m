@@ -18,7 +18,7 @@ f_succ = 0;
 
 %--- fid file assignment ---
 spinSysLibPathTmp = get(fm.marss.spinSysLibPath,'String');
-spinSysLibPathTmp = SP2_SlashWinLin(spinSysLibPathTmp);
+spinSysLibPathTmp = spinSysLibPathTmp;
 if isempty(spinSysLibPathTmp)
     fprintf('%s ->\nAn empty entry is useless.\n',FCTNAME);
     set(fm.marss.spinSysLibPath,'String',marss.spinSys.libPath)

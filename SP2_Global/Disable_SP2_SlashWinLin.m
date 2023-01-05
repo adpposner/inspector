@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-    function strOut = SP2_SlashWinLin(strIn)
+    function strOut = strIn
 %%
 %%  Slash/Backslash selection for string variable that becomes necessary
 %%  for the correct assignment of directory and file paths on 

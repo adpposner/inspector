@@ -22,7 +22,7 @@ if ~toolsAnonDir            % buffer select cancelation
     fprintf('%s aborted.\n',FCTNAME);
     return
 end
-tools.anonDir = SP2_SlashWinLin(toolsAnonDir);
+tools.anonDir = toolsAnonDir;
 tools.anonDir = SP2_GuaranteeFinalSlash(tools.anonDir);
 
 %--- check directory accessibility ---

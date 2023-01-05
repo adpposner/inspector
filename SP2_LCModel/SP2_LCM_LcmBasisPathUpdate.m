@@ -18,7 +18,7 @@ f_succ = 0;
 
 %--- fid file assignment ---
 basisPathTmp = get(fm.lcm.basisPath,'String');
-basisPathTmp = SP2_SlashWinLin(basisPathTmp);
+basisPathTmp = basisPathTmp;
 if isempty(basisPathTmp)
     fprintf('%s ->\nAn empty entry is useless.\n',FCTNAME);
     set(fm.lcm.basisPath,'String',lcm.basisPath)

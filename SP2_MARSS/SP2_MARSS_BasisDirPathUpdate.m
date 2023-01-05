@@ -20,7 +20,7 @@ if isempty(basisDirTmp)
     set(fm.marss.basisDirPath,'String',marss.basis.fileDir)
     return
 end
-basisDirTmp = SP2_SlashWinLin(basisDirTmp);
+basisDirTmp = basisDirTmp;
 basisDirTmp = SP2_GuaranteeFinalSlash(basisDirTmp);
 
 %--- check directory accessibility ---

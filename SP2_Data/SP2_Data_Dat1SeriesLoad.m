@@ -113,7 +113,7 @@ switch flag.dataManu
         for expCnt = 1:data.spec1.seriesN
     
             %--- assignment of experiment directory ---
-            if SP2_CheckDirAccessR(SP2_SlashWinLin([studyDir num2str(data.spec1.seriesVec(expCnt)) '.fid\']))
+            if SP2_CheckDirAccessR([studyDir num2str(data.spec1.seriesVec(expCnt)) '.fid\'])
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
                 seriesDirs{expCnt} = [studyDir num2str(data.spec1.seriesVec(expCnt)) '.fid\'];
             else
@@ -122,7 +122,7 @@ switch flag.dataManu
                 f_done = 0;     % init alternative path success flag
                 for altCnt = 1:altN
                     if data.spec1.seriesVec(expCnt)==altStruct(altCnt).number
-                        seriesDirs{expCnt} = SP2_SlashWinLin([studyDir altStruct(altCnt).name '\']);
+                        seriesDirs{expCnt} = [studyDir altStruct(altCnt).name '\'];
                         if f_done       % check for multiple options
                             fprintf(loggingfile,'%s ->\nNo direct scan, but multiple alternatives were found for\n',FCTNAME);
                             fprintf(loggingfile,'scan number %i. Program aborted.\n',data.spec1.seriesVec(expCnt));
@@ -205,7 +205,7 @@ switch flag.dataManu
             %--- extract alternative scan directories (like 005_fovXXX_matXXX_dateXXX.fid) ---
             for sCnt = 1:dirLen             % all elements in folder
                 if dirStruct(sCnt).isdir==1 && ~strcmp(dirStruct(sCnt).name,'.') && ~strcmp(dirStruct(sCnt).name,'..')      % is directory
-                    if SP2_CheckFileExistenceR(SP2_SlashWinLin([studyDir dirStruct(sCnt).name '/rawdata.job0']),0)           % contains rawdata.job0 file
+                    if SP2_CheckFileExistenceR([studyDir dirStruct(sCnt).name '/rawdata.job0']),0           % contains rawdata.job0 file
                         underInd = findstr(dirStruct(sCnt).name,'_');
                         % check for underscore and reasonable string-to-number conversion
                         if any(underInd) && any(str2double(dirStruct(sCnt).name(1:underInd(1)-1)))
@@ -227,16 +227,16 @@ switch flag.dataManu
             for expCnt = 1:data.spec1.seriesN
 
                 %--- assignment of experiment directory ---
-                if SP2_CheckDirAccessR(SP2_SlashWinLin([studyDir num2str(data.spec1.seriesVec(expCnt)) '\']))
+                if SP2_CheckDirAccessR([studyDir num2str(data.spec1.seriesVec(expCnt)) '\'])
                     % direct assignment of 1.fid, 2.fid, 3.fid, ...
-                    seriesDirs{expCnt} = SP2_SlashWinLin([studyDir num2str(data.spec1.seriesVec(expCnt)) '\']);
+                    seriesDirs{expCnt} = [studyDir num2str(data.spec1.seriesVec(expCnt)) '\'];
                 else
                     % try to extract/deduce scan number and path from alternative
                     % directory structure (like 005_matXXX_fovXXX_dateXXX.fid)
                     f_done = 0;     % init alternative path success flag
                     for altCnt = 1:altN
                         if data.spec1.seriesVec(expCnt)==altStruct(altCnt).number
-                            seriesDirs{expCnt} = SP2_SlashWinLin([studyDir altStruct(altCnt).name '\']);
+                            seriesDirs{expCnt} = [studyDir altStruct(altCnt).name '\'];
                             if f_done       % check for multiple options
                                 fprintf(loggingfile,'%s ->\nNo direct scan, but multiple alternatives were found for\n',FCTNAME);
                                 fprintf(loggingfile,'scan number %i. Program aborted.\n',data.spec1.seriesVec(expCnt));
@@ -336,7 +336,7 @@ switch flag.dataManu
             %--- extract alternative scan directories (like 005_fovXXX_matXXX_dateXXX.fid) ---
             for sCnt = 1:dirLen             % all elements in folder
                 if dirStruct(sCnt).isdir==1 && ~strcmp(dirStruct(sCnt).name,'.') && ~strcmp(dirStruct(sCnt).name,'..')       % is directory
-                    if SP2_CheckFileExistenceR(SP2_SlashWinLin([studyDir dirStruct(sCnt).name '/fid']),0)   % contains fid file
+                    if SP2_CheckFileExistenceR([studyDir dirStruct(sCnt).name '/fid']),0   % contains fid file
                         underInd = findstr(dirStruct(sCnt).name,'_');
                         % check for underscore and reasonable string-to-number conversion
                         if any(underInd) && any(str2double(dirStruct(sCnt).name(1:underInd(1)-1)))
@@ -357,16 +357,16 @@ switch flag.dataManu
             for expCnt = 1:data.spec1.seriesN;
 
                 %--- assignment of experiment directory ---
-                if SP2_CheckDirAccessR(SP2_SlashWinLin([studyDir num2str(data.spec1.seriesVec(expCnt)) '\']))
+                if SP2_CheckDirAccessR([studyDir num2str(data.spec1.seriesVec(expCnt)) '\'])
                     % direct assignment of 1.fid, 2.fid, 3.fid, ...
-                    seriesDirs{expCnt} = SP2_SlashWinLin([studyDir num2str(data.spec1.seriesVec(expCnt)) '\']);
+                    seriesDirs{expCnt} = [studyDir num2str(data.spec1.seriesVec(expCnt)) '\'];
                 else
                     % try to extract/deduce scan number and path from alternative
                     % directory structure (like 005_matXXX_fovXXX_dateXXX.fid)
                     f_done = 0;     % init alternative path success flag
                     for altCnt = 1:altN
                         if data.spec1.seriesVec(expCnt)==altStruct(altCnt).number
-                            seriesDirs{expCnt} = SP2_SlashWinLin([studyDir altStruct(altCnt).name '\']);
+                            seriesDirs{expCnt} = [studyDir altStruct(altCnt).name '\'];
                             if f_done       % check for multiple options
                                 fprintf(loggingfile,'%s ->\nNo direct scan, but multiple alternatives were found for\n',FCTNAME);
                                 fprintf(loggingfile,'scan number %i. Program aborted.\n',data.spec1.seriesVec(expCnt));
@@ -489,7 +489,7 @@ switch flag.dataManu
         seriesFiles = {};
         for expCnt = 1:data.spec1.seriesN;
             
-            if SP2_CheckFileExistenceR(SP2_SlashWinLin([studyDir num2str(data.spec1.seriesVec(expCnt)) '.7']),flag.verbose)
+            if SP2_CheckFileExistenceR([studyDir num2str(data.spec1.seriesVec(expCnt)) '.7']),flag.verbose
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
                 seriesFiles{expCnt} = [studyDir num2str(data.spec1.seriesVec(expCnt)) '.7'];
             else
@@ -498,7 +498,7 @@ switch flag.dataManu
                 f_done = 0;     % init alternative path success flag
                 for altCnt = 1:altN
                     if data.spec1.seriesVec(expCnt)==altStruct(altCnt).number
-                        seriesFiles{expCnt} = SP2_SlashWinLin([studyDir altStruct(altCnt).name]);
+                        seriesFiles{expCnt} = [studyDir altStruct(altCnt).name];
                         if f_done       % check for multiple options
                             fprintf(loggingfile,'%s ->\nNo direct scan, but multiple alternatives were found for\n',FCTNAME);
                             fprintf(loggingfile,'scan number %i. Program aborted.\n',data.spec1.seriesVec(expCnt));
@@ -582,7 +582,7 @@ switch flag.dataManu
         seriesFiles = {};
         for expCnt = 1:data.spec1.seriesN
             
-            if SP2_CheckFileExistenceR(SP2_SlashWinLin([studyDir num2str(data.spec1.seriesVec(expCnt)) '.rda']),flag.verbose)
+            if SP2_CheckFileExistenceR([studyDir num2str(data.spec1.seriesVec(expCnt)) '.rda']),flag.verbose
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
                 seriesFiles{expCnt} = [studyDir num2str(data.spec1.seriesVec(expCnt)) '.rda'];
             else
@@ -591,7 +591,7 @@ switch flag.dataManu
                 f_done = 0;     % init alternative path success flag
                 for altCnt = 1:altN
                     if data.spec1.seriesVec(expCnt)==altStruct(altCnt).number
-                        seriesFiles{expCnt} = SP2_SlashWinLin([studyDir altStruct(altCnt).name]);
+                        seriesFiles{expCnt} = [studyDir altStruct(altCnt).name];
                         if f_done       % check for multiple options
                             fprintf(loggingfile,'%s ->\nNo direct scan, but multiple alternatives were found for\n',FCTNAME);
                             fprintf(loggingfile,'scan number %i. Program aborted.\n',data.spec1.seriesVec(expCnt));
@@ -682,7 +682,7 @@ switch flag.dataManu
         seriesFiles = {};
         for expCnt = 1:data.spec1.seriesN
             
-            if SP2_CheckFileExistenceR(SP2_SlashWinLin([studyDir num2str(data.spec1.seriesVec(expCnt)) '.dcm']),flag.verbose)
+            if SP2_CheckFileExistenceR([studyDir num2str(data.spec1.seriesVec(expCnt)) '.dcm']),flag.verbose
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
                 seriesFiles{expCnt} = [studyDir num2str(data.spec1.seriesVec(expCnt)) '.dcm'];
             else
@@ -691,7 +691,7 @@ switch flag.dataManu
                 f_done = 0;     % init alternative path success flag
                 for altCnt = 1:altN
                     if data.spec1.seriesVec(expCnt)==altStruct(altCnt).number
-                        seriesFiles{expCnt} = SP2_SlashWinLin([studyDir altStruct(altCnt).name]);
+                        seriesFiles{expCnt} = [studyDir altStruct(altCnt).name];
                         if f_done       % check for multiple options
                             fprintf(loggingfile,'%s ->\nNo direct scan, but multiple alternatives were found for\n',FCTNAME);
                             fprintf(loggingfile,'scan number %i. Program aborted.\n',data.spec1.seriesVec(expCnt));
@@ -787,7 +787,7 @@ switch flag.dataManu
         seriesFiles = {};
         for expCnt = 1:data.spec1.seriesN
 
-            if SP2_CheckFileExistenceR(SP2_SlashWinLin([studyDir num2str(data.spec1.seriesVec(expCnt)) '.dat']),flag.verbose)
+            if SP2_CheckFileExistenceR([studyDir num2str(data.spec1.seriesVec(expCnt)) '.dat']),flag.verbose
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
                 seriesFiles{expCnt} = [studyDir num2str(data.spec1.seriesVec(expCnt)) '.dat'];
             else
@@ -796,7 +796,7 @@ switch flag.dataManu
                 f_done = 0;     % init alternative path success flag
                 for altCnt = 1:altN
                     if data.spec1.seriesVec(expCnt)==altStruct(altCnt).number
-                        seriesFiles{expCnt} = SP2_SlashWinLin([studyDir altStruct(altCnt).name]);
+                        seriesFiles{expCnt} = [studyDir altStruct(altCnt).name];
                         if f_done       % check for multiple options
                             fprintf(loggingfile,'%s ->\nNo direct scan, but multiple alternatives were found for\n',FCTNAME);
                             fprintf(loggingfile,'scan number %i. Program aborted.\n',data.spec1.seriesVec(expCnt));
@@ -889,7 +889,7 @@ switch flag.dataManu
         seriesFiles = {};
         for expCnt = 1:data.spec1.seriesN
             
-            if SP2_CheckFileExistenceR(SP2_SlashWinLin([studyDir num2str(data.spec1.seriesVec(expCnt)) '.raw']),flag.verbose)
+            if SP2_CheckFileExistenceR([studyDir num2str(data.spec1.seriesVec(expCnt)) '.raw']),flag.verbose
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
                 seriesFiles{expCnt} = [studyDir num2str(data.spec1.seriesVec(expCnt)) '.raw'];
             else
@@ -898,7 +898,7 @@ switch flag.dataManu
                 f_done = 0;     % init alternative path success flag
                 for altCnt = 1:altN
                     if data.spec1.seriesVec(expCnt)==altStruct(altCnt).number
-                        seriesFiles{expCnt} = SP2_SlashWinLin([studyDir altStruct(altCnt).name]);
+                        seriesFiles{expCnt} = [studyDir altStruct(altCnt).name];
                         if f_done       % check for multiple options
                             fprintf(loggingfile,'%s ->\nNo direct scan, but multiple alternatives were found for\n',FCTNAME);
                             fprintf(loggingfile,'scan number %i. Program aborted.\n',data.spec1.seriesVec(expCnt));
@@ -985,7 +985,7 @@ switch flag.dataManu
         seriesFiles = {};
         for expCnt = 1:data.spec1.seriesN
             
-            if SP2_CheckFileExistenceR(SP2_SlashWinLin([studyDir num2str(data.spec1.seriesVec(expCnt)) '.SDAT']),flag.verbose)
+            if SP2_CheckFileExistenceR([studyDir num2str(data.spec1.seriesVec(expCnt)) '.SDAT']),flag.verbose
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
                 seriesFiles{expCnt} = [studyDir num2str(data.spec1.seriesVec(expCnt)) '.SDAT'];
             else
@@ -994,7 +994,7 @@ switch flag.dataManu
                 f_done = 0;     % init alternative path success flag
                 for altCnt = 1:altN
                     if data.spec1.seriesVec(expCnt)==altStruct(altCnt).number
-                        seriesFiles{expCnt} = SP2_SlashWinLin([studyDir altStruct(altCnt).name]);
+                        seriesFiles{expCnt} = [studyDir altStruct(altCnt).name];
                         if f_done       % check for multiple options
                             fprintf(loggingfile,'%s ->\nNo direct scan, but multiple alternatives were found for\n',FCTNAME);
                             fprintf(loggingfile,'scan number %i. Program aborted.\n',data.spec1.seriesVec(expCnt));

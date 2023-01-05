@@ -16,7 +16,7 @@ FCTNAME = 'SP2_Syn_MetabFidPathUpdate';
 
 %--- fid file assignment ---
 synFidPathTmp = get(fm.syn.fidPath,'String');
-synFidPathTmp = SP2_SlashWinLin(synFidPathTmp);
+synFidPathTmp = synFidPathTmp;
 if isempty(synFidPathTmp)
     fprintf('%s ->\nAn empty entry is useless.\n',FCTNAME);
     set(fm.syn.fidPath,'String',syn.fidPath)

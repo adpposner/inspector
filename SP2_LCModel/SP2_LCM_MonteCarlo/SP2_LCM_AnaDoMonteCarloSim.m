@@ -54,7 +54,7 @@ if ~flag.lcmMCarloInit                          % no parameter init, i.e. reset 
 end
 
 %--- result directory handling ---
-resultDir = SP2_SlashWinLin([lcm.expt.dataDir 'SPX_LcmMonteCarlo\']);
+resultDir = [lcm.expt.dataDir 'SPX_LcmMonteCarlo\'];
 if ~SP2_CheckDirAccessR(resultDir)
     [f_done,msg,msgId] = mkdir(resultDir);
     if f_done

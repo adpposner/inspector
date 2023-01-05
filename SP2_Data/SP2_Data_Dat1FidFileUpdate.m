@@ -114,16 +114,16 @@ if ~any(dat1FidFileTmp=='/') && ~any(dat1FidFileTmp=='\') && ...
             expNum = max(round(str2double(dat1FidFileTmp)),1);
             %--- assignment of experiment directory ---
             expDir = '';            % init / reset
-            if SP2_CheckDirAccessR(SP2_SlashWinLin([studyDir num2str(expNum) '.fid\']),flag.verbose)
+            if SP2_CheckDirAccessR([studyDir num2str(expNum) '.fid\']),flag.verbose
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
-                expDir = SP2_SlashWinLin([studyDir num2str(expNum) '.fid\']);
+                expDir = [studyDir num2str(expNum) '.fid\'];
             else
                 % try to extract/deduce scan number and path from alternative
                 % directory structure (like 005_matXXX_fovXXX_dateXXX.fid)
                 f_done = 0;     % init alternative path success flag
                 for altCnt = 1:altN
                     if expNum==altStruct(altCnt).number
-                        expDir = SP2_SlashWinLin([studyDir altStruct(altCnt).name '\']);
+                        expDir = [studyDir altStruct(altCnt).name '\'];
                         if f_done       % check for multiple options
                             fprintf('%s ->\nNo direct scan, but multiple alternatives were found for\n',FCTNAME);
                             fprintf('scan number %i. Program aborted.\n',expNum);
@@ -153,7 +153,7 @@ if ~any(dat1FidFileTmp=='/') && ~any(dat1FidFileTmp=='\') && ...
                 %--- extract alternative scan directories (like 005_fovXXX_matXXX_dateXXX.fid) ---
                 for sCnt = 1:dirLen             % all elements in folder
                     if dirStruct(sCnt).isdir==1 && ~strcmp(dirStruct(sCnt).name,'.') && ~strcmp(dirStruct(sCnt).name,'..')       % is directory
-                        if SP2_CheckFileExistenceR(SP2_SlashWinLin([studyDir dirStruct(sCnt).name '/fid']),0)   % contains fid file
+                        if SP2_CheckFileExistenceR([studyDir dirStruct(sCnt).name '/fid']),0   % contains fid file
                             underInd = findstr(dirStruct(sCnt).name,'_');
                             % check for underscore and reasonable string-to-number conversion
                             if any(underInd) && any(str2double(dirStruct(sCnt).name(1:underInd(1)-1)))
@@ -170,16 +170,16 @@ if ~any(dat1FidFileTmp=='/') && ~any(dat1FidFileTmp=='\') && ...
                 expNum = max(round(str2double(dat1FidFileTmp)),1);
                 %--- assignment of experiment directory ---
                 expDir = '';            % init / reset
-                if SP2_CheckDirAccessR(SP2_SlashWinLin([studyDir num2str(expNum) '\']),flag.verbose)
+                if SP2_CheckDirAccessR([studyDir num2str(expNum) '\']),flag.verbose
                     % direct assignment of 1.fid, 2.fid, 3.fid, ...
-                    expDir = SP2_SlashWinLin([studyDir num2str(expNum) '\']);
+                    expDir = [studyDir num2str(expNum) '\'];
                 else
                     % try to extract/deduce scan number and path from alternative
                     % directory structure (like 005_matXXX_fovXXX_dateXXX.fid)
                     f_done = 0;     % init alternative path success flag
                     for altCnt = 1:altN
                         if expNum==altStruct(altCnt).number
-                            expDir = SP2_SlashWinLin([studyDir altStruct(altCnt).name '\']);
+                            expDir = [studyDir altStruct(altCnt).name '\'];
                             if f_done       % check for multiple options
                                 fprintf('%s ->\nNo direct scan, but multiple alternatives were found for\n',FCTNAME);
                                 fprintf('scan number %i. Program aborted.\n',expNum);
@@ -206,7 +206,7 @@ if ~any(dat1FidFileTmp=='/') && ~any(dat1FidFileTmp=='\') && ...
                 %--- extract alternative scan directories (like 005_fovXXX_matXXX_dateXXX.fid) ---
                 for sCnt = 1:dirLen             % all elements in folder
                     if dirStruct(sCnt).isdir==1 && ~strcmp(dirStruct(sCnt).name,'.') && ~strcmp(dirStruct(sCnt).name,'..')       % is directory
-                        if SP2_CheckFileExistenceR(SP2_SlashWinLin([studyDir dirStruct(sCnt).name '/rawdata.job0']),0)   % contains fid file
+                        if SP2_CheckFileExistenceR([studyDir dirStruct(sCnt).name '/rawdata.job0']),0   % contains fid file
                             underInd = findstr(dirStruct(sCnt).name,'_');
                             % check for underscore and reasonable string-to-number conversion
                             if any(underInd) && any(str2double(dirStruct(sCnt).name(1:underInd(1)-1)))
@@ -223,16 +223,16 @@ if ~any(dat1FidFileTmp=='/') && ~any(dat1FidFileTmp=='\') && ...
                 expNum = max(round(str2double(dat1FidFileTmp)),1);
                 %--- assignment of experiment directory ---
                 expDir = '';            % init / reset
-                if SP2_CheckDirAccessR(SP2_SlashWinLin([studyDir num2str(expNum) '\']),flag.verbose)
+                if SP2_CheckDirAccessR([studyDir num2str(expNum) '\']),flag.verbose
                     % direct assignment of 1.fid, 2.fid, 3.fid, ...
-                    expDir = SP2_SlashWinLin([studyDir num2str(expNum) '\']);
+                    expDir = [studyDir num2str(expNum) '\'];
                 else
                     % try to extract/deduce scan number and path from alternative
                     % directory structure (like 005_matXXX_fovXXX_dateXXX.fid)
                     f_done = 0;     % init alternative path success flag
                     for altCnt = 1:altN
                         if expNum==altStruct(altCnt).number
-                            expDir = SP2_SlashWinLin([studyDir altStruct(altCnt).name '\']);
+                            expDir = [studyDir altStruct(altCnt).name '\'];
                             if f_done       % check for multiple options
                                 fprintf('%s ->\nNo direct scan, but multiple alternatives were found for\n',FCTNAME);
                                 fprintf('scan number %i. Program aborted.\n',expNum);
@@ -275,16 +275,16 @@ if ~any(dat1FidFileTmp=='/') && ~any(dat1FidFileTmp=='\') && ...
             %--- parameter file handling and consistency ---
             expNum = max(round(str2double(dat1FidFileTmp)),1);
             %--- assignment of experiment directory ---
-            if SP2_CheckFileExistenceR(SP2_SlashWinLin([studyDir num2str(expNum) '.7']),flag.verbose)
+            if SP2_CheckFileExistenceR([studyDir num2str(expNum) '.7']),flag.verbose
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
-                dat1FidFileTmp = SP2_SlashWinLin([studyDir num2str(expNum) '.7']);
+                dat1FidFileTmp = [studyDir num2str(expNum) '.7'];
             else
                 % try to extract/deduce scan number and path from alternative
                 % file structure (like 005_matXXX_fovXXX_dateXXX.fid)
                 f_done = 0;     % init alternative path success flag
                 for altCnt = 1:altN
                     if expNum==altStruct(altCnt).number
-                        dat1FidFileTmp = SP2_SlashWinLin([studyDir altStruct(altCnt).name]);
+                        dat1FidFileTmp = [studyDir altStruct(altCnt).name];
                         if f_done       % check for multiple options
                             fprintf('%s ->\nNo direct scan, but multiple alternatives were found for\n',FCTNAME);
                             fprintf('scan number %i. Program aborted.\n',expNum);
@@ -321,16 +321,16 @@ if ~any(dat1FidFileTmp=='/') && ~any(dat1FidFileTmp=='\') && ...
             %--- parameter file handling and consistency ---
             expNum = max(round(str2double(dat1FidFileTmp)),1);
             %--- assignment of experiment directory ---
-            if SP2_CheckFileExistenceR(SP2_SlashWinLin([studyDir num2str(expNum) '.rda']),flag.verbose)
+            if SP2_CheckFileExistenceR([studyDir num2str(expNum) '.rda']),flag.verbose
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
-                dat1FidFileTmp = SP2_SlashWinLin([studyDir num2str(expNum) '.rda']);
+                dat1FidFileTmp = [studyDir num2str(expNum) '.rda'];
             else
                 % try to extract/deduce scan number and path from alternative
                 % file structure (like 005_matXXX_fovXXX_dateXXX.fid)
                 f_done = 0;     % init alternative path success flag
                 for altCnt = 1:altN
                     if expNum==altStruct(altCnt).number
-                        dat1FidFileTmp = SP2_SlashWinLin([studyDir altStruct(altCnt).name]);
+                        dat1FidFileTmp = [studyDir altStruct(altCnt).name];
                         if f_done       % check for multiple options
                             fprintf('%s ->\nNo direct scan, but multiple alternatives were found for\n',FCTNAME);
                             fprintf('scan number %i. Program aborted.\n',expNum);
@@ -368,16 +368,16 @@ if ~any(dat1FidFileTmp=='/') && ~any(dat1FidFileTmp=='\') && ...
             expNum = max(round(str2double(dat1FidFileTmp)),1);
             %--- assignment of experiment directory ---
             expDir = '';            % init / reset
-            if SP2_CheckDirAccessR(SP2_SlashWinLin([studyDir num2str(expNum) '.fid\']),flag.verbose)
+            if SP2_CheckDirAccessR([studyDir num2str(expNum) '.fid\']),flag.verbose
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
-                expDir = SP2_SlashWinLin([studyDir num2str(expNum) '.fid\']);
+                expDir = [studyDir num2str(expNum) '.fid\'];
             else
                 % try to extract/deduce scan number and path from alternative
                 % directory structure (like 005_matXXX_fovXXX_dateXXX.fid)
                 f_done = 0;     % init alternative path success flag
                 for altCnt = 1:altN
                     if expNum==altStruct(altCnt).number
-                        expDir = SP2_SlashWinLin([studyDir altStruct(altCnt).name '\']);
+                        expDir = [studyDir altStruct(altCnt).name '\'];
                         if f_done       % check for multiple options
                             fprintf('%s ->\nNo direct scan, but multiple alternatives were found for\n',FCTNAME);
                             fprintf('scan number %i. Program aborted.\n',expNum);
@@ -420,16 +420,16 @@ if ~any(dat1FidFileTmp=='/') && ~any(dat1FidFileTmp=='\') && ...
             %--- parameter file handling and consistency ---
             expNum = max(round(str2double(dat1FidFileTmp)),1);
             %--- assignment of experiment directory ---
-            if SP2_CheckFileExistenceR(SP2_SlashWinLin([studyDir num2str(expNum) '.dat']),flag.verbose)
+            if SP2_CheckFileExistenceR([studyDir num2str(expNum) '.dat']),flag.verbose
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
-                dat1FidFileTmp = SP2_SlashWinLin([studyDir num2str(expNum) '.dat']);
+                dat1FidFileTmp = [studyDir num2str(expNum) '.dat'];
             else
                 % try to extract/deduce scan number and path from alternative
                 % file structure (like 005_matXXX_fovXXX_dateXXX.fid)
                 f_done = 0;     % init alternative path success flag
                 for altCnt = 1:altN
                     if expNum==altStruct(altCnt).number
-                        dat1FidFileTmp = SP2_SlashWinLin([studyDir altStruct(altCnt).name]);
+                        dat1FidFileTmp = [studyDir altStruct(altCnt).name];
                         if f_done       % check for multiple options
                             fprintf('%s ->\nNo direct scan, but multiple alternatives were found for\n',FCTNAME);
                             fprintf('scan number %i. Program aborted.\n',expNum);
@@ -466,16 +466,16 @@ if ~any(dat1FidFileTmp=='/') && ~any(dat1FidFileTmp=='\') && ...
             %--- parameter file handling and consistency ---
             expNum = max(round(str2double(dat1FidFileTmp)),1);
             %--- assignment of experiment directory ---
-            if SP2_CheckFileExistenceR(SP2_SlashWinLin([studyDir num2str(expNum) '.raw']),flag.verbose)
+            if SP2_CheckFileExistenceR([studyDir num2str(expNum) '.raw']),flag.verbose
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
-                dat1FidFileTmp = SP2_SlashWinLin([studyDir num2str(expNum) '.raw']);
+                dat1FidFileTmp = [studyDir num2str(expNum) '.raw'];
             else
                 % try to extract/deduce scan number and path from alternative
                 % file structure (like 005_matXXX_fovXXX_dateXXX.fid)
                 f_done = 0;     % init alternative path success flag
                 for altCnt = 1:altN
                     if expNum==altStruct(altCnt).number
-                        dat1FidFileTmp = SP2_SlashWinLin([studyDir altStruct(altCnt).name]);
+                        dat1FidFileTmp = [studyDir altStruct(altCnt).name];
                         if f_done       % check for multiple options
                             fprintf('%s ->\nNo direct scan, but multiple alternatives were found for\n',FCTNAME);
                             fprintf('scan number %i. Program aborted.\n',expNum);
@@ -512,16 +512,16 @@ if ~any(dat1FidFileTmp=='/') && ~any(dat1FidFileTmp=='\') && ...
             %--- parameter file handling and consistency ---
             expNum = max(round(str2double(dat1FidFileTmp)),1);
             %--- assignment of experiment directory ---
-            if SP2_CheckFileExistenceR(SP2_SlashWinLin([studyDir num2str(expNum) '.SDAT']),flag.verbose)
+            if SP2_CheckFileExistenceR([studyDir num2str(expNum) '.SDAT']),flag.verbose
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
-                dat1FidFileTmp = SP2_SlashWinLin([studyDir num2str(expNum) '.SDAT']);
+                dat1FidFileTmp = [studyDir num2str(expNum) '.SDAT'];
             else
                 % try to extract/deduce scan number and path from alternative
                 % file structure (like 005_matXXX_fovXXX_dateXXX.fid)
                 f_done = 0;     % init alternative path success flag
                 for altCnt = 1:altN
                     if expNum==altStruct(altCnt).number
-                        dat1FidFileTmp = SP2_SlashWinLin([studyDir altStruct(altCnt).name]);
+                        dat1FidFileTmp = [studyDir altStruct(altCnt).name];
                         if f_done       % check for multiple options
                             fprintf('%s ->\nNo direct scan, but multiple alternatives were found for\n',FCTNAME);
                             fprintf('scan number %i. Program aborted.\n',expNum);
@@ -557,16 +557,16 @@ if ~any(dat1FidFileTmp=='/') && ~any(dat1FidFileTmp=='\') && ...
             %--- parameter file handling and consistency ---
             expNum = max(round(str2double(dat1FidFileTmp)),1);
             %--- assignment of experiment directory ---
-            if SP2_CheckFileExistenceR(SP2_SlashWinLin([studyDir num2str(expNum) '.IMA']),flag.verbose)
+            if SP2_CheckFileExistenceR([studyDir num2str(expNum) '.IMA']),flag.verbose
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
-                dat1FidFileTmp = SP2_SlashWinLin([studyDir num2str(expNum) '.IMA']);
+                dat1FidFileTmp = [studyDir num2str(expNum) '.IMA'];
             else
                 % try to extract/deduce scan number and path from alternative
                 % file structure (like 005_matXXX_fovXXX_dateXXX.fid)
                 f_done = 0;     % init alternative path success flag
                 for altCnt = 1:altN
                     if expNum==altStruct(altCnt).number
-                        dat1FidFileTmp = SP2_SlashWinLin([studyDir altStruct(altCnt).name]);
+                        dat1FidFileTmp = [studyDir altStruct(altCnt).name];
                         if f_done       % check for multiple options
                             fprintf('%s ->\nNo direct scan, but multiple alternatives were found for\n',FCTNAME);
                             fprintf('scan number %i. Program aborted.\n',expNum);
@@ -586,7 +586,7 @@ if ~any(dat1FidFileTmp=='/') && ~any(dat1FidFileTmp=='\') && ...
             % end of DICOM .IMA
     end
 else                                            % full path assignment
-    dat1FidFileTmp = SP2_SlashWinLin(dat1FidFileTmp);
+    dat1FidFileTmp = dat1FidFileTmp;
     if isempty(dat1FidFileTmp)
         fprintf('%s ->\nAn empty entry is useless.\n',FCTNAME);
         set(fm.data.spec1FidFile,'String',data.spec1.fidFile)

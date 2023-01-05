@@ -52,9 +52,9 @@ end
 %--- result directory handling ---
 narg = nargin;
 if narg==1          % direct assignment of directory name (through master script)
-    resultDir = SP2_SlashWinLin([lcm.expt.dataDir SP2_Check4StrR(varargin{1}) '\']);
+    resultDir = [lcm.expt.dataDir SP2_Check4StrR(varargin{1}) '\'];
 else                % default directory
-    resultDir = SP2_SlashWinLin([lcm.expt.dataDir 'SPX_LcmMonteCarlo\']);
+    resultDir = [lcm.expt.dataDir 'SPX_LcmMonteCarlo\'];
 end
 % if SP2_CheckDirAccessR(resultDir)
 %     [f_done,msg,msgId] = rmdir(resultDir);

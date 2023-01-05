@@ -15,7 +15,7 @@ FCTNAME = 'SP2_LCM_SpecDataMatUpdate';
 
 %--- fid file assignment ---
 datFidFileTmp = get(fm.lcm.dataPath,'String');
-datFidFileTmp = SP2_SlashWinLin(datFidFileTmp);
+datFidFileTmp = datFidFileTmp;
 if isempty(datFidFileTmp)
     fprintf('%s ->\nAn empty entry is useless.\n',FCTNAME);
     set(fm.lcm.dataPath,'String',lcm.dataPathMat)

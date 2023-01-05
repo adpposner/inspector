@@ -29,7 +29,7 @@ if ~SP2_CheckDirAccessR(lcm.expt.dataDir)
 end
 
 %--- path handling: result directory ---
-resultDir = SP2_SlashWinLin([lcm.expt.dataDir 'SPX_LcmData\']);
+resultDir = [lcm.expt.dataDir 'SPX_LcmData\'];
 if ~SP2_CheckDirAccessR(resultDir)
     [f_succ,msg,msgId] = mkdir(resultDir);
     if f_succ

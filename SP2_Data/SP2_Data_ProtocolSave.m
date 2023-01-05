@@ -12,7 +12,6 @@ global loggingfile data
 
 FCTNAME = 'SP2_Data_ProtocolSave';
 
-
 %--- init success flag ---
 f_succ = 0;
 

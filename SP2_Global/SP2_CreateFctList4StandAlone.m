@@ -43,9 +43,9 @@ elseif ismac
 else
     flag.OS = 1;
 end
-fmPath = SP2_SlashWinLin(fmStruct.path);      % substitute / by \
+fmPath = fmStruct.path;      % substitute / by \
 fmFile = [fmPath '\SP' vStr '_global loggingfile\SP' vStr '_FctList4StandAlone.m'];
-fmFile = SP2_SlashWinLin(fmFile);
+fmFile = fmFile;
 
 %--- script file generation ---
 [unit,msg] = fopen(fmFile,'w');

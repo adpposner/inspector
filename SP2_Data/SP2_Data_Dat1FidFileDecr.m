@@ -109,7 +109,7 @@ switch flag.dataManu
         gapCnt = 0;                         % gap counter (on top of immediate neighbor)
         while gapCnt<maxGap                 % find next available scan, extra counter on top of basic
             %--- scan extraction ---
-            if SP2_CheckDirAccessR(SP2_SlashWinLin([studyDir num2str(expNew) '.fid\']),flag.verbose)
+            if SP2_CheckDirAccessR([studyDir num2str(expNew) '.fid\']),flag.verbose
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
                 expDir = [studyDir num2str(expNew) '.fid\'];
                 f_succ = 1;
@@ -119,7 +119,7 @@ switch flag.dataManu
                 % directory structure (like 005_matXXX_fovXXX_dateXXX.fid)
                 for altCnt = 1:altN
                     if expNew==altStruct(altCnt).number
-                        expDir = SP2_SlashWinLin([studyDir altStruct(altCnt).name '\']);
+                        expDir = [studyDir altStruct(altCnt).name '\'];
                         f_succ = 1;
                         gapCnt = maxGap;
                     end
@@ -167,7 +167,7 @@ switch flag.dataManu
             %--- extract potential scan directories (like 005_fovXXX_matXXX_dateXXX.fid) ---
             for sCnt = 1:dirLen             % all elements in folder
                 if dirStruct(sCnt).isdir==1 && ~strcmp(dirStruct(sCnt).name,'.') && ~strcmp(dirStruct(sCnt).name,'..')       % is directory
-                    if SP2_CheckFileExistenceR(SP2_SlashWinLin([studyDir dirStruct(sCnt).name '/fid']),0)   % contains fid file
+                    if SP2_CheckFileExistenceR([studyDir dirStruct(sCnt).name '/fid']),0   % contains fid file
                         underInd = findstr(dirStruct(sCnt).name,'_');
                         % check for underscore and reasonable string-to-number conversion
                         if any(underInd) && any(str2double(dirStruct(sCnt).name(1:underInd(1)-1)))
@@ -193,9 +193,9 @@ switch flag.dataManu
             gapCnt = 0;                         % gap counter (on top of immediate neighbor)
             while gapCnt<maxGap                 % find next available scan, extra counter on top of basic
                 %--- scan extraction ---
-                if SP2_CheckDirAccessR(SP2_SlashWinLin([studyDir num2str(expNew) '\']),flag.verbose)
+                if SP2_CheckDirAccessR([studyDir num2str(expNew) '\']),flag.verbose
                     % direct assignment of 1.fid, 2.fid, 3.fid, ...
-                    expDir = SP2_SlashWinLin([studyDir num2str(expNew) '\']);
+                    expDir = [studyDir num2str(expNew) '\'];
                     f_succ = 1;
                     gapCnt = maxGap;
                 else
@@ -203,7 +203,7 @@ switch flag.dataManu
                     % directory structure (like 005_matXXX_fovXXX_dateXXX.fid)
                     for altCnt = 1:altN
                         if expNew==altStruct(altCnt).number
-                            expDir = SP2_SlashWinLin([studyDir altStruct(altCnt).name '\']);
+                            expDir = [studyDir altStruct(altCnt).name '\'];
                             f_succ = 1;
                             gapCnt = maxGap;
                         end
@@ -244,7 +244,7 @@ switch flag.dataManu
             %--- extract potential scan directories (like 005_fovXXX_matXXX_dateXXX.fid) ---
             for sCnt = 1:dirLen             % all elements in folder
                 if dirStruct(sCnt).isdir==1 && ~strcmp(dirStruct(sCnt).name,'.') && ~strcmp(dirStruct(sCnt).name,'..')       % is directory
-                    if SP2_CheckFileExistenceR(SP2_SlashWinLin([studyDir dirStruct(sCnt).name '/rawdata.job0']),0)   % contains fid file
+                    if SP2_CheckFileExistenceR([studyDir dirStruct(sCnt).name '/rawdata.job0']),0   % contains fid file
                         underInd = findstr(dirStruct(sCnt).name,'_');
                         % check for underscore and reasonable string-to-number conversion
                         if any(underInd) && any(str2double(dirStruct(sCnt).name(1:underInd(1)-1)))
@@ -270,9 +270,9 @@ switch flag.dataManu
             gapCnt = 0;                         % gap counter (on top of immediate neighbor)
             while gapCnt<maxGap                 % find next available scan, extra counter on top of basic
                 %--- scan extraction ---
-                if SP2_CheckDirAccessR(SP2_SlashWinLin([studyDir num2str(expNew) '\']),flag.verbose)
+                if SP2_CheckDirAccessR([studyDir num2str(expNew) '\']),flag.verbose
                     % direct assignment of 1.fid, 2.fid, 3.fid, ...
-                    expDir = SP2_SlashWinLin([studyDir num2str(expNew) '\']);
+                    expDir = [studyDir num2str(expNew) '\'];
                     f_succ = 1;
                     gapCnt = maxGap;
                 else
@@ -280,7 +280,7 @@ switch flag.dataManu
                     % directory structure (like 005_matXXX_fovXXX_dateXXX.fid)
                     for altCnt = 1:altN
                         if expNew==altStruct(altCnt).number
-                            expDir = SP2_SlashWinLin([studyDir altStruct(altCnt).name '\']);
+                            expDir = [studyDir altStruct(altCnt).name '\'];
                             f_succ = 1;
                             gapCnt = maxGap;
                         end
@@ -350,7 +350,7 @@ switch flag.dataManu
         gapCnt = 0;                         % gap counter (on top of immediate neighbor)
         while gapCnt<maxGap                 % find next available scan, extra counter on top of basic
             %--- scan extraction ---
-            if SP2_CheckDirAccessR(SP2_SlashWinLin([studyDir num2str(expNew) '.7']),flag.verbose)
+            if SP2_CheckDirAccessR([studyDir num2str(expNew) '.7']),flag.verbose
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
                 dat1FidFileTmp = [studyDir num2str(expNew) '.7'];
                 f_succ = 1;
@@ -360,7 +360,7 @@ switch flag.dataManu
                 % files (like 005_matXXX_fovXXX_dateXXX.fid)
                 for altCnt = 1:altN
                     if expNew==altStruct(altCnt).number
-                        dat1FidFileTmp = SP2_SlashWinLin([studyDir altStruct(altCnt).name]);
+                        dat1FidFileTmp = [studyDir altStruct(altCnt).name];
                         f_succ = 1;
                         gapCnt = maxGap;
                     end
@@ -422,7 +422,7 @@ switch flag.dataManu
         gapCnt = 0;                         % gap counter (on top of immediate neighbor)
         while gapCnt<maxGap                 % find next available scan, extra counter on top of basic
             %--- scan extraction ---
-            if SP2_CheckDirAccessR(SP2_SlashWinLin([studyDir num2str(expNew) '.rda']),flag.verbose)
+            if SP2_CheckDirAccessR([studyDir num2str(expNew) '.rda']),flag.verbose
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
                 dat1FidFileTmp = [studyDir num2str(expNew) '.rda'];
                 f_succ = 1;
@@ -432,7 +432,7 @@ switch flag.dataManu
                 % files (like 005_matXXX_fovXXX_dateXXX.fid)
                 for altCnt = 1:altN
                     if expNew==altStruct(altCnt).number
-                        dat1FidFileTmp = SP2_SlashWinLin([studyDir altStruct(altCnt).name]);
+                        dat1FidFileTmp = [studyDir altStruct(altCnt).name];
                         f_succ = 1;
                         gapCnt = maxGap;
                     end
@@ -494,7 +494,7 @@ switch flag.dataManu
         gapCnt = 0;                         % gap counter (on top of immediate neighbor)
         while gapCnt<maxGap                 % find next available scan, extra counter on top of basic
             %--- scan extraction ---
-            if SP2_CheckDirAccessR(SP2_SlashWinLin([studyDir num2str(expNew) '.dcm']),flag.verbose)
+            if SP2_CheckDirAccessR([studyDir num2str(expNew) '.dcm']),flag.verbose
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
                 dat1FidFileTmp = [studyDir num2str(expNew) '.dcm'];
                 f_succ = 1;
@@ -504,7 +504,7 @@ switch flag.dataManu
                 % files (like 005_matXXX_fovXXX_dateXXX.fid)
                 for altCnt = 1:altN
                     if expNew==altStruct(altCnt).number
-                        dat1FidFileTmp = SP2_SlashWinLin([studyDir altStruct(altCnt).name]);
+                        dat1FidFileTmp = [studyDir altStruct(altCnt).name];
                         f_succ = 1;
                         gapCnt = maxGap;
                     end
@@ -566,7 +566,7 @@ switch flag.dataManu
         gapCnt = 0;                         % gap counter (on top of immediate neighbor)
         while gapCnt<maxGap                 % find next available scan, extra counter on top of basic
             %--- scan extraction ---
-            if SP2_CheckDirAccessR(SP2_SlashWinLin([studyDir num2str(expNew) '.dat']),flag.verbose)
+            if SP2_CheckDirAccessR([studyDir num2str(expNew) '.dat']),flag.verbose
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
                 dat1FidFileTmp = [studyDir num2str(expNew) '.dat'];
                 f_succ = 1;
@@ -576,7 +576,7 @@ switch flag.dataManu
                 % files (like 005_matXXX_fovXXX_dateXXX.fid)
                 for altCnt = 1:altN
                     if expNew==altStruct(altCnt).number
-                        dat1FidFileTmp = SP2_SlashWinLin([studyDir altStruct(altCnt).name]);
+                        dat1FidFileTmp = [studyDir altStruct(altCnt).name];
                         f_succ = 1;
                         gapCnt = maxGap;
                     end
@@ -638,7 +638,7 @@ switch flag.dataManu
         gapCnt = 0;                         % gap counter (on top of immediate neighbor)
         while gapCnt<maxGap                 % find next available scan, extra counter on top of basic
             %--- scan extraction ---
-            if SP2_CheckDirAccessR(SP2_SlashWinLin([studyDir num2str(expNew) '.raw']),flag.verbose)
+            if SP2_CheckDirAccessR([studyDir num2str(expNew) '.raw']),flag.verbose
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
                 dat1FidFileTmp = [studyDir num2str(expNew) '.raw'];
                 f_succ = 1;
@@ -648,7 +648,7 @@ switch flag.dataManu
                 % files (like 005_matXXX_fovXXX_dateXXX.fid)
                 for altCnt = 1:altN
                     if expNew==altStruct(altCnt).number
-                        dat1FidFileTmp = SP2_SlashWinLin([studyDir altStruct(altCnt).name]);
+                        dat1FidFileTmp = [studyDir altStruct(altCnt).name];
                         f_succ = 1;
                         gapCnt = maxGap;
                     end
@@ -711,7 +711,7 @@ switch flag.dataManu
         gapCnt = 0;                         % gap counter (on top of immediate neighbor)
         while gapCnt<maxGap                 % find next available scan, extra counter on top of basic
             %--- scan extraction ---
-            if SP2_CheckDirAccessR(SP2_SlashWinLin([studyDir num2str(expNew) '.SDAT']),flag.verbose)
+            if SP2_CheckDirAccessR([studyDir num2str(expNew) '.SDAT']),flag.verbose
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
                 dat1FidFileTmp = [studyDir num2str(expNew) '.SDAT'];
                 f_succ = 1;
@@ -721,7 +721,7 @@ switch flag.dataManu
                 % files (like 005_matXXX_fovXXX_dateXXX.fid)
                 for altCnt = 1:altN
                     if expNew==altStruct(altCnt).number
-                        dat1FidFileTmp = SP2_SlashWinLin([studyDir altStruct(altCnt).name]);
+                        dat1FidFileTmp = [studyDir altStruct(altCnt).name];
                         f_succ = 1;
                         gapCnt = maxGap;
                     end
@@ -784,7 +784,7 @@ switch flag.dataManu
         gapCnt = 0;                         % gap counter (on top of immediate neighbor)
         while gapCnt<maxGap                 % find next available scan, extra counter on top of basic
             %--- scan extraction ---
-            if SP2_CheckDirAccessR(SP2_SlashWinLin([studyDir num2str(expNew) '.IMA']),flag.verbose)
+            if SP2_CheckDirAccessR([studyDir num2str(expNew) '.IMA']),flag.verbose
                 % direct assignment of 1.fid, 2.fid, 3.fid, ...
                 dat1FidFileTmp = [studyDir num2str(expNew) '.IMA'];
                 f_succ = 1;
@@ -794,7 +794,7 @@ switch flag.dataManu
                 % files (like 005_matXXX_fovXXX_dateXXX.fid)
                 for altCnt = 1:altN
                     if expNew==altStruct(altCnt).number
-                        dat1FidFileTmp = SP2_SlashWinLin([studyDir altStruct(altCnt).name]);
+                        dat1FidFileTmp = [studyDir altStruct(altCnt).name];
                         f_succ = 1;
                         gapCnt = maxGap;
                     end

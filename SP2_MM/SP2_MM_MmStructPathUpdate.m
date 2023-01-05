@@ -15,7 +15,7 @@ FCTNAME = 'SP2_MM_MmStructPathUpdate';
 
 %--- fid file assignment ---
 mmStructPathTmp = get(fm.mm.mmStructPath,'String');
-mmStructPathTmp = SP2_SlashWinLin(mmStructPathTmp);
+mmStructPathTmp = mmStructPathTmp;
 if isempty(mmStructPathTmp)
     fprintf('%s ->\nAn empty entry is useless.\n',FCTNAME);
     set(fm.mm.mmStructPath,'String',mm.mmStructPath)
