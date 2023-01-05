@@ -18,7 +18,7 @@ threshLen = 50;         % threshold length
 cutLen    = 46;         % string length after which the next space is used for cutting
 
 FCTNAME = 'SP2_Data_Dat1SeriesUpdate';
-fprintf(loggingfile, "%s call\n",FCTNAME);
+SP2_Logger.log( "%s call\n",FCTNAME);
 
 %--- initial string assignment ---
 dataSpec1SeriesStr = get(fm.data.spec1SeriesStr,'String');

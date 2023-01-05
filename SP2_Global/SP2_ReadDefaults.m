@@ -62,12 +62,12 @@ elseif isunix
     flag.OS = 1;
 end
 
-fprintf(loggingfile,"flag.OS = %d\n",flag.OS);
+SP2_Logger.log("flag.OS = %d\n",flag.OS);
 
 %--- default directory ---
 data.defaultDir = SP2_FileHelper.setGetDefaultDir()
 
-fprintf(loggingfile,"data.defaultDir = %s\n",data.defaultDir);
+SP2_Logger.log("data.defaultDir = %s\n",data.defaultDir);
 
 %--- protocol handling ---
 data.protFile     = 'UserProtocol';                 % protocol containing all FMAP parameters
@@ -1261,9 +1261,8 @@ tools.anonFilePath     = [tools.anonFileDir 'procpar'];     % path of file to be
 tools.anonDir          = data.defaultDir;                   % directory to be anonymized
 
 %--- manual page ---
-man.fileDir    = data.defaultDir;                 % (general) init manual directory
-man.fileName   = 'INSPECTOR_Manual.pdf';          % generic file name
-man.filePath   = [man.fileDir man.fileName];
+manName   = 'INSPECTOR_Manual.pdf';          % generic file name
+man.filePath   = [data.defaultDir manName];
 
 
 %--- flag handling ---
@@ -1279,7 +1278,7 @@ flagDef = flag;
 %--- search for file with default settings and load/generate it ---
 fmStruct = what('INSPECTOR')
 if isempty(fmStruct) || ~isfield(fmStruct,'path')
-    fprintf(loggingfile,'%s ->\nCouldn''t find the main program file\nCheck folder name/existence <INSPECTOR_v2> and software version...',FCTNAME);
+    SP2_Logger.log('%s ->\nCouldn''t find the main program file\nCheck folder name/existence <INSPECTOR_v2> and software version...',FCTNAME);
     return
 else
     pars.specPath   = SP2_FileHelper.inspectorPath();
@@ -1293,7 +1292,7 @@ else
     else                            % PC
         pars.usrDefFile = [pars.specPath filesep 'SP_DefaultsWindows.mat'];
     end
-    fprintf(loggingfile,"%s\tpars.usrDefFile=%s",mfilename,pars.usrDefFile);
+    SP2_Logger.log("%s\tpars.usrDefFile=%s",mfilename,pars.usrDefFile);
     % selection of specific/default protocol file
     if nargin==1                % external/specific protocol is loaded
         protFile = varargin{1};
@@ -1308,13 +1307,13 @@ else
         
         %--- check if protocol file ---
         if ~exist('data2save') || ~exist('proc2save') || ~exist('mm2save')
-            fprintf(loggingfile,'Assigned file is not an INSPECTOR protocol. Program aborted.\n');
+            SP2_Logger.log('Assigned file is not an INSPECTOR protocol. Program aborted.\n');
             return
         end        
         
         %--- check if protocol file ---
         if ~isstruct(data2save) || ~isstruct(proc2save) || ~isstruct(mm2save)
-            fprintf(loggingfile,'Assigned file is not an INSPECTOR protocol. Program aborted.\n');
+            SP2_Logger.log('Assigned file is not an INSPECTOR protocol. Program aborted.\n');
             return
         end        
                 
@@ -1334,8 +1333,8 @@ else
                 data2save.phAlignPpmN    = 1;
             end
 
-            fprintf(loggingfile,'\n--- INFO ---\nBackward compatibility conversion applied\nfor phase alignment parameters.\n');
-            fprintf(loggingfile,'Note: For fully identical phase alignment conditions,\nkeep original FID length (no apodization, no zero-filling)\n');
+            SP2_Logger.log('\n--- INFO ---\nBackward compatibility conversion applied\nfor phase alignment parameters.\n');
+            SP2_Logger.log('Note: For fully identical phase alignment conditions,\nkeep original FID length (no apodization, no zero-filling)\n');
             % include:
             % data.phAlignFftCut = 1024;        % frequency alignment: apodization
             % data.phAlignFftZf  = 8*1024;      % frequency alignment: zero-filling
@@ -1343,7 +1342,7 @@ else
             %--- frequency alignment ---
             data2save.frAlignPpmStr  = [num2str(data2save.frAlignPpmMin) ':' num2str(data2save.frAlignPpmMax)];
             data2save.frAlignPpmN    = 1;
-            fprintf(loggingfile,'\n--- INFO ---\nBackward compatibility conversion applied\nfor frequency alignment parameters.\n\n');
+            SP2_Logger.log('\n--- INFO ---\nBackward compatibility conversion applied\nfor frequency alignment parameters.\n\n');
         end
                 
         %--- assure backwards compatibility of LCM shift variation limits ---
@@ -1354,7 +1353,7 @@ else
                 lcm2save.fit.shiftMax = lcm2save.fit.frequVar;        % allowed maximum/positive shift limit, [Hz]
                 lcm2save.fit = rmfield(lcm2save.fit,'frequVar');
 
-                fprintf(loggingfile,'\n--- INFO ---\nBackward compatibility conversion applied\nto LCM frequency shift range.\n');
+                SP2_Logger.log('\n--- INFO ---\nBackward compatibility conversion applied\nto LCM frequency shift range.\n');
             end
         end
         
@@ -1387,7 +1386,7 @@ else
                                     for s2Cnt = 1:length(sub2Fields)
                                         if isfield(eval(['pars.' pars2sFields{iCnt} '.' sub1Fields{s1Cnt}]),sub2Fields{s2Cnt})
                                             if isstruct(eval(['pars.' pars2sFields{iCnt} '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt}]))
-                                                fprintf(loggingfile,'%s -> Only 2 sublevels are supported for ''pars'' structure.\n',FCTNAME);
+                                                SP2_Logger.log('%s -> Only 2 sublevels are supported for ''pars'' structure.\n',FCTNAME);
                                                 return
                                             else                    % single entry field
                                                 eval(['pars.' pars2sFields{iCnt} '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt} ' = pars2save.' pars2sFields{iCnt}  '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt} ';'])
@@ -1424,7 +1423,7 @@ else
                                     for s2Cnt = 1:length(sub2Fields)
                                         if isfield(eval(['data.' data2sFields{iCnt} '.' sub1Fields{s1Cnt}]),sub2Fields{s2Cnt})
                                             if isstruct(eval(['data.' data2sFields{iCnt} '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt}]))
-                                                fprintf(loggingfile,'%s -> Only 2 sublevels are supported for ''data'' structure.\n',FCTNAME);
+                                                SP2_Logger.log('%s -> Only 2 sublevels are supported for ''data'' structure.\n',FCTNAME);
                                                 return
                                             else                    % single entry field
                                                 eval(['data.' data2sFields{iCnt} '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt} ' = data2save.' data2sFields{iCnt}  '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt} ';'])
@@ -1453,7 +1452,7 @@ else
                 data.frAlignPpm2Min = data2save.frAlignPpmMin;
                 data.frAlignPpm2Max = data2save.frAlignPpmMax;
                 data.frAlignPpm2N   = data2save.frAlignPpmN;
-                fprintf(loggingfile,'\n--- INFO ---\nBackwards compatibility:\nTwo frequency alignment windows initialized with (old) single-window values.\n');
+                SP2_Logger.log('\n--- INFO ---\nBackwards compatibility:\nTwo frequency alignment windows initialized with (old) single-window values.\n');
             end
 
             %--- assure backwards compatibility of phase alignment window ---
@@ -1467,7 +1466,7 @@ else
                 data.phAlignPpm2Min = data2save.phAlignPpmMin;
                 data.phAlignPpm2Max = data2save.phAlignPpmMax;
                 data.phAlignPpm2N   = data2save.phAlignPpmN;
-                fprintf(loggingfile,'\n--- INFO ---\nBackwards compatibility:\nTwo phase alignment windows initialized with (old) single-window values.\n');
+                SP2_Logger.log('\n--- INFO ---\nBackwards compatibility:\nTwo phase alignment windows initialized with (old) single-window values.\n');
             end
             clear data2save data2sFields
         end
@@ -1489,7 +1488,7 @@ else
                                     for s2Cnt = 1:length(sub2Fields)
                                         if isfield(eval(['mm.' mm2sFields{iCnt} '.' sub1Fields{s1Cnt}]),sub2Fields{s2Cnt})
                                             if isstruct(eval(['mm.' mm2sFields{iCnt} '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt}]))
-                                                fprintf(loggingfile,'%s -> Only 2 sublevels are supported for ''mm'' structure.\n',FCTNAME);
+                                                SP2_Logger.log('%s -> Only 2 sublevels are supported for ''mm'' structure.\n',FCTNAME);
                                                 return
                                             else                    % single entry field
                                                 eval(['mm.' mm2sFields{iCnt} '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt} ' = mm2save.' mm2sFields{iCnt}  '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt} ';'])
@@ -1547,7 +1546,7 @@ else
                                     for s2Cnt = 1:length(sub2Fields)
                                         if isfield(eval(['proc.' proc2sFields{iCnt} '.' sub1Fields{s1Cnt}]),sub2Fields{s2Cnt})
                                             if isstruct(eval(['proc.' proc2sFields{iCnt} '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt}]))
-                                                fprintf(loggingfile,'%s -> Only 2 sublevels are supported for ''proc'' structure.\n',FCTNAME);
+                                                SP2_Logger.log('%s -> Only 2 sublevels are supported for ''proc'' structure.\n',FCTNAME);
                                                 return
                                             else                    % single entry field
                                                 eval(['proc.' proc2sFields{iCnt} '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt} ' = proc2save.' proc2sFields{iCnt}  '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt} ';'])
@@ -1584,7 +1583,7 @@ else
                                     for s2Cnt = 1:length(sub2Fields)
                                         if isfield(eval(['t1t2.' t1t22sFields{iCnt} '.' sub1Fields{s1Cnt}]),sub2Fields{s2Cnt})
                                             if isstruct(eval(['t1t2.' t1t22sFields{iCnt} '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt}]))
-                                                fprintf(loggingfile,'%s -> Only 2 sublevels are supported for ''t1t2'' structure.\n',FCTNAME);
+                                                SP2_Logger.log('%s -> Only 2 sublevels are supported for ''t1t2'' structure.\n',FCTNAME);
                                                 return
                                             else                    % single entry field
                                                 eval(['t1t2.' t1t22sFields{iCnt} '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt} ' = t1t22save.' t1t22sFields{iCnt}  '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt} ';'])
@@ -1621,7 +1620,7 @@ else
                                     for s2Cnt = 1:length(sub2Fields)
                                         if isfield(eval(['marss.' marss2sFields{iCnt} '.' sub1Fields{s1Cnt}]),sub2Fields{s2Cnt})
                                             if isstruct(eval(['marss.' marss2sFields{iCnt} '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt}]))
-                                                fprintf(loggingfile,'%s -> Only 2 sublevels are supported for ''marss'' structure.\n',FCTNAME);
+                                                SP2_Logger.log('%s -> Only 2 sublevels are supported for ''marss'' structure.\n',FCTNAME);
                                                 return
                                             else                    % single entry field
                                                 eval(['marss.' marss2sFields{iCnt} '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt} ' = marss2save.' marss2sFields{iCnt}  '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt} ';'])
@@ -1658,7 +1657,7 @@ else
                                     for s2Cnt = 1:length(sub2Fields)
                                         if isfield(eval(['mrsi.' mrsi2sFields{iCnt} '.' sub1Fields{s1Cnt}]),sub2Fields{s2Cnt})
                                             if isstruct(eval(['mrsi.' mrsi2sFields{iCnt} '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt}]))
-                                                fprintf(loggingfile,'%s -> Only 2 sublevels are supported for ''mrsi'' structure.\n',FCTNAME);
+                                                SP2_Logger.log('%s -> Only 2 sublevels are supported for ''mrsi'' structure.\n',FCTNAME);
                                                 return
                                             else                    % single entry field
                                                 eval(['mrsi.' mrsi2sFields{iCnt} '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt} ' = mrsi2save.' mrsi2sFields{iCnt}  '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt} ';'])
@@ -1695,7 +1694,7 @@ else
                                     for s2Cnt = 1:length(sub2Fields)
                                         if isfield(eval(['lcm.' lcm2sFields{iCnt} '.' sub1Fields{s1Cnt}]),sub2Fields{s2Cnt})
                                             if isstruct(eval(['lcm.' lcm2sFields{iCnt} '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt}]))
-                                                fprintf(loggingfile,'%s -> Only 2 sublevels are supported for ''lcm'' structure.\n',FCTNAME);
+                                                SP2_Logger.log('%s -> Only 2 sublevels are supported for ''lcm'' structure.\n',FCTNAME);
                                                 return
                                             else                    % single entry field
                                                 eval(['lcm.' lcm2sFields{iCnt} '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt} ' = lcm2save.' lcm2sFields{iCnt}  '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt} ';'])
@@ -1732,7 +1731,7 @@ else
                                     for s2Cnt = 1:length(sub2Fields)
                                         if isfield(eval(['syn.' syn2sFields{iCnt} '.' sub1Fields{s1Cnt}]),sub2Fields{s2Cnt})
                                             if isstruct(eval(['syn.' syn2sFields{iCnt} '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt}]))
-                                                fprintf(loggingfile,'%s -> Only 2 sublevels are supported for ''syn'' structure.\n',FCTNAME);
+                                                SP2_Logger.log('%s -> Only 2 sublevels are supported for ''syn'' structure.\n',FCTNAME);
                                                 return
                                             else                    % single entry field
                                                 eval(['syn.' syn2sFields{iCnt} '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt} ' = syn2save.' syn2sFields{iCnt}  '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt} ';'])
@@ -1769,7 +1768,7 @@ else
                                     for s2Cnt = 1:length(sub2Fields)
                                         if isfield(eval(['tools.' tools2sFields{iCnt} '.' sub1Fields{s1Cnt}]),sub2Fields{s2Cnt})
                                             if isstruct(eval(['tools.' tools2sFields{iCnt} '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt}]))
-                                                fprintf(loggingfile,'%s -> Only 2 sublevels are supported for ''tools'' structure.\n',FCTNAME);
+                                                SP2_Logger.log('%s -> Only 2 sublevels are supported for ''tools'' structure.\n',FCTNAME);
                                                 return
                                             else                    % single entry field
                                                 eval(['tools.' tools2sFields{iCnt} '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt} ' = tools2save.' tools2sFields{iCnt}  '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt} ';'])
@@ -1806,7 +1805,7 @@ else
                                     for s2Cnt = 1:length(sub2Fields)
                                         if isfield(eval(['man.' man2sFields{iCnt} '.' sub1Fields{s1Cnt}]),sub2Fields{s2Cnt})
                                             if isstruct(eval(['man.' man2sFields{iCnt} '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt}]))
-                                                fprintf(loggingfile,'%s -> Only 2 sublevels are supported for ''man'' structure.\n',FCTNAME);
+                                                SP2_Logger.log('%s -> Only 2 sublevels are supported for ''man'' structure.\n',FCTNAME);
                                                 return
                                             else                    % single entry field
                                                 eval(['man.' man2sFields{iCnt} '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt} ' = man2save.' man2sFields{iCnt}  '.' sub1Fields{s1Cnt} '.' sub2Fields{s2Cnt} ';'])
@@ -1846,54 +1845,7 @@ end
 
 %--- manual location ---
 
-if flag.OS==1                   % Linux
-    if ~SP2_CheckFileExistenceR(man.filePath,0)             % check default/previous path
-        if SP2_CheckFileExistenceR([pars.specPath 'SP2_Manual/INSPECTOR_Manual.pdf'],0)
-            man.fileDir  = [pars.specPath 'SP2_Manual/'];   % default directory
-            man.fileName = 'INSPECTOR_Manual.pdf';          % generic
-            man.filePath = [man.fileDir man.fileName];
-        else
-            man.fileDir  = pars.specPath;                   % SPX directory
-            man.fileName = 'INSPECTOR_Manual.pdf';          % generic
-            man.filePath = [man.fileDir man.fileName];
-        end
-    end
-elseif flag.OS==2               % Mac
-    if ~SP2_CheckFileExistenceR(man.filePath,0)             % check default/previous path
-        if SP2_CheckFileExistenceR([pars.specPath 'SP2_Manual/INSPECTOR_Manual.pdf'],0)
-            man.fileDir  = [pars.specPath 'SP2_Manual/'];   % default directory
-            man.fileName = 'INSPECTOR_Manual.pdf';          % generic
-            man.filePath = [man.fileDir man.fileName];
-        else
-            man.fileDir  = pars.specPath;                   % SPX directory
-            man.fileName = 'INSPECTOR_Manual.pdf';          % generic
-            man.filePath = [man.fileDir man.fileName];
-        end
-    end
-else                            % PC
-    if ~SP2_CheckFileExistenceR(man.filePath,0)             % check default/previous path
-        mcrInd = strfind(pars.specPath,'\INSPECTOR_mcr');   % specPath is inside the MCR directory structure
-        if any(mcrInd)      % compiled exe
-            parsSpecExeDir = pars.specPath(1:mcrInd);
-        else                % Matlab code
-            parsSpecExeDir = pars.specPath;
-        end
-        if SP2_CheckFileExistenceR([pars.specPath 'SP2_Manual\INSPECTOR_Manual.pdf'],0)
-            man.fileDir  = [pars.specPath 'SP2_Manual\'];   % default directory
-        elseif SP2_CheckFileExistenceR([parsSpecExeDir 'INSPECTOR_Manual.pdf'],0)
-            man.fileDir  = parsSpecExeDir;                  % SPX directory
-        else
-            man.fileDir  = pars.specPath;                   % SPX directory
-        end
-        man.fileName = 'INSPECTOR_Manual.pdf';          % generic
-        man.filePath = [man.fileDir man.fileName];
-    end
-end
-if SP2_CheckFileExistenceR(man.filePath)
-    fprintf(loggingfile,'INSPECTOR manual located:\n%s\n',man.filePath);
-elseif flag.verbose        
-    fprintf(loggingfile,'WARNING: INSPECTOR manual could NOT be located.\n');
-end
+
 
 
 %--- string update: OS handling ---
@@ -1966,92 +1918,143 @@ flag.mrsiProcInit = 0;              % status flag: non-WS analysis done at least
 flag.lcmMCarloRunning = 0;          % default: not running at startup
 flag.lcmMCarloData    = 1;          % default: synthesized LCM analysis
 
-fprintf(loggingfile,"%s\tdata.defaultDir %s",mfilename,data.defaultDir);
+SP2_Logger.log("%s\tdata.defaultDir %s",mfilename,data.defaultDir);
 
 %--- check directory access of all paths ---
 if ~isfield(flag,'compile4publ')
     flag.compile4publ = 1;
 end 
 if ~SP2_CheckDirAccessR(data.defaultDir)
-    fprintf(loggingfile,'The general directory <%s>\nis not accessible. Please update.\n\n',data.defaultDir);
+    SP2_Logger.log('The general directory <%s>\nis not accessible. Please update.\n\n',data.defaultDir);
 end
 
-fprintf(loggingfile,"%s\tdata.defaultDir %s",mfilename,data.defaultDir);
+SP2_Logger.log("%s\tdata.defaultDir %s",mfilename,data.defaultDir);
 
 if ~SP2_CheckDirAccessR(data.protDir)
-    fprintf(loggingfile,'The protocol directory <%s>\nis not accessible. Please update.\n\n',data.protDir);
+    SP2_Logger.log('The protocol directory <%s>\nis not accessible. Please update.\n\n',data.protDir);
 end
 if ~SP2_CheckDirAccessR(data.spec1.fidDir)
-    fprintf(loggingfile,'The data directory 1 <%s>\nis not accessible. Please update.\n\n',data.spec1.fidDir);
+    SP2_Logger.log('The data directory 1 <%s>\nis not accessible. Please update.\n\n',data.spec1.fidDir);
 end
 if ~SP2_CheckDirAccessR(data.spec2.fidDir)
-    fprintf(loggingfile,'The data directory 2 <%s>\nis not accessible. Please update.\n\n',data.spec2.fidDir);
+    SP2_Logger.log('The data directory 2 <%s>\nis not accessible. Please update.\n\n',data.spec2.fidDir);
 end
 if ~SP2_CheckDirAccessR(mm.sim.fidDir)
-    fprintf(loggingfile,'The simulation directory <%s>\nis not accessible. Please update.\n\n',mm.sim.fidDir);
+    SP2_Logger.log('The simulation directory <%s>\nis not accessible. Please update.\n\n',mm.sim.fidDir);
 end
 if ~flag.compile4publ
     if ~SP2_CheckDirAccessR(mm.mmStructDir)
-        fprintf(loggingfile,'The directory <%s>\nis not accessible. Please update.\n\n',mm.mmStructDir);
+        SP2_Logger.log('The directory <%s>\nis not accessible. Please update.\n\n',mm.mmStructDir);
     end
 end
 if ~SP2_CheckDirAccessR(proc.spec1.dataDir)
-    fprintf(loggingfile,'The processing data directory 1\n<%s>\nis not accessible. Please update.\n\n',proc.spec1.dataDir);
+    SP2_Logger.log('The processing data directory 1\n<%s>\nis not accessible. Please update.\n\n',proc.spec1.dataDir);
 end
 if ~SP2_CheckDirAccessR(proc.spec2.dataDir)
-    fprintf(loggingfile,'The processing data directory 2\n<%s>\nis not accessible. Please update.\n\n',proc.spec2.dataDir);
+    SP2_Logger.log('The processing data directory 2\n<%s>\nis not accessible. Please update.\n\n',proc.spec2.dataDir);
 end
 if ~SP2_CheckDirAccessR(proc.expt.dataDir)
-    fprintf(loggingfile,'The processing export directory\n<%s>\nis not accessible. Please update.\n\n',proc.expt.dataDir);
+    SP2_Logger.log('The processing export directory\n<%s>\nis not accessible. Please update.\n\n',proc.expt.dataDir);
 end
 if ~SP2_CheckDirAccessR(marss.spinSys.libDir)
-    fprintf(loggingfile,'The directory containing the spin system library file\n<%s>\nis not accessible. Please update.\n\n',marss.spinSys.libDir);
+    SP2_Logger.log('The directory containing the spin system library file\n<%s>\nis not accessible. Please update.\n\n',marss.spinSys.libDir);
 end
 if ~SP2_CheckDirAccessR(marss.basis.fileDir)
-    fprintf(loggingfile,'The directory of simulated basis file\n<%s>\nis not accessible. Please update.\n\n',marss.basis.fileDir);
+    SP2_Logger.log('The directory of simulated basis file\n<%s>\nis not accessible. Please update.\n\n',marss.basis.fileDir);
 end
 if ~flag.compile4publ
     if ~SP2_CheckDirAccessR(mrsi.spec1.dataDir)
-        fprintf(loggingfile,'The MRSI data directory 1\n<%s>\nis not accessible. Please update.\n\n',mrsi.spec1.dataDir);
+        SP2_Logger.log('The MRSI data directory 1\n<%s>\nis not accessible. Please update.\n\n',mrsi.spec1.dataDir);
     end
     if ~SP2_CheckDirAccessR(mrsi.spec2.dataDir)
-        fprintf(loggingfile,'The MRSI data directory 2\n<%s>\nis not accessible. Please update.\n\n',mrsi.spec2.dataDir);
+        SP2_Logger.log('The MRSI data directory 2\n<%s>\nis not accessible. Please update.\n\n',mrsi.spec2.dataDir);
     end
     if ~SP2_CheckDirAccessR(mrsi.ref.dataDir)
-        fprintf(loggingfile,'The MRSI reference directory\n<%s>\nis not accessible. Please update.\n\n',mrsi.ref.dataDir);
+        SP2_Logger.log('The MRSI reference directory\n<%s>\nis not accessible. Please update.\n\n',mrsi.ref.dataDir);
     end
     if ~SP2_CheckDirAccessR(mrsi.expt.dataDir)
-        fprintf(loggingfile,'The MRSI export directory\n<%s>\nis not accessible. Please update.\n\n',mrsi.expt.dataDir);
+        SP2_Logger.log('The MRSI export directory\n<%s>\nis not accessible. Please update.\n\n',mrsi.expt.dataDir);
     end
 end
 if ~SP2_CheckDirAccessR(lcm.dataDir)
-    fprintf(loggingfile,'The LCM data directory\n<%s>\nis not accessible. Please update.\n\n',lcm.dataDir);
+    SP2_Logger.log('The LCM data directory\n<%s>\nis not accessible. Please update.\n\n',lcm.dataDir);
 end
 if ~SP2_CheckDirAccessR(lcm.basisDir)
-    fprintf(loggingfile,'The LCM basis directory\n<%s>\nis not accessible. Please update.\n\n',lcm.basisDir);
+    SP2_Logger.log('The LCM basis directory\n<%s>\nis not accessible. Please update.\n\n',lcm.basisDir);
 end
 if ~SP2_CheckDirAccessR(lcm.batch.protDir)
-    fprintf(loggingfile,'The LCM batch protocol directory\n<%s>\nis not accessible. Please update.\n\n',lcm.batch.protDir);
+    SP2_Logger.log('The LCM batch protocol directory\n<%s>\nis not accessible. Please update.\n\n',lcm.batch.protDir);
 end
 if ~SP2_CheckDirAccessR(lcm.expt.dataDir)
-    fprintf(loggingfile,'The LCM export directory\n<%s>\nis not accessible. Please update.\n\n',lcm.expt.dataDir);
+    SP2_Logger.log('The LCM export directory\n<%s>\nis not accessible. Please update.\n\n',lcm.expt.dataDir);
 end
 if ~SP2_CheckDirAccessR(syn.fidDir)
-    fprintf(loggingfile,'The simulation directory\n<%s>\nis not accessible. Please update.\n\n',syn.fidDir);
+    SP2_Logger.log('The simulation directory\n<%s>\nis not accessible. Please update.\n\n',syn.fidDir);
 end
 if ~flag.compile4publ
     if ~SP2_CheckDirAccessR(tools.anonFileDir)
-        fprintf(loggingfile,'The tools file directory\n<%s>\nis not accessible. Please update.\n\n',tools.anonFileDir);
+        SP2_Logger.log('The tools file directory\n<%s>\nis not accessible. Please update.\n\n',tools.anonFileDir);
     end
     if ~SP2_CheckDirAccessR(tools.anonDir)
-        fprintf(loggingfile,'The tools general directory\n<%s>\nis not accessible. Please update.\n\n',tools.anonDir);
+        SP2_Logger.log('The tools general directory\n<%s>\nis not accessible. Please update.\n\n',tools.anonDir);
     end
 end
 
 %--- update success flag ---
 f_succ = 1;
 
+end
 
+function manPath = manualFilePath(manPath)
+    if flag.OS==1                   % Linux
+        if ~SP2_CheckFileExistenceR(manPath,0)             % check default/previous path
+            if SP2_CheckFileExistenceR([pars.specPath 'SP2_Manual/INSPECTOR_Manual.pdf'],0)
+                manDir  = [pars.specPath 'SP2_Manual/'];   % default directory
+                manName = 'INSPECTOR_Manual.pdf';          % generic
+                manPath = [manDir manName];
+            else
+                manDir  = pars.specPath;                   % SPX directory
+                manName = 'INSPECTOR_Manual.pdf';          % generic
+                manPath = [manDir manName];
+            end
+        end
+    elseif flag.OS==2               % Mac
+        if ~SP2_CheckFileExistenceR(manPath,0)             % check default/previous path
+            if SP2_CheckFileExistenceR([pars.specPath 'SP2_Manual/INSPECTOR_Manual.pdf'],0)
+                manDir  = [pars.specPath 'SP2_Manual/'];   % default directory
+                manName = 'INSPECTOR_Manual.pdf';          % generic
+                manPath = [manDir manName];
+            else
+                manDir  = pars.specPath;                   % SPX directory
+                manName = 'INSPECTOR_Manual.pdf';          % generic
+                manPath = [manDir manName];
+            end
+        end
+    else                            % PC
+        if ~SP2_CheckFileExistenceR(manPath,0)             % check default/previous path
+            mcrInd = strfind(pars.specPath,'\INSPECTOR_mcr');   % specPath is inside the MCR directory structure
+            if any(mcrInd)      % compiled exe
+                parsSpecExeDir = pars.specPath(1:mcrInd);
+            else                % Matlab code
+                parsSpecExeDir = pars.specPath;
+            end
+            if SP2_CheckFileExistenceR([pars.specPath 'SP2_Manual\INSPECTOR_Manual.pdf'],0)
+                manDir  = [pars.specPath 'SP2_Manual\'];   % default directory
+            elseif SP2_CheckFileExistenceR([parsSpecExeDir 'INSPECTOR_Manual.pdf'],0)
+                manDir  = parsSpecExeDir;                  % SPX directory
+            else
+                manDir  = pars.specPath;                   % SPX directory
+            end
+            manName = 'INSPECTOR_Manual.pdf';          % generic
+            manPath = [manDir manName];
+        end
+    end
+    if SP2_CheckFileExistenceR(manPath)
+        SP2_Logger.log('INSPECTOR manual located:\n%s\n',manPath);
+    elseif flag.verbose        
+        SP2_Logger.log('WARNING: INSPECTOR manual could NOT be located.\n');
+    end
 
+end
 
 

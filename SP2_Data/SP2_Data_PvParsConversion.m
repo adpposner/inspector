@@ -54,7 +54,7 @@ if isfield(method,'PVM_SpecMatrix')
 elseif isfield(acqp,'ACQ_size')
     dataSpecX.nspecC   = acqp.ACQ_size(1)/2;
 else
-    fprintf(loggingfile,'%s ->\nFID length not found in parameter file(s). Program aborted.\n',FCTNAME);
+    SP2_Logger.log('%s ->\nFID length not found in parameter file(s). Program aborted.\n',FCTNAME);
     return
 end
 if isfield(method,'Y_Mode') && isfield(method,'Y_CsiListSize')
@@ -110,7 +110,7 @@ switch dataflags.dataExpType
         dataSpecX.njde = 3;    
         
     otherwise
-        fprintf(loggingfile,'%s ->\nThis data mode is not supported. Program aborted.\n',FCTNAME);
+        SP2_Logger.log('%s ->\nThis data mode is not supported. Program aborted.\n',FCTNAME);
         return
 end
 
@@ -768,9 +768,9 @@ else                                    % new, rawdata.job0
          
             dataSpecX.nr = method.PVM_NAverages*method.PVM_NRepetitions;      
             if dataflags.verbose
-                fprintf(loggingfile,'ragSTEAM:\nPVM_NAverages    = %.0f\nPVM_NRepetitions = %.0f\n',method.PVM_NAverages,method.PVM_NRepetitions);
+                SP2_Logger.log('ragSTEAM:\nPVM_NAverages    = %.0f\nPVM_NRepetitions = %.0f\n',method.PVM_NAverages,method.PVM_NRepetitions);
                 if isfield(method,'IsisNAverages')
-                    fprintf(loggingfile,'IsisNAverages    = %.0f\n',method.IsisNAverages);
+                    SP2_Logger.log('IsisNAverages    = %.0f\n',method.IsisNAverages);
                 end
             end
             dataSpecX.na = 1;
@@ -780,10 +780,10 @@ else                                    % new, rawdata.job0
             % RAG's polarization transfer (ISIS) sequence
             dataSpecX.nr = method.PVM_NRepetitions*method.IsisNAverages;      
             if verbose
-                fprintf(loggingfile,'ragPT:\n');
-                fprintf(loggingfile,'PVM_NAverages    = %.0f\n',method.PVM_NAverages);
-                fprintf(loggingfile,'PVM_NRepetitions = %.0f\n',method.PVM_NRepetitions);
-                fprintf(loggingfile,'IsisNAverages    = %.0f\n',method.IsisNAverages);
+                SP2_Logger.log('ragPT:\n');
+                SP2_Logger.log('PVM_NAverages    = %.0f\n',method.PVM_NAverages);
+                SP2_Logger.log('PVM_NRepetitions = %.0f\n',method.PVM_NRepetitions);
+                SP2_Logger.log('IsisNAverages    = %.0f\n',method.IsisNAverages);
             end
             dataSpecX.na = 1;
         elseif strcmp(dataSpecX.sequence,'ISIS.ppg') && ...
@@ -793,10 +793,10 @@ else                                    % new, rawdata.job0
             % Bruker's ISIS sequence
             dataSpecX.nr = method.IsisNAverages;      
             if verbose
-                fprintf(loggingfile,'Bruker ISIS:\n');
-                fprintf(loggingfile,'PVM_NAverages     = %.0f\n',method.PVM_NAverages);
-                fprintf(loggingfile,'PVM_NRepetitions  = %.0f\n',method.PVM_NRepetitions);
-                fprintf(loggingfile,'IsisNAverages     = %.0f\n',method.IsisNAverages);
+                SP2_Logger.log('Bruker ISIS:\n');
+                SP2_Logger.log('PVM_NAverages     = %.0f\n',method.PVM_NAverages);
+                SP2_Logger.log('PVM_NRepetitions  = %.0f\n',method.PVM_NRepetitions);
+                SP2_Logger.log('IsisNAverages     = %.0f\n',method.IsisNAverages);
             end
             dataSpecX.na = 1;
         else                    % regular case
@@ -844,9 +844,9 @@ else                                    % new, rawdata.job0
         if isfield(method,'PVM_NAverages') && isfield(method,'PVM_NRepetitions')
             dataSpecX.nr = method.PVM_NAverages*method.PVM_NRepetitions;      
             if dataflags.verbose
-                fprintf(loggingfile,'JDE:\nPVM_NAverages    = %.0f\nPVM_NRepetitions = %.0f\n',method.PVM_NAverages,method.PVM_NRepetitions);
+                SP2_Logger.log('JDE:\nPVM_NAverages    = %.0f\nPVM_NRepetitions = %.0f\n',method.PVM_NAverages,method.PVM_NRepetitions);
                 if isfield(method,'IsisNAverages')
-                    fprintf(loggingfile,'IsisNAverages    = %.0f\n',method.IsisNAverages);
+                    SP2_Logger.log('IsisNAverages    = %.0f\n',method.IsisNAverages);
                 end
             end
         else

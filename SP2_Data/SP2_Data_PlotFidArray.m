@@ -41,17 +41,17 @@ end
 fidSize = size(dataspec.fid);
 if length(fidSize)==2
     if fidSize(2)<data.scrollRcvr
-        fprintf(loggingfile,'FID %d data size does not allow multi-receiver display\n(Hint: Make sure receivers haven''t been combined yet).\n\n',specnum);
+        SP2_Logger.log('FID %d data size does not allow multi-receiver display\n(Hint: Make sure receivers haven''t been combined yet).\n\n',specnum);
         return
     end
 end
 if length(fidSize)==3
     if fidSize(2)<data.scrollRcvr
-        fprintf(loggingfile,'FID %d data size does not allow multi-receiver display\n(Hint: Make sure receivers haven''t been combined yet)\n\n',specnum);
+        SP2_Logger.log('FID %d data size does not allow multi-receiver display\n(Hint: Make sure receivers haven''t been combined yet)\n\n',specnum);
         return
     end
     if fidSize(3)<data.scrollRep
-        fprintf(loggingfile,'FID %d data size does not allow selected NR display\n(Hint: Make sure repetitions haven''t been combined yet)\n\n',specnum);
+        SP2_Logger.log('FID %d data size does not allow selected NR display\n(Hint: Make sure repetitions haven''t been combined yet)\n\n',specnum);
         return
     end
 end

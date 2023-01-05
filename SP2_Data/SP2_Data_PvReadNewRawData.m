@@ -40,7 +40,7 @@ elseif strcmp(dataSpec.wordSize,'_32_BIT')
    NumBytes  = 4;              % 32 bit 
    PRECISION = 'int32';
 else
-   fprintf(loggingfile,'%s: unknown type <%s> for ACQ_word_size\n',FCTNAME,dataSpec.wordSize);
+   SP2_Logger.log('%s: unknown type <%s> for ACQ_word_size\n',FCTNAME,dataSpec.wordSize);
    return
 end
 if strcmp(dataSpec.byteOrder, 'big')
@@ -48,7 +48,7 @@ if strcmp(dataSpec.byteOrder, 'big')
 elseif strcmp(dataSpec.byteOrder, 'little')
    BYTEORDER = 'ieee-le';     % 'ieee-le' little endian for Linux
 else
-   fprintf(loggingfile,'%s: unknown type <%s> for BYTORDA',FCTNAME,dataSpec.byteOrder);
+   SP2_Logger.log('%s: unknown type <%s> for BYTORDA',FCTNAME,dataSpec.byteOrder);
 end
 
 %--- check file existence ---
@@ -56,13 +56,13 @@ if 2==exist(dataSpec.fidFile)
     thedir = dir(dataSpec.fidFile);
     fsize = thedir.bytes;
 else
-    fprintf(loggingfile,'%s -> the file %s doesn''nt exist\n',FCTNAME, dataSpec.fidFile);
+    SP2_Logger.log('%s -> the file %s doesn''nt exist\n',FCTNAME, dataSpec.fidFile);
     return
 end
     
 %--- consistency check: expected data size vs. file size ---
 if ( fsize/NumBytes == (2*nspecC)*nRcvrs*nx*ny*ns*ni*nr)
-    fprintf(loggingfile,'%s\treading <%s>\n',mfilename, dataSpec.fidFile);
+    SP2_Logger.log('%s\treading <%s>\n',mfilename, dataSpec.fidFile);
     fprintf(loggingfile,'nspec/nRcvrs/nx/ny/ns/ni/nr: %d/%d/%d/%d/%d/%d/%d filesize %dk\n', ...
             2*nspecC,nRcvrs,nx,ny,ns,ni,nr,fsize/1024);
 else
@@ -74,19 +74,19 @@ end
 %--- reading the data from file FIDFILE ---
 [fid, message] = fopen(dataSpec.fidFile, 'r', BYTEORDER);
 if fid <= 0   
-    fprintf(loggingfile,'%s -> Opening %s failed\n%s\n',FCTNAME,dataSpec.fidFile,message);
+    SP2_Logger.log('%s -> Opening %s failed\n%s\n',FCTNAME,dataSpec.fidFile,message);
     return
 end
 
 [datFid, fcount] = fread(fid, fsize, [PRECISION '=>' PRECISION]); 
 if (fcount*NumBytes < fsize)
-    fprintf(loggingfile,'%s: only %d / %d read', FCTNAME, fcount, fsize);
+    SP2_Logger.log('%s: only %d / %d read', FCTNAME, fcount, fsize);
     return
 end
 
 st = fclose(fid);
 if st~=0
-    fprintf(loggingfile,'%s -> Closing file %s failed\n',dataSpec.fidFile);
+    SP2_Logger.log('%s -> Closing file %s failed\n',dataSpec.fidFile);
     return
 end
 
@@ -99,8 +99,8 @@ datFid  = complex(datReal, datImag);
 if nx==1 && ny==1 && ns==1 && ni==1
     datFid  = reshape(datFid,nspecC,nRcvrs,nr);
 else
-    fprintf(loggingfile,'Inconsistent data dimensions detected. Loading aborted.\n');
-    fprintf(loggingfile,'Hint: Check nx, ny, ni and ns\n\n');
+    SP2_Logger.log('Inconsistent data dimensions detected. Loading aborted.\n');
+    SP2_Logger.log('Hint: Check nx, ny, ni and ns\n\n');
     return
 end
 fprintf(loggingfile,'resorting to complex: dim nspecC/nRcvrs/nx/ny/ns/ni/nr: %d/%d/%d/%d/%d/%d/%d \n',...
@@ -109,7 +109,7 @@ fprintf(loggingfile,'resorting to complex: dim nspecC/nRcvrs/nx/ny/ns/ni/nr: %d/
 %----- determination of PhaseFac & datShift out of ConvDat -----
 [ConvDat, f_succ] = SP2_Data_PvAvanceConvList(dataSpec);
 if ~f_succ
-    fprintf(loggingfile,'%s -> Digital-to-analog conversion failed. Program aborted.\n',FCTNAME);
+    SP2_Logger.log('%s -> Digital-to-analog conversion failed. Program aborted.\n',FCTNAME);
     return
 end
 PhaseFac = mod(abs(ConvDat),1);
@@ -136,7 +136,7 @@ datFid(1:nspecC-datShift,:,:) = ifft(ifftshift(dataTmp));
 %maxAmp = max(max(max(abs(datFid))))
 
 %--- info printout ---
-fprintf(loggingfile,'%s finished\n',FCTNAME);
+SP2_Logger.log('%s finished\n',FCTNAME);
 
 %--- update success flag ---
 f_succ = 1;

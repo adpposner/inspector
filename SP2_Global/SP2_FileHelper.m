@@ -35,7 +35,7 @@ methods(Static)
         if isempty(basepth)
             fms = what('INSPECTOR');
             if isempty(fms) || ~isfield(fms,'path')
-                fprintf(loggingfile,'%s ->\nCouldn''t find the main program file\nCheck folder name/existence <INSPECTOR_v2> and software version...',FCTNAME);
+                SP2_Logger.log('%s ->\nCouldn''t find the main program file\nCheck folder name/existence <INSPECTOR_v2> and software version...',FCTNAME);
                 return
             else
                basepth = [fms.path filesep];

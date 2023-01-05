@@ -8,34 +8,33 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm fmfig pars flag inspectorroot loggingfile
+global fm fmfig pars flag inspectorroot
 
-
-%--- switch warnings off ---
-warning off;
-inspectorroot = fileparts(mfilename('fullpath'));
-loggingfile = fopen('logfile.txt','w');
-
-fprintf(loggingfile,"%s",inspectorroot);
 %Add all to path
-genpath('.')
+genpath('.');
 addpath(genpath('.'));
+%--- switch warnings off ---
+%warning off;
+inspectorroot = fileparts(mfilename('fullpath'));
+SP2_Logger.log("%s\n",inspectorroot);
+
+
 
 
 %--- check for open INSPECTOR ---
 % if isfield(pars,'spxOpen')
-%     fprintf(loggingfile,'\nOpen INSPECTOR found. Start of second one aborted.\n\n');
+%     SP2_Logger.log('\nOpen INSPECTOR found. Start of second one aborted.\n\n');
 %     return
 % end
 
 %--- license handling ---
 pars.licLimDayStr = '12/01/2023';                       % expiration date of limited-term license, format: mm/dd/yyyy
 if datenum(pars.licLimDayStr)-now<0                     % expired
-    fprintf(loggingfile,'\n\nINSPECTOR limited-term license expired.\nObtain updated software/license to proceed.\n\n');
+    SP2_Logger.log('\n\nINSPECTOR limited-term license expired.\nObtain updated software/license to proceed.\n\n');
     pause(5)
     return   
 elseif datenum(pars.licLimDayStr)-now<30                % 30-day warning
-    fprintf(loggingfile,'\n\nINSPECTOR limited-term license is expiring in less than 30 days.\nObtain updated software/license soon.\n\n');
+    SP2_Logger.log('\n\nINSPECTOR limited-term license is expiring in less than 30 days.\nObtain updated software/license soon.\n\n');
     pause(5)
 end
 
@@ -50,7 +49,7 @@ elseif nargin==1
         return
     end
 else
-    fprintf(loggingfile,'%s ->\nWrong number of input arguments. Program aborted.\n',FCTNAME);
+    SP2_Logger.log('%s ->\nWrong number of input arguments. Program aborted.\n',FCTNAME);
     return
 end
 
@@ -63,10 +62,10 @@ frameBufferY   = 100;          % frame pluse page buttons (on my PC)
 pars.figPos(1) = frameBufferX;
 pars.figPos(2) = screenSizePix(4) - pars.mainDims(4) - frameBufferY;
 if screenSizePix<pars.mainDims(4)+frameBufferY
-    fprintf(loggingfile,'\n--- WARNING ---\nPixel size of INSPECTOR GUI exceeds your screen size.\nSelect the maximal screen resolution.\n\n');
+    SP2_Logger.log('\n--- WARNING ---\nPixel size of INSPECTOR GUI exceeds your screen size.\nSelect the maximal screen resolution.\n\n');
 end
-% fprintf(loggingfile,'pars.figPos(1) = %.0f\n',pars.figPos(1));
-% fprintf(loggingfile,'pars.figPos(2) = %.0f\n',pars.figPos(2));
+% SP2_Logger.log('pars.figPos(1) = %.0f\n',pars.figPos(1));
+% SP2_Logger.log('pars.figPos(2) = %.0f\n',pars.figPos(2));
 
 %--- compile for publishing ---
 flag.compile4publ = 1;
@@ -167,13 +166,13 @@ end
 SP2_FctList4StandAlone
 
 %--- print software info at program start ---
-fprintf(loggingfile,'\n---   INSPECTOR   ---\n');
-fprintf(loggingfile,'Magnetic Resonance Spectroscopy Software\n');
-fprintf(loggingfile,'Version 11-2021\n');
-fprintf(loggingfile,'by Christoph Juchem\n');
-fprintf(loggingfile,'MR SCIENCE Laboratory\n');
-fprintf(loggingfile,'Columbia University\n');
-fprintf(loggingfile,'All Rights Reserved\n\n');
+SP2_Logger.log('\n---   INSPECTOR   ---\n');
+SP2_Logger.log('Magnetic Resonance Spectroscopy Software\n');
+SP2_Logger.log('Version 11-2021\n');
+SP2_Logger.log('by Christoph Juchem\n');
+SP2_Logger.log('MR SCIENCE Laboratory\n');
+SP2_Logger.log('Columbia University\n');
+SP2_Logger.log('All Rights Reserved\n\n');
 
 
 

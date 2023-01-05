@@ -16,7 +16,7 @@ FCTNAME = 'SP2_Exit_ExitFct';
 
 %--- delete local windows ---
 if ~SP2_ClearWindow
-    fprintf(loggingfile,'\n--- WARNING ---\nClearing of window figure handles failed.\n\n');
+    SP2_Logger.log('\n--- WARNING ---\nClearing of window figure handles failed.\n\n');
     return
 end
 
@@ -758,7 +758,7 @@ elseif nargin==2
         return
     end
 else
-    fprintf(loggingfile,'%s -> Number of input variables >2 is not supported. Program aborted.\n',FCTNAME);
+    SP2_Logger.log('%s -> Number of input variables >2 is not supported. Program aborted.\n',FCTNAME);
     return
 end
 
@@ -769,13 +769,13 @@ save(protFile,'pars2save','data2save','stab2save','mm2save','proc2save',...
                 
 %--- info printout ---
 if flag.verbose
-    fprintf(loggingfile,'\nSettings written to file:\n<%s>\n',protFile');
+    SP2_Logger.log('\nSettings written to file:\n<%s>\n',protFile');
     dirStruct = dir(protFile);
-    fprintf(loggingfile,'file size: %.3f MByte\n',dirStruct.bytes/1e6);
+    SP2_Logger.log('file size: %.3f MByte\n',dirStruct.bytes/1e6);
 else
-    fprintf(loggingfile,'\nSettings written to protocol file ...\n');
+    SP2_Logger.log('\nSettings written to protocol file ...\n');
 end
-fprintf(loggingfile,'INSPECTOR exited correctly.\n\n');
+SP2_Logger.log('INSPECTOR exited correctly.\n\n');
                     
 %--- kill all windows, clear variables ---
 a = gcf;

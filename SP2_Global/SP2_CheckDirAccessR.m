@@ -59,7 +59,7 @@ if ~exist(dirPath,'dir')
             Slash1st = 1;               % first relevant (directory covering) slash 
         else
             if f_verbose
-                fprintf(loggingfile,'%s ->\nString <%s> seems not to be a directory path...\n',FCTNAME,dirPath);
+                SP2_Logger.log('%s ->\nString <%s> seems not to be a directory path...\n',FCTNAME,dirPath);
             end
         end
     else                        % 0: PC
@@ -72,7 +72,7 @@ if ~exist(dirPath,'dir')
             Slash1st = 1;               % first relevant (directory covering) slash 
         else
             if f_verbose
-                fprintf(loggingfile,'%s ->\nString <%s> seems not to be a directory path...\n',FCTNAME,dirPath);
+                SP2_Logger.log('%s ->\nString <%s> seems not to be a directory path...\n',FCTNAME,dirPath);
             end
         end
     end
