@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile mm
+global mm
 
 FCTNAME = 'SP2_MM_DoSatEffAnalysis';
 

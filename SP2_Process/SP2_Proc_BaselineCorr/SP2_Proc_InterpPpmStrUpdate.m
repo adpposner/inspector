@@ -9,7 +9,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm proc
+global fm proc
 
 %--- display setting variables ---
 threshLen = 50;         % threshold length

@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm fmfig pars flag data proc
+global fm fmfig pars flag data proc
 
 FCTNAME = 'SP2_Tools_ToolsWinUpdate';
 

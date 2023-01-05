@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm flag lcm
+global fm flag lcm
 
 %--- flag handling ---
 flag.lcmLinkLb = get(fm.lcm.fit.linkLb,'Value');

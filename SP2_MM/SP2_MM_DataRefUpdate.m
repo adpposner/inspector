@@ -10,7 +10,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm flag
+global fm flag
 
 flag.mmMetabRef = ~get(fm.mm.dataRef,'Value');
 

@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm proc flag
+global fm proc flag
 
 %--- update percentage value spec 1 ---
 proc.spec1.gb = proc.spec1.gb - 0.1;

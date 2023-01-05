@@ -11,7 +11,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile mrsi
+global mrsi
 
 %--- init fitted FID ---
 if mrsi.svd.specNumber==1           % spectrum 1

@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile flag mrsi
+global flag mrsi
 
 FCTNAME = 'SP2_MRSI_ProcAndPlotFidDiff';
 

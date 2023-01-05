@@ -9,7 +9,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm flag
+global fm flag
 
 
 flag.marssAmplShow = ~get(fm.marss.amplShowAuto,'Value');

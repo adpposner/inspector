@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile mrsi proc
+global mrsi proc
 
 
 FCTNAME = 'SP2_Proc_Spec1DataLoadFromMrsi';

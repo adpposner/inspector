@@ -14,7 +14,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm flag
+global fm flag
 
 FCTNAME = 'SP2_MARSS_SimParsDefUpdate';
 

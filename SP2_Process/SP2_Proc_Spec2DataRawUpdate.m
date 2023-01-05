@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm proc flag
+global fm proc flag
 
 
 FCTNAME = 'SP2_Proc_Spec2DataRawUpdate';

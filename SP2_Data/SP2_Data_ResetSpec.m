@@ -10,7 +10,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fmfig pars
+global fmfig pars
 
 FCTNAME = 'SP2_Data_ResetSpec';
 

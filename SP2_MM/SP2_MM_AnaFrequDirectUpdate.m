@@ -8,13 +8,13 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm flag
+global fm flag
 
 flag.mmAnaFrequMode = ~get(fm.mm.anaFrequDirect,'Value');
 
 %--- switch radiobutton ---
-set(fm.mm.anaFrequglobal loggingfile,'Value',flag.mmAnaFrequMode)
-set(fm.mm.anaFrequDirect,'Value',~flag.mmAnaFrequMode)
+set(fm.mm.anaFrequglobal,'Value',flag.mmAnaFrequMode);
+set(fm.mm.anaFrequDirect,'Value',~flag.mmAnaFrequMode);
 
 %--- update window ---
 SP2_MM_MacroWinUpdate

@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm lcm
+global fm lcm
 
 %--- update window limit ---
 lcm.ppmOffsetMax = lcm.ppmOffsetMax - 0.1;

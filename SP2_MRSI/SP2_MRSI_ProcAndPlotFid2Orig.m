@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile mrsi
+global mrsi
 
 FCTNAME = 'SP2_MRSI_ProcAndPlotFid2Orig';
 

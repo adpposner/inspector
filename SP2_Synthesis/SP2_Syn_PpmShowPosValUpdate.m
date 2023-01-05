@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm syn flag
+global fm syn flag
 
 %--- update percentage value ---
 syn.ppmShowPos = str2num(get(fm.syn.ppmShowPosVal,'String'));     % frequency update

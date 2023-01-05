@@ -10,7 +10,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile data flag
+global data flag
 
 FCTNAME = 'SP2_Data_QualityCalcFidArrRxComb';
 

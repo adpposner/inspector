@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile marss proc
+global marss proc
 
 
 FCTNAME = 'SP2_Proc_Spec2DataLoadFromMarss';

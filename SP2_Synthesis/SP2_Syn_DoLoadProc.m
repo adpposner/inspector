@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile syn flag proc fm
+global syn flag proc fm
 
 
 FCTNAME = 'SP2_Syn_DoLoadProc';

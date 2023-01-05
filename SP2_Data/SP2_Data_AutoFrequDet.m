@@ -9,7 +9,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile data
+global data
 
 FCTNAME = 'SP2_Data_AutoFrequDet';
 
@@ -109,7 +109,7 @@ end
 
 
 %--- extraction of spectral parts to be matched ---
-alignAllBin = zeros(1,max(data.spec1.nspecC,data.frAlignFftZf));     % init global loggingfile index vector for ppm ranges to be used (binary format)
+alignAllBin = zeros(1,max(data.spec1.nspecC,data.frAlignFftZf));     % init global index vector for ppm ranges to be used (binary format)
 alignMinI   = zeros(1,frAlignPpmN);            % init minimum ppm index vector
 alignMaxI   = zeros(1,frAlignPpmN);            % init maximum ppm index vector
 for winCnt = 1:frAlignPpmN
@@ -123,7 +123,7 @@ for winCnt = 1:frAlignPpmN
     end
     alignAllBin(alignMinI(winCnt):alignMaxI(winCnt)) = 1;
 end
-data.frAlignAllInd  = find(alignAllBin);             % global loggingfile index vector including all ppm ranges
+data.frAlignAllInd  = find(alignAllBin);             % global index vector including all ppm ranges
 data.frAlignAllIndN = length(data.frAlignAllInd);
 
 %--- frequency shift determination ---
@@ -204,7 +204,7 @@ if f_show
     if maxX>minX && maxY>minY && ~any(isnan([minX maxX minY maxY]))
         axis([minX maxX minY maxY])
     else
-        fprintf('\n\nWARNING: Frequency alignment failed! (global loggingfile display)\n');
+        fprintf('\n\nWARNING: Frequency alignment failed! (global display)\n');
         fprintf('[minX maxX minY maxY] = [%.1f %.1f %.1f %.1f]\n\n',minX,maxX,minY,maxY);
     end
     hold off

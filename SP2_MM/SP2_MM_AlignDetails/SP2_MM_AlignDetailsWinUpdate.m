@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm pars flag
+global fm pars flag
 
 FCTNAME = 'SP2_MM_AlignDetailsWinUpdate';
 

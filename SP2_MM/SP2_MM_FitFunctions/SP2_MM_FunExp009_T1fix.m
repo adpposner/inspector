@@ -4,7 +4,7 @@
 %
 function f = SP2_MM_FunExp009_T1fix(a,x)
 
-global loggingfile mm
+global mm
 
 f = a(1) * (1 - exp(-x/mm.anaTOne(1))) + ...
     a(2) * (1 - exp(-x/mm.anaTOne(2))) + ...

@@ -11,7 +11,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile lcm lcmAna flag
+global lcm lcmAna flag
 
 
 %--- loop over basis functions ---

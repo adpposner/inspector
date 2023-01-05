@@ -13,7 +13,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile flag
+global flag
 
 FCTNAME = 'SP2_CheckFileExistenceR';
 

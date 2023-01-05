@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm proc
+global fm proc
 
 %--- update window limit ---
 proc.ppmNoiseMax = proc.ppmNoiseMax - 0.1;

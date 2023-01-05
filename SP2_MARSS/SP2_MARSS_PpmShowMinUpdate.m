@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm marss
+global fm marss
 
 %--- minimum amplitude ---
 marss.ppmShowMin = str2num(get(fm.marss.ppmShowMin,'String'));

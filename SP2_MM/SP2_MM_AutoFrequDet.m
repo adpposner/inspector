@@ -9,7 +9,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile mm
+global mm
 
 FCTNAME = 'SP2_MM_AutoFrequDet';
 
@@ -90,7 +90,7 @@ if ~f_succ
 end
 
 %--- extraction of spectral parts to be matched ---
-alignAllBin = zeros(1,mm.nspecC);           % init global loggingfile index vector for ppm ranges to be used (binary format)
+alignAllBin = zeros(1,mm.nspecC);           % init global index vector for ppm ranges to be used (binary format)
 alignMinI   = zeros(1,mm.frAlignPpmN);            % init minimum ppm index vector
 alignMaxI   = zeros(1,mm.frAlignPpmN);            % init maximum ppm index vector
 for winCnt = 1:mm.frAlignPpmN
@@ -99,7 +99,7 @@ for winCnt = 1:mm.frAlignPpmN
                                  mm.ppmCalib,mm.sw,datSpecRef);
     alignAllBin(alignMinI(winCnt):alignMaxI(winCnt)) = 1;
 end
-mm.frAlignAllInd = find(alignAllBin);             % global loggingfile index vector including all ppm ranges
+mm.frAlignAllInd = find(alignAllBin);             % global index vector including all ppm ranges
 
 %--- frequency shift determination ---
 datFidShiftMat  = repmat(datFid,[1 mm.opt.nFrequ]) .* mm.opt.frequShiftMat;

@@ -9,7 +9,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm pars exm syn pass act impt ana reg flag
+global fm pars exm syn pass act impt ana reg flag
 
 FCTNAME = 'SP2_ConvertGray2RGB';
 
@@ -110,17 +110,17 @@ end
 if flag.plotRange==1            % automatic search for 'reasonable' slice data range limits (median +/- 20% of max.difference)
     pars.colLims(1) = sliceMedVal - 0.2*(sliceMaxVal-sliceMinVal);
     pars.colLims(2) = sliceMedVal + 0.2*(sliceMaxVal-sliceMinVal);
-    if (globMinVal-pars.colLims(1))/(pars.colLims(2)-pars.colLims(1))<0         % security check, reset to global loggingfile value
+    if (globMinVal-pars.colLims(1))/(pars.colLims(2)-pars.colLims(1))<0         % security check, reset to global value
         pars.colLims(1) = globMinVal;
     end
-    if (globMaxVal-pars.colLims(1))/(pars.colLims(2)-pars.colLims(1))>1         % security check, reset to global loggingfile value
+    if (globMaxVal-pars.colLims(1))/(pars.colLims(2)-pars.colLims(1))>1         % security check, reset to global value
         pars.colLims(2) = globMaxVal;
     end
     initStr   = 'automatic';
 elseif flag.plotRange==2        % full data range of particular slice
     pars.colLims(1) = globMinVal;
     pars.colLims(2) = globMaxVal;
-    initStr   = 'global loggingfile';
+    initStr   = 'global';
 elseif flag.plotRange==3        % full data range of all slices
     pars.colLims(1) = sliceMinVal;
     pars.colLims(2) = sliceMaxVal;

@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm syn flag
+global fm syn flag
 
 %--- update value spec 1 ---
 syn.procOffset = syn.procOffset - 10;

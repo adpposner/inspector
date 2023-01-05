@@ -15,7 +15,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile data flag
+global data flag
 
 FCTNAME = 'SP2_Data_ProcparConversion';
 
@@ -278,7 +278,7 @@ if isfield(procpar,'JDE')
 else
     eval(['data.spec' num2str(nData) '.jde.applied = '''';'])
 end
-eval(['data.spec' num2str(nData) '.t2Series = 0;'])         % global loggingfile init (potential later update)
+eval(['data.spec' num2str(nData) '.t2Series = 0;'])         % global init (potential later update)
 if eval(['strcmp(data.spec' num2str(nData) '.jde.applied,''y'');'])
     if isfield(procpar,'t2TeExtra')
         if iscell(procpar.t2TeExtra)

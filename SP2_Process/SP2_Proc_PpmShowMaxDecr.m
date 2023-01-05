@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm proc
+global fm proc
 
 %--- update window limit ---
 proc.ppmShowMax = proc.ppmShowMax - 0.1;

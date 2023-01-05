@@ -12,7 +12,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile flag data
+global flag data
 
 FCTNAME = 'SP2_Data_Dat1SeriesAlignSatRec';
 

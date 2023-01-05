@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm proc
+global fm proc
 
 %--- update percentage value ---
 proc.alignAmpWeight = min(max(str2double(get(fm.proc.alignAmpWeight,'String')),1e-5),1e3);

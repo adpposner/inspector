@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm mrsi
+global fm mrsi
 
 %--- update window limit ---
 mrsi.amplMax = mrsi.amplMax - 10000;

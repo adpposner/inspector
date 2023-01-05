@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile marss flag fm
+global marss flag fm
 
 FCTNAME = 'SP2_MARSS_SpinSysLibLoad';
 

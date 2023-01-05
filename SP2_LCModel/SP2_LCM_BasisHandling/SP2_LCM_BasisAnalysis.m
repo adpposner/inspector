@@ -12,7 +12,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile flag lcm
+global flag lcm
 
 FCTNAME = 'SP2_LCM_BasisAnalysis';
 

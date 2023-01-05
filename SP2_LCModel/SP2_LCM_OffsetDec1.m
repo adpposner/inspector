@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm lcm
+global fm lcm
 
 %--- update percentage value spec 1 ---
 lcm.offsetVal = lcm.offsetVal - 100;

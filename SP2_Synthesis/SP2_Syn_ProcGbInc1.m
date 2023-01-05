@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm syn flag
+global fm syn flag
 
 %--- update percentage value spec 1 ---
 syn.procGb = syn.procGb + 0.1;

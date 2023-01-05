@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile proc procpar flag
+global proc procpar flag
 
 
 FCTNAME = 'SP2_Proc_AmplCorr';

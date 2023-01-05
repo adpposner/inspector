@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm pars flag proc
+global fm pars flag proc
 
 FCTNAME = 'SP2_Proc_JdeEfficiencyWinUpdate';
 

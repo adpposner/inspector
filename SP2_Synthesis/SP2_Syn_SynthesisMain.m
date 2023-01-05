@@ -11,7 +11,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm fmfig pars syn flag
+global fm fmfig pars syn flag
 
 
 if ~SP2_ClearWindow

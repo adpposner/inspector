@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile mm
+global mm
 
 FCTNAME = 'SP2_MM_LoadParFile';
 
@@ -72,7 +72,7 @@ mm.dwell = 1/mm.sw_h;                   % dwell time
 fprintf('larmor frequency: %.1f MHz\n',mm.sf);
 fprintf('sweep width:      %.1f Hz\n',mm.sw_h);
 fprintf('complex points:   %.0f\n',mm.nspecC);
-fprintf('ppm calibration:  %.3f ppm (global loggingfile)\n\n',mm.ppmCalib);
+fprintf('ppm calibration:  %.3f ppm (global)\n\n',mm.ppmCalib);
 
 %--- update success flag ---
 f_done = 1;

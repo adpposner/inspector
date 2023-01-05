@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm mrsi flag
+global fm mrsi flag
 
 %--- update percentage value spec 1 ---
 mrsi.spec1.gb = mrsi.spec1.gb + 0.1;

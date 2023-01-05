@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile proc flag fm
+global proc flag fm
 
 FCTNAME = 'SP2_Proc_Spec1DataLoadFromProc';
 
@@ -573,7 +573,7 @@ end
 fprintf('larmor frequency: %.1f MHz\n',proc.spec1.sf);
 fprintf('sweep width:      %.1f Hz\n',proc.spec1.sw_h);
 fprintf('complex points:   %.0f\n',proc.spec1.nspecC);
-fprintf('ppm calibration:  %.3f ppm (global loggingfile)\n\n',proc.ppmCalib);
+fprintf('ppm calibration:  %.3f ppm (global)\n\n',proc.ppmCalib);
 
 %--- update success flag ---
 f_succ = 1;

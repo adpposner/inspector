@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm flag
+global fm flag
 
 FCTNAME = 'SP2_Data_QualityDetailsWinUpdate';
 
@@ -23,7 +23,7 @@ else                                % direct
 end
 
 %--- frequency mode ---
-if flag.dataQualityFrequMode        % global loggingfile
+if flag.dataQualityFrequMode        % global
     set(fm.data.qualityDet.frequMin,'Enable','off')
     set(fm.data.qualityDet.frequMax,'Enable','off')
 else                                % direct

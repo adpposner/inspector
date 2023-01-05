@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm mrsi flag
+global fm mrsi flag
 
 %--- update percentage value ---
 mrsi.ppmShowPos = str2num(get(fm.mrsi.ppmShowPosVal,'String'));         % frequency update

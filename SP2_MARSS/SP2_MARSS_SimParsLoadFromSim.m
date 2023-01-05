@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile sim marss pars
+global sim marss pars
 
 
 FCTNAME = 'SP2_Proc_SP2_MARSS_SimParsLoadFromSim';

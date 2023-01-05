@@ -9,7 +9,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile pars flag exm syn pass act impt ana reg optn splx expt tosi tosiCom
+global pars flag exm syn pass act impt ana reg optn splx expt tosi tosiCom
 
 
 FCTNAME = 'SP2_DisplPars';

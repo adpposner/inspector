@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm syn
+global fm syn
 
 %--- update window limit ---
 syn.ppmNoiseMin = syn.ppmNoiseMin - 0.1;

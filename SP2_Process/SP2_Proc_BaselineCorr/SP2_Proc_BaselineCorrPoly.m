@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile proc flag
+global proc flag
 
 
 FCTNAME = 'SP2_Proc_BaselineCorrPoly';
@@ -55,7 +55,7 @@ else
 end
 
 %--- extraction of baseline parts to be fitted ---
-corrBinVec   = zeros(1,length(datStruct.spec));      % init global loggingfile index vector for ppm ranges to be used
+corrBinVec   = zeros(1,length(datStruct.spec));      % init global index vector for ppm ranges to be used
 minPpmIndVec = zeros(1,proc.basePolyPpmN);           % init minimum ppm index vector
 maxPpmIndVec = zeros(1,proc.basePolyPpmN);           % init maximum ppm index vector
 for winCnt = 1:proc.basePolyPpmN
@@ -75,7 +75,7 @@ corrIndVec  = find(corrBinVec);                                                 
 realCoeff   = polyfit(corrIndVec,real(datStruct.spec(corrIndVec))',proc.basePolyOrder);   % polynomial fit of real part
 imagCoeff   = polyfit(corrIndVec,imag(datStruct.spec(corrIndVec))',proc.basePolyOrder);   % polynomial fit of imaginary part
 specFitTot  = complex(polyval(realCoeff,1:length(datStruct.spec),polyval(imagCoeff,1:length(datStruct.spec))))';
-specCorrTot = datStruct.spec - specFitTot;                   % global loggingfile baseline correction
+specCorrTot = datStruct.spec - specFitTot;                   % global baseline correction
 
 %--- ppm limit handling ---
 if flag.procPpmShow     % direct

@@ -12,7 +12,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile
+global
 
 FCTNAME = 'SP2_Data_PvReadNewRawData';
 
@@ -63,10 +63,10 @@ end
 %--- consistency check: expected data size vs. file size ---
 if ( fsize/NumBytes == (2*nspecC)*nRcvrs*nx*ny*ns*ni*nr)
     SP2_Logger.log('%s\treading <%s>\n',mfilename, dataSpec.fidFile);
-    fprintf(loggingfile,'nspec/nRcvrs/nx/ny/ns/ni/nr: %d/%d/%d/%d/%d/%d/%d filesize %dk\n', ...
+    SP2_Logger.log('nspec/nRcvrs/nx/ny/ns/ni/nr: %d/%d/%d/%d/%d/%d/%d filesize %dk\n', ...
             2*nspecC,nRcvrs,nx,ny,ns,ni,nr,fsize/1024);
 else
-    fprintf(loggingfile,'%s: nint %d ~= (2*nspecC)*nRcvrs*nx*ny*ni*ns*nr = %d/%d/%d/%d/%d/%d/%d = %d\n', ...
+    SP2_Logger.log('%s: nint %d ~= (2*nspecC)*nRcvrs*nx*ny*ni*ns*nr = %d/%d/%d/%d/%d/%d/%d = %d\n', ...
             FCTNAME,fsize/NumBytes,2*nspecC,nRcvrs,nx,ny,ns,ni,nr,2*nspecC*nRcvrs*nx*ny*ns*ni*nr);
     return
 end
@@ -103,7 +103,7 @@ else
     SP2_Logger.log('Hint: Check nx, ny, ni and ns\n\n');
     return
 end
-fprintf(loggingfile,'resorting to complex: dim nspecC/nRcvrs/nx/ny/ns/ni/nr: %d/%d/%d/%d/%d/%d/%d \n',...
+SP2_Logger.log('resorting to complex: dim nspecC/nRcvrs/nx/ny/ns/ni/nr: %d/%d/%d/%d/%d/%d/%d \n',...
          nspecC,nRcvrs,nx,ny,ns,ni,nr);
 
 %----- determination of PhaseFac & datShift out of ConvDat -----

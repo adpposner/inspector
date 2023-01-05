@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile data lcm
+global data lcm
 
 FCTNAME = 'SP2_LCM_SpecDataLoadFromDataPage';
 

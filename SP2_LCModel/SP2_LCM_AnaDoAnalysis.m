@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile lcm flag lcmAna
+global lcm flag lcmAna
 
 FCTNAME = 'SP2_LCM_AnaDoAnalysis';
 
@@ -166,7 +166,7 @@ else
 end
 
 %--- target spectrum: spectral extraction ---
-anaAllBin = zeros(1,lcm.anaNspecC);         % init global loggingfile index vector for ppm ranges to be used (binary format)
+anaAllBin = zeros(1,lcm.anaNspecC);         % init global index vector for ppm ranges to be used (binary format)
 anaMinI   = zeros(1,lcm.anaPpmN);           % init minimum ppm index vector
 anaMaxI   = zeros(1,lcm.anaPpmN);           % init maximum ppm index vector
 fprintf('\nSpectral range for LCM analysis:\n');
@@ -191,7 +191,7 @@ for winCnt = 1:lcm.anaPpmN
         fprintf(lcm.log,'%.0f: %.3f..%.3f ppm (%.0f pts)\n',winCnt,lcm.anaPpmMin(winCnt),lcm.anaPpmMax(winCnt),anaMaxI(winCnt)-anaMinI(winCnt)+1);
     end
 end
-lcm.anaAllInd     = find(anaAllBin);                    % global loggingfile index vector including all ppm ranges
+lcm.anaAllInd     = find(anaAllBin);                    % global index vector including all ppm ranges
 lcm.anaAllIndN    = length(lcm.anaAllInd);              % number of points to be fitted
 lcm.anaAllIndOnes = ones(lcm.anaAllIndN,1);             % ones vector (for improved performence of polynomial offset fit)
 fprintf('Total: %.0f pts\n',lcm.anaAllIndN) 
@@ -1498,7 +1498,7 @@ end             % end of combined metabs
 
 
 
-%--- info printout: global loggingfile pars ---
+%--- info printout: global pars ---
 % in original order
 if flag.lcmAnaLb && flag.lcmLinkLb
     if flag.verbose
@@ -1621,7 +1621,7 @@ end
 fprintf('\n');
 
 
-%--- info printout: global loggingfile pars (log file) ---
+%--- info printout: global pars (log file) ---
 if flag.lcmSaveLog
     % in original order
     if flag.lcmAnaLb && flag.lcmLinkLb
@@ -1762,7 +1762,7 @@ f_succ = 1;
 %-----------------------
 function SP2_Loc_FitDiagnostics(exitflag,output)
 
-    global loggingfile flag lcm
+    global flag lcm
 
     %--- fit quality assessment ---
     fprintf('\nFit diagnostics:\n');
@@ -1828,7 +1828,7 @@ function SP2_Loc_FitDiagnostics(exitflag,output)
 %----------------------
 function [coeffErr, sdErr] = SP2_Loc_ErrorAnalysis(res2norm,residual,jacobian,specZoom)
 
-    global loggingfile flag lcm
+    global flag lcm
     
     % ERROR 1: STANDARD DEVIATION OF THE OBSERVATIONS AROUND THE REGRESSION CURVE
     % by Peter Perkins, The MathWorks, Inc. 

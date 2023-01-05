@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile lcm marss pars
+global lcm marss pars
 
 
 FCTNAME = 'SP2_MARSS_SimParsLoadFromLcm';

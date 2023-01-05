@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile procSpecFlags
+global procSpecFlags
 
     
 FCTNAME = 'SP2_Proc_DoProcessFid1';

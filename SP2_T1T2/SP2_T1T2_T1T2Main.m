@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm fmfig pars flag t1t2
+global fm fmfig pars flag t1t2
 
 
 if ~SP2_ClearWindow
@@ -41,7 +41,7 @@ fm.t1t2.ppmCalib    = uicontrol('Style','Edit','Position', [160 586 50 18],'Stri
 fm.t1t2.phaseZeroLab = text('Position',[-0.11, 0.865],'String','Zero Phase','FontSize',pars.fontSize);
 fm.t1t2.phaseZero    = uicontrol('Style','Edit','Position', [160 563 50 18],'String',num2str(t1t2.phaseZero),...
                                  'BackGroundColor',pars.bgColor,'Callback','SP2_T1T2_ParsUpdate',...
-                                 'TooltipString','global loggingfile zero-order phase offset [deg]','FontSize',pars.fontSize);
+                                 'TooltipString','global zero-order phase offset [deg]','FontSize',pars.fontSize);
 
 %--- load data ---
 fm.t1t2.dataLoad    = uicontrol('Style','Pushbutton','String','Load & Reco','Position',[260 655 100 18],'Callback','SP2_T1T2_DataLoadAndReco;',...

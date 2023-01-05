@@ -5,7 +5,7 @@ function SP2_PlotRangeDeterm(datArray)
 % 01-2007, Christoph Juchem
 %
 
-global loggingfile fm pars flag
+global fm pars flag
 FCTNAME = 'SP2_PlotRangeDeterm';
 
 
@@ -14,7 +14,7 @@ if ~SP2_Check4Num(datArray)
 end
 datSize = size(datArray);
 
-%--- determine global loggingfile linear expression for correct color (re)scaling ([min max] <-> [0 1]) ---
+%--- determine global linear expression for correct color (re)scaling ([min max] <-> [0 1]) ---
 minVal = min(min(min(min(datArray))));
 maxVal = max(max(max(max(datArray))));
 % y = mx + b
@@ -46,7 +46,7 @@ if flag.plotRange==1            % automatic search for 'reasonable' slice data r
 elseif flag.plotRange==2        % full data range of particular slice
     pars.colLims(1) = globMinVal;
     pars.colLims(2) = globMaxVal;
-    initStr   = 'global loggingfile';
+    initStr   = 'global';
 elseif flag.plotRange==3        % full data range of all slices
     pars.colLims(1) = sliceMinVal;
     pars.colLims(2) = sliceMaxVal;

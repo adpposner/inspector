@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm pars flag stab data
+global fm pars flag stab data
 
 FCTNAME = 'SP2_Stab_StabilityWinUpdate';
 

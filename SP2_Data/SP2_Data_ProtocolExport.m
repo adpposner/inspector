@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile pars data proc ana expt flag
+global pars data proc ana expt flag
 
 FCTNAME = 'SP2_Data_ProtocolExport';
 

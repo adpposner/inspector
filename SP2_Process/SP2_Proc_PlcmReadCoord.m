@@ -7,7 +7,7 @@
 %%  02-2016, Christoph Juchem
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile flag
+global flag
 
 FCTNAME = 'SP2_Proc_PlcmReadCoord';
 

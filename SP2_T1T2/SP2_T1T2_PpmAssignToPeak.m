@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile t1t2 flag fm
+global t1t2 flag fm
 
 FCTNAME = 'SP2_T1T2_PpmAssignToPeak';
 

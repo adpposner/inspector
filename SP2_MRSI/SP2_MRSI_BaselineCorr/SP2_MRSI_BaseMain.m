@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile pars flag mrsi fm
+global pars flag mrsi fm
 
 FCTNAME = 'SP2_MRSI_BaseMain';
 

@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm marss flag
+global fm marss flag
 
 FCTNAME = 'SP2_MARSS_SpinSysLibPathUpdate';
 

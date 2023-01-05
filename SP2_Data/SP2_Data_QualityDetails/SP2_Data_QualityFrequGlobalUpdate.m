@@ -1,19 +1,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-    function SP2_Data_QualityFrequglobal loggingfileUpdate
+    function SP2_Data_QualityFrequglobalUpdate
 %% 
-%%  Updates radiobutton setting: global loggingfile frequency range
+%%  Updates radiobutton setting: global frequency range
 %%
 %%  12-2013, Christoph Juchem
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm flag
+global fm flag
 
-flag.dataQualityFrequMode = get(fm.data.qualityDet.frequglobal loggingfile,'Value');
+flag.dataQualityFrequMode = get(fm.data.qualityDet.frequglobal,'Value');
 
 %--- switch radiobutton ---
-set(fm.data.qualityDet.frequglobal loggingfile,'Value',flag.dataQualityFrequMode)
+set(fm.data.qualityDet.frequglobal,'Value',flag.dataQualityFrequMode)
 set(fm.data.qualityDet.frequDirect,'Value',~flag.dataQualityFrequMode)
 
 %--- update window ---

@@ -11,7 +11,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile lcm flag
+global lcm flag
 
 FCTNAME = 'SP2_LCM_AnaDoCalcCRLB_Individual';
 
@@ -28,7 +28,7 @@ FCTNAME = 'SP2_LCM_AnaDoCalcCRLB_Individual';
 %   * D: derivative
 %   * computaton of D requires the derivative of the functions xn with
 %     respect to the parameters pl using their true values
-%   * note that (as opposed to the paper) only one global loggingfile phase is
+%   * note that (as opposed to the paper) only one global phase is
 %   * There is no sum in the derivative (as opposed to the model sampel) as the partial derivative is p_l-specific
 %     considered, i.e. the individual signals are phase-locked
 %   * P: prior knowledge
@@ -119,12 +119,12 @@ parsPerMetab = 1 + ...                                          % amplitudes (al
                flag.lcmAnaGb * ~flag.lcmLinkGb + ...            % GB if uncoupled
                flag.lcmAnaShift * ~flag.lcmLinkShift;           % frequency shift if uncoupled
 
-%--- number of global loggingfile (linked) parameters ---
-nglobal loggingfile = flag.lcmAnaLb * flag.lcmLinkLb + ...                  % LB if coupled
+%--- number of global (linked) parameters ---
+nglobal = flag.lcmAnaLb * flag.lcmLinkLb + ...                  % LB if coupled
           flag.lcmAnaGb * flag.lcmLinkGb + ...                  % GB if coupled
           flag.lcmAnaShift * flag.lcmLinkShift + ...            % frequency shift if coupled
-          flag.lcmAnaPhc0 + ...                                 % PHC0 (always global loggingfile)
-          flag.lcmAnaPhc1;                                      % PHC1 (always global loggingfile)
+          flag.lcmAnaPhc0 + ...                                 % PHC0 (always global)
+          flag.lcmAnaPhc1;                                      % PHC1 (always global)
 
       
 %--- reformat basis FIDs ---
@@ -156,16 +156,16 @@ lcmShiftVec = lcm.anaShift(lcm.fit.applied);
 % t_n therefore becomes -pi*tVec
 %
 %--- parameter init ---
-D    = zeros(lcm.nFidCrlb,(parsPerMetab+nglobal loggingfile)*nMetab);       % init derivative matrix D in time domain
+D    = zeros(lcm.nFidCrlb,(parsPerMetab+nglobal)*nMetab);       % init derivative matrix D in time domain
 Dfft = D;                                                       % init derivative matrix Dfft in frequency domain
 % note that before the prior knowledge matrix P is applied all parameters
-% are independent, therefore (parsPerMetab+nglobal loggingfile)*nMetab
+% are independent, therefore (parsPerMetab+nglobal)*nMetab
 dCnt    = 0;                                                    % init D index counter
 legCell = {};                                                   % name cell for D
 legCnt  = 0;                                                    % init legend counter
 
 %--- init (analysis window-specific) frequency domain D ---
-DfftZoom = zeros(lcm.anaAllIndN,(parsPerMetab+nglobal loggingfile)*nMetab);
+DfftZoom = zeros(lcm.anaAllIndN,(parsPerMetab+nglobal)*nMetab);
 
 %--- individual metabolite-specific paramters ---
 for metabCnt = 1:nMetab         % somewhat redundant as strings are identical for all metabolites
@@ -190,11 +190,11 @@ for metabCnt = 1:nMetab         % somewhat redundant as strings are identical fo
     if flag.lcmAnaShift % && ~flag.lcmLinkShift
         cKStr = [cKStr ' .* exp(1i*2*pi*lcmShiftVec(metabCnt)*tVec)'];
     end
-    % PHC0 (always global loggingfile)
+    % PHC0 (always global)
     if flag.lcmAnaPhc0
         cKStr = [cKStr ' .* exp(1i*lcm.anaPhc0*pi/180)'];
     end
-    % PHC1 (always global loggingfile)
+    % PHC1 (always global)
     if flag.lcmAnaPhc1
         cKStr = [cKStr ' .* exp(1i*2*pi*lcmShiftVec(metabCnt)*lcm.anaPhc1*pi/180)'];
     end
@@ -226,11 +226,11 @@ for metabCnt = 1:nMetab         % somewhat redundant as strings are identical fo
         if flag.lcmAnaShift % && ~flag.lcmLinkShift
             alphaKStr = [alphaKStr ' .* exp(1i*2*pi*lcmShiftVec(metabCnt).*tVec)'];
         end
-        % PHC0 (always global loggingfile)
+        % PHC0 (always global)
         if flag.lcmAnaPhc0
             alphaKStr = [alphaKStr ' .* exp(1i*lcm.anaPhc0*pi/180)'];
         end
-        % PHC1 (always global loggingfile)
+        % PHC1 (always global)
         if flag.lcmAnaPhc1
             alphaKStr = [alphaKStr ' .* exp(1i*2*pi*lcmShiftVec(metabCnt)*lcm.anaPhc1*pi/180)'];
         end
@@ -261,11 +261,11 @@ for metabCnt = 1:nMetab         % somewhat redundant as strings are identical fo
         if flag.lcmAnaShift % && ~flag.lcmLinkShift
             betaKStr = [betaKStr ' .* exp(1i*2*pi*lcmShiftVec(metabCnt)*tVec)'];
         end
-        % PHC0 (always global loggingfile)
+        % PHC0 (always global)
         if flag.lcmAnaPhc0
             betaKStr = [betaKStr ' .* exp(1i*lcm.anaPhc0*pi/180)'];
         end
-        % PHC1 (always global loggingfile)
+        % PHC1 (always global)
         if flag.lcmAnaPhc1
             betaKStr = [betaKStr ' .* exp(1i*2*pi*lcmShiftVec(metabCnt)*lcm.anaPhc1*pi/180)'];
         end
@@ -300,11 +300,11 @@ for metabCnt = 1:nMetab         % somewhat redundant as strings are identical fo
             omegaKStr = [omegaKStr ' .* exp(-lcmGbVec(metabCnt)*pi^2*tVec.^2)'];
             % omegaKStr = [omegaKStr ' .* exp(-pi^2/(4*log(2))*lcmGbVec(metabCnt)^2.*tVec.^2)'];
         end
-        % PHC0 (always global loggingfile)
+        % PHC0 (always global)
         if flag.lcmAnaPhc0
             omegaKStr = [omegaKStr ' .* exp(1i*lcm.anaPhc0*pi/180)'];
         end
-        % PHC1 (always global loggingfile)
+        % PHC1 (always global)
         if flag.lcmAnaPhc1
             omegaKStr = [omegaKStr ' .* exp(1i*2*pi*lcmShiftVec(metabCnt)*lcm.anaPhc1*pi/180)'];
         end
@@ -322,20 +322,20 @@ for metabCnt = 1:nMetab         % somewhat redundant as strings are identical fo
         end
     end
     
-    %--- global loggingfile zero-order phase (PHC0) ---
+    %--- global zero-order phase (PHC0) ---
     if flag.lcmAnaPhc0   
-        %--- init global loggingfile phase part ---
-        % init phc0 string (always global loggingfile)
+        %--- init global phase part ---
+        % init phc0 string (always global)
         phc0KStr = 'basisFid(:,metabCnt) .* lcmAmpVec(metabCnt) * (1i*pi/180) .* exp(1i*lcm.anaPhc0*pi/180)';
-        % PHC1 (always global loggingfile)
+        % PHC1 (always global)
         if flag.lcmAnaPhc1
             phc0KStr = [phc0KStr ' .* exp(1i*2*pi*lcmShiftVec(metabCnt)*lcm.anaPhc1*pi/180)'];
         end
-        % Lorentzian (global loggingfile)
+        % Lorentzian (global)
         if flag.lcmAnaLb % && ~flag.lcmLinkLb
             phc0KStr = [phc0KStr ' .* exp(-lcmLbVec(metabCnt)*pi*tVec)'];
         end
-        % Gaussian (global loggingfile)
+        % Gaussian (global)
         if flag.lcmAnaGb % && ~flag.lcmLinkGb
             phc0KStr = [phc0KStr ' .* exp(-lcmGbVec(metabCnt)*pi^2*tVec.^2)'];
             % phc0KStr = [phc0KStr ' .* exp(-pi^2/(4*log(2))*lcmGbVec(metabCnt)^2.*tVec.^2)'];
@@ -352,20 +352,20 @@ for metabCnt = 1:nMetab         % somewhat redundant as strings are identical fo
         DfftZoom(:,dCnt) = Dfft(lcm.anaAllInd,dCnt);
     end
     
-    %--- global loggingfile first-order phase (PHC1) ---
+    %--- global first-order phase (PHC1) ---
     if flag.lcmAnaPhc1   
-        %--- init global loggingfile phase part ---
-        % init phc1 string (always global loggingfile)
+        %--- init global phase part ---
+        % init phc1 string (always global)
         phc1KStr = '1i * basisFid(:,metabCnt) * 2*pi*lcmShiftVec(metabCnt) * exp(1i*2*pi*lcmShiftVec(metabCnt)*lcm.anaPhc1*pi/180)';
-        % PHC0 (always global loggingfile)
+        % PHC0 (always global)
         if flag.lcmAnaPhc0
             phc1KStr = [phc1KStr ' .* exp(1i*lcm.anaPhc0*pi/180)'];
         end
-        % Lorentzian (global loggingfile)
+        % Lorentzian (global)
         if flag.lcmAnaLb % && ~flag.lcmLinkLb
             phc1KStr = [phc1KStr ' .* exp(-lcmLbVec(metabCnt)*pi*tVec)'];
         end
-        % Gaussian (global loggingfile)
+        % Gaussian (global)
         if flag.lcmAnaGb % && ~flag.lcmLinkGb
             phc1KStr = [phc1KStr ' .* exp(-lcmGbVec(metabCnt)*pi^2*tVec.^2)'];
             % phc1KStr = [phc1KStr ' .* exp(-pi^2/(4*log(2))*lcmGbVec(metabCnt)^2.*tVec.^2)'];
@@ -383,7 +383,7 @@ for metabCnt = 1:nMetab         % somewhat redundant as strings are identical fo
     end
 end
 
-%--- legend name handling for global loggingfile parameters ---
+%--- legend name handling for global parameters ---
 %--- Lorentzian line broadening ---
 if flag.lcmAnaLb && flag.lcmLinkLb
     legCnt = legCnt + 1;
@@ -412,10 +412,10 @@ end
 
 
 % %--- total number of CRLB parameters ---
-% nCRLB = parsPerMetab*nMetab + nglobal loggingfile;
+% nCRLB = parsPerMetab*nMetab + nglobal;
 % 
 % %--- creation of prior knowledge matrix ---
-% % 1st working version: 3 parameters per metabolite plus 1 global loggingfile phase
+% % 1st working version: 3 parameters per metabolite plus 1 global phase
 % P = zeros(dCnt,nCRLB-nMetab);
 % indVec = parsPerMetab:parsPerMetab:dCnt;
 % rowCnt = 1;     % init row position counter
@@ -429,10 +429,10 @@ end
 % end
 % P(indVec,end) = 1;
 
-% generation of P for arbitrary combination of independent and global loggingfile parameters
-P = zeros(dCnt,parsPerMetab*nMetab+nglobal loggingfile);      % 1: all pars, 2: effective size
+% generation of P for arbitrary combination of independent and global parameters
+P = zeros(dCnt,parsPerMetab*nMetab+nglobal);      % 1: all pars, 2: effective size
 % indVec = parsPerMetab:parsPerMetab:dCnt;
-indVec1st = 1:parsPerMetabD:dCnt;        % (1st) index vector for global loggingfile parameter dimension
+indVec1st = 1:parsPerMetabD:dCnt;        % (1st) index vector for global parameter dimension
 rowInd    = 1;                          % init row index
 colInd    = 1;                          % init column index
 %--- metabolite-specific parameters ---
@@ -513,9 +513,9 @@ for colCnt = 1:nMetab
     end
 end
 
-%--- global loggingfile parameter dimensions ---
+%--- global parameter dimensions ---
 % note reversed order
-globCnt   = 0;                          % counter of global loggingfile parameters
+globCnt   = 0;                          % counter of global parameters
 %--- PHC1 ---
 if flag.lcmAnaPhc1
     globCnt = globCnt + 1;
@@ -558,8 +558,8 @@ if flag.verbose
     end
     fprintf('size(D) = [%.0f %.0f], size(P) = [%.0f %.0f]\n',size(D,1),size(D,2),size(P,1),size(P,2));
     fprintf('Full D:  %.0f metabs * %.0f metab-specific pars = %.0f\n',nMetab,parsPerMetabD,dCnt);
-    fprintf('After P: %.0f metabs * %.0f metab-specific pars + %.0f global loggingfile pars = %.0f fit pars (CRLB)\n',...
-            nMetab,parsPerMetabD-globCnt,globCnt,parsPerMetab*nMetab+nglobal loggingfile)
+    fprintf('After P: %.0f metabs * %.0f metab-specific pars + %.0f global pars = %.0f fit pars (CRLB)\n',...
+            nMetab,parsPerMetabD-globCnt,globCnt,parsPerMetab*nMetab+nglobal)
 
     %--- log file ---
     if flag.lcmSaveLog && ~f_plot
@@ -571,8 +571,8 @@ if flag.verbose
         end
         fprintf(lcm.log,'size(D) = [%.0f %.0f], size(P) = [%.0f %.0f]\n',size(D,1),size(D,2),size(P,1),size(P,2));
         fprintf(lcm.log,'Full D:  %.0f metabs * %.0f metab-specific pars = %.0f\n',nMetab,parsPerMetabD,dCnt);
-        fprintf(lcm.log,'After P: %.0f metabs * %.0f metab-specific pars + %.0f global loggingfile pars = %.0f fit pars (CRLB)\n',...
-                nMetab,parsPerMetabD-globCnt,globCnt,parsPerMetab*nMetab+nglobal loggingfile);
+        fprintf(lcm.log,'After P: %.0f metabs * %.0f metab-specific pars + %.0f global pars = %.0f fit pars (CRLB)\n',...
+                nMetab,parsPerMetabD-globCnt,globCnt,parsPerMetab*nMetab+nglobal);
     end
 end
 
@@ -613,12 +613,12 @@ if f_plot && flag.verbose
 end
 
 %--- dimension update ---
-% parsPerMetab = parsPerMetab-nglobal loggingfile;                % since PHC0 is now global loggingfile 
-nCRLB = parsPerMetab*nMetab+nglobal loggingfile;            % = size(P,2) = size(F,1) = size(F,2)
+% parsPerMetab = parsPerMetab-nglobal;                % since PHC0 is now global 
+nCRLB = parsPerMetab*nMetab+nglobal;            % = size(P,2) = size(F,1) = size(F,2)
 
 %--- Cramer-Rao Lower Bounds ---
 invF = inv(F);
-lcm.fit.crlb = zeros(1,nCRLB);                  % complete CRLB vector included metabolite-specific and global loggingfile parameters
+lcm.fit.crlb = zeros(1,nCRLB);                  % complete CRLB vector included metabolite-specific and global parameters
 for crlbCnt = 1:nCRLB
     lcm.fit.crlb(crlbCnt) = sqrt(invF(crlbCnt,crlbCnt));
 %     lcm.fit.crlb(crlbCnt) = sqrt(invF(crlbCnt,crlbCnt))/lcm.anaScale(lcm.fit.appliedFit(crlbCnt));
@@ -648,31 +648,31 @@ end
 %--- extract metabolite-specific CRLBs                                  ---
 % amplitude
 indCnt          = 1;                                            % init individual parameter counter
-% lcm.fit.crlbAmp = min(100*lcm.fit.crlb(indCnt:parsPerMetab:nCRLB-nglobal loggingfile),666);
-lcm.fit.crlbAmp = lcm.fit.crlb(indCnt:parsPerMetab:nCRLB-nglobal loggingfile);
+% lcm.fit.crlbAmp = min(100*lcm.fit.crlb(indCnt:parsPerMetab:nCRLB-nglobal),666);
+lcm.fit.crlbAmp = lcm.fit.crlb(indCnt:parsPerMetab:nCRLB-nglobal);
 
 % Lorentzian broadening
 if flag.lcmAnaLb && ~flag.lcmLinkLb
     indCnt         = indCnt + 1;
-    lcm.fit.crlbLb = lcm.fit.crlb(indCnt:parsPerMetab:nCRLB-nglobal loggingfile);
+    lcm.fit.crlbLb = lcm.fit.crlb(indCnt:parsPerMetab:nCRLB-nglobal);
 end
 
 % Gaussian broadening
 if flag.lcmAnaGb && ~flag.lcmLinkGb
     indCnt         = indCnt + 1;
-    lcm.fit.crlbGb = lcm.fit.crlb(indCnt:parsPerMetab:nCRLB-nglobal loggingfile);
+    lcm.fit.crlbGb = lcm.fit.crlb(indCnt:parsPerMetab:nCRLB-nglobal);
 end
 
 % frequency shift
 if flag.lcmAnaShift && ~flag.lcmLinkShift
     indCnt            = indCnt + 1;
-    lcm.fit.crlbShift = lcm.fit.crlb(indCnt:parsPerMetab:nCRLB-nglobal loggingfile);
+    lcm.fit.crlbShift = lcm.fit.crlb(indCnt:parsPerMetab:nCRLB-nglobal);
 end
 
 
 %--------------------------------------------------------------------------
-%--- extract global loggingfile CRLBs                                               ---
-globCnt = 0;                          % counter of global loggingfile parameters
+%--- extract global CRLBs                                               ---
+globCnt = 0;                          % counter of global parameters
 %--- PHC1 ---
 if flag.lcmAnaPhc1
     globCnt = globCnt + 1;
@@ -735,7 +735,7 @@ if flag.lcmAnaShift && ~flag.lcmLinkShift
 end
 
 
-%--- info printout: global loggingfile pars ---
+%--- info printout: global pars ---
 % in original order
 if flag.lcmAnaLb && flag.lcmLinkLb
     fprintf('CRLB(LB)        = %.3f Hz\n',lcm.fit.crlbLb);
@@ -755,7 +755,7 @@ end
 
 
 
-%--- info printout: individual/global loggingfile parameters (log file) ---
+%--- info printout: individual/global parameters (log file) ---
 if flag.lcmSaveLog && ~f_plot
     %--- info printout: individual pars ---
     % in original order
@@ -771,7 +771,7 @@ if flag.lcmSaveLog && ~f_plot
     end
 
 
-    %--- info printout: global loggingfile pars ---
+    %--- info printout: global pars ---
     % in original order
     if flag.lcmAnaLb && flag.lcmLinkLb
         fprintf(lcm.log,'CRLB(LB)        = %.3f Hz\n',lcm.fit.crlbLb);
@@ -811,24 +811,24 @@ end
 % rearrange to have first metabolite in lower left corner (similar to Minnesota)
 % amplitude
 indCnt     = 1;             % init individual parameter counter
-corrMatAmp = flipud(corrMatCompl(indCnt:parsPerMetab:nCRLB-nglobal loggingfile,1:parsPerMetab:nCRLB-nglobal loggingfile));
+corrMatAmp = flipud(corrMatCompl(indCnt:parsPerMetab:nCRLB-nglobal,1:parsPerMetab:nCRLB-nglobal));
 
 % Lorentzian broadening
 if flag.lcmAnaLb && ~flag.lcmLinkLb
     indCnt    = indCnt + 1;
-    corrMatLb = flipud(corrMatCompl(indCnt:parsPerMetab:nCRLB-nglobal loggingfile,1:parsPerMetab:nCRLB-nglobal loggingfile));
+    corrMatLb = flipud(corrMatCompl(indCnt:parsPerMetab:nCRLB-nglobal,1:parsPerMetab:nCRLB-nglobal));
 end
 
 % Gaussian broadening
 if flag.lcmAnaGb && ~flag.lcmLinkGb
     indCnt    = indCnt + 1;
-    corrMatGb = flipud(corrMatCompl(indCnt:parsPerMetab:nCRLB-nglobal loggingfile,1:parsPerMetab:nCRLB-nglobal loggingfile));
+    corrMatGb = flipud(corrMatCompl(indCnt:parsPerMetab:nCRLB-nglobal,1:parsPerMetab:nCRLB-nglobal));
 end
 
 % frequency shift
 if flag.lcmAnaShift && ~flag.lcmLinkShift
     indCnt       = indCnt + 1;
-    corrMatShift = flipud(corrMatCompl(indCnt:parsPerMetab:nCRLB-nglobal loggingfile,1:parsPerMetab:nCRLB-nglobal loggingfile));
+    corrMatShift = flipud(corrMatCompl(indCnt:parsPerMetab:nCRLB-nglobal,1:parsPerMetab:nCRLB-nglobal));
 end
 
 %--- keep for potential saving to xls file ---

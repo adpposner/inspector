@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm flag t1t2 pars
+global fm flag t1t2 pars
 
 FCTNAME = 'SP2_T1T2_T1T2WinUpdate';
 
@@ -93,7 +93,7 @@ else
 end
 
 %--- analysis frequency mode ---
-if flag.t1t2PpmShow                     % global loggingfile
+if flag.t1t2PpmShow                     % global
     set(fm.t1t2.ppmShowMin,'Enable','off')
     set(fm.t1t2.ppmShowMax,'Enable','off')
 else                                % direct

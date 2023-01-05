@@ -5,13 +5,13 @@
 %%  Switching on/off phase correction of spectral data.
 %%  0: off
 %%  1: Klose method (includes frequency correction)
-%%  2: global loggingfile correction via phase of first point of reference FID.
+%%  2: global correction via phase of first point of reference FID.
 %%
 %%  01-2012, Christoph Juchem
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm flag
+global fm flag
 
 
 %--- retrieve parameter ---

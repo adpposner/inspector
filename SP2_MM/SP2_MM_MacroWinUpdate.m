@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm flag mm pars
+global fm flag mm pars
 
 FCTNAME = 'SP2_MM_MacroWinUpdate';
 
@@ -17,7 +17,7 @@ FCTNAME = 'SP2_MM_MacroWinUpdate';
 set(fm.mm.boxCarHz,'String',sprintf('/ %.1f Hz',mm.boxCarHz))
 
 %--- analysis frequency mode ---
-if flag.mmAnaFrequMode        % global loggingfile
+if flag.mmAnaFrequMode        % global
     set(fm.mm.anaFrequMin,'Enable','off')
     set(fm.mm.anaFrequMax,'Enable','off')
 else                                % direct
@@ -43,7 +43,7 @@ else
 end
 
 %--- analysis frequency mode ---
-if flag.mmPpmShow                     % global loggingfile
+if flag.mmPpmShow                     % global
     set(fm.mm.ppmShowMin,'Enable','off')
     set(fm.mm.ppmShowMax,'Enable','off')
 else                                % direct

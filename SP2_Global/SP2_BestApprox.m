@@ -55,7 +55,7 @@ elseif ~isempty(find(appVal<yVec)) && ~isempty(find(appVal>yVec))
 %         fprintf('%s -> best approximation value is found around the vector limit and not reliable...\n\n',FCTNAME);
 %         return
 % 	end
-	% simple consideration of the global loggingfile 2nd nearest neighbour can fail if there is another local
+	% simple consideration of the global 2nd nearest neighbour can fail if there is another local
 	% amplitude value in that range somewhere else. Therefore a localized search is required:
     if indNear==1                   % value lies between first two points
         ind1 = 1;

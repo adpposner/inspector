@@ -14,7 +14,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile flag data
+global flag data
 
 FCTNAME = 'SP2_Data_PhaseCorrKloseRxCombJdeArray';
 
@@ -72,7 +72,7 @@ for nrCnt = nrRg(1):nrRg(2)
     end
 
     %--- frequency correction ---
-    % 1 global loggingfile frequency for all receivers of the same FID
+    % 1 global frequency for all receivers of the same FID
     phPerPt = frequVec(nrCnt)*data.spec2.dwell*data.spec2.nspecC*(pi/180)/(2*pi);            % corr phase per point
     for rxCnt = 1:data.rcvrN
         data.spec2.fidSelect(:,data.rcvrInd(rxCnt),nrCnt) = exp(-1i*phPerPt*(0:data.spec2.nspecC-1)') .* ...
@@ -108,7 +108,7 @@ for nrCnt = nrRg(1):nrRg(2)
     end
 
     %--- frequency correction ---
-    % 1 (global loggingfile) phase for all receivers of the same FID (keeping the relative phase
+    % 1 (global) phase for all receivers of the same FID (keeping the relative phase
     % between Rx channels unaffected)
     for rxCnt = 1:data.rcvrN
         data.spec2.fidSelect(:,data.rcvrInd(rxCnt),nrCnt) = exp(1i*phaseVec(nrCnt)*pi/180) * ...

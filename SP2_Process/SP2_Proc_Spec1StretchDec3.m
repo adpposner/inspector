@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm proc flag
+global fm proc flag
 
 %--- update value spec 1 ---
 proc.spec1.stretch = proc.spec1.stretch - 1;

@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile lcm flag fm
+global lcm flag fm
 
 FCTNAME = 'SP2_LCM_SpecDataLoadFromLcmPage';
 
@@ -503,7 +503,7 @@ end
 fprintf('larmor frequency: %.1f MHz\n',lcm.sf);
 fprintf('sweep width:      %.1f Hz\n',lcm.sw_h);
 fprintf('complex points:   %.0f\n',lcm.nspecC);
-fprintf('ppm calibration:  %.3f ppm (global loggingfile)\n\n',lcm.ppmCalib);
+fprintf('ppm calibration:  %.3f ppm (global)\n\n',lcm.ppmCalib);
 
 %--- update success flag ---
 f_succ = 1;

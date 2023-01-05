@@ -5,14 +5,14 @@
 %%  Stability analysis of spectral signals:
 %% 
 %% (1) check for base line offset and maximum ratio
-%% (2) check global loggingfile noise standard deviation
+%% (2) check global noise standard deviation
 %% (3) check for frequency range dependence of noise
 %%
 %%  01-2011, Christoph Juchem
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile stab flag
+global stab flag
 
 FCTNAME = 'SP2_Stab_DoSignalAnalysis';
 
@@ -119,7 +119,7 @@ maxInd     = zeros(1,stab.ppmBins);             % index end for considered spect
 binMean    = zeros(stab.ppmBins,stab.nr);         % mean values from all spectral bins from all spectra
 binMax     = zeros(stab.ppmBins,stab.nr);         % maximum values from all spetral bins from all spectra
 binStd     = zeros(stab.ppmBins,stab.nr);         % std.deviations from all spectral bins from all spectra
-binStdComp = zeros(stab.ppmBins,stab.nr);         % comparison std.deviations: local vs. global loggingfile
+binStdComp = zeros(stab.ppmBins,stab.nr);         % comparison std.deviations: local vs. global
 
 %--- lower/upper ppm and index limits of spectral windows ---
 for bCnt = 1:stab.ppmBins
@@ -130,7 +130,7 @@ for bCnt = 1:stab.ppmBins
     centPpm(bCnt) = (minPpm(bCnt) + maxPpm(bCnt))/2;                                      % center frequencies [ppm] of spectral windows    
 end
 
-%--- calculation of global loggingfile base line offset and global loggingfile standard deviation ---
+%--- calculation of global base line offset and global standard deviation ---
 totalMean = mean(stab.ana.spec,1)';
 totalMax  = max(stab.ana.spec,[],1)';
 totalStd  = std(stab.ana.spec,0,1)';
@@ -222,11 +222,11 @@ if flag.stabTotSel
     end    
 
     %--- additional analysis calculations ---
-    fprintf('global loggingfile:  mean=%.0f, max=%.0f, std.=%.0f, mean/std.=%.3f, max(abs)/std.=%.3f\n',...
+    fprintf('global:  mean=%.0f, max=%.0f, std.=%.0f, mean/std.=%.3f, max(abs)/std.=%.3f\n',...
             stab.rangeMean(stab.specSel),stab.rangeMax(stab.specSel),...
             stab.rangeStd(stab.specSel),stab.rangeMean(stab.specSel)/stab.rangeStd(stab.specSel),...
             stab.rangeMax(stab.specSel)/stab.rangeStd(stab.specSel))
-    fprintf('windows: std(mean(window)/std(global loggingfile))=%.3f, std(std(window)/std(global loggingfile))=%.3f\n',...
+    fprintf('windows: std(mean(window)/std(global))=%.3f, std(std(window)/std(global))=%.3f\n',...
             std(binMean(:,stab.specSel)./stab.rangeStd(stab.specSel)),...
             std(binStdComp(:,stab.specSel)))
 end    
@@ -276,7 +276,7 @@ if flag.stabTotSel
     set(gca,'XDir','reverse')
     axis([minX maxX minY maxY])
     text(minX+(maxX-minX)/4.6,maxY-(maxY-minY)/10,'standard deviation')
-    meanstr = sprintf('global loggingfile: %.0f',stab.rangeStd(stab.specSel));
+    meanstr = sprintf('global: %.0f',stab.rangeStd(stab.specSel));
     text(minX+(maxX-minX)/1.05,maxY-(maxY-minY)/10,meanstr)
     fprintf('plotting limits: std. deviation [%.0f %.0f]\n',minY,maxY);
     subplot(3,1,3)

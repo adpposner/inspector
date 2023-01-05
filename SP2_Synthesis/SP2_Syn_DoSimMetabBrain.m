@@ -9,7 +9,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile syn flag
+global syn flag
 
 FCTNAME = 'SP2_Syn_DoSimMetabBrain';
 
@@ -238,7 +238,7 @@ if flag.verbose
     fprintf('larmor frequency: %.1f MHz\n',syn.sf);
     fprintf('sweep width:      %.1f Hz\n',syn.sw_h);
     fprintf('complex points:   %.0f\n',syn.nspecC);
-    fprintf('ppm calibration:  %.3f ppm (global loggingfile)\n\n',syn.ppmCalib);
+    fprintf('ppm calibration:  %.3f ppm (global)\n\n',syn.ppmCalib);
 end
     
 %--- update success flag ---

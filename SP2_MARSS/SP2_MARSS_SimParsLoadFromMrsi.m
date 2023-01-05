@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile mrsi marss pars
+global mrsi marss pars
 
 
 FCTNAME = 'SP2_MARSS_SimParsLoadFromMrsi';

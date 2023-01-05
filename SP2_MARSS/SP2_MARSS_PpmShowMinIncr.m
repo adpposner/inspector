@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm marss
+global fm marss
 
 %--- update window limit ---
 marss.ppmShowMin = marss.ppmShowMin + 0.1;

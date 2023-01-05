@@ -16,7 +16,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm proc flag align
+global fm proc flag align
 
 FCTNAME = 'SP2_Proc_AlignSpec2';
 
@@ -116,7 +116,7 @@ set(fm.proc.spec2StretchFlag,'Value',flag.procSpec2Stretch==1);
 SP2_Proc_ProcessWinUpdate
 
 %--- extraction of spectral parts to be fitted ---
-alignAllBin = zeros(1,proc.spec1.nspecC);        % init global loggingfile index vector for ppm ranges to be used (binary format)
+alignAllBin = zeros(1,proc.spec1.nspecC);        % init global index vector for ppm ranges to be used (binary format)
 alignMinI   = zeros(1,proc.alignPpmN);           % init minimum ppm index vector
 alignMaxI   = zeros(1,proc.alignPpmN);           % init maximum ppm index vector
 for winCnt = 1:proc.alignPpmN
@@ -130,7 +130,7 @@ for winCnt = 1:proc.alignPpmN
     end
     alignAllBin(alignMinI(winCnt):alignMaxI(winCnt)) = 1;
 end
-proc.alignAllInd = find(alignAllBin);           % global loggingfile index vector including all ppm ranges
+proc.alignAllInd = find(alignAllBin);           % global index vector including all ppm ranges
 
 %--- extract spectral range(s) in ppm for polynomial fit ---
 if flag.procAlignPoly

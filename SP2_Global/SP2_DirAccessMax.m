@@ -14,7 +14,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile flag
+global flag
 
 FCTNAME = 'SP2_DirAccessMax';
 

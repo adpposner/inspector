@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile lcm flag lcmAna
+global lcm flag lcmAna
 
 FCTNAME = 'SP2_LCM_ProcResultData';
 

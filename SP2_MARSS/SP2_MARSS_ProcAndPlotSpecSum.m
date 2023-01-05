@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile marss
+global marss
 
 FCTNAME = 'SP2_MARSS_ProcAndPlotSpecSum';
 

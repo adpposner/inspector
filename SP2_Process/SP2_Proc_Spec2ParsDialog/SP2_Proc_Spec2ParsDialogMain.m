@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile pars proc fm
+global pars proc fm
 
 FCTNAME = 'SP2_Proc_Spec2ParsDialogMain';
 

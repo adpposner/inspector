@@ -9,7 +9,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile marss flag
+global marss flag
 
 FCTNAME = 'SP2_MARSS_ProcAndPlotSpecSuperpos';
 

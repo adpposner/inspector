@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm flag pars mrsi
+global fm flag pars mrsi
 
 FCTNAME = 'SP2_MRSI_MrsiWinUpdate';
 

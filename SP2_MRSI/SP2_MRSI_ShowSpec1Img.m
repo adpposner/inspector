@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile mrsi flag
+global mrsi flag
 
 FCTNAME = 'SP2_MRSI_ShowSpec1Img';
 
@@ -53,7 +53,7 @@ minVal = min(min(min(specimg)));
 maxVal = max(max(max(specimg)));
 %--- info printout ---
 if f_new
-    fprintf('global loggingfile min/max amplitudes: %f/%f\n',minVal,maxVal);
+    fprintf('global min/max amplitudes: %f/%f\n',minVal,maxVal);
 end
 
 %--- figure creation ---

@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile sim proc
+global sim proc
 
 
 FCTNAME = 'SP2_Proc_Spec2DataLoadFromSim';

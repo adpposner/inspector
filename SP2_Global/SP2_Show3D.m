@@ -15,7 +15,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile pars exm syn impt ana reg flag
+global pars exm syn impt ana reg flag
 
 FCTNAME = 'SP2_Show3D';
 

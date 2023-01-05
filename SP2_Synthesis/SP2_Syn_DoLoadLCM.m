@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile syn flag lcm fm
+global syn flag lcm fm
 
 
 FCTNAME = 'SP2_Syn_DoLoadLCM';

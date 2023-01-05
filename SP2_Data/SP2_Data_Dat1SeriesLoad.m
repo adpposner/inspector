@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile flag data procpar fm
+global flag data procpar fm
 
 FCTNAME = 'SP2_Data_Dat1SeriesLoad';
 f_succ = SP2_Data_Dat1SeriesUpdate;
@@ -133,7 +133,7 @@ switch flag.dataManu
                 end
                 %--- check if unique alternative was found ---
                 if ~f_done
-                    fprintf(loggingfile,'%s ->\n\n\nNo scan could be attributed to number %i. Program aborted\n\n\n',...
+                    SP2_Logger.log('%s ->\n\n\nNo scan could be attributed to number %i. Program aborted\n\n\n',...
                             FCTNAME,data.spec1.seriesVec(expCnt))
                     return
                 end
@@ -247,7 +247,7 @@ switch flag.dataManu
                     end
                     %--- check if unique alternative was found ---
                     if ~f_done
-                        fprintf(loggingfile,'%s ->\n\n\nNo scan could be attributed to number %i. Program aborted\n\n\n',...
+                        SP2_Logger.log('%s ->\n\n\nNo scan could be attributed to number %i. Program aborted\n\n\n',...
                                 FCTNAME,data.spec1.seriesVec(expCnt))
                         return
                     end
@@ -377,7 +377,7 @@ switch flag.dataManu
                     end
                     %--- check if unique alternative was found ---
                     if ~f_done
-                        fprintf(loggingfile,'%s ->\n\n\nNo scan could be attributed to number %i. Program aborted\n\n\n',...
+                        SP2_Logger.log('%s ->\n\n\nNo scan could be attributed to number %i. Program aborted\n\n\n',...
                                 FCTNAME,data.spec1.seriesVec(expCnt))
                         return
                     end
@@ -509,7 +509,7 @@ switch flag.dataManu
                 end
                 %--- check if unique alternative was found ---
                 if ~f_done
-                    fprintf(loggingfile,'%s ->\nNo scan could be attributed to number %i. Program aborted\n',...
+                    SP2_Logger.log('%s ->\nNo scan could be attributed to number %i. Program aborted\n',...
                             FCTNAME,data.spec1.seriesVec(expCnt))
                     return
                 end
@@ -602,7 +602,7 @@ switch flag.dataManu
                 end
                 %--- check if unique alternative was found ---
                 if ~f_done
-                    fprintf(loggingfile,'%s ->\nNo scan could be attributed to number %i. Program aborted\n',...
+                    SP2_Logger.log('%s ->\nNo scan could be attributed to number %i. Program aborted\n',...
                             FCTNAME,data.spec1.seriesVec(expCnt))
                     return
                 end
@@ -613,7 +613,7 @@ switch flag.dataManu
                 %--- read header from file ---
                 [procpar,f_done] = SP2_Data_SiemensRdaReadHeader(seriesFiles{expCnt});
                 if ~f_done
-                    fprintf(loggingfile,'%s ->\nReading Siemens header from file failed for:\n%s\nProgram aborted.\n',...
+                    SP2_Logger.log('%s ->\nReading Siemens header from file failed for:\n%s\nProgram aborted.\n',...
                             FCTNAME,seriesFiles{expCnt})
                     return
                 end
@@ -621,7 +621,7 @@ switch flag.dataManu
                 %--- read header from file ---
                 [procparTmp,f_done] = SP2_Data_SiemensRdaReadHeader(seriesFiles{expCnt});
                 if ~f_done
-                    fprintf(loggingfile,'%s ->\nReading Siemens header from file failed for:\n%s\nProgram aborted.\n',...
+                    SP2_Logger.log('%s ->\nReading Siemens header from file failed for:\n%s\nProgram aborted.\n',...
                             FCTNAME,seriesFiles{expCnt})
                     return
                 end
@@ -702,7 +702,7 @@ switch flag.dataManu
                 end
                 %--- check if unique alternative was found ---
                 if ~f_done
-                    fprintf(loggingfile,'%s ->\nNo scan could be attributed to number %i. Program aborted\n',...
+                    SP2_Logger.log('%s ->\nNo scan could be attributed to number %i. Program aborted\n',...
                             FCTNAME,data.spec1.seriesVec(expCnt))
                     return
                 end
@@ -713,7 +713,7 @@ switch flag.dataManu
                 %--- read header from file ---
                 [procpar,f_done] = SP2_Data_SiemensDatReadHeader(seriesFiles{expCnt});
                 if ~f_done
-                    fprintf(loggingfile,'%s ->\nReading Siemens header from file failed for:\n%s\nProgram aborted.\n',...
+                    SP2_Logger.log('%s ->\nReading Siemens header from file failed for:\n%s\nProgram aborted.\n',...
                             FCTNAME,seriesFiles{expCnt})
                     return
                 end
@@ -721,7 +721,7 @@ switch flag.dataManu
                 %--- read header from file ---
                 [procparTmp,f_done] = SP2_Data_SiemensDatReadHeader(seriesFiles{expCnt});
                 if ~f_done
-                    fprintf(loggingfile,'%s ->\nReading Siemens header from file failed for:\n%s\nProgram aborted.\n',...
+                    SP2_Logger.log('%s ->\nReading Siemens header from file failed for:\n%s\nProgram aborted.\n',...
                             FCTNAME,seriesFiles{expCnt})
                     return
                 end
@@ -807,7 +807,7 @@ switch flag.dataManu
                 end
                 %--- check if unique alternative was found ---
                 if ~f_done
-                    fprintf(loggingfile,'%s ->\nNo scan could be attributed to number %i. Program aborted\n',...
+                    SP2_Logger.log('%s ->\nNo scan could be attributed to number %i. Program aborted\n',...
                             FCTNAME,data.spec1.seriesVec(expCnt))
                     return
                 end
@@ -820,7 +820,7 @@ switch flag.dataManu
                     %--- read header from file ---
                     [procpar,f_done] = SP2_Data_SiemensDatReadHeader(seriesFiles{expCnt});
                     if ~f_done
-                        fprintf(loggingfile,'%s ->\nReading Siemens header from file failed for:\n%s\nProgram aborted.\n',...
+                        SP2_Logger.log('%s ->\nReading Siemens header from file failed for:\n%s\nProgram aborted.\n',...
                                 FCTNAME,seriesFiles{expCnt})
                         return
                     end
@@ -828,7 +828,7 @@ switch flag.dataManu
                     %--- read header from file ---
                     [procparTmp,f_done] = SP2_Data_SiemensDatReadHeader(seriesFiles{expCnt});
                     if ~f_done
-                        fprintf(loggingfile,'%s ->\nReading Siemens header from file failed for:\n%s\nProgram aborted.\n',...
+                        SP2_Logger.log('%s ->\nReading Siemens header from file failed for:\n%s\nProgram aborted.\n',...
                                 FCTNAME,seriesFiles{expCnt})
                         return
                     end
@@ -909,7 +909,7 @@ switch flag.dataManu
                 end
                 %--- check if unique alternative was found ---
                 if ~f_done
-                    fprintf(loggingfile,'%s ->\nNo scan could be attributed to number %i. Program aborted\n',...
+                    SP2_Logger.log('%s ->\nNo scan could be attributed to number %i. Program aborted\n',...
                             FCTNAME,data.spec1.seriesVec(expCnt))
                     return
                 end
@@ -1005,7 +1005,7 @@ switch flag.dataManu
                 end
                 %--- check if unique alternative was found ---
                 if ~f_done
-                    fprintf(loggingfile,'%s ->\nNo scan could be attributed to number %i. Program aborted\n',...
+                    SP2_Logger.log('%s ->\nNo scan could be attributed to number %i. Program aborted\n',...
                             FCTNAME,data.spec1.seriesVec(expCnt))
                     return
                 end
@@ -1109,7 +1109,7 @@ switch flag.dataManu
             %--- check existence of scan (directory) ---
             if ~any(data.spec1.seriesVec(expCnt)==altStructNumVec)
                 % file not found
-                fprintf(loggingfile,'%s ->\nNo scan could be attributed to number %i. Program aborted\n',...
+                SP2_Logger.log('%s ->\nNo scan could be attributed to number %i. Program aborted\n',...
                         FCTNAME,data.spec1.seriesVec(expCnt))
                 return
             end            
@@ -1122,7 +1122,7 @@ switch flag.dataManu
                 %--- read header from file ---
                 [procpar,f_done] = SP2_Data_SiemensDatReadHeader(seriesFiles{expCnt});
                 if ~f_done
-                    fprintf(loggingfile,'%s ->\nReading Siemens header from file failed for:\n%s\nProgram aborted.\n',...
+                    SP2_Logger.log('%s ->\nReading Siemens header from file failed for:\n%s\nProgram aborted.\n',...
                             FCTNAME,seriesFiles{expCnt})
                     return
                 end
@@ -1130,7 +1130,7 @@ switch flag.dataManu
                 %--- read header from file ---
                 [procparTmp,f_done] = SP2_Data_SiemensDatReadHeader(seriesFiles{expCnt});
                 if ~f_done
-                    fprintf(loggingfile,'%s ->\nReading Siemens header from file failed for:\n%s\nProgram aborted.\n',...
+                    SP2_Logger.log('%s ->\nReading Siemens header from file failed for:\n%s\nProgram aborted.\n',...
                             FCTNAME,seriesFiles{expCnt})
                     return
                 end
@@ -1257,7 +1257,7 @@ for expCnt = 1:data.spec1.seriesN
     end
 
     %--- info printout ---
-    fprintf(loggingfile,'\nLoading file %.0f (of %.0f):\n%s\n',expCnt,data.spec1.seriesN,...
+    SP2_Logger.log('\nLoading file %.0f (of %.0f):\n%s\n',expCnt,data.spec1.seriesN,...
             data.spec1.fidFile)
         
     %--- file handling ---

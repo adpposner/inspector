@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm fmfig pars flag lcm
+global fm fmfig pars flag lcm
 
 if ~SP2_ClearWindow
     fprintf('\n--- WARNING ---\nClearing of window figure handles failed.\n\n');

@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile flag data
+global flag data
 
 FCTNAME = 'SP2_Data_DoSumRcvrsStability';
 
@@ -35,7 +35,7 @@ if flag.dataRcvrWeight          % weighted summation
     end
 end
 
-%--- basic receiver-specific global loggingfile phase correction (with itself) ---
+%--- basic receiver-specific global phase correction (with itself) ---
 phaseVec  = mean(angle(data.spec1.fid(1:3,data.rcvrInd,1)));        % first three points of first FID
 phaseMat  = repmat(phaseVec,[data.spec1.nspecC 1 data.spec1.nr]);
 data.spec1.fid(:,data.rcvrInd,:) = data.spec1.fid(:,data.rcvrInd,:) .* exp(-1i*phaseMat);

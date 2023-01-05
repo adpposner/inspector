@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm sim
+global fm sim
 
 %--- update percentage value spec 1 ---
 lcm.offsetVal = sim.offsetVal + 10000;

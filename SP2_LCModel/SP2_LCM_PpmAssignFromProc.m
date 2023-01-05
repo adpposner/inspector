@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile lcm flag proc
+global lcm flag proc
 
 FCTNAME = 'SP2_LCM_PpmAssignFromProc';
 

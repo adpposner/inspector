@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile flag proc
+global flag proc
 
 FCTNAME = 'SP2_Proc_ProcAndPlotFidSuperpos';
 

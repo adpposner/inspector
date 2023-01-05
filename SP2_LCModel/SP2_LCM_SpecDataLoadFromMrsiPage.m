@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile mrsi lcm
+global mrsi lcm
 
 FCTNAME = 'SP2_LCM_SpecDataLoadFromMrsiPage';
 

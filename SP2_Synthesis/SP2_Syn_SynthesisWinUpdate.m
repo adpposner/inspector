@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm flag syn pars
+global fm flag syn pars
 
 FCTNAME = 'SP2_Syn_SynthesisWinUpdate';
 
@@ -69,7 +69,7 @@ else
 end
 
 %--- analysis frequency mode ---
-if flag.synPpmShow                      % global loggingfile
+if flag.synPpmShow                      % global
     set(fm.syn.ppmShowMinDecr,'Enable','off')
     set(fm.syn.ppmShowMin,'Enable','off')
     set(fm.syn.ppmShowMinIncr,'Enable','off')

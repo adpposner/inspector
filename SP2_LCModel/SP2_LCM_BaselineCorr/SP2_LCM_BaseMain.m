@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile pars flag lcm fm
+global pars flag lcm fm
 
 FCTNAME = 'SP2_LCM_BaseMain';
 

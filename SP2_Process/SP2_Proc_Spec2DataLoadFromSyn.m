@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile syn proc
+global syn proc
 
 
 FCTNAME = 'SP2_Proc_Spec2DataLoadFromSyn';

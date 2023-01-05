@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile lcm flag
+global lcm flag
 
 
 FCTNAME = 'SP2_LCM_BaselineCorrInterp';
@@ -55,7 +55,7 @@ else
 end
 
 %--- extraction of baseline parts to be fitted ---
-corrBinVec   = zeros(1,length(datStruct.spec));     % init global loggingfile index vector for ppm ranges to be used
+corrBinVec   = zeros(1,length(datStruct.spec));     % init global index vector for ppm ranges to be used
 minPpmIndVec = zeros(1,lcm.baseInterpPpmN);           % init minimum ppm index vector
 maxPpmIndVec = zeros(1,lcm.baseInterpPpmN);           % init maximum ppm index vector
 for winCnt = 1:lcm.baseInterpPpmN
@@ -71,7 +71,7 @@ end
 % realCoeff   = polyfit(corrIndVec,real(datStruct.spec(corrIndVec))',lcm.baseInterpOrder);   % polynomial fit of real part
 % imagCoeff   = polyfit(corrIndVec,imag(datStruct.spec(corrIndVec))',lcm.baseInterpOrder);   % polynomial fit of imaginary part
 % specFitTot  = complex(polyval(realCoeff,1:length(datStruct.spec),polyval(imagCoeff,1:length(datStruct.spec))))';
-% specCorrTot = datStruct.spec - specFitTot;                   % global loggingfile baseline correction
+% specCorrTot = datStruct.spec - specFitTot;                   % global baseline correction
 % 
 
 %--- polynomial fit ---
@@ -79,12 +79,12 @@ end
 % realSpline  = spline(corrIndVec,real(datStruct.spec(corrIndVec))',1:length(datStruct.spec));    % spline fit of real part
 % imagSpline  = spline(corrIndVec,imag(datStruct.spec(corrIndVec))',1:length(datStruct.spec));    % spline fit of imaginary part
 % specFitTot  = complex(realSpline,imagSpline)';
-% specCorrTot = datStruct.spec - specFitTot;                   % global loggingfile baseline correction
+% specCorrTot = datStruct.spec - specFitTot;                   % global baseline correction
 corrIndVec  = find(corrBinVec);                                                                 % index vector
 realSpline  = spline(corrIndVec,real(datStruct.spec(corrIndVec))',1:length(datStruct.spec));    % spline fit of real part
 imagSpline  = spline(corrIndVec,imag(datStruct.spec(corrIndVec))',1:length(datStruct.spec));    % spline fit of imaginary part
 specFitTot  = complex(realSpline,imagSpline)';
-specCorrTot = datStruct.spec - specFitTot;                   % global loggingfile baseline correction
+specCorrTot = datStruct.spec - specFitTot;                   % global baseline correction
 
 % 
 %     vecLen = length(vector);

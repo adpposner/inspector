@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile flag fm
+global flag fm
 
 FCTNAME = 'SP2_MARSS_SaveIndivMetabsFlagUpdate';
 

@@ -15,7 +15,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile flag
+global flag
 
 FCTNAME = 'SP2_CheckDirAccessR';
 
@@ -105,13 +105,13 @@ if ~exist(dirPath,'dir')
         lastField = find(existVec==1);      % last accessible subdirectory
         if isempty(lastField)
             if f_verbose
-                fprintf(loggingfile,'%s ->\n<%s> isn''t accessible at all,\nnot even <%s>...\n',...
+                SP2_Logger.log('%s ->\n<%s> isn''t accessible at all,\nnot even <%s>...\n',...
                         FCTNAME,dirPath,dirStr{1})
             end
             maxPath = '';
         else
             if f_verbose
-                fprintf(loggingfile,'%s ->\n<%s> isn''t accessible,\neven if <%s> is accessible...\n',...
+                SP2_Logger.log('%s ->\n<%s> isn''t accessible,\neven if <%s> is accessible...\n',...
                         FCTNAME,dirPath,dirStr{max(lastField)})
             end
             maxPath = dirStr{max(lastField)};

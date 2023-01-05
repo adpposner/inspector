@@ -14,7 +14,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile flag data procpar fm
+global flag data procpar fm
 
 FCTNAME = 'SP2_Data_Dat1FidFileLoad';
 

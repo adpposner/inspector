@@ -1,19 +1,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-    function SP2_MM_AnaFrequglobal loggingfileUpdate
+    function SP2_MM_AnaFrequglobalUpdate
 %% 
-%%  Updates radiobutton setting: global loggingfile frequency range
+%%  Updates radiobutton setting: global frequency range
 %%
 %%  12-2013, Christoph Juchem
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm flag
+global fm flag
 
-flag.mmAnaFrequMode = get(fm.mm.anaFrequglobal loggingfile,'Value');
+flag.mmAnaFrequMode = get(fm.mm.anaFrequglobal,'Value');
 
 %--- switch radiobutton ---
-set(fm.mm.anaFrequglobal loggingfile,'Value',flag.mmAnaFrequMode)
+set(fm.mm.anaFrequglobal,'Value',flag.mmAnaFrequMode)
 set(fm.mm.anaFrequDirect,'Value',~flag.mmAnaFrequMode)
 
 %--- update window ---

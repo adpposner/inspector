@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile mm flag
+global mm flag
 
 FCTNAME = 'SP2_MM_DoT1Analysis_L1Norm';
 
@@ -131,7 +131,7 @@ Tmax       = 2;               % maximum limit of time constant range
 TstepMin   = 0.1;               % minimum step size for multi-grid analysis
 TstepMax   = 1;                 % maximum step size for multi-grid analysis
 TstepN     = 10;                % number of multi-grid steps
-Tshift     = 0.05;              % global loggingfile shift of T grid
+Tshift     = 0.05;              % global shift of T grid
 TshiftN    = 3;                 % number of T grid shifts
 
 %--- amplitude fit: parameter init ---

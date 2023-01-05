@@ -9,7 +9,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile verbose 
+global verbose 
 
 FCTNAME = 'SP2_Data_PvParsConversion';
 
@@ -402,7 +402,7 @@ else
     dataSpecX.jde.offset  = '';
     dataSpecX.jde.shape   = '';
 end
-dataSpecX.t2Series = 0;         % global loggingfile init (potential later update)
+dataSpecX.t2Series = 0;         % global init (potential later update)
 if strcmp(dataSpecX.jde.applied,'y')
     if isfield(acqp,'t2TeExtra')
         if iscell(acqp.t2TeExtra)

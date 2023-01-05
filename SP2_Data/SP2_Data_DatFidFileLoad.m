@@ -14,7 +14,7 @@ function f_succ = SP2_Data_DatFidFileLoad(f_winUpdate,f_loadMsgFlag)
     %%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
-    global loggingfile 
+    global 
     
     FCTNAME = 'SP2_Data_DatFidFileLoad';
     

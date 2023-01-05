@@ -33,7 +33,7 @@ fprintf(unit,'%% Automatically generated fit function\n');
 fprintf(unit,'%% created %s\n',datestr(now));
 fprintf(unit,'%%\n');
 fprintf(unit,'function f = %s(a,x)\n\n',fileName);
-fprintf(unit,'global loggingfile mm\n\n');
+fprintf(unit,'global mm\n\n');
 for dimCnt = 1:fitDim
     if dimCnt==1                    % 1st run
         if dimCnt==fitDim           % single case

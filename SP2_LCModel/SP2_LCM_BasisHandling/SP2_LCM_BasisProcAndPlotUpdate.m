@@ -2,13 +2,13 @@
 %%
     function SP2_LCM_BasisProcAndPlotUpdate
 %% 
-%%  global loggingfile processing update function.
+%%  global processing update function.
 %%
 %%  10-2015, Christoph Juchem
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile lcm flag
+global lcm flag
 
 FCTNAME = 'SP2_LCM_BasisProcAndPlotUpdate';
 

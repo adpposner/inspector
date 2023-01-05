@@ -10,7 +10,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm flag exm syn pass impt ana reg pars
+global fm flag exm syn pass impt ana reg pars
 
 FCTNAME = 'SP2_TransferGray2RGB';
 
@@ -115,7 +115,7 @@ if flag.plotRange==1            % automatic search for 'reasonable' slice data r
 elseif flag.plotRange==2        % full data range of particular slice
     pars.colLims(1) = globMinVal;
     pars.colLims(2) = globMaxVal;
-    initStr   = 'global loggingfile';
+    initStr   = 'global';
 elseif flag.plotRange==3        % full data range of all slices
     pars.colLims(1) = sliceMinVal;
     pars.colLims(2) = sliceMaxVal;

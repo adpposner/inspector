@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile lcm flag 
+global lcm flag 
 
 FCTNAME = 'SP2_LCM_AnaSaveXls';
 
@@ -208,14 +208,14 @@ end
 %--------------------------------------------------------------------------
 %---    G L O B A L     P A R A M E T E R S                             ---
 %--------------------------------------------------------------------------
-% if any global loggingfile paramater
+% if any global paramater
 if (flag.lcmAnaLb && flag.lcmLinkLb) || (flag.lcmAnaGb && flag.lcmLinkGb) || ...
    (flag.lcmAnaShift && flag.lcmLinkShift) || (flag.lcmAnaPhc0 && flag.lcmLinkPhc0) || ...
    (flag.lcmAnaPhc1 && flag.lcmLinkPhc1)
 
     %--- label ---
     rowCnt = lcm.fit.appliedN + combShift + 8;     
-    xlswrite(xlsPath,{'global loggingfile parameters:'},'analysis',sprintf('A%d',rowCnt));
+    xlswrite(xlsPath,{'global parameters:'},'analysis',sprintf('A%d',rowCnt));
     rowCnt = rowCnt + 1;
     xlswrite(xlsPath,{'parameter','value','CRLB','Hessian','unit'},'analysis',sprintf('A%d',rowCnt));
     

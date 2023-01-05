@@ -9,7 +9,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile pars flag mm fm
+global pars flag mm fm
 
 FCTNAME = 'SP2_MM_AlignDetailsMain';
 

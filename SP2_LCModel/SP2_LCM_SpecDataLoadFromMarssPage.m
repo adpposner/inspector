@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile lcm marss
+global lcm marss
 
 FCTNAME = 'SP2_LCM_SpecDataLoadFromMarssPage';
 

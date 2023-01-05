@@ -2,13 +2,13 @@
 %%
     function SP2_MARSS_ProcAndPlotUpdate
 %% 
-%%  global loggingfile processing update function.
+%%  global processing update function.
 %%
 %%  12-2019, Christoph Juchem
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile marss
+global marss
 
 FCTNAME = 'SP2_MARSS_ProcAndPlotUpdate';
 

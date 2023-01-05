@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm flag exm roi
+global fm flag exm roi
 
 FCTNAME = 'SP2_Tools_AnonDirPathUpdate';
 

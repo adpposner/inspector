@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile mrsi procpar flag
+global mrsi procpar flag
 
 
 FCTNAME = 'SP2_MRSI_AmplCorr';

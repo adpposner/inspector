@@ -38,7 +38,7 @@ elseif datenum(pars.licLimDayStr)-now<30                % 30-day warning
     pause(5)
 end
 
-%addpath('SP2_global loggingfile','SP2_Data');
+%addpath('SP2_global','SP2_Data');
 %--- read user defaults (last usage) ---
 if nargin==0
     if ~SP2_ReadDefaults

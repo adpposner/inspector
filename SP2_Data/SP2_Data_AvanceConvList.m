@@ -4,7 +4,7 @@
 %%
 %% function ConvDat = SP2_Data_AvanceConvList
 %%
-%% function that uses DECIM and DSPFVS (acqus file, part of global loggingfile acqp parameter)
+%% function that uses DECIM and DSPFVS (acqus file, part of global acqp parameter)
 %% to give back the corresponding value for data rotation and 1st order phasing
 %% -> technical report of Westler & Abildgaard, 1996
 %% http://garbanzo.scripps.edu/nmrgrp/wisdom/dig.nmrfam.txt
@@ -14,7 +14,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile acqp
+global acqp
 
 
 %--- init success flag ---

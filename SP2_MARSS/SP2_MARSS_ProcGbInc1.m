@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm marss flag
+global fm marss flag
 
 %--- update percentage value spec 1 ---
 marss.procGb = marss.procGb + 0.1;

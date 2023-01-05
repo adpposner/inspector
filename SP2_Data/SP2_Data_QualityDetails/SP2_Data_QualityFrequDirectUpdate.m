@@ -8,12 +8,12 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm flag
+global fm flag
 
 flag.dataQualityFrequMode = ~get(fm.data.qualityDet.frequDirect,'Value');
 
 %--- switch radiobutton ---
-set(fm.data.qualityDet.frequglobal loggingfile,'Value',flag.dataQualityFrequMode)
+set(fm.data.qualityDet.frequglobal,'Value',flag.dataQualityFrequMode)
 set(fm.data.qualityDet.frequDirect,'Value',~flag.dataQualityFrequMode)
 
 %--- update window ---

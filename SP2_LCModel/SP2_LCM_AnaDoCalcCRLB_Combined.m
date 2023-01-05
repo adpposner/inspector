@@ -11,7 +11,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile lcm flag
+global lcm flag
 
 FCTNAME = 'SP2_LCM_AnaDoCalcCRLB_Combined';
 
@@ -29,7 +29,7 @@ flag.debug = 0;
 %   * D: derivative
 %   * computaton of D requires the derivative of the functions xn with
 %     respect to the parameters pl using their true values
-%   * note that (as opposed to the paper) only one global loggingfile phase is
+%   * note that (as opposed to the paper) only one global phase is
 %   * There is no sum in the derivative (as opposed to the model sampel) as the partial derivative is p_l-specific
 %     considered, i.e. the individual signals are phase-locked
 %   * P: prior knowledge
@@ -173,12 +173,12 @@ parsPerMetab = 1 + ...                                          % amplitudes (al
                flag.lcmAnaGb * ~flag.lcmLinkGb + ...            % GB if uncoupled
                flag.lcmAnaShift * ~flag.lcmLinkShift;           % frequency shift if uncoupled
 
-%--- number of global loggingfile (linked) parameters ---
-nglobal loggingfile = flag.lcmAnaLb * flag.lcmLinkLb + ...                  % LB if coupled
+%--- number of global (linked) parameters ---
+nglobal = flag.lcmAnaLb * flag.lcmLinkLb + ...                  % LB if coupled
           flag.lcmAnaGb * flag.lcmLinkGb + ...                  % GB if coupled
           flag.lcmAnaShift * flag.lcmLinkShift + ...            % frequency shift if coupled
-          flag.lcmAnaPhc0 + ...                                 % PHC0 (always global loggingfile)
-          flag.lcmAnaPhc1;                                      % PHC1 (always global loggingfile)
+          flag.lcmAnaPhc0 + ...                                 % PHC0 (always global)
+          flag.lcmAnaPhc1;                                      % PHC1 (always global)
 
       
 %--- reformat basis FIDs ---
@@ -210,16 +210,16 @@ lcmShiftVec = lcm.anaShift(lcm.fit.applied);
 % t_n therefore becomes -pi*tVec
 %
 %--- parameter init ---
-D    = zeros(lcm.nFidCrlb,(parsPerMetab+nglobal loggingfile)*nMetab);       % init derivative matrix D in time domain
+D    = zeros(lcm.nFidCrlb,(parsPerMetab+nglobal)*nMetab);       % init derivative matrix D in time domain
 Dfft = D;                                                       % init derivative matrix Dfft in frequency domain
 % note that before the prior knowledge matrix P is applied all parameters
-% are independent, therefore (parsPerMetab+nglobal loggingfile)*nMetab
+% are independent, therefore (parsPerMetab+nglobal)*nMetab
 dCnt    = 0;                                                    % init D index counter
 legCell = {};                                                   % name cell for D
 legCnt  = 0;                                                    % init legend counter
 
 %--- init (analysis window-specific) frequency domain D ---
-DfftZoom = zeros(lcm.anaAllIndN,(parsPerMetab+nglobal loggingfile)*nMetab);
+DfftZoom = zeros(lcm.anaAllIndN,(parsPerMetab+nglobal)*nMetab);
 
 %--- individual metabolite-specific paramters ---
 for mCnt = 1:nMetab         % somewhat redundant as strings are identical for all metabolites
@@ -244,11 +244,11 @@ for mCnt = 1:nMetab         % somewhat redundant as strings are identical for al
     if flag.lcmAnaShift % && ~flag.lcmLinkShift
         cKStr = [cKStr ' .* exp(1i*2*pi*lcmShiftVec(mCnt)*tVec)'];
     end
-    % PHC0 (always global loggingfile)
+    % PHC0 (always global)
     if flag.lcmAnaPhc0
         cKStr = [cKStr ' .* exp(1i*lcm.anaPhc0*pi/180)'];
     end
-    % PHC1 (always global loggingfile)
+    % PHC1 (always global)
     if flag.lcmAnaPhc1
         cKStr = [cKStr ' .* exp(1i*2*pi*lcmShiftVec(mCnt)*lcm.anaPhc1*pi/180)'];
     end
@@ -280,11 +280,11 @@ for mCnt = 1:nMetab         % somewhat redundant as strings are identical for al
         if flag.lcmAnaShift % && ~flag.lcmLinkShift
             alphaKStr = [alphaKStr ' .* exp(1i*2*pi*lcmShiftVec(mCnt).*tVec)'];
         end
-        % PHC0 (always global loggingfile)
+        % PHC0 (always global)
         if flag.lcmAnaPhc0
             alphaKStr = [alphaKStr ' .* exp(1i*lcm.anaPhc0*pi/180)'];
         end
-        % PHC1 (always global loggingfile)
+        % PHC1 (always global)
         if flag.lcmAnaPhc1
             alphaKStr = [alphaKStr ' .* exp(1i*2*pi*lcmShiftVec(mCnt)*lcm.anaPhc1*pi/180)'];
         end
@@ -315,11 +315,11 @@ for mCnt = 1:nMetab         % somewhat redundant as strings are identical for al
         if flag.lcmAnaShift % && ~flag.lcmLinkShift
             betaKStr = [betaKStr ' .* exp(1i*2*pi*lcmShiftVec(mCnt)*tVec)'];
         end
-        % PHC0 (always global loggingfile)
+        % PHC0 (always global)
         if flag.lcmAnaPhc0
             betaKStr = [betaKStr ' .* exp(1i*lcm.anaPhc0*pi/180)'];
         end
-        % PHC1 (always global loggingfile)
+        % PHC1 (always global)
         if flag.lcmAnaPhc1
             betaKStr = [betaKStr ' .* exp(1i*2*pi*lcmShiftVec(mCnt)*lcm.anaPhc1*pi/180)'];
         end
@@ -354,11 +354,11 @@ for mCnt = 1:nMetab         % somewhat redundant as strings are identical for al
             omegaKStr = [omegaKStr ' .* exp(-lcmGbVec(mCnt)*pi^2*tVec.^2)'];
             % omegaKStr = [omegaKStr ' .* exp(-pi^2/(4*log(2))*lcmGbVec(mCnt)^2.*tVec.^2)'];
         end
-        % PHC0 (always global loggingfile)
+        % PHC0 (always global)
         if flag.lcmAnaPhc0
             omegaKStr = [omegaKStr ' .* exp(1i*lcm.anaPhc0*pi/180)'];
         end
-        % PHC1 (always global loggingfile)
+        % PHC1 (always global)
         if flag.lcmAnaPhc1
             omegaKStr = [omegaKStr ' .* exp(1i*2*pi*lcmShiftVec(mCnt)*lcm.anaPhc1*pi/180)'];
         end
@@ -376,20 +376,20 @@ for mCnt = 1:nMetab         % somewhat redundant as strings are identical for al
         end
     end
     
-    %--- global loggingfile zero-order phase (PHC0) ---
+    %--- global zero-order phase (PHC0) ---
     if flag.lcmAnaPhc0   
-        %--- init global loggingfile phase part ---
-        % init phc0 string (always global loggingfile)
+        %--- init global phase part ---
+        % init phc0 string (always global)
         phc0KStr = 'basisFid(:,mCnt) .* lcmAmpVec(mCnt) * (1i*pi/180) .* exp(1i*lcm.anaPhc0*pi/180)';
-        % PHC1 (always global loggingfile)
+        % PHC1 (always global)
         if flag.lcmAnaPhc1
             phc0KStr = [phc0KStr ' .* exp(1i*2*pi*lcmShiftVec(mCnt)*lcm.anaPhc1*pi/180)'];
         end
-        % Lorentzian (global loggingfile)
+        % Lorentzian (global)
         if flag.lcmAnaLb % && ~flag.lcmLinkLb
             phc0KStr = [phc0KStr ' .* exp(-lcmLbVec(mCnt)*pi*tVec)'];
         end
-        % Gaussian (global loggingfile)
+        % Gaussian (global)
         if flag.lcmAnaGb % && ~flag.lcmLinkGb
             phc0KStr = [phc0KStr ' .* exp(-lcmGbVec(mCnt)*pi^2*tVec.^2)'];
             % phc0KStr = [phc0KStr ' .* exp(-pi^2/(4*log(2))*lcmGbVec(mCnt)^2.*tVec.^2)'];
@@ -406,20 +406,20 @@ for mCnt = 1:nMetab         % somewhat redundant as strings are identical for al
         DfftZoom(:,dCnt) = Dfft(lcm.anaAllInd,dCnt);
     end
     
-    %--- global loggingfile first-order phase (PHC1) ---
+    %--- global first-order phase (PHC1) ---
     if flag.lcmAnaPhc1   
-        %--- init global loggingfile phase part ---
-        % init phc1 string (always global loggingfile)
+        %--- init global phase part ---
+        % init phc1 string (always global)
         phc1KStr = '1i * basisFid(:,mCnt) * 2*pi*lcmShiftVec(mCnt) * exp(1i*2*pi*lcmShiftVec(mCnt)*lcm.anaPhc1*pi/180)';
-        % PHC0 (always global loggingfile)
+        % PHC0 (always global)
         if flag.lcmAnaPhc0
             phc1KStr = [phc1KStr ' .* exp(1i*lcm.anaPhc0*pi/180)'];
         end
-        % Lorentzian (global loggingfile)
+        % Lorentzian (global)
         if flag.lcmAnaLb % && ~flag.lcmLinkLb
             phc1KStr = [phc1KStr ' .* exp(-lcmLbVec(mCnt)*pi*tVec)'];
         end
-        % Gaussian (global loggingfile)
+        % Gaussian (global)
         if flag.lcmAnaGb % && ~flag.lcmLinkGb
             phc1KStr = [phc1KStr ' .* exp(-lcmGbVec(mCnt)*pi^2*tVec.^2)'];
             % phc1KStr = [phc1KStr ' .* exp(-pi^2/(4*log(2))*lcmGbVec(mCnt)^2.*tVec.^2)'];
@@ -437,7 +437,7 @@ for mCnt = 1:nMetab         % somewhat redundant as strings are identical for al
     end
 end
 
-%--- legend name handling for global loggingfile parameters ---
+%--- legend name handling for global parameters ---
 %--- Lorentzian line broadening ---
 if flag.lcmAnaLb && flag.lcmLinkLb
     legCnt = legCnt + 1;
@@ -468,25 +468,25 @@ end
 %--- transformation of D to D_eff ---
 % number of hypothetical CRLB parameters including combinations, but before
 % prior knowledge is applied
-crlbRawN   = (parsPerMetab+nglobal loggingfile)*(nMetab - flag.lcmComb1*(lcm.comb1N-1) ...
+crlbRawN   = (parsPerMetab+nglobal)*(nMetab - flag.lcmComb1*(lcm.comb1N-1) ...
              - flag.lcmComb2*(lcm.comb2N-1) - flag.lcmComb3*(lcm.comb3N-1));
 % effective number of CRLB coefficients after everything is set and done:
 % 1) combination of metabolites
 % 2) application of prior knowledge
-nCRLB   = parsPerMetab*nMetabEff+nglobal loggingfile;    % = size(P,2) = size(F,1) = size(F,2)
+nCRLB   = parsPerMetab*nMetabEff+nglobal;    % = size(P,2) = size(F,1) = size(F,2)
          
 % again, note that before P is applied, all fitting parameters are
-% considered independent, therefore (parsPerMetab+nglobal loggingfile)*...
+% considered independent, therefore (parsPerMetab+nglobal)*...
 D_eff      = zeros(lcm.nFidCrlb,crlbRawN);                  % init effective derivative matrix D in time domain
 Dfft_eff   = zeros(lcm.nFidCrlb,crlbRawN);                  % init effective derivative matrix D in frequency domain
 origUsed   = zeros(1,nMetab);                               % logical vector tracking the unassigned lines of D representing the indivdiual parameters
 legEffCell = {}; 
 
 %--- init frequency domain DfftZoom_eff ---
-DfftZoom_eff = zeros(lcm.anaAllIndN,parsPerMetab*nMetabEff+nglobal loggingfile);
+DfftZoom_eff = zeros(lcm.anaAllIndN,parsPerMetab*nMetabEff+nglobal);
 
 % Note:
-% Individual and linked (i.e. global loggingfile) fitting parameters are treated
+% Individual and linked (i.e. global) fitting parameters are treated
 % equally in D and D_eff as they are only later linked through the
 % application of the prior knowledge matrix P
 [ismBin,lcm.comb1IndAppl] = ismember(lcm.comb1Ind,lcm.fit.applied);     % combination indices among applied metabolites
@@ -512,17 +512,17 @@ for mCnt = 1:nMetab                                     % loop over applied orig
         effCnt = effCnt + 1;
         if flag.lcmComb1 && any(mCnt==lcm.comb1IndAppl)
             if flag.debug
-                fprintf('Scale: %s -> %.0f (comb 1)\n',SP2_Vec2PrintStr((lcm.comb1IndAppl-1)*(parsPerMetab+nglobal loggingfile)+1,0),(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1);      % combined metabolites
+                fprintf('Scale: %s -> %.0f (comb 1)\n',SP2_Vec2PrintStr((lcm.comb1IndAppl-1)*(parsPerMetab+nglobal)+1,0),(effCnt-1)*(parsPerMetab+nglobal)+1);      % combined metabolites
             end
-            % D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1)        =
-            % sum(D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal loggingfile)+1),2);        % combined metabolites, TD, until 11/2020
-            D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1)        = ...
-                 sum(repmat(lcm.anaScale(lcm.comb1Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal loggingfile)+1)/sum(lcm.anaScale(lcm.comb1Ind)),2);        
+            % D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+1)        =
+            % sum(D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal)+1),2);        % combined metabolites, TD, until 11/2020
+            D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+1)        = ...
+                 sum(repmat(lcm.anaScale(lcm.comb1Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal)+1)/sum(lcm.anaScale(lcm.comb1Ind)),2);        
             % combined metabolites, TD, amplitude-weighted
-            % (lcm.comb1IndAppl-1)*(parsPerMetab+nglobal loggingfile)+1  is optimization parameter index across all metabolites
+            % (lcm.comb1IndAppl-1)*(parsPerMetab+nglobal)+1  is optimization parameter index across all metabolites
             % for instance, 3 metabolites and 2 variables (amp, LB): 1, (amp1), 2 (lb1), 3 (amp2), 4 (lb2), ...
-            Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1)     = fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1)));      % combined metabolites, FD
-            DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1) = Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1);      % combined metabolites, FD zoom
+            Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+1)     = fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+1)));      % combined metabolites, FD
+            DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+1) = Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+1);      % combined metabolites, FD zoom
             origUsed(lcm.comb1IndAppl) = 1;                             % mark as used
             lcm.comb1Label = '';                                        % core metab label for result display
             for lCnt = 1:lcm.comb1N
@@ -544,13 +544,13 @@ for mCnt = 1:nMetab                                     % loop over applied orig
             legCnt      = legCnt + 1;                                   % increase metabolite legend counter
         elseif flag.lcmComb2 && any(mCnt==lcm.comb2IndAppl)
             if flag.debug
-                fprintf('Scale: %s -> %.0f (comb 2)\n',SP2_Vec2PrintStr((lcm.comb2IndAppl-1)*(parsPerMetab+nglobal loggingfile)+1,0),(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1);      % combined metabolites
+                fprintf('Scale: %s -> %.0f (comb 2)\n',SP2_Vec2PrintStr((lcm.comb2IndAppl-1)*(parsPerMetab+nglobal)+1,0),(effCnt-1)*(parsPerMetab+nglobal)+1);      % combined metabolites
             end
-            % D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1)        = sum(D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal loggingfile)+1),2);        % combined metabolites, TD
-            D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1)        = ...
-                 sum(repmat(lcm.anaScale(lcm.comb2Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal loggingfile)+1)/sum(lcm.anaScale(lcm.comb2Ind)),2);        
-            Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1)     = fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1)));      % combined metabolites, FD
-            DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1) = Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1);      % combined metabolites, FD zoom
+            % D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+1)        = sum(D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal)+1),2);        % combined metabolites, TD
+            D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+1)        = ...
+                 sum(repmat(lcm.anaScale(lcm.comb2Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal)+1)/sum(lcm.anaScale(lcm.comb2Ind)),2);        
+            Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+1)     = fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+1)));      % combined metabolites, FD
+            DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+1) = Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+1);      % combined metabolites, FD zoom
             origUsed(lcm.comb2IndAppl) = 1;                             % mark as used
             lcm.comb2Label = '';                                        % core metab label for result display
             for lCnt = 1:lcm.comb2N
@@ -572,13 +572,13 @@ for mCnt = 1:nMetab                                     % loop over applied orig
             legCnt      = legCnt + 1;                                   % increase metabolite legend counter
         elseif flag.lcmComb3 && any(mCnt==lcm.comb3IndAppl)
             if flag.debug
-                fprintf('Scale: %s -> %.0f (comb 3)\n',SP2_Vec2PrintStr((lcm.comb3IndAppl-1)*(parsPerMetab+nglobal loggingfile)+1,0),(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1);      % combined metabolites
+                fprintf('Scale: %s -> %.0f (comb 3)\n',SP2_Vec2PrintStr((lcm.comb3IndAppl-1)*(parsPerMetab+nglobal)+1,0),(effCnt-1)*(parsPerMetab+nglobal)+1);      % combined metabolites
             end
-            % D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1)        = sum(D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal loggingfile)+1),2);        % combined metabolites, TD
-            D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1)        = ...
-                 sum(repmat(lcm.anaScale(lcm.comb3Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal loggingfile)+1)/sum(lcm.anaScale(lcm.comb3Ind)),2);        
-            Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1)     = fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1)));      % combined metabolites, FD
-            DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1) = Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1);      % combined metabolites, FD zoom
+            % D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+1)        = sum(D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal)+1),2);        % combined metabolites, TD
+            D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+1)        = ...
+                 sum(repmat(lcm.anaScale(lcm.comb3Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal)+1)/sum(lcm.anaScale(lcm.comb3Ind)),2);        
+            Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+1)     = fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+1)));      % combined metabolites, FD
+            DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+1) = Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+1);      % combined metabolites, FD zoom
             origUsed(lcm.comb3IndAppl) = 1;                             % mark as used
             lcm.comb3Label = '';                                        % core metab label for result display
             for lCnt = 1:lcm.comb3N
@@ -600,11 +600,11 @@ for mCnt = 1:nMetab                                     % loop over applied orig
             legCnt      = legCnt + 1;                                   % increase metabolite legend counter
         else
             if flag.debug
-                fprintf('Scale: %.0f -> %.0f\n',(mCnt-1)*(parsPerMetab+nglobal loggingfile)+1,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1);      % combined metabolites
+                fprintf('Scale: %.0f -> %.0f\n',(mCnt-1)*(parsPerMetab+nglobal)+1,(effCnt-1)*(parsPerMetab+nglobal)+1);      % combined metabolites
             end
-            D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1)        = D(:,(mCnt-1)*(parsPerMetab+nglobal loggingfile)+1);                           % TD
-            Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1)     = fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1)));      % FD
-            DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1) = Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+1);      % FD zoom
+            D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+1)        = D(:,(mCnt-1)*(parsPerMetab+nglobal)+1);                           % TD
+            Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+1)     = fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+1)));      % FD
+            DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+1) = Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+1);      % FD zoom
             origUsed(mCnt) = 1;
             
             %--- legend handling ---
@@ -682,45 +682,45 @@ if flag.lcmAnaLb
             effCnt = effCnt + 1;
             if flag.lcmComb1 && any(mCnt==lcm.comb1IndAppl)
                 if flag.debug
-                    fprintf('LB:    %s -> %.0f (comb 1)\n',SP2_Vec2PrintStr((lcm.comb1IndAppl-1)*(parsPerMetab+nglobal loggingfile)+2,0),...
-                        (effCnt-1)*(parsPerMetab+nglobal loggingfile)+2);      % combined metabolites
+                    fprintf('LB:    %s -> %.0f (comb 1)\n',SP2_Vec2PrintStr((lcm.comb1IndAppl-1)*(parsPerMetab+nglobal)+2,0),...
+                        (effCnt-1)*(parsPerMetab+nglobal)+2);      % combined metabolites
                 end
-                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2)        = sum(D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal loggingfile)+2),2);        % combined metabolites, TD
-%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2)        = ...
-%                      sum(repmat(lcm.anaScale(lcm.comb1Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal loggingfile)+2)/sum(lcm.anaScale(lcm.comb1Ind)),2);        
-                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2)     = fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2)));      % combined metabolites, FD
-                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2) = Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2);      % combined metabolites, FD zoom
+                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+2)        = sum(D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal)+2),2);        % combined metabolites, TD
+%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+2)        = ...
+%                      sum(repmat(lcm.anaScale(lcm.comb1Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal)+2)/sum(lcm.anaScale(lcm.comb1Ind)),2);        
+                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+2)     = fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+2)));      % combined metabolites, FD
+                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+2) = Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+2);      % combined metabolites, FD zoom
                 origUsed(lcm.comb1IndAppl) = 1;                     % mark as used
             elseif flag.lcmComb2 && any(mCnt==lcm.comb2IndAppl)
                 if flag.debug
-                    fprintf('LB:    %s -> %.0f (comb 2)\n',SP2_Vec2PrintStr((lcm.comb2IndAppl-1)*(parsPerMetab+nglobal loggingfile)+2,0),...
-                        (effCnt-1)*(parsPerMetab+nglobal loggingfile)+2);      % combined metabolites
+                    fprintf('LB:    %s -> %.0f (comb 2)\n',SP2_Vec2PrintStr((lcm.comb2IndAppl-1)*(parsPerMetab+nglobal)+2,0),...
+                        (effCnt-1)*(parsPerMetab+nglobal)+2);      % combined metabolites
                 end
-                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2)        = sum(D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal loggingfile)+2),2);        % combined metabolites, TD
-%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2)        = ...
-%                      sum(repmat(lcm.anaScale(lcm.comb2Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal loggingfile)+2)/sum(lcm.anaScale(lcm.comb2Ind)),2);        
-                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2)     = fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2)));      % combined metabolites, FD
-                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2) = Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2);      % combined metabolites, FD zoom
+                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+2)        = sum(D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal)+2),2);        % combined metabolites, TD
+%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+2)        = ...
+%                      sum(repmat(lcm.anaScale(lcm.comb2Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal)+2)/sum(lcm.anaScale(lcm.comb2Ind)),2);        
+                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+2)     = fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+2)));      % combined metabolites, FD
+                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+2) = Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+2);      % combined metabolites, FD zoom
                 origUsed(lcm.comb2IndAppl) = 1;                     % mark as used
             elseif flag.lcmComb3 && any(mCnt==lcm.comb3IndAppl)
                 if flag.debug
-                    fprintf('LB:    %s -> %.0f (comb 3)\n',SP2_Vec2PrintStr((lcm.comb3IndAppl-1)*(parsPerMetab+nglobal loggingfile)+2,0),...
-                        (effCnt-1)*(parsPerMetab+nglobal loggingfile)+2);      % combined metabolites
+                    fprintf('LB:    %s -> %.0f (comb 3)\n',SP2_Vec2PrintStr((lcm.comb3IndAppl-1)*(parsPerMetab+nglobal)+2,0),...
+                        (effCnt-1)*(parsPerMetab+nglobal)+2);      % combined metabolites
                 end
-                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2)        = sum(D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal loggingfile)+2),2);        % combined metabolites, TD
-%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2)        = ...
-%                      sum(repmat(lcm.anaScale(lcm.comb3Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal loggingfile)+2)/sum(lcm.anaScale(lcm.comb3Ind)),2);        
-                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2)     = fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2)));      % combined metabolites, FD
-                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2) = Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2);      % combined metabolites, FD zoom
+                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+2)        = sum(D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal)+2),2);        % combined metabolites, TD
+%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+2)        = ...
+%                      sum(repmat(lcm.anaScale(lcm.comb3Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal)+2)/sum(lcm.anaScale(lcm.comb3Ind)),2);        
+                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+2)     = fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+2)));      % combined metabolites, FD
+                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+2) = Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+2);      % combined metabolites, FD zoom
                 origUsed(lcm.comb3IndAppl) = 1;                     % mark as used
             else
                 if flag.debug
-                    fprintf('LB:    %.0f -> %.0f\n',(mCnt-1)*(parsPerMetab+nglobal loggingfile)+2,...
-                        (effCnt-1)*(parsPerMetab+nglobal loggingfile)+2);      % combined metabolites
+                    fprintf('LB:    %.0f -> %.0f\n',(mCnt-1)*(parsPerMetab+nglobal)+2,...
+                        (effCnt-1)*(parsPerMetab+nglobal)+2);      % combined metabolites
                 end
-                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2)        = D(:,(mCnt-1)*(parsPerMetab+nglobal loggingfile)+2);                           % TD
-                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2)     = fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2)));      % FD
-                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2) = Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+2);      % FD zoom
+                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+2)        = D(:,(mCnt-1)*(parsPerMetab+nglobal)+2);                           % TD
+                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+2)     = fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+2)));      % FD
+                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+2) = Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+2);      % FD zoom
                 origUsed(mCnt) = 1;
             end
         end
@@ -736,57 +736,57 @@ if flag.lcmAnaGb
             effCnt = effCnt + 1;
             if flag.lcmComb1 && any(mCnt==lcm.comb1IndAppl)
                 if flag.debug
-                    fprintf('GB:    %s -> %.0f (comb 1)\n',SP2_Vec2PrintStr((lcm.comb1IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2,0),...
-                        (effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2);      % combined metabolites
+                    fprintf('GB:    %s -> %.0f (comb 1)\n',SP2_Vec2PrintStr((lcm.comb1IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2,0),...
+                        (effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2);      % combined metabolites
                 end
-                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2)        = ...
-                    sum(D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2),2);        % combined metabolites, TD
-%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2)        = ...
-%                      sum(repmat(lcm.anaScale(lcm.comb1Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2)/sum(lcm.anaScale(lcm.comb1Ind)),2);        
-                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2)     = ...
-                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2)));      % combined metabolites, FD
-                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2) = ...
-                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2);      % combined metabolites, FD zoom
+                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2)        = ...
+                    sum(D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2),2);        % combined metabolites, TD
+%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2)        = ...
+%                      sum(repmat(lcm.anaScale(lcm.comb1Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2)/sum(lcm.anaScale(lcm.comb1Ind)),2);        
+                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2)     = ...
+                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2)));      % combined metabolites, FD
+                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2) = ...
+                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2);      % combined metabolites, FD zoom
                 origUsed(lcm.comb1IndAppl) = 1;                     % mark as used
             elseif flag.lcmComb2 && any(mCnt==lcm.comb2IndAppl)
                 if flag.debug
-                    fprintf('GB:    %s -> %.0f (comb 2)\n',SP2_Vec2PrintStr((lcm.comb2IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2,0),...
-                        (effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2);      % combined metabolites
+                    fprintf('GB:    %s -> %.0f (comb 2)\n',SP2_Vec2PrintStr((lcm.comb2IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2,0),...
+                        (effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2);      % combined metabolites
                 end
-                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2)        = ...
-                    sum(D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2),2);        % combined metabolites, TD
-%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2)        = ...
-%                      sum(repmat(lcm.anaScale(lcm.comb2Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2)/sum(lcm.anaScale(lcm.comb2Ind)),2);        
-                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2)     = ...
-                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2)));      % combined metabolites, FD
-                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2) = ...
-                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2);      % combined metabolites, FD zoom
+                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2)        = ...
+                    sum(D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2),2);        % combined metabolites, TD
+%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2)        = ...
+%                      sum(repmat(lcm.anaScale(lcm.comb2Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2)/sum(lcm.anaScale(lcm.comb2Ind)),2);        
+                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2)     = ...
+                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2)));      % combined metabolites, FD
+                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2) = ...
+                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2);      % combined metabolites, FD zoom
                 origUsed(lcm.comb2IndAppl) = 1;                     % mark as used
             elseif flag.lcmComb3 && any(mCnt==lcm.comb3IndAppl)
                 if flag.debug
-                    fprintf('GB:    %s -> %.0f (comb 3)\n',SP2_Vec2PrintStr((lcm.comb3IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2,0),...
-                        (effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2);      % combined metabolites
+                    fprintf('GB:    %s -> %.0f (comb 3)\n',SP2_Vec2PrintStr((lcm.comb3IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2,0),...
+                        (effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2);      % combined metabolites
                 end
-                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2)        = ...
-                    sum(D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2),2);        % combined metabolites, TD
-%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2)        = ...
-%                      sum(repmat(lcm.anaScale(lcm.comb3Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2)/sum(lcm.anaScale(lcm.comb3Ind)),2);        
-                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2)     = ...
-                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2)));      % combined metabolites, FD
-                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2) = ...
-                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2);      % combined metabolites, FD zoom
+                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2)        = ...
+                    sum(D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2),2);        % combined metabolites, TD
+%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2)        = ...
+%                      sum(repmat(lcm.anaScale(lcm.comb3Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2)/sum(lcm.anaScale(lcm.comb3Ind)),2);        
+                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2)     = ...
+                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2)));      % combined metabolites, FD
+                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2) = ...
+                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2);      % combined metabolites, FD zoom
                 origUsed(lcm.comb3IndAppl) = 1;                     % mark as used
             else
                 if flag.debug
-                    fprintf('GB:    %.0f -> %.0f\n',(mCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2,...
-                        (effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2);      % combined metabolites
+                    fprintf('GB:    %.0f -> %.0f\n',(mCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2,...
+                        (effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2);      % combined metabolites
                 end
-                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2)        = ...             
-                    D(:,(mCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2);                           % TD
-                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2)     = ...
-                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2)));      % FD
-                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2) = ...
-                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+2);      % FD zoom
+                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2)        = ...             
+                    D(:,(mCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2);                           % TD
+                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2)     = ...
+                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2)));      % FD
+                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2) = ...
+                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+2);      % FD zoom
                 origUsed(mCnt) = 1;
             end
         end
@@ -802,57 +802,57 @@ if flag.lcmAnaShift
             effCnt = effCnt + 1;
             if flag.lcmComb1 && any(mCnt==lcm.comb1IndAppl)
                 if flag.debug
-                    fprintf('Shift: %s -> %.0f (comb 1)\n',SP2_Vec2PrintStr((lcm.comb1IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2,0),...
-                        (effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2);      % combined metabolites
+                    fprintf('Shift: %s -> %.0f (comb 1)\n',SP2_Vec2PrintStr((lcm.comb1IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2,0),...
+                        (effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2);      % combined metabolites
                 end
-                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2)        = ...
-                    sum(D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2),2);          % combined metabolites, TD
-%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2)        = ...
-%                      sum(repmat(lcm.anaScale(lcm.comb1Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2)/sum(lcm.anaScale(lcm.comb1Ind)),2);        
-                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2)     = ...
-                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2)));        % combined metabolites, FD
-                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2) = ...
-                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2);        % combined metabolites, FD zoom
+                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2)        = ...
+                    sum(D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2),2);          % combined metabolites, TD
+%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2)        = ...
+%                      sum(repmat(lcm.anaScale(lcm.comb1Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2)/sum(lcm.anaScale(lcm.comb1Ind)),2);        
+                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2)     = ...
+                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2)));        % combined metabolites, FD
+                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2) = ...
+                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2);        % combined metabolites, FD zoom
                 origUsed(lcm.comb1IndAppl) = 1;                     % mark as used
             elseif flag.lcmComb2 && any(mCnt==lcm.comb2IndAppl)
                 if flag.debug
-                    fprintf('Shift: %s -> %.0f (comb 2)\n',SP2_Vec2PrintStr((lcm.comb2IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2,0),...
-                        (effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2);      % combined metabolites
+                    fprintf('Shift: %s -> %.0f (comb 2)\n',SP2_Vec2PrintStr((lcm.comb2IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2,0),...
+                        (effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2);      % combined metabolites
                 end
-                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2)        = ...
-                    sum(D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2),2);          % combined metabolites, TD
-%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2)        = ...
-%                      sum(repmat(lcm.anaScale(lcm.comb2Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2)/sum(lcm.anaScale(lcm.comb2Ind)),2);        
-                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2)     = ...
-                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2)));        % combined metabolites, FD
-                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2) = ...
-                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2);        % combined metabolites, FD zoom
+                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2)        = ...
+                    sum(D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2),2);          % combined metabolites, TD
+%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2)        = ...
+%                      sum(repmat(lcm.anaScale(lcm.comb2Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2)/sum(lcm.anaScale(lcm.comb2Ind)),2);        
+                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2)     = ...
+                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2)));        % combined metabolites, FD
+                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2) = ...
+                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2);        % combined metabolites, FD zoom
                 origUsed(lcm.comb2IndAppl) = 1;                     % mark as used
             elseif flag.lcmComb3 && any(mCnt==lcm.comb3IndAppl)
                 if flag.debug
-                    fprintf('Shift: %s -> %.0f (comb 3)\n',SP2_Vec2PrintStr((lcm.comb3IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2,0),...
-                        (effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2);      % combined metabolites
+                    fprintf('Shift: %s -> %.0f (comb 3)\n',SP2_Vec2PrintStr((lcm.comb3IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2,0),...
+                        (effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2);      % combined metabolites
                 end
-                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2)        = ....
-                    sum(D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2),2);          % combined metabolites, TD
-%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2)        = ...
-%                      sum(repmat(lcm.anaScale(lcm.comb3Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2)/sum(lcm.anaScale(lcm.comb3Ind)),2);        
-                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2)     = ...
-                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2)));        % combined metabolites, FD
-                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2) = ...
-                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2);        % combined metabolites, FD zoom
+                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2)        = ....
+                    sum(D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2),2);          % combined metabolites, TD
+%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2)        = ...
+%                      sum(repmat(lcm.anaScale(lcm.comb3Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2)/sum(lcm.anaScale(lcm.comb3Ind)),2);        
+                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2)     = ...
+                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2)));        % combined metabolites, FD
+                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2) = ...
+                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2);        % combined metabolites, FD zoom
                 origUsed(lcm.comb3IndAppl) = 1;                     % mark as used
             else
                 if flag.debug
-                    fprintf('Shift: %.0f -> %.0f\n',(mCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2,...
-                        (effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2);      % combined metabolites
+                    fprintf('Shift: %.0f -> %.0f\n',(mCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2,...
+                        (effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2);      % combined metabolites
                 end
-                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2)        = ...
-                    D(:,(mCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2);                             % TD
-                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2)     = ...
-                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2)));        % FD
-                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2) = ...
-                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+2);        % FD zoom
+                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2)        = ...
+                    D(:,(mCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2);                             % TD
+                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2)     = ...
+                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2)));        % FD
+                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2) = ...
+                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+2);        % FD zoom
                 origUsed(mCnt) = 1;
             end
         end
@@ -868,57 +868,57 @@ if flag.lcmAnaPhc0
             effCnt = effCnt + 1;
             if flag.lcmComb1 && any(mCnt==lcm.comb1IndAppl)
                 if flag.debug
-                    fprintf('PHC0:  %s -> %.0f (comb 1)\n',SP2_Vec2PrintStr((lcm.comb1IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2,0),...
-                        (effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2);      % combined metabolites
+                    fprintf('PHC0:  %s -> %.0f (comb 1)\n',SP2_Vec2PrintStr((lcm.comb1IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2,0),...
+                        (effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2);      % combined metabolites
                 end
-                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)        = ...
-                    sum(D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2),2);         % combined metabolites, TD
-%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)        = ...
-%                      sum(repmat(lcm.anaScale(lcm.comb1Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)/sum(lcm.anaScale(lcm.comb1Ind)),2);        
-                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)     = ...
-                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)));       % combined metabolites, FD
-                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2) = ...
-                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2);       % combined metabolites, FD zoom
+                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)        = ...
+                    sum(D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2),2);         % combined metabolites, TD
+%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)        = ...
+%                      sum(repmat(lcm.anaScale(lcm.comb1Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)/sum(lcm.anaScale(lcm.comb1Ind)),2);        
+                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)     = ...
+                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)));       % combined metabolites, FD
+                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2) = ...
+                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2);       % combined metabolites, FD zoom
                 origUsed(lcm.comb1IndAppl) = 1;                     % mark as used
             elseif flag.lcmComb2 && any(mCnt==lcm.comb2IndAppl)
                 if flag.debug
-                    fprintf('PHC0:  %s -> %.0f (comb 2)\n',SP2_Vec2PrintStr((lcm.comb2IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2,0),...
-                        (effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2);      % combined metabolites
+                    fprintf('PHC0:  %s -> %.0f (comb 2)\n',SP2_Vec2PrintStr((lcm.comb2IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2,0),...
+                        (effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2);      % combined metabolites
                 end
-                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)        = ...
-                    sum(D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2),2);         % combined metabolites, TD
-%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)        = ...
-%                      sum(repmat(lcm.anaScale(lcm.comb2Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)/sum(lcm.anaScale(lcm.comb2Ind)),2);        
-                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)     = ...
-                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)));       % combined metabolites, FD
-                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2) = ...
-                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2);       % combined metabolites, FD zoom
+                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)        = ...
+                    sum(D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2),2);         % combined metabolites, TD
+%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)        = ...
+%                      sum(repmat(lcm.anaScale(lcm.comb2Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)/sum(lcm.anaScale(lcm.comb2Ind)),2);        
+                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)     = ...
+                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)));       % combined metabolites, FD
+                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2) = ...
+                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2);       % combined metabolites, FD zoom
                 origUsed(lcm.comb2IndAppl) = 1;                     % mark as used
             elseif flag.lcmComb3 && any(mCnt==lcm.comb3IndAppl)
                 if flag.debug
-                    fprintf('PHC0:  %s -> %.0f (comb 3)\n',SP2_Vec2PrintStr((lcm.comb3IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2,0),...
-                        (effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2);      % combined metabolites
+                    fprintf('PHC0:  %s -> %.0f (comb 3)\n',SP2_Vec2PrintStr((lcm.comb3IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2,0),...
+                        (effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2);      % combined metabolites
                 end
-                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)        = ...
-                    sum(D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2),2);         % combined metabolites, TD
-%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)        = ...
-%                      sum(repmat(lcm.anaScale(lcm.comb3Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)/sum(lcm.anaScale(lcm.comb3Ind)),2);        
-                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)     = ...
-                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)));       % combined metabolites, FD
-                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2) = ...
-                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2);       % combined metabolites, FD zoom
+                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)        = ...
+                    sum(D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2),2);         % combined metabolites, TD
+%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)        = ...
+%                      sum(repmat(lcm.anaScale(lcm.comb3Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)/sum(lcm.anaScale(lcm.comb3Ind)),2);        
+                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)     = ...
+                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)));       % combined metabolites, FD
+                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2) = ...
+                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2);       % combined metabolites, FD zoom
                 origUsed(lcm.comb3IndAppl) = 1;                     % mark as used
             else
                 if flag.debug
-                    fprintf('PHC0:  %.0f -> %.0f\n',(mCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2,...
-                        (effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2);      % combined metabolites
+                    fprintf('PHC0:  %.0f -> %.0f\n',(mCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2,...
+                        (effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2);      % combined metabolites
                 end
-                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)        = ...
-                    D(:,(mCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2);                            % TD
-                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)     = ...
-                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)));       % FD
-                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2) = ...
-                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2);       % FD zoom
+                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)        = ...
+                    D(:,(mCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2);                            % TD
+                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)     = ...
+                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2)));       % FD
+                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2) = ...
+                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+2);       % FD zoom
                 origUsed(mCnt) = 1;
             end
         end
@@ -934,57 +934,57 @@ if flag.lcmAnaPhc1
             effCnt = effCnt + 1;
             if flag.lcmComb1 && any(mCnt==lcm.comb1IndAppl)
                 if flag.debug
-                    fprintf('PHC1:  %s -> %.0f (comb 1)\n',SP2_Vec2PrintStr((lcm.comb1IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2,0),...
-                        (effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2);      % combined metabolites
+                    fprintf('PHC1:  %s -> %.0f (comb 1)\n',SP2_Vec2PrintStr((lcm.comb1IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2,0),...
+                        (effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2);      % combined metabolites
                 end
-                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)        = ...
-                    sum(D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2),2);         % combined metabolites, TD
-%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)        = ...
-%                      sum(repmat(lcm.anaScale(lcm.comb1Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)/sum(lcm.anaScale(lcm.comb1Ind)),2);        
-                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)     = ...
-                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)));       % combined metabolites, FD
-                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2) = ...
-                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2);       % combined metabolites, FD zoom
+                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)        = ...
+                    sum(D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2),2);         % combined metabolites, TD
+%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)        = ...
+%                      sum(repmat(lcm.anaScale(lcm.comb1Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb1IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)/sum(lcm.anaScale(lcm.comb1Ind)),2);        
+                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)     = ...
+                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)));       % combined metabolites, FD
+                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2) = ...
+                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2);       % combined metabolites, FD zoom
                 origUsed(lcm.comb1IndAppl) = 1;                     % mark as used
             elseif flag.lcmComb2 && any(mCnt==lcm.comb2IndAppl)
                 if flag.debug
-                    fprintf('PHC1:  %s -> %.0f (comb 2)\n',SP2_Vec2PrintStr((lcm.comb2IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2,0),...
-                        (effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2);      % combined metabolites
+                    fprintf('PHC1:  %s -> %.0f (comb 2)\n',SP2_Vec2PrintStr((lcm.comb2IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2,0),...
+                        (effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2);      % combined metabolites
                 end
-                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)        = ...
-                    sum(D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2),2);         % combined metabolites, TD
-%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)        = ...
-%                      sum(repmat(lcm.anaScale(lcm.comb2Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)/sum(lcm.anaScale(lcm.comb2Ind)),2);        
-                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)     = ...
-                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)));       % combined metabolites, FD
-                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2) = ...
-                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2);       % combined metabolites, FD zoom
+                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)        = ...
+                    sum(D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2),2);         % combined metabolites, TD
+%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)        = ...
+%                      sum(repmat(lcm.anaScale(lcm.comb2Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb2IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)/sum(lcm.anaScale(lcm.comb2Ind)),2);        
+                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)     = ...
+                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)));       % combined metabolites, FD
+                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2) = ...
+                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2);       % combined metabolites, FD zoom
                 origUsed(lcm.comb2IndAppl) = 1;                     % mark as used
             elseif flag.lcmComb3 && any(mCnt==lcm.comb3IndAppl)
                 if flag.debug
-                    fprintf('PHC1:  %s -> %.0f (comb 3)\n',SP2_Vec2PrintStr((lcm.comb3IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2,0),...
-                        (effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2);      % combined metabolites
+                    fprintf('PHC1:  %s -> %.0f (comb 3)\n',SP2_Vec2PrintStr((lcm.comb3IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2,0),...
+                        (effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2);      % combined metabolites
                 end
-                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)        = ...
-                    sum(D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2),2);         % combined metabolites, TD
-%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)        = ...
-%                      sum(repmat(lcm.anaScale(lcm.comb3Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)/sum(lcm.anaScale(lcm.comb3Ind)),2);        
-                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)     = ...
-                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)));       % combined metabolites, FD
-                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2) = ...
-                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2);       % combined metabolites, FD zoom
+                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)        = ...
+                    sum(D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2),2);         % combined metabolites, TD
+%                 D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)        = ...
+%                      sum(repmat(lcm.anaScale(lcm.comb3Ind),[lcm.nFidCrlb 1]).*D(:,(lcm.comb3IndAppl-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)/sum(lcm.anaScale(lcm.comb3Ind)),2);        
+                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)     = ...
+                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)));       % combined metabolites, FD
+                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2) = ...
+                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2);       % combined metabolites, FD zoom
                 origUsed(lcm.comb3IndAppl) = 1;                     % mark as used
             else
                 if flag.debug
-                    fprintf('PHC0:  %.0f -> %.0f\n',(mCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2,...
-                        (effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2);      % combined metabolites
+                    fprintf('PHC0:  %.0f -> %.0f\n',(mCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2,...
+                        (effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2);      % combined metabolites
                 end
-                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)        = ...
-                    D(:,(mCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2);                            % TD
-                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)     = ...
-                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)));       % FD
-                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2) = ...
-                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal loggingfile)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2);       % FD zoom
+                D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)        = ...
+                    D(:,(mCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2);                            % TD
+                Dfft_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)     = ...
+                    fftshift(fft(D_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2)));       % FD
+                DfftZoom_eff(:,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2) = ...
+                    Dfft_eff(lcm.anaAllInd,(effCnt-1)*(parsPerMetab+nglobal)+flag.lcmAnaLb+flag.lcmAnaGb+flag.lcmAnaShift+flag.lcmAnaPhc0+2);       % FD zoom
                 origUsed(mCnt) = 1;
             end
         end
@@ -1004,10 +1004,10 @@ Dfft     = Dfft_eff;        % FD, not used in F (and CRLB) calculation
 DfftZoom = DfftZoom_eff;    % FD, specific to analyzed frequency window: used in F (and CRLB) calculation
 dCnt = crlbRawN;
 
-% generation of P for arbitrary combination of independent and global loggingfile parameters
+% generation of P for arbitrary combination of independent and global parameters
 P = zeros(dCnt,nCRLB);         % 1: all pars, 2: effective size
 % indVec = parsPerMetab:parsPerMetab:dCnt;
-indVec1st = 1:parsPerMetabD:dCnt;                       % (1st) index vector for global loggingfile parameter dimension
+indVec1st = 1:parsPerMetabD:dCnt;                       % (1st) index vector for global parameter dimension
 rowInd    = 1;                                          % init row index
 colInd    = 1;                                          % init column index
 %--- metabolite-specific parameters ---
@@ -1088,9 +1088,9 @@ for colCnt = 1:nMetabEff
     end
 end
 
-%--- global loggingfile parameter dimensions ---
+%--- global parameter dimensions ---
 % note reversed order
-globCnt   = 0;                          % counter of global loggingfile parameters
+globCnt   = 0;                          % counter of global parameters
 %--- PHC1 ---
 if flag.lcmAnaPhc1
     globCnt = globCnt + 1;
@@ -1132,7 +1132,7 @@ if flag.verbose
     end
     fprintf('size(D combined) = [%.0f %.0f], size(P) = [%.0f %.0f]\n',size(D,1),size(D,2),size(P,1),size(P,2));
     fprintf('Full combined D:  %.0f metabs * %.0f metab-specific pars = %.0f\n',nMetabEff,parsPerMetabD,dCnt);
-    fprintf('After combined P: %.0f metabs * %.0f metab-specific pars + %.0f global loggingfile pars = %.0f fit pars (CRLB)\n',...
+    fprintf('After combined P: %.0f metabs * %.0f metab-specific pars + %.0f global pars = %.0f fit pars (CRLB)\n',...
             nMetabEff,parsPerMetabD-globCnt,globCnt,nCRLB)
 
     %--- log file ---
@@ -1145,7 +1145,7 @@ if flag.verbose
         end
         fprintf(lcm.log,'size(D combined) = [%.0f %.0f], size(P) = [%.0f %.0f]\n',size(D,1),size(D,2),size(P,1),size(P,2));
         fprintf(lcm.log,'Full combined D:  %.0f metabs * %.0f metab-specific pars = %.0f\n',nMetabEff,parsPerMetabD,dCnt);
-        fprintf(lcm.log,'After combined P: %.0f metabs * %.0f metab-specific pars + %.0f global loggingfile pars = %.0f fit pars (CRLB)\n',...
+        fprintf(lcm.log,'After combined P: %.0f metabs * %.0f metab-specific pars + %.0f global pars = %.0f fit pars (CRLB)\n',...
                 nMetabEff,parsPerMetabD-globCnt,globCnt,nCRLB);
     end
 end
@@ -1187,12 +1187,12 @@ if f_plot && flag.verbose
 end
 
 %--- dimension update ---
-% parsPerMetab = parsPerMetab-nglobal loggingfile;                % since PHC0 is now global loggingfile 
+% parsPerMetab = parsPerMetab-nglobal;                % since PHC0 is now global 
 % nCRLB = crlbEffN;            
 
 %--- Cramer-Rao Lower Bounds ---
 invF = inv(F);
-lcm.fit.combCrlb = zeros(1,nCRLB);                  % complete CRLB vector included metabolite-specific and global loggingfile parameters
+lcm.fit.combCrlb = zeros(1,nCRLB);                  % complete CRLB vector included metabolite-specific and global parameters
 for crlbCnt = 1:nCRLB
     lcm.fit.combCrlb(crlbCnt) = sqrt(invF(crlbCnt,crlbCnt));
 %     lcm.fit.combCrlb(crlbCnt) = sqrt(invF(crlbCnt,crlbCnt))/lcm.anaScale(lcm.fit.appliedFit(crlbCnt));
@@ -1222,31 +1222,31 @@ end
 %--- extract metabolite-specific CRLBs                                  ---
 % amplitude
 indCnt = 1;                                            % init individual parameter counter
-% lcm.fit.combCrlbAmp = min(100*lcm.fit.combCrlb(indCnt:parsPerMetab:nCRLB-nglobal loggingfile),666);
-lcm.fit.combCrlbAmp = lcm.fit.combCrlb(indCnt:parsPerMetab:nCRLB-nglobal loggingfile);
+% lcm.fit.combCrlbAmp = min(100*lcm.fit.combCrlb(indCnt:parsPerMetab:nCRLB-nglobal),666);
+lcm.fit.combCrlbAmp = lcm.fit.combCrlb(indCnt:parsPerMetab:nCRLB-nglobal);
 
 % Lorentzian broadening
 if flag.lcmAnaLb && ~flag.lcmLinkLb
     indCnt = indCnt + 1;
-    lcm.fit.combCrlbLb = lcm.fit.combCrlb(indCnt:parsPerMetab:nCRLB-nglobal loggingfile);
+    lcm.fit.combCrlbLb = lcm.fit.combCrlb(indCnt:parsPerMetab:nCRLB-nglobal);
 end
 
 % Gaussian broadening
 if flag.lcmAnaGb && ~flag.lcmLinkGb
     indCnt = indCnt + 1;
-    lcm.fit.combCrlbGb = lcm.fit.combCrlb(indCnt:parsPerMetab:nCRLB-nglobal loggingfile);
+    lcm.fit.combCrlbGb = lcm.fit.combCrlb(indCnt:parsPerMetab:nCRLB-nglobal);
 end
 
 % frequency shift
 if flag.lcmAnaShift && ~flag.lcmLinkShift
     indCnt = indCnt + 1;
-    lcm.fit.combCrlbShift = lcm.fit.combCrlb(indCnt:parsPerMetab:nCRLB-nglobal loggingfile);
+    lcm.fit.combCrlbShift = lcm.fit.combCrlb(indCnt:parsPerMetab:nCRLB-nglobal);
 end
 
 
 %--------------------------------------------------------------------------
-%--- extract global loggingfile CRLBs                                               ---
-globCnt = 0;                          % counter of global loggingfile parameters
+%--- extract global CRLBs                                               ---
+globCnt = 0;                          % counter of global parameters
 %--- PHC1 ---
 if flag.lcmAnaPhc1
     globCnt = globCnt + 1;
@@ -1308,7 +1308,7 @@ if flag.lcmAnaShift && ~flag.lcmLinkShift
 end
 
 
-%--- info printout: global loggingfile pars ---
+%--- info printout: global pars ---
 % in original order
 if flag.lcmAnaLb && flag.lcmLinkLb
     fprintf('CRLB(LB)        = %.3f Hz\n',lcm.fit.combCrlbLb);
@@ -1328,7 +1328,7 @@ end
 
 
 
-%--- info printout: individual/global loggingfile parameters (log file) ---
+%--- info printout: individual/global parameters (log file) ---
 if flag.lcmSaveLog && ~f_plot
     %--- info printout: individual pars ---
     % in original order
@@ -1344,7 +1344,7 @@ if flag.lcmSaveLog && ~f_plot
     end
 
 
-    %--- info printout: global loggingfile pars ---
+    %--- info printout: global pars ---
     % in original order
     if flag.lcmAnaLb && flag.lcmLinkLb
         fprintf(lcm.log,'CRLB(LB)        = %.3f Hz\n',lcm.fit.combCrlbLb);
@@ -1454,24 +1454,24 @@ end
 % rearrange to have first metabolite in lower left corner (similar to Minnesota)
 % amplitude
 indCnt     = 1;             % init individual parameter counter
-combCorrMatAmp = flipud(combCorrMatCompl(indCnt:parsPerMetab:nCRLB-nglobal loggingfile,1:parsPerMetab:nCRLB-nglobal loggingfile));
+combCorrMatAmp = flipud(combCorrMatCompl(indCnt:parsPerMetab:nCRLB-nglobal,1:parsPerMetab:nCRLB-nglobal));
 
 % Lorentzian broadening
 if flag.lcmAnaLb && ~flag.lcmLinkLb
     indCnt    = indCnt + 1;
-    combCorrMatLb = flipud(combCorrMatCompl(indCnt:parsPerMetab:nCRLB-nglobal loggingfile,1:parsPerMetab:nCRLB-nglobal loggingfile));
+    combCorrMatLb = flipud(combCorrMatCompl(indCnt:parsPerMetab:nCRLB-nglobal,1:parsPerMetab:nCRLB-nglobal));
 end
 
 % Gaussian broadening
 if flag.lcmAnaGb && ~flag.lcmLinkGb
     indCnt    = indCnt + 1;
-    combCorrMatGb = flipud(combCorrMatCompl(indCnt:parsPerMetab:nCRLB-nglobal loggingfile,1:parsPerMetab:nCRLB-nglobal loggingfile));
+    combCorrMatGb = flipud(combCorrMatCompl(indCnt:parsPerMetab:nCRLB-nglobal,1:parsPerMetab:nCRLB-nglobal));
 end
 
 % frequency shift
 if flag.lcmAnaShift && ~flag.lcmLinkShift
     indCnt       = indCnt + 1;
-    combCorrMatShift = flipud(combCorrMatCompl(indCnt:parsPerMetab:nCRLB-nglobal loggingfile,1:parsPerMetab:nCRLB-nglobal loggingfile));
+    combCorrMatShift = flipud(combCorrMatCompl(indCnt:parsPerMetab:nCRLB-nglobal,1:parsPerMetab:nCRLB-nglobal));
 end
 
 %--- keep for potential saving to xls file ---

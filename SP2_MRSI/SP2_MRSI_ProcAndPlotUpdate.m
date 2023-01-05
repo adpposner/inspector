@@ -2,13 +2,13 @@
 %%
     function SP2_MRSI_ProcAndPlotUpdate
 %% 
-%%  global loggingfile processing update function.
+%%  global processing update function.
 %%
 %%  12-2011, Christoph Juchem
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile mrsi flag
+global mrsi flag
 
 FCTNAME = 'SP2_MRSI_ProcAndPlotUpdate';
 

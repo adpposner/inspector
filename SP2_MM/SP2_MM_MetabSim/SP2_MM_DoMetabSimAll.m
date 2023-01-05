@@ -9,7 +9,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile mm flag
+global mm flag
 
 FCTNAME = 'SP2_MM_DoMetabSimAll';
 
@@ -225,7 +225,7 @@ fprintf('%s completed.\n',FCTNAME);
 %%%   L O C A L    F U N C T I O N S                                    %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function f_succ = SP2_LOC_StripOffFields
-global loggingfile mm
+global mm
 
 f_succ = 0;
 

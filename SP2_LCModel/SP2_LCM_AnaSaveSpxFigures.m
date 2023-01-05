@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile lcm fmfig fm
+global lcm fmfig fm
 
 FCTNAME = 'SP2_LCM_AnaSaveSpxFigures';
 

@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile pars flag data stab mm proc mrsi t1t2 syn marss lcm tools man
+global pars flag data stab mm proc mrsi t1t2 syn marss lcm tools man
 
 FCTNAME = 'SP2_ReadDefaults';
 
@@ -1001,11 +1001,11 @@ lcm.fit.phc1Var         = 20*ones(1,lcm.fit.nLim);      % allowed PHC0 variation
 lcm.fit.shiftMin        = -5*ones(1,lcm.fit.nLim);      % allowed minimum/negative shift limit, [Hz]
 lcm.fit.shiftMax        = 5*ones(1,lcm.fit.nLim);       % allowed maximum/positive shift limit, [Hz]
 % lcm.fit.frequVar        = 5*ones(1,lcm.fit.nLim);       % allowed frequency variation [Hz], applied to both sides
-flag.lcmLinkLb          = 1;                            % link LB of all basis functions, i.e. use 1 global loggingfile value
-flag.lcmLinkGb          = 1;                            % link lineshape of all basis functions, i.e. use 1 global loggingfile value
-flag.lcmLinkPhc0        = 1;                            % link Phc0 of all basis functions, i.e. use 1 global loggingfile value
-flag.lcmLinkPhc1        = 1;                            % link Phc1 of all basis functions, i.e. use 1 global loggingfile value
-flag.lcmLinkShift       = 1;                            % link frequency shift of all basis functions, i.e. use 1 global loggingfile value
+flag.lcmLinkLb          = 1;                            % link LB of all basis functions, i.e. use 1 global value
+flag.lcmLinkGb          = 1;                            % link lineshape of all basis functions, i.e. use 1 global value
+flag.lcmLinkPhc0        = 1;                            % link Phc0 of all basis functions, i.e. use 1 global value
+flag.lcmLinkPhc1        = 1;                            % link Phc1 of all basis functions, i.e. use 1 global value
+flag.lcmLinkShift       = 1;                            % link frequency shift of all basis functions, i.e. use 1 global value
 flag.lcmComb1           = 0;                            % enable metabolite combinations for CRLB analysis
 lcm.comb1Str            = '1 2';                        % combination string
 lcm.comb1Ind            = [1 2];                        % indices vector
@@ -1062,11 +1062,11 @@ flag.lcmAnaShift        = 1;                                % include shift
 lcm.anaShift            = zeros(1,lcm.fit.nLim);            % shift vector
 lcm.anaShiftErr         = zeros(1,lcm.fit.nLim);            % shift vector error
 flag.lcmAnaPhc0         = 1;                                % include PHC0
-lcm.anaPhc0             = 0;                                % global loggingfile PHC0
-lcm.anaPhc0Err          = 0;                                % global loggingfile PHC0 error
+lcm.anaPhc0             = 0;                                % global PHC0
+lcm.anaPhc0Err          = 0;                                % global PHC0 error
 flag.lcmAnaPhc1         = 1;                                % include PHC1
-lcm.anaPhc1             = 0;                                % global loggingfile PHC1
-lcm.anaPhc1Err          = 0;                                % global loggingfile PHC1 error
+lcm.anaPhc1             = 0;                                % global PHC1
+lcm.anaPhc1Err          = 0;                                % global PHC1 error
 lcm.anaPpmStr           = '1.8:4.1';                        % string of ppm window ranges for spectrum alignment
 lcm.anaPpmMin           = 1.8;                              % minimum ppm window values for spectrum alignment (vector if N>1)
 lcm.anaPpmMax           = 4.1;                              % maximum ppm window values for spectrum alignment (vector if N>1)
@@ -1825,7 +1825,7 @@ else
             clear man2save man2sFields
         end
     else
-        fprintf(loggingfile,'%s ->\nNo parameter file found. Default settings are used.\n',FCTNAME)        
+        SP2_Logger.log('%s ->\nNo parameter file found. Default settings are used.\n',FCTNAME)        
     end
     clear fmStruct
 end

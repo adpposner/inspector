@@ -19,7 +19,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile lcm flag syn
+global lcm flag syn
 
 FCTNAME = 'SP2_LCM_AnaDoMonteCarloSim';
 
@@ -971,7 +971,7 @@ end
 %--- write LB traces to file ---
 if f_lb 
     if flag.lcmLinkLb
-        fprintf(unit,'\nglobal loggingfile (linked) Lorentzian line broadening trace:\n[');
+        fprintf(unit,'\nglobal (linked) Lorentzian line broadening trace:\n[');
         for nCnt = 1:lcm.mc.n                   % MC iterations
             % fprintf(unit,'%f',lcm.mc.lbMat(nCnt));
             fprintf(unit,'%f',lcm.mc.lbVec(nCnt));
@@ -1042,7 +1042,7 @@ end
 %--- write LB CRLB to file ---
 if f_lb 
     if flag.lcmLinkLb
-        fprintf(unit,'\nglobal loggingfile (linked) Lorentzian line broadening CRLB trace:\n[');
+        fprintf(unit,'\nglobal (linked) Lorentzian line broadening CRLB trace:\n[');
         for nCnt = 1:lcm.mc.n                   % MC iterations
             % fprintf(unit,'%f',lcm.mc.lbCrlbMat(nCnt));
             fprintf(unit,'%f',lcm.mc.lbCrlbVec(nCnt));
@@ -1113,7 +1113,7 @@ end
 %--- write LB SD traces to file ---
 if f_lb 
     if flag.lcmLinkLb
-        fprintf(unit,'\nglobal loggingfile (linked) Lorentzian line broadening SD trace:\n[');
+        fprintf(unit,'\nglobal (linked) Lorentzian line broadening SD trace:\n[');
         for nCnt = 1:lcm.mc.n                   % MC iterations
             fprintf(unit,'%f',lcm.mc.lbSdTrace(nCnt));
             if nCnt<lcm.mc.n
@@ -1184,7 +1184,7 @@ end
 %--- write GB traces to file ---
 if f_gb 
     if flag.lcmLinkGb
-        fprintf(unit,'\nglobal loggingfile (linked) Gaussian line broadening trace:\n[');
+        fprintf(unit,'\nglobal (linked) Gaussian line broadening trace:\n[');
         for nCnt = 1:lcm.mc.n                   % MC iterations
             % fprintf(unit,'%f',lcm.mc.gbMat(nCnt));
             fprintf(unit,'%f',lcm.mc.gbVec(nCnt));
@@ -1255,7 +1255,7 @@ end
 %--- write GB CRLB to file ---
 if f_gb 
     if flag.lcmLinkGb
-        fprintf(unit,'\nglobal loggingfile (linked) Gaussian line broadening CRLB trace:\n[');
+        fprintf(unit,'\nglobal (linked) Gaussian line broadening CRLB trace:\n[');
         for nCnt = 1:lcm.mc.n                   % MC iterations
             % fprintf(unit,'%f',lcm.mc.gbCrlbMat(nCnt));
             fprintf(unit,'%f',lcm.mc.gbCrlbVec(nCnt));
@@ -1326,7 +1326,7 @@ end
 %--- write GB SD traces to file ---
 if f_gb 
     if flag.lcmLinkGb
-        fprintf(unit,'\nglobal loggingfile (linked) Gaussian line broadening SD trace:\n[');
+        fprintf(unit,'\nglobal (linked) Gaussian line broadening SD trace:\n[');
         for nCnt = 1:lcm.mc.n                   % MC iterations
             fprintf(unit,'%f',lcm.mc.gbSdTrace(nCnt));
             if nCnt<lcm.mc.n
@@ -1397,7 +1397,7 @@ end
 %--- write frequency shift traces to file ---
 if f_shift 
     if flag.lcmLinkShift
-        fprintf(unit,'\nglobal loggingfile (linked) frequency shift trace:\n[');
+        fprintf(unit,'\nglobal (linked) frequency shift trace:\n[');
         for nCnt = 1:lcm.mc.n                   % MC iterations
             % fprintf(unit,'%f',lcm.mc.shiftMat(nCnt));
             fprintf(unit,'%f',lcm.mc.shiftVec(nCnt));
@@ -1468,7 +1468,7 @@ end
 %--- write frequency shift CRLB to file ---
 if f_shift 
     if flag.lcmLinkShift
-        fprintf(unit,'\nglobal loggingfile (linked) frequency shift CRLB trace:\n[');
+        fprintf(unit,'\nglobal (linked) frequency shift CRLB trace:\n[');
         for nCnt = 1:lcm.mc.n                   % MC iterations
             % fprintf(unit,'%f',lcm.mc.shiftCrlbMat(nCnt));
             fprintf(unit,'%f',lcm.mc.shiftCrlbVec(nCnt));
@@ -1539,7 +1539,7 @@ end
 %--- write shift SD traces to file ---
 if f_shift 
     if flag.lcmLinkShift
-        fprintf(unit,'\nglobal loggingfile (linked) frequency shift SD trace:\n[');
+        fprintf(unit,'\nglobal (linked) frequency shift SD trace:\n[');
         for nCnt = 1:lcm.mc.n                   % MC iterations
             fprintf(unit,'%f',lcm.mc.shiftSdTrace(nCnt));
             if nCnt<lcm.mc.n
@@ -1608,7 +1608,7 @@ end
 
 %--- write PHC0 SD trace to file ---
 if f_phc0
-    fprintf(unit,'\nglobal loggingfile PHC0 SD trace:\n[');
+    fprintf(unit,'\nglobal PHC0 SD trace:\n[');
     for nCnt = 1:lcm.mc.n                   % MC iterations
         fprintf(unit,'%f',lcm.mc.phc0SdTrace(nCnt));
         if nCnt<lcm.mc.n

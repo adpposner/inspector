@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile t1t2 flag
+global t1t2 flag
 
 FCTNAME = 'SP2_T1T2_DoTConstAnalysis';
 

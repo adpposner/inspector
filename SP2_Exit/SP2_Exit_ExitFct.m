@@ -9,7 +9,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile pars flag data stab mm proc t1t2 mrsi syn marss lcm tools man
+global pars flag data stab mm proc t1t2 mrsi syn marss lcm tools man
 
 FCTNAME = 'SP2_Exit_ExitFct';
 

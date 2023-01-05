@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm lcm pars flag
+global fm lcm pars flag
 
 FCTNAME = 'SP2_LCM_FitDetailsWinUpdate';
 

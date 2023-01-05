@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile f_verbose
+global f_verbose
 
 FCTNAME = 'SP2_Proc_PlcmFormatCoord';
 

@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile pars flag proc fm
+global pars flag proc fm
 
 FCTNAME = 'SP2_Proc_JdeEfficiencyMain';
 

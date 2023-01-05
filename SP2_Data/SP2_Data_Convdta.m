@@ -14,9 +14,9 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile acqp acqpRef 
-global loggingfile nx ny nspecC
-global loggingfile hflag hcte pars
+global acqp acqpRef 
+global nx ny nspecC
+global hflag hcte pars
 
 
 FCTNAME  = 'SP2_Data_Convdta';

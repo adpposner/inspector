@@ -3,7 +3,7 @@
     function [specPhased, ph0, f_succ] = SP2_ZeroPhasing(specOrig)
 %
 % function [specPhased,ph0] = zeroPhasing(specOrig)
-% zero order phasing of single spectrum by global loggingfile maximum search. The zero order phased (complex) spectrum, as well as the determined
+% zero order phasing of single spectrum by global maximum search. The zero order phased (complex) spectrum, as well as the determined
 % phase value are returned
 % 3-2005, Christoph Juchem
 %
@@ -36,7 +36,7 @@ zeroPhase = [0:1/degFrac:360-1/degFrac];                    % phasing vector acc
 zeroArray = repmat(zeroPhase,specSize(2),1);                % reformat phasing vector to matrix
 datArray = datArray .* exp(i*zeroArray'*pi/180);            % calculate phased spectra
 [maxVecVal,maxVecInd] = max(real(datArray),[],2);           % get real part maximum values
-[maxVal,maxInd] = max(maxVecVal);                           % get global loggingfile maximum and its position
+[maxVal,maxInd] = max(maxVecVal);                           % get global maximum and its position
 ph0 = zeroPhase(maxInd);                                    % calculate zero order phase value
 specPhased = specOrig .* exp(i*ph0*pi/180);
 

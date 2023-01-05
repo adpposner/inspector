@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm flag pars marss
+global fm flag pars marss
 
 FCTNAME = 'SP2_MARSS_MARSSWinUpdate';
 
@@ -264,7 +264,7 @@ else
 end
 
 %--- analysis frequency mode ---
-if flag.marssPpmShow                      % global loggingfile
+if flag.marssPpmShow                      % global
     set(fm.marss.ppmShowMinDecr,'Enable','off')
     set(fm.marss.ppmShowMin,'Enable','off')
     set(fm.marss.ppmShowMinIncr,'Enable','off')

@@ -2,13 +2,13 @@
 %%
     function SP2_Syn_ProcAndPlotUpdate
 %% 
-%%  global loggingfile processing update function.
+%%  global processing update function.
 %%
 %%  11-2015, Christoph Juchem
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile syn flag
+global syn flag
 
 FCTNAME = 'SP2_Syn_ProcAndPlotUpdate';
 

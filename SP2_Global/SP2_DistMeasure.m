@@ -9,7 +9,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 FCTNAME = 'SP2_DistMeasure';
-global loggingfile flag exm syn pass ana reg
+global flag exm syn pass ana reg
 
 
 %--- init success flag ---

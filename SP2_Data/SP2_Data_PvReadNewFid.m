@@ -11,7 +11,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 FCTNAME = 'SP2_Data_PvReadNewFid';
-global loggingfile
+global
 
 %--- init success flag ---
 f_done = 0;
@@ -60,10 +60,10 @@ end
 % note that the repetitions (nr) have already been collapsed here
 if ( fsize/NumBytes == (2*nspecC)*nx*ny*ns*ni*nr*nRcvrs)
     SP2_Logger.log('%s\treading <%s>\n',mfilename, dataSpec.fidFile);
-    fprintf(loggingfile,'nspec/nx/ny/ns/ni/nr/nRcvrs: %d/%d/%d/%d/%d/%d/%d filesize %dk\n', ...
+    SP2_Logger.log('nspec/nx/ny/ns/ni/nr/nRcvrs: %d/%d/%d/%d/%d/%d/%d filesize %dk\n', ...
             2*nspecC,nx,ny,ns,ni,nr,nRcvrs,fsize/1024);
 else
-    fprintf(loggingfile,'%s: nint %d ~= nspec*nx*ny*ni*ns*nr*nRcvrs = %d*%d*%d*%d*%d*%d*%d = %d\n', ...
+    SP2_Logger.log('%s: nint %d ~= nspec*nx*ny*ni*ns*nr*nRcvrs = %d*%d*%d*%d*%d*%d*%d = %d\n', ...
             FCTNAME,fsize/NumBytes,2*nspecC,nx,ny,ns,ni,nr,nRcvrs,2*nspecC*nx*ny*ns*ni*nr*nRcvrs);
     return
 end
@@ -98,7 +98,7 @@ else
     SP2_Logger.log('Hint: Check nx, ny, ni and ns\n\n');
     return
 end
-fprintf(loggingfile,'resorting to complex: dim nspecC/nx/ny/ns/ni/nr/nRcvrs: %d/%d/%d/%d/%d/%d/%d \n',...
+SP2_Logger.log('resorting to complex: dim nspecC/nx/ny/ns/ni/nr/nRcvrs: %d/%d/%d/%d/%d/%d/%d \n',...
         nspecC,nx,ny,ns,ni,nr,nRcvrs);
      
 %----- determination of PhaseFac & datShift out of ConvDat -----

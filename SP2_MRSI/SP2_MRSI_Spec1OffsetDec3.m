@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile fm mrsi flag
+global fm mrsi flag
 
 %--- update value spec 1 ---
 mrsi.spec1.offset = mrsi.spec1.offset - 10;

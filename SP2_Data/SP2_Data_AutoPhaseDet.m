@@ -11,7 +11,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile data flag
+global data flag
 
 FCTNAME = 'SP2_Data_AutoPhaseDet';
 
@@ -63,7 +63,7 @@ if ~f_succ
 end
 
 %--- extraction of spectral parts to be fitted ---
-alignAllBin = zeros(1,data.spec1.nspecC);           % init global loggingfile index vector for ppm ranges to be used (binary format)
+alignAllBin = zeros(1,data.spec1.nspecC);           % init global index vector for ppm ranges to be used (binary format)
 alignMinI   = zeros(1,phAlignPpmN);            % init minimum ppm index vector
 alignMaxI   = zeros(1,phAlignPpmN);            % init maximum ppm index vector
 for winCnt = 1:phAlignPpmN
@@ -77,7 +77,7 @@ for winCnt = 1:phAlignPpmN
     end
     alignAllBin(alignMinI(winCnt):alignMaxI(winCnt)) = 1;
 end
-data.phAlignAllInd = find(alignAllBin);             % global loggingfile index vector including all ppm ranges
+data.phAlignAllInd = find(alignAllBin);             % global index vector including all ppm ranges
 
 %--- phase optimization ---
 phaseVec = 0:data.phAlignPhStep:360;    % phase vector
@@ -121,7 +121,7 @@ if f_show
     if maxX>minX && maxY>minY && ~any(isnan([minX maxX minY maxY]))
         axis([minX maxX minY maxY])
     else
-        fprintf('\n\nWARNING: Phase alignment failed! (global loggingfile display)\n');
+        fprintf('\n\nWARNING: Phase alignment failed! (global display)\n');
         fprintf('[minX maxX minY maxY] = [%.1f %.1f %.1f %.1f]\n\n',minX,maxX,minY,maxY);
     end
     yLim = get(gca,'YLim');

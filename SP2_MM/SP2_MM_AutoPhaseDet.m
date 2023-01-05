@@ -11,7 +11,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile mm flag
+global mm flag
 
 FCTNAME = 'SP2_MM_AutoPhaseDet';
 
@@ -66,7 +66,7 @@ if ~f_succ
 end
 
 %--- extraction of spectral parts to be fitted ---
-alignAllBin = zeros(1,mm.nspecC);           % init global loggingfile index vector for ppm ranges to be used (binary format)
+alignAllBin = zeros(1,mm.nspecC);           % init global index vector for ppm ranges to be used (binary format)
 alignMinI   = zeros(1,mm.phAlignPpmN);            % init minimum ppm index vector
 alignMaxI   = zeros(1,mm.phAlignPpmN);            % init maximum ppm index vector
 for winCnt = 1:mm.phAlignPpmN
@@ -75,7 +75,7 @@ for winCnt = 1:mm.phAlignPpmN
                                  mm.ppmCalib,mm.sw,datSpecOrig);
     alignAllBin(alignMinI(winCnt):alignMaxI(winCnt)) = 1;
 end
-mm.phAlignAllInd = find(alignAllBin);             % global loggingfile index vector including all ppm ranges
+mm.phAlignAllInd = find(alignAllBin);             % global index vector including all ppm ranges
 
 %--- phase optimization ---
 phaseVec = 0:mm.phAlignPhStep:360;    % phase vector

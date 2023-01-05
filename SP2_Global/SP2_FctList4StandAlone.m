@@ -230,7 +230,7 @@ function SP2_FctList4StandAlone
 %#function SP2_Data_QualityFormatPhaseUpdate
 %#function SP2_Data_QualityFormatRealUpdate
 %#function SP2_Data_QualityFrequDirectUpdate
-%#function SP2_Data_QualityFrequglobal loggingfileUpdate
+%#function SP2_Data_QualityFrequglobalUpdate
 %#function SP2_Data_QualityParsUpdate
 %#function SP2_Data_QualityPhModeIntegralUpdate
 %#function SP2_Data_QualityReplaceApply
@@ -969,7 +969,7 @@ function SP2_FctList4StandAlone
 %#function SP2_MM_AnaFormatMagnUpdate
 %#function SP2_MM_AnaFormatRealUpdate
 %#function SP2_MM_AnaFrequDirectUpdate
-%#function SP2_MM_AnaFrequglobal loggingfileUpdate
+%#function SP2_MM_AnaFrequglobalUpdate
 %#function SP2_MM_AnaTOneModeFixedUpdate
 %#function SP2_MM_AnaTOneModeFlexibleUpdate
 %#function SP2_MM_AnaTOneStrUpdate

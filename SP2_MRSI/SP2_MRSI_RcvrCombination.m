@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile data mrsi flag
+global data mrsi flag
     
 FCTNAME = 'SP2_MRSI_RcvrCombination';
 

@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile syn
+global syn
 
 FCTNAME = 'SP2_Syn_LoadParFile';
 
@@ -73,7 +73,7 @@ syn.nspecCOrig = syn.nspecC;
 fprintf('larmor frequency: %.1f MHz\n',syn.sf);
 fprintf('sweep width:      %.1f Hz\n',syn.sw_h);
 fprintf('complex points:   %.0f\n',syn.nspecC);
-fprintf('ppm calibration:  %.3f ppm (global loggingfile)\n',syn.ppmCalib);
+fprintf('ppm calibration:  %.3f ppm (global)\n',syn.ppmCalib);
 
 %--- update success flag ---
 f_succ = 1;

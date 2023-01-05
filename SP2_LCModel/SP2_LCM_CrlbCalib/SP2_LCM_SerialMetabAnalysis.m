@@ -19,7 +19,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile sim lcm flag fmfig
+global sim lcm flag fmfig
 
 FCTNAME = 'SP2_LCM_SerialMetabAnalysis';
 

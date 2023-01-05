@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile flag lcm data fm pars
+global flag lcm data fm pars
 
 FCTNAME = 'SP2_LCM_AnaDoMonteCarloInVivoBatch';
 
@@ -149,7 +149,7 @@ for spxCnt = 1:spxFilesN
     end
     
     %--- parameter handling ---
-    if lcmBatchN>0                  % global loggingfile number of MC computations (identical to all cases)
+    if lcmBatchN>0                  % global number of MC computations (identical to all cases)
         lcm.mc.n = lcmBatchN;
     end
     flag.lcmMCarloRef  = 0;         % do NOT perform (extra) initial analysis as reference since this is done explicitly as part of this script

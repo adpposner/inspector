@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile mrsi
+global mrsi
 
 
 FCTNAME = 'SP2_MRSI_SpectralBaselineCorrPolySingle';
@@ -24,7 +24,7 @@ if ~isfield(datStruct,'spec')
 end
 
 %--- extraction of baseline parts to be fitted ---
-corrBinVec   = zeros(1,datStruct.nspecCimg);        % init global loggingfile index vector for ppm ranges to be used
+corrBinVec   = zeros(1,datStruct.nspecCimg);        % init global index vector for ppm ranges to be used
 minPpmIndVec = zeros(1,mrsi.basePolyPpmN);           % init minimum ppm index vector
 maxPpmIndVec = zeros(1,mrsi.basePolyPpmN);           % init maximum ppm index vector
 for winCnt = 1:mrsi.basePolyPpmN
@@ -39,7 +39,7 @@ corrIndVec = find(corrBinVec);                                                  
 realCoeff   = polyfit(corrIndVec,real(datStruct.spec(corrIndVec))',mrsi.basePolyOrder);   % polynomial fit of real part
 imagCoeff   = polyfit(corrIndVec,imag(datStruct.spec(corrIndVec))',mrsi.basePolyOrder);   % polynomial fit of imaginary part
 specFitTot  = complex(polyval(realCoeff,1:datStruct.nspecCimg)',polyval(imagCoeff,1:datStruct.nspecCimg)');
-datStruct.spec = datStruct.spec - specFitTot;                   % global loggingfile baseline correction
+datStruct.spec = datStruct.spec - specFitTot;                   % global baseline correction
 
 %--- info print out ---
 fprintf('Spectral baseline correction applied (%s).\n',datStruct.name);

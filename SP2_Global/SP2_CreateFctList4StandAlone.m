@@ -11,7 +11,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile flag
+global flag
 
 vNum = 2;                       % default: INSPECTOR software version
 
@@ -44,7 +44,7 @@ else
     flag.OS = 1;
 end
 fmPath = fmStruct.path;      % substitute / by \
-fmFile = [fmPath '\SP' vStr '_global loggingfile\SP' vStr '_FctList4StandAlone.m'];
+fmFile = [fmPath '\SP' vStr '_global\SP' vStr '_FctList4StandAlone.m'];
 fmFile = fmFile;
 
 %--- script file generation ---

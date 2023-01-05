@@ -9,7 +9,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile data
+global data
 
 FCTNAME = 'SP2_Data_AutoFrequDetIndiv';
 
@@ -23,7 +23,7 @@ f_done = 0;
 
 %--- verbose handling ---
 f_show = 0;         % default: no figure display
-anaPars = data;     % default: parameters from global loggingfile 'data' structure
+anaPars = data;     % default: parameters from global 'data' structure
 if nargin==4        % verbose flag
     f_show = SP2_Check4FlagR( varargin{1} );
 elseif nargin==5    % verbose flag & analysis parameters

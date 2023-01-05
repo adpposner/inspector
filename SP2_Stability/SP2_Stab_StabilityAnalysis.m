@@ -9,7 +9,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile stab flag
+global stab flag
 
 FCTNAME = 'SP2_Stab_StabilityAnalysis';
 
@@ -203,7 +203,7 @@ for icnt = 1:stab.ana.nr                                                    % de
         else
             [stab.maxMagnVal(icnt),stab.maxMagnInd(icnt)] = SP2_SplineMaxDeterm(stab.specMagnZoom(:,icnt),stab.splFac);      
         end
-        stab.maxMagnInd(icnt) = stab.indMin + stab.maxMagnInd(icnt) -1;        % translate index from zoomed range to global loggingfile index
+        stab.maxMagnInd(icnt) = stab.indMin + stab.maxMagnInd(icnt) -1;        % translate index from zoomed range to global index
     else        % previous result of pure maximum search is used
         stab.maxMagnVal = stab.maxMagnValDiscr;
         stab.maxMagnInd = stab.maxMagnIndDiscr;
@@ -317,7 +317,7 @@ f_succ = 1;
 %--------------------------------------------------------------------------
 function StabAnaLoc_SuperPosition
 
-global loggingfile stab flag
+global stab flag
 
 % determine frequency window (centered on discrete peak position of first magnitude spectrum)
 stab.plotWinPts = stab.plotWinHz / stab.hzPerPt;                                       % translate frequency window to point window
@@ -400,7 +400,7 @@ ylabel('amplitude [a.u.]')
 %--------------------------------------------------------------------------
 function StabAnaLoc_TimeDomain
 
-global loggingfile stab flag
+global stab flag
 
 fh1 = figure;
 namestr = sprintf(' Stability Analysis (Time Domain)');
@@ -459,7 +459,7 @@ end
 %---------------------------------------------------------------------------------
 function StabAnaLoc_FrequencyDomain
 
-global loggingfile stab flag
+global stab flag
 
 fh2 = figure;
 namestr = sprintf(' Stability Analysis (Frequency Domain)');
@@ -549,7 +549,7 @@ end
 %---------------------------------------------------------------------------------
 function StabAnaLoc_FWHM_Analysis
 
-global loggingfile stab flag
+global stab flag
 
 fh2 = figure;
 namestr = sprintf(' FWHM Analysis');
@@ -586,7 +586,7 @@ text(minX+(maxX-minX)/20,maxY-(maxY-minY)/10,stdDev)
 %---------------------------------------------------------------------------------
 function StabAnaLoc_FourierAnalysis
 
-global loggingfile stab flag
+global stab flag
 
 
 phaseFftTmp  = abs(fft(stab.phase));
@@ -717,7 +717,7 @@ end
 %---------------------------------------------------------------------------------
 function StabAnaLoc_PlotCalcTracking
 
-global loggingfile stab
+global stab
 
 fh_db = figure;
 namestr = sprintf(' Calculation Tracking of 3rd FID, datShift=%i, PhaseFac=%.3f',...
@@ -749,7 +749,7 @@ xlabel('magn. spectrum')
 % plot single each acquisition to separate figure
 function StabAnaLoc_PlotSingleAcqs
 
-global loggingfile stab
+global stab
 
 % particular scan(s) of acqVec
 for icnt = 1:stab.ana.nr

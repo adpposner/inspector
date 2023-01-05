@@ -12,7 +12,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile lcm
+global lcm
 
 FCTNAME = 'SP2_LCM_SvdPeakAnalysis';
 
@@ -133,9 +133,9 @@ fprintf('%sppm\n',SP2_Vec2PrintStr(lcm.svd.frequAll/lcm.svd.sf+lcm.ppmCalib,2));
 fprintf('SVD T2''s:\n%sms\n',SP2_Vec2PrintStr(lcm.svd.dampAll*1000));
 
 %--- extraction of baseline parts to be fitted ---
-lcm.svd.binVec = zeros(1,lcm.svd.nspecC);  % init global loggingfile bin vector of ppm ranges to be used
-lcm.svd.indVec = 0;                         % init global loggingfile index vector of ppm ranges to be used
-indCnt          = 0;                         % index counter (for global loggingfile index vector)
+lcm.svd.binVec = zeros(1,lcm.svd.nspecC);  % init global bin vector of ppm ranges to be used
+lcm.svd.indVec = 0;                         % init global index vector of ppm ranges to be used
+indCnt          = 0;                         % index counter (for global index vector)
 minIndVec = zeros(1,lcm.baseSvdPpmN);           % init minimum ppm index vector for specific ppm windows
 maxIndVec = zeros(1,lcm.baseSvdPpmN);           % init maximum ppm index vector for specific ppm windows
 for winCnt = 1:lcm.baseSvdPpmN
@@ -146,7 +146,7 @@ for winCnt = 1:lcm.baseSvdPpmN
     lcm.svd.binVec(minIndVec(winCnt):maxIndVec(winCnt)) = 1;
     winLen = maxIndVec(winCnt)-minIndVec(winCnt)+1;         % individual window length
     lcm.svd.indVec(indCnt+1:indCnt+winLen) = minIndVec(winCnt):maxIndVec(winCnt);
-    indCnt = length(lcm.svd.indVec);                       % update global loggingfile index vector
+    indCnt = length(lcm.svd.indVec);                       % update global index vector
 end
 
 %--- selection of valid frequencies ---

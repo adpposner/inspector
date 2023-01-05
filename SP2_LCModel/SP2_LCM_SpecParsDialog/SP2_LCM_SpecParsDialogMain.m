@@ -8,7 +8,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global loggingfile pars lcm fm
+global pars lcm fm
 
 FCTNAME = 'SP2_LCM_SpecParsDialogMain';
 
