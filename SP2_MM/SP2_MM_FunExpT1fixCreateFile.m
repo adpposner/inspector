@@ -56,3 +56,5 @@ fprintf('File <%s.m> created.\n',fileName);
     
 %--- update success flag ---
 f_succ = 1;
+
+end

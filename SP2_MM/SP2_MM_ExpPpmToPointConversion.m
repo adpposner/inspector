@@ -22,3 +22,4 @@ end
     SP2_MM_ExtractPpmRange(mm.expPpmSelect,mm.expPpmSelect+1,mm.ppmCalib,...
                            mm.sw,real(mm.spec(:,1)));
                        
+end

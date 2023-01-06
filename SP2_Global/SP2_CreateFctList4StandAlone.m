@@ -85,3 +85,5 @@ for icnt = 1:length(explicitCell)
 end
 fclose(unit);
 fprintf('file <%s> successfully created\n\n',fmFile);
+
+end

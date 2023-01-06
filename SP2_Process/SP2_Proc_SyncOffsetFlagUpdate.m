@@ -19,3 +19,5 @@ set(fm.proc.syncOffset,'Value',flag.procSyncOffset)
 
 %--- window update ---
 SP2_Proc_ProcessWinUpdate
+
+end

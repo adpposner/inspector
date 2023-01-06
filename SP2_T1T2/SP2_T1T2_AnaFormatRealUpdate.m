@@ -23,3 +23,5 @@ set(fm.t1t2.anaFormatMagn,'Value',~flag.t1t2AnaFormat)
 SP2_T1T2_T1T2WinUpdate
 
 
+
+end

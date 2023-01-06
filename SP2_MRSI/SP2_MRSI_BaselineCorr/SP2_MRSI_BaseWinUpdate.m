@@ -25,3 +25,5 @@ FCTNAME = 'SP2_MRSI_BaseWinUpdate';
 %     set(fm.mrsi.base.anaPolyPpmLabel,'Color',pars.bgTextColor)
 %     set(fm.mrsi.base.anaPolyPpmStr,'Enable','off')
 % end
+
+end

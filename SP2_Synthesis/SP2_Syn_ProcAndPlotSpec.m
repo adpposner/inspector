@@ -30,3 +30,5 @@ SP2_Syn_PlotSpec(1);        % forced new figure
 %--- figure selection ---
 flag.synFigSelect = 3;
 
+
+end

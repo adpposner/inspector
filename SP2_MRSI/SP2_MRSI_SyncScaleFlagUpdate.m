@@ -19,3 +19,5 @@ set(fm.mrsi.syncScale,'Value',flag.mrsiSyncScale)
 
 %--- window update ---
 SP2_MRSI_MrsiWinUpdate
+
+end

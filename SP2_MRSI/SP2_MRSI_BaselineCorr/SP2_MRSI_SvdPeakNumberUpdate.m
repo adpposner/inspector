@@ -18,3 +18,5 @@ set(fm.mrsi.base.svdPeakN,'String',num2str(mrsi.baseSvdPeakN))
 
 %--- window update ---
 SP2_MRSI_MrsiWinUpdate
+
+end

@@ -47,3 +47,5 @@ marss.spinSys.libPath = get(fm.marss.spinSysLibPath,'String');
 
 %--- update display ---
 SP2_MARSS_MARSSWinUpdate
+
+end

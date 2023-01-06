@@ -17,3 +17,5 @@ lcm.nspecCOrig = lcm.nspecC;
 
 %--- window update ---
 set(fm.lcm.dialog1.nspecC,'String',num2str(lcm.nspecC))
+
+end

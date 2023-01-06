@@ -26,3 +26,5 @@ end
 
 %--- figure creation ---
 SP2_MRSI_PlotFidSum(1)        % forced new figure
+
+end

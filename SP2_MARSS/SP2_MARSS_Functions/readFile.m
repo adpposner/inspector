@@ -230,3 +230,5 @@ if(pulseStruct.generatePropagators)
 else
     disp('Warning, no propagators. This will cause simulations to take a long time. This is because there are slice-selective gradients (G) in two or more dimensions simultaneously. Typically orthogonal slices are used in which case you should rotate your gradients to make them orthogonal, if theyre truly non-orthogonal then disregard this message');
 end
+
+end

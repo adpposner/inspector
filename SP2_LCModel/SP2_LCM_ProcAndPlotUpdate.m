@@ -38,3 +38,5 @@ if isfield(lcm,'fhLcmFidOrig') || isfield(lcm,'fhLcmFid') || ...
         return
     end
 end        
+
+end

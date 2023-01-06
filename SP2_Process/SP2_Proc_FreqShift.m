@@ -20,3 +20,5 @@ datFid = datStruct.fid .* exp(1i*tVec*datStruct.shift*2*pi);       % apply phase
 
 %--- update success flag ---
 f_succ = 1;
+
+end

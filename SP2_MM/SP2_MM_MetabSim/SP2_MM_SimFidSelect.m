@@ -47,3 +47,5 @@ set(fm.mm.simFidPath,'String',mm.sim.fidPath)
 %--- update display ---
 SP2_MM_MacroWinUpdate
 
+
+end

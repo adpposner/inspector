@@ -25,3 +25,5 @@ FCTNAME = 'SP2_LCM_BaseWinUpdate';
 %     set(fm.lcm.base.anaPolyPpmLabel,'Color',pars.bgTextColor)
 %     set(fm.lcm.base.anaPolyPpmStr,'Enable','off')
 % end
+
+end

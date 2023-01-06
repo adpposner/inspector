@@ -28,3 +28,5 @@ SP2_MM_SatRecShowSpecSum(0);
 
 %--- window update ---
 SP2_MM_MacroWinUpdate
+
+end

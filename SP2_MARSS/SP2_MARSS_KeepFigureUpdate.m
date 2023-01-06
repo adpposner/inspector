@@ -16,3 +16,5 @@ flag.marssKeepFig = get(fm.marss.keepFigure,'Value');
 
 %--- window update ---
 set(fm.marss.keepFigure,'Value',flag.marssKeepFig)
+
+end

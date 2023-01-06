@@ -28,3 +28,5 @@ data.spec1.fidArrSerial = reshape(permute(data.spec1.fidArrRxComb,[2 3 1]),data.
 
 %--- update success flag ---
 f_done = 1;
+
+end

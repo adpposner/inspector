@@ -23,3 +23,5 @@ set(fm.data.alignDet.phModeCongr,'Value',flag.dataAlignPhMode)
 %--- window update ---
 SP2_Data_AlignDetailsWinUpdate
 
+
+end

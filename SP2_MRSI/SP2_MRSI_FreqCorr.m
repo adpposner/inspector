@@ -44,3 +44,5 @@ mrsi.spec2.fid = datFid(nSpec/2+1:end,:);
 
 %--- update success flag ---
 f_done = 1;
+
+end

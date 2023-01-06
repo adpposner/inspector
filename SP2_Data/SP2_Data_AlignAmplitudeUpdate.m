@@ -18,3 +18,5 @@ flag.dataAlignAmpl = get(fm.data.alignAmplitude,'Value');
 %--- window update ---
 set(fm.data.alignAmplitude,'Value',flag.dataAlignAmpl)
 
+
+end

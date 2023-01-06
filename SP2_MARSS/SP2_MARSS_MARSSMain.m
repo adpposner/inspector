@@ -381,3 +381,5 @@ fm.marss.verbose   = uicontrol('Style','RadioButton','BackGroundColor',pars.bgCo
                              
 %--- window update ---
 SP2_MARSS_MARSSWinUpdate
+
+end

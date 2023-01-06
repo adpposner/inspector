@@ -19,3 +19,5 @@ set(fm.mrsi.syncLb,'Value',flag.mrsiSyncLb)
 
 %--- window update ---
 SP2_MRSI_MrsiWinUpdate
+
+end

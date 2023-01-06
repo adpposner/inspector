@@ -21,3 +21,5 @@ end
 
 %--- figure creation ---
 SP2_MRSI_PlotFid1Orig(1)        % forced new figure
+
+end

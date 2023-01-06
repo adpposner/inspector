@@ -377,3 +377,5 @@ fm.data.cMapHot   = uicontrol('Style','RadioButton','BackGroundColor',pars.bgCol
 
 %--- window update ---                           
 SP2_Data_DataWinUpdate
+
+end

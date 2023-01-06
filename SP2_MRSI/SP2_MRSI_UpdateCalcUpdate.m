@@ -19,3 +19,5 @@ flag.mrsiUpdateCalc = get(fm.mrsi.updateCalc,'Value');
 
 %--- window update ---
 set(fm.mrsi.updateCalc,'Value',flag.mrsiUpdateCalc)
+
+end

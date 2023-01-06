@@ -20,3 +20,5 @@ set(fm.mm.neighInit,'Value',flag.mmNeighInit)
 %--- window update (not strictly necessary) ---
 SP2_MM_MacroWinUpdate
 
+
+end

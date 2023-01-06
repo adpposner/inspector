@@ -258,3 +258,5 @@ SP2_Data_QualitySeriesClose
 %--- close (old) array figure ---
 SP2_Data_QualityArrayClose
 
+
+end

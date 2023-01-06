@@ -223,3 +223,5 @@ fprintf('Difference calculation of data sets 1 and 2 completed.\n');
 %--- update success flag ---
 f_done = 1;
 
+
+end

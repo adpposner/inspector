@@ -29,3 +29,5 @@ datFid = datStruct.fid .* lbWeight;
 
 %--- update success flag ---
 f_done = 1;
+
+end

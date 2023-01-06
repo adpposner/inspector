@@ -16,3 +16,5 @@ flag.verbose = get(fm.mrsi.verbose,'Value');
 
 %--- window update ---
 set(fm.mrsi.verbose,'Value',flag.verbose)
+
+end

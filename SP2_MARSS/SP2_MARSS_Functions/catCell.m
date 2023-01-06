@@ -8,3 +8,4 @@ end
 for ii = 3:length(inputCell)
     catMat = cat(dimensionToConcatenate,catMat,inputCell{ii});
 end
+end

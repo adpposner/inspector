@@ -179,3 +179,5 @@ fprintf('Frequency and phase alignment completed.\n');
 
 %--- update read flag ---
 f_succ = 1;
+
+end

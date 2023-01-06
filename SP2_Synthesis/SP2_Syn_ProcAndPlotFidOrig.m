@@ -50,3 +50,5 @@ SP2_Syn_PlotFidOrig(1);        % forced new figure
 %--- update success flag ---
 f_succ = 1;
 
+
+end

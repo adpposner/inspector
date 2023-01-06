@@ -21,3 +21,5 @@ SP2_Data_FigureUpdate;
 %--- window update ---
 set(fm.data.alignVerbose,'Value',flag.dataAlignVerbose)
 
+
+end

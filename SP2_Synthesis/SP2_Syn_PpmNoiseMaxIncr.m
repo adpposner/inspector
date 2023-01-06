@@ -19,3 +19,5 @@ SP2_Syn_SynthesisWinUpdate
 
 %--- analysis update ---
 SP2_Syn_ProcAndPlotUpdate
+
+end

@@ -19,3 +19,5 @@ set(fm.proc.syncStretch,'Value',flag.procSyncStretch)
 
 %--- window update ---
 SP2_Proc_ProcessWinUpdate
+
+end

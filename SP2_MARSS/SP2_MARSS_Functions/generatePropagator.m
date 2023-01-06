@@ -49,3 +49,4 @@ for individualPosition = positions
         end
     end
 end
+end

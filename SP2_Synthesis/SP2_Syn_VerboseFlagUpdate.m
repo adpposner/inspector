@@ -16,3 +16,5 @@ flag.verbose = get(fm.syn.verbose,'Value');
 
 %--- window update ---
 set(fm.syn.verbose,'Value',flag.verbose)
+
+end

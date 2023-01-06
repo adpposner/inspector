@@ -21,3 +21,5 @@ set(fm.mm.align.phSpecRgTwo,'Value',flag.mmAlignPhSpecRg)
 %--- window update ---
 SP2_MM_AlignDetailsWinUpdate
 
+
+end

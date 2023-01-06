@@ -25,3 +25,4 @@ FCTNAME = 'SP2_Proc_BaseWinUpdate';
 %     set(fm.proc.base.anaPolyPpmLabel,'Color',pars.bgTextColor)
 %     set(fm.proc.base.anaPolyPpmStr,'Enable','off')
 % end
+end

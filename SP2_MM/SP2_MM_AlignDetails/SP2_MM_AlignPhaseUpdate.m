@@ -18,3 +18,5 @@ flag.mmAlignPhase = get(fm.mm.align.phase,'Value');
 %--- window update ---
 set(fm.mm.align.phase,'Value',flag.mmAlignPhase)
 
+
+end

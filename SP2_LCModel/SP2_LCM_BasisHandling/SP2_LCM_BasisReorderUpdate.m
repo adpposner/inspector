@@ -29,3 +29,5 @@ lcm.basis.reorder(nMetab) = min(max(lcmBasisReorder,1),lcm.basis.n);
 
 %--- update window ---
 SP2_LCM_BasisWinUpdate
+
+end

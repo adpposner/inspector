@@ -153,3 +153,5 @@ fm.mm.align.exit = uicontrol('Style','Pushbutton','String','Exit','FontWeight','
 %--- window update ---
 SP2_MM_AlignDetailsWinUpdate
 
+
+end

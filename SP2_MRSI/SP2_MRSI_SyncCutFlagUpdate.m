@@ -19,3 +19,5 @@ set(fm.mrsi.syncCut,'Value',flag.mrsiSyncCut)
 
 %--- window update ---
 SP2_MRSI_MrsiWinUpdate
+
+end

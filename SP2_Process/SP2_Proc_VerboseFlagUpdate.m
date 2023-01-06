@@ -16,3 +16,5 @@ flag.verbose = get(fm.proc.verbose,'Value');
 
 %--- window update ---
 set(fm.proc.verbose,'Value',flag.verbose)
+
+end

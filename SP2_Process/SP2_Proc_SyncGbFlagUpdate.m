@@ -19,3 +19,5 @@ set(fm.proc.syncGb,'Value',flag.procSyncGb)
 
 %--- window update ---
 SP2_Proc_ProcessWinUpdate
+
+end

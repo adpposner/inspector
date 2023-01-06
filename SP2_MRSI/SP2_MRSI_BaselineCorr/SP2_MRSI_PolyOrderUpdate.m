@@ -19,3 +19,5 @@ set(fm.mrsi.base.polyOrder,'String',sprintf('%.0f',mrsi.basePolyOrder))
 
 %--- window update ---
 SP2_MRSI_MrsiWinUpdate
+
+end

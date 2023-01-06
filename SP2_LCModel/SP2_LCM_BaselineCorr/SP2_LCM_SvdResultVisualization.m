@@ -173,3 +173,5 @@ elseif lcm.svd.specNumber==2
     lcm.expt.sw_h   = lcm.spec2.sw_h;
     lcm.expt.nspecC = lcm.spec2.nspecC;
 end
+
+end

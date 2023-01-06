@@ -21,3 +21,5 @@ header = dicominfo(fidFile);
 f_succ = 1;
 
 
+
+end

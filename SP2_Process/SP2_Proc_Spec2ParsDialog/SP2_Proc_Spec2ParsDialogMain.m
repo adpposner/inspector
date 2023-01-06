@@ -48,3 +48,5 @@ end
 fm.proc.dialog2.exit     = uicontrol('Style','Pushbutton','String','Done','FontWeight','bold','Position',[45 20 70 20],...
                                      'FontSize',pars.fontSize,'FontName','Helvetica','Callback','SP2_Proc_Spec2ParsDialogExit');
 
+
+end

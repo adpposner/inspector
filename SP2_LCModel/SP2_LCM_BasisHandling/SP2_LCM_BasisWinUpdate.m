@@ -73,3 +73,5 @@ end
 
 %--- reference frequency ---
 set(fm.lcm.basis.ppmCalib,'String',num2str(lcm.basis.ppmCalib))
+
+end

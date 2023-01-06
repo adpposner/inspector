@@ -53,3 +53,5 @@ data.protPathTxt = [data.protPath '.txt'];
 
 %--- update display ---
 set(fm.data.protPath,'String',data.protPath)
+
+end

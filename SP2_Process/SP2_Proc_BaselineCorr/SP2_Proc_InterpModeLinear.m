@@ -23,3 +23,5 @@ set(fm.proc.base.interpNearest,'Value',0)
 set(fm.proc.base.interpLinear,'Value',1)
 set(fm.proc.base.interpSpline,'Value',0)
 set(fm.proc.base.interpCubic,'Value',0)
+
+end

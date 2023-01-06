@@ -339,3 +339,5 @@ SP2_MRSI_ProcAndPlotUpdate
 %--- info printout ---
 fprintf('%s completed (elapsed time %.1f minutes)\n\n',FCTNAME,etime(clock,t0)/60);
 
+
+end

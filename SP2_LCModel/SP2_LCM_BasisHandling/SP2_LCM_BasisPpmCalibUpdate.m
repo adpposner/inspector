@@ -15,3 +15,5 @@ global fm lcm
 lcm.basis.ppmCalib = str2num(get(fm.lcm.basis.ppmCalib,'String'));
 set(fm.lcm.basis.ppmCalib,'String',num2str(lcm.basis.ppmCalib))
 
+
+end

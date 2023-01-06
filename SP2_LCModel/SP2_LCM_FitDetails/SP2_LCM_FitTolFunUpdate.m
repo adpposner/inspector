@@ -22,3 +22,5 @@ set(fm.lcm.fit.tolFun,'String',sprintf('%.2g',lcm.fit.tolFun))
 
 %--- update window ---
 SP2_LCM_FitDetailsWinUpdate
+
+end

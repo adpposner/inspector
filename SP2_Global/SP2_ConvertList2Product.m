@@ -28,3 +28,5 @@ if ~isempty(cIndList)
     vec(nCom) = str2num(valStr);
     parvalStr = ['( ' num2str(prod(vec)) ' )'];
 end
+
+end

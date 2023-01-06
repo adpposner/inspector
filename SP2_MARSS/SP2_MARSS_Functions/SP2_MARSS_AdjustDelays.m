@@ -49,3 +49,4 @@ switch flagSequence
         end
 end
 adjustedDelays = delays;
+end

@@ -22,3 +22,5 @@ set(fm.lcm.fit.anaGbVarMin,'String',sprintf('%.1f',lcm.fit.gbVarMin))
 
 %--- update window ---
 SP2_LCM_FitDetailsWinUpdate
+
+end

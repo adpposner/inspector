@@ -23,3 +23,5 @@ set(fm.t1t2.formatMagn,'Value',~flag.t1t2Format)
 SP2_T1T2_T1T2WinUpdate
 
 
+
+end

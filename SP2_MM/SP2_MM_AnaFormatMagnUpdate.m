@@ -23,3 +23,5 @@ set(fm.mm.anaFormatMagn,'Value',~flag.mmAnaFormat)
 SP2_MM_MacroWinUpdate
 
 
+
+end

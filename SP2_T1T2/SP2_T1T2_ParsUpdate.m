@@ -202,3 +202,5 @@ set(fm.t1t2.t2DecScale,'String',num2str(t1t2.t2decScale))
 
 %--- window update ---
 SP2_T1T2_T1T2WinUpdate
+
+end

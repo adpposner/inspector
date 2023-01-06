@@ -24,3 +24,5 @@ if stab.trans>1
     set(fm.stab.transNum,'String',num2str(stab.trans))
     stab.trans = str2double(get(fm.stab.transNum,'String'));
 end
+
+end

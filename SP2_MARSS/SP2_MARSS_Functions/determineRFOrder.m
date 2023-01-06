@@ -281,3 +281,5 @@ if (pulseStruct.use1DProjection) %determine which RF pulses to use for which pul
     pulseStruct.numberOfSequenceBlocks = numberOfSequenceBlocks;
     pulseStruct.rfOrdering = rfOrdering;
 end
+
+end

@@ -28,3 +28,5 @@ if isfield(marss,'fhMarssSpecSingle') || isfield(marss,'fhMarssSpecSuperpos') ||
         return
     end
 end        
+
+end

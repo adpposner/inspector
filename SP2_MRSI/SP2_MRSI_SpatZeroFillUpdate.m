@@ -18,3 +18,5 @@ set(fm.mrsi.spatZfVal,'String',num2str(mrsi.spatZF))
 %--- window update ---
 SP2_MRSI_MrsiWinUpdate
 
+
+end

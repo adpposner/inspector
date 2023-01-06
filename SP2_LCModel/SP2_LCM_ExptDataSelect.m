@@ -82,3 +82,5 @@ lcm.expt.dataPathRaw = [lcm.expt.dataDir lcm.expt.dataFileRaw];          % updat
 
 %--- update display ---
 SP2_LCM_LCModelWinUpdate
+
+end

@@ -22,3 +22,5 @@ phPerPtVec        = data.opt.frequVec*pars.dwell*pars.nspecC*(pi/180)/(2*pi);   
 phPerPtMat        = repmat(phPerPtVec,[pars.nspecC 1]);                    % correction phase per point: matrix
 pointMat          = repmat((0:(pars.nspecC-1))',[1 data.opt.nFrequ]);
 data.opt.frequShiftMat = exp(-1i*phPerPtMat .* pointMat);      % time domain frequency shift matrix
+
+end

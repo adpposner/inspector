@@ -16,3 +16,5 @@ flag.mrsiKeepFig = get(fm.mrsi.keepFigure,'Value');
 
 %--- window update ---
 set(fm.mrsi.keepFigure,'Value',flag.mrsiKeepFig)
+
+end

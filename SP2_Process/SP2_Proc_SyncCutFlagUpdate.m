@@ -19,3 +19,5 @@ set(fm.proc.syncCut,'Value',flag.procSyncCut)
 
 %--- window update ---
 SP2_Proc_ProcessWinUpdate
+
+end

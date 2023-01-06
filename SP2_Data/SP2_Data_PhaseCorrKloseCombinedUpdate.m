@@ -27,3 +27,4 @@ set(fm.data.kloseSelect,'Value',flag.dataKloseMode==3)
 
 %--- window update ---
 SP2_Data_DataWinUpdate
+end

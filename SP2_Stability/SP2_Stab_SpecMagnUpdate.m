@@ -17,3 +17,4 @@ set(fm.stab.specMagn,'Value',~flag.stabRealMagn)
 
 %--- window update ---                           
 SP2_Stab_StabilityWinUpdate
+end

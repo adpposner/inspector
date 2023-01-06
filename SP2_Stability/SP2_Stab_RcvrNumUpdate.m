@@ -23,3 +23,5 @@ end
 %--- display updated ---
 stab.rcvr = max(min(str2double(get(fm.stab.rcvrNum,'String')),data.nRcvrs),1);
 set(fm.stab.rcvrNum,'String',sprintf('%.0f',stab.rcvr))
+
+end

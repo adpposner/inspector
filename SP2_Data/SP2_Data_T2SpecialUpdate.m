@@ -17,3 +17,5 @@ flag.t2Special = get(fm.data.t2Special,'Value');
 %--- window update ---
 set(fm.data.t2Special,'Value',flag.t2Special)
 
+
+end

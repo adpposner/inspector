@@ -50,3 +50,5 @@ fm.proc.jdeEff.analyze   = uicontrol('Style','Pushbutton','String','Analyze','Fo
 %--- window update ---
 SP2_Proc_JdeEfficiencyWinUpdate
 
+
+end

@@ -65,3 +65,5 @@ set(fm.data.align.frVerbMax,'String',num2str(data.frAlignVerbMax));
 SP2_Data_AlignDetailsWinUpdate
 
 
+
+end

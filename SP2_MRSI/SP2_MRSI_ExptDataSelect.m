@@ -56,3 +56,5 @@ mrsi.expt.dataPathMat = [mrsi.expt.dataDir mrsi.expt.dataFileMat];          % up
 
 %--- update display ---
 SP2_MRSI_MrsiWinUpdate
+
+end

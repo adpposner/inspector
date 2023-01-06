@@ -23,3 +23,5 @@ set(fm.t1t2.anaDataSpecI,'Value',flag.t1t2AnaData==3)
 
 %--- update window ---
 SP2_T1T2_T1T2WinUpdate
+
+end

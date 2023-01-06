@@ -78,3 +78,5 @@ if MinY==MaxY
         MaxY = (1+OffsetFac) * MaxY;
     end
 end
+
+end

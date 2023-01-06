@@ -17,3 +17,5 @@ lcm.mc.initSpread = min(max(round(str2num(get(fm.lcm.anaMCarloSpread,'String')))
 %--- update display ---
 set(fm.lcm.anaMCarloSpread,'String',sprintf('%.0f',lcm.mc.initSpread))
 
+
+end

@@ -39,3 +39,5 @@ else                                % export
     diffSpec = mrsi.expt.spec - fftshift(fft(mrsi.svd.fid'));
 end
 outdata  = abs(diffSpec(mrsi.svd.indVec))';
+
+end

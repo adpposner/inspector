@@ -123,3 +123,5 @@ proc.spec2.dataPathCoord = [proc.spec2.dataDir proc.spec2.dataFileCoord];       
 
 %--- update display ---
 SP2_Proc_ProcessWinUpdate
+
+end

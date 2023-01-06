@@ -35,3 +35,5 @@ if isfield(proc,'fhFid1Orig') || isfield(proc,'fhFid2Orig') || ...
         return
     end
 end        
+
+end

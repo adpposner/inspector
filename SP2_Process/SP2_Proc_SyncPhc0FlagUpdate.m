@@ -19,3 +19,5 @@ set(fm.proc.syncPhc0,'Value',flag.procSyncPhc0)
 
 %--- window update ---
 SP2_Proc_ProcessWinUpdate
+
+end

@@ -16,3 +16,5 @@ flag.lcmKeepFig = get(fm.lcm.keepFigure,'Value');
 
 %--- window update ---
 set(fm.lcm.keepFigure,'Value',flag.lcmKeepFig)
+
+end

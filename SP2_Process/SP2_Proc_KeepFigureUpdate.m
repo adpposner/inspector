@@ -16,3 +16,5 @@ flag.procKeepFig = get(fm.proc.keepFigure,'Value');
 
 %--- window update ---
 set(fm.proc.keepFigure,'Value',flag.procKeepFig)
+
+end

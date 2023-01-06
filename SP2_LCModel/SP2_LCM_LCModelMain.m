@@ -633,3 +633,5 @@ fm.lcm.verbose      = uicontrol('Style','RadioButton','BackGroundColor',pars.bgC
                              
 %--- window update ---
 SP2_LCM_LCModelWinUpdate
+
+end

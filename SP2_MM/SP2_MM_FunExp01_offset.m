@@ -7,3 +7,5 @@ f = a(1) * (1 - exp(-(x-mm.xOff)/a(2))) + mm.yOff;
        
 
 
+
+end

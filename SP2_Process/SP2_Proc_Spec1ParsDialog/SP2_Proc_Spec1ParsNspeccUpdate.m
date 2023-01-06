@@ -17,3 +17,5 @@ proc.spec1.nspecCOrig = proc.spec1.nspecC;
 
 %--- window update ---
 set(fm.proc.dialog1.nspecC,'String',num2str(proc.spec1.nspecC))
+
+end

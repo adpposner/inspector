@@ -22,3 +22,5 @@ if ~SP2_MARSS_PlotSpecSingle( 1 )
     fprintf('Figure update of single spectrum failed.\n');
     return
 end
+
+end

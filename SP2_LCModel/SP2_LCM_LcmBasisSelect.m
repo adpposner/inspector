@@ -47,3 +47,5 @@ lcm.basisPath = get(fm.lcm.basisPath,'String');
 
 %--- update display ---
 SP2_LCM_LCModelWinUpdate
+
+end

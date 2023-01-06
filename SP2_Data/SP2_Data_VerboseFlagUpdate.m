@@ -19,3 +19,5 @@ set(fm.data.verbose,'Value',flag.verbose)
 
 %--- figure update ---
 SP2_Data_FigureUpdate;
+
+end

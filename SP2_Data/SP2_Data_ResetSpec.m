@@ -26,3 +26,5 @@ clear all
 
 %--- restart FMAP ---
 INSPECTOR
+
+end

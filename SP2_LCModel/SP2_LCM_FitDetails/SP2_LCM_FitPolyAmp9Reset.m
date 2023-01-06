@@ -19,3 +19,5 @@ lcm.anaPolyCoeffImag(2) = 0;
 SP2_LCM_FitDetailsWinUpdate
 
 
+
+end

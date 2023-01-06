@@ -28,3 +28,5 @@ datFid = datStruct.fid .* gbWeight;
 
 %--- update success flag ---
 f_done = 1;
+
+end

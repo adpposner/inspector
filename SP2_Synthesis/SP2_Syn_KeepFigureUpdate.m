@@ -16,3 +16,5 @@ flag.synKeepFig = get(fm.syn.keepFigure,'Value');
 
 %--- window update ---
 set(fm.syn.keepFigure,'Value',flag.synKeepFig)
+
+end

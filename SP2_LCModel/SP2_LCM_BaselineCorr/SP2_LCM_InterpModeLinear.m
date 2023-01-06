@@ -23,3 +23,5 @@ set(fm.lcm.base.interpNearest,'Value',0)
 set(fm.lcm.base.interpLinear,'Value',1)
 set(fm.lcm.base.interpSpline,'Value',0)
 set(fm.lcm.base.interpCubic,'Value',0)
+
+end

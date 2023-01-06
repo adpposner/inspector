@@ -72,3 +72,5 @@ set(fm.mm.expPointSelect,'String',num2str(mm.expPointSelect))
 
 %--- ppm line display ---
 set(fm.mm.ppmShowPosVal,'String',sprintf('%.4f',mm.ppmShowPos))
+
+end

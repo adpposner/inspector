@@ -48,3 +48,5 @@ fprintf('Spectral analysis completed.\n');
 
 %--- update read flag ---
 f_succ = 1;
+
+end

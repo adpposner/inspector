@@ -53,3 +53,5 @@ if isfield(syn,'fhSynFidOrig') || isfield(syn,'fhSynFid') || ...
         return
     end
 end        
+
+end

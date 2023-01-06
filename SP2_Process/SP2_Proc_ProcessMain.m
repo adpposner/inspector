@@ -774,3 +774,5 @@ fm.proc.batch1minus2 = uicontrol('Style','Pushbutton','String','1-2','Position',
                              
 %--- window update ---
 SP2_Proc_ProcessWinUpdate
+
+end

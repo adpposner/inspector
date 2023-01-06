@@ -204,3 +204,5 @@ end
    
 %--- info printout ---
 fprintf('header(s) successfully read\n')
+
+end

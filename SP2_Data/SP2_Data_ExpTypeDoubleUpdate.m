@@ -30,3 +30,5 @@ set(fm.data.mrsi,'Value',flag.dataExpType==6)
 
 %--- window update ---
 SP2_Data_DataWinUpdate
+
+end

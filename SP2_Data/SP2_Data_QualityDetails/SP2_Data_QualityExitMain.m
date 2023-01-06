@@ -50,3 +50,5 @@ SP2_Data_QualityArrayClose
 if isfield(data.spec1,'fidArrSerial')
     data.spec1 = rmfield(data.spec1,'fidArrSerial');
 end
+
+end

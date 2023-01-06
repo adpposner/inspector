@@ -203,3 +203,5 @@ title(sprintf('JDE Efficiency: abs. %.1f%% / rel. %.1f%%',...
       100*jdeEff*jdeEffRel,100*jdeEffRel))
 lh = legend('Spec 1','Spec 2');
 set(lh,'Location','Northwest')
+
+end

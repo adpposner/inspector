@@ -38,3 +38,5 @@ end
 if ~SP2_Proc_PlotFidSum(f_new)        % forced new figure
     return
 end
+
+end

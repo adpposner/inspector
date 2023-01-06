@@ -15,3 +15,5 @@ global fm flag
 %--- update flag parameter ---
 flag.dataConvdta = get(fm.data.convdta,'Value');
 set(fm.data.convdta,'Value',flag.dataConvdta)
+
+end

@@ -23,3 +23,5 @@ end
 %--- display updated ---
 stab.trans = max(min(str2double(get(fm.stab.transNum,'String')),data.nRcvrs),1);
 set(fm.stab.transNum,'String',sprintf('%.0f',stab.trans))
+
+end

@@ -240,3 +240,4 @@ lcm.fit.resid = lcm.spec - lcm.fit.sumSpec;
 
 %--- success flag update ---
 f_done = 1;
+end

@@ -39,3 +39,5 @@ else                                % export
     diffSpec = proc.expt.spec - fftshift(fft(proc.svd.fid'));
 end
 outdata  = abs(diffSpec(proc.svd.indVec))';
+
+end

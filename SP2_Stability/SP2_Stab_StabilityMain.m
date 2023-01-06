@@ -102,3 +102,5 @@ fm.stab.stabAna   = uicontrol('Style','Pushbutton','String','Stability Analysis'
 
 %--- window update ---                           
 SP2_Stab_StabilityWinUpdate
+
+end

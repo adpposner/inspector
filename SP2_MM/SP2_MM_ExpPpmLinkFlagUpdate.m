@@ -39,3 +39,5 @@ SP2_MM_T1ShowSpecSubtract(0);
 
 %--- window update ---
 SP2_MM_MacroWinUpdate
+
+end

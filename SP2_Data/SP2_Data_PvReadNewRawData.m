@@ -141,3 +141,5 @@ SP2_Logger.log('%s finished\n',FCTNAME);
 %--- update success flag ---
 f_succ = 1;
 
+
+end

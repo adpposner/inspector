@@ -22,3 +22,5 @@ set(fm.data.alignRefFid,'String',sprintf('%.0f',data.alignRefFid))
 
 %--- window update ---
 SP2_Data_DataWinUpdate
+
+end

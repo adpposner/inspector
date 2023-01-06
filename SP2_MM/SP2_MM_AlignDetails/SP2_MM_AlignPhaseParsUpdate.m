@@ -38,3 +38,5 @@ set(fm.mm.align.phIter,'String',num2str(mm.phAlignIter))
 %--- window update ---
 SP2_MM_AlignDetailsWinUpdate
 
+
+end

@@ -18,3 +18,5 @@ set(fm.mrsi.spatZfFlag,'Value',flag.mrsiSpatZF)
 %--- window update ---
 SP2_MRSI_MrsiWinUpdate
 
+
+end

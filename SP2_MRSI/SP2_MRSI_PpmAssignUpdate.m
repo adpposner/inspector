@@ -18,3 +18,5 @@ set(fm.mrsi.ppmAssign,'String',num2str(mrsi.ppmAssign))
 %--- window update ---
 SP2_MRSI_MrsiWinUpdate
 
+
+end

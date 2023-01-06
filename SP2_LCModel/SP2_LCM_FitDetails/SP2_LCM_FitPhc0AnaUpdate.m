@@ -20,3 +20,5 @@ set(fm.lcm.fit.phc0,'String',sprintf('%.1f',lcm.anaPhc0))
 %--- update window ---
 SP2_LCM_FitDetailsWinUpdate
 
+
+end

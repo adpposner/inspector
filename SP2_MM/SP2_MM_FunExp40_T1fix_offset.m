@@ -46,3 +46,5 @@ f = a(1) * (1 - exp(-(x-mm.xOff)/mm.anaTOne(1))) + ...
        
 
 
+
+end

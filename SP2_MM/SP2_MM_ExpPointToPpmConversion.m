@@ -20,3 +20,4 @@ end
 %--- parameter update ---
 ppmVec = (-mm.sw/2:mm.sw/(mm.nspecC-1):mm.sw/2) + mm.ppmCalib;
 mm.expPpmSelect = ppmVec(mm.expPointSelect);
+end

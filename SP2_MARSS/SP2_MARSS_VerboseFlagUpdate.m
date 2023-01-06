@@ -16,3 +16,5 @@ flag.verbose = get(fm.marss.verbose,'Value');
 
 %--- window update ---
 set(fm.marss.verbose,'Value',flag.verbose)
+
+end

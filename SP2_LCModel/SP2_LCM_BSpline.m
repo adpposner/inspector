@@ -30,3 +30,5 @@ knotVec = 0:1/100:1;
 bspline(knotVec)
 
 
+
+end

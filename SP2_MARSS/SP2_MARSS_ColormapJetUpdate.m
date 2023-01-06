@@ -25,3 +25,5 @@ set(fm.marss.cmapHot,'Value',flag.marssColorMap==3)
 
 %--- analysis update ---
 SP2_MARSS_ProcAndPlotUpdate
+
+end

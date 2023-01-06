@@ -103,3 +103,5 @@ return
 % set(fm.data.fidImg3,'String',exm.fid3)             % adopt image path
 % set(fm.data.fidImg4,'String',exm.fid4)             % adopt image path
 % 
+
+end

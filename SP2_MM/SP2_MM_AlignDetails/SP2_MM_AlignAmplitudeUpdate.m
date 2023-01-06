@@ -18,3 +18,5 @@ flag.mmAlignAmpl = get(fm.mm.align.amplitude,'Value');
 %--- window update ---
 set(fm.mm.align.amplitude,'Value',flag.mmAlignAmpl)
 
+
+end

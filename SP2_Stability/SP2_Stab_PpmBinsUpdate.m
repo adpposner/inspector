@@ -18,3 +18,5 @@ set(fm.stab.ppmBins,'String',sprintf('%.0f',stab.ppmBins))
 %--- window update ---
 SP2_Stab_StabilityWinUpdate
 
+
+end

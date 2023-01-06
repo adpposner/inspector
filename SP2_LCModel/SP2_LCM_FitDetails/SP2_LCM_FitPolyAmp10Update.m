@@ -18,3 +18,5 @@ lcm.anaPolyCoeff(1) = str2double(get(fm.lcm.fit.polyAmp10,'String'));
 SP2_LCM_FitDetailsWinUpdate
 
 
+
+end

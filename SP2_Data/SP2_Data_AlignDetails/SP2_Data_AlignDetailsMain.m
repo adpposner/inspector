@@ -410,3 +410,5 @@ fm.data.align.exit = uicontrol('Style','Pushbutton','String','Exit','FontWeight'
 %--- window update ---
 SP2_Data_AlignDetailsWinUpdate
 
+
+end

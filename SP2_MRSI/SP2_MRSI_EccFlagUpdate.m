@@ -18,3 +18,5 @@ set(fm.mrsi.eccFlag,'Value',flag.mrsiEcc)
 %--- window update ---
 SP2_MRSI_MrsiWinUpdate
 
+
+end

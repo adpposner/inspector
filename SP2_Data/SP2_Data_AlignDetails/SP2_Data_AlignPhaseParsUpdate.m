@@ -76,3 +76,5 @@ set(fm.data.align.phVerbMax,'String',num2str(data.phAlignVerbMax));
 %--- window update ---
 SP2_Data_AlignDetailsWinUpdate
 
+
+end

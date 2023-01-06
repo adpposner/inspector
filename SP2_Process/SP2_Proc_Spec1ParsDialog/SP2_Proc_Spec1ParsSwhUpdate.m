@@ -16,3 +16,5 @@ proc.spec1.sw_h = max(str2num(get(fm.proc.dialog1.swh,'String')),0);
 
 %--- window update ---
 set(fm.proc.dialog1.swh,'String',num2str(proc.spec1.sw_h))
+
+end

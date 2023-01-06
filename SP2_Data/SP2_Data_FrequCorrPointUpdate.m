@@ -19,3 +19,5 @@ flag.dataFrequCorr = get(fm.data.frCorrPoint,'Value');
 %--- update switches ---
 set(fm.data.frCorrPoint,'Value',flag.dataFrequCorr)
 set(fm.data.frCorrPeak,'Value',~flag.dataFrequCorr)
+
+end

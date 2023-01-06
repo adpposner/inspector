@@ -24,3 +24,5 @@ if stab.rcvr>1
     set(fm.stab.rcvrNum,'String',num2str(stab.rcvr))
     stab.rcvr = str2double(get(fm.stab.rcvrNum,'String'));
 end
+
+end

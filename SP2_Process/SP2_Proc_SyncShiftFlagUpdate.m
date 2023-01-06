@@ -19,3 +19,5 @@ set(fm.proc.syncShift,'Value',flag.procSyncShift)
 
 %--- window update ---
 SP2_Proc_ProcessWinUpdate
+
+end

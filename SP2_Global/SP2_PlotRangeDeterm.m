@@ -60,3 +60,5 @@ fprintf('%s -> %s color scaling: %.2f to %.2f\n',FCTNAME,initStr,pars.colLims(1)
 pars.valLims(1) = (pars.colLims(1) - pars.colScaleB) / pars.colScaleM;      % [0 1] range
 pars.valLims(2) = (pars.colLims(2) - pars.colScaleB) / pars.colScaleM;      % [0 1] range
 
+
+end

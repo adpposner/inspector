@@ -86,3 +86,5 @@ fprintf('%s ->\n%s read.\n',FCTNAME,dataSpec.fidFile)
 f_succ = 1;
 
 
+
+end

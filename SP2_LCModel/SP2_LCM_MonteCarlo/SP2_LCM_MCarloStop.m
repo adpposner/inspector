@@ -13,3 +13,5 @@ global flag
 
 %--- set flag ---
 flag.lcmMCarloStop = 1;         % stop
+
+end

@@ -73,7 +73,32 @@ def fullpathforfilename(rootdir,fname):
   return fullpath
 
 fileslist = []
-for item in calledzero.keys():
-  #print(item)
-  fileslist.append(fullpathforfilename('.',item))
 
+def countStartsEnds(fname):
+  openers=('if','for','while','function','switch')
+  ct=0
+  with open(fname,'r') as fin:
+    for line in fin:
+      line=line.strip()
+      if list(filter(line.startswith, openers)) != []:
+        ct=ct+1
+      elif line.startswith('end'):
+        ct=ct-1
+  return ct
+
+def addEndsToFiles(fname):
+  f1 = open(fname, 'a+')
+  #f2 = open(secondfile, 'r')
+ 
+  # appending the contents of the second file to the first file
+  f1.write('\nend\n')
+  f1.close()
+
+fun,files = getFuncNamesAndFileList()
+for fil in files:
+  ct=countStartsEnds(fil)
+  if ct == 1:
+    addEndsToFiles(fil)
+    print(fil)
+  #print(countStartsEnds(fullpathforfilename('.',f)))
+countStartsEnds('SP2_Global/SP2_ReadDefaults.m')

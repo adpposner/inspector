@@ -36,3 +36,5 @@ delete(parsUsrDefFile)
 
 %--- restart SPEC / create new default protocol ---
 INSPECTOR
+
+end

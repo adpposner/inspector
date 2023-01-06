@@ -18,3 +18,5 @@ set(fm.marss.legend,'Value',flag.marssLegend)
 
 %--- analysis update ---
 SP2_MARSS_ProcAndPlotUpdate
+
+end

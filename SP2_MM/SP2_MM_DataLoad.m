@@ -140,3 +140,5 @@ SP2_MM_ParsUpdate
 
 %--- update read flag ---
 f_succ = 1;
+
+end

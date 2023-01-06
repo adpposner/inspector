@@ -19,3 +19,5 @@ flag.procUpdateCalc = get(fm.proc.updateCalc,'Value');
 
 %--- window update ---
 set(fm.proc.updateCalc,'Value',flag.procUpdateCalc)
+
+end

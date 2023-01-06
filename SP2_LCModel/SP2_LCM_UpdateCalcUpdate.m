@@ -19,3 +19,5 @@ flag.lcmUpdateCalc = get(fm.lcm.updateCalc,'Value');
 
 %--- window update ---
 set(fm.lcm.updateCalc,'Value',flag.lcmUpdateCalc)
+
+end

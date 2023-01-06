@@ -25,3 +25,5 @@ if stab.trans<data.nRcvrs
     set(fm.stab.transNum,'String',num2str(stab.trans))
     stab.trans = str2double(get(fm.stab.transNum,'String'));
 end
+
+end

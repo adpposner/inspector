@@ -156,3 +156,5 @@ t1t2.fid = data.spec1.fid;
 
 %--- update read flag ---
 f_succ = 1;
+
+end

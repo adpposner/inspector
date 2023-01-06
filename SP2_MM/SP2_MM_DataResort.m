@@ -41,3 +41,5 @@ fprintf('%ss\n\n',SP2_Vec2PrintStr(mm.satRecDelays,3));
 
 %--- update read flag ---
 f_succ = 1;
+
+end

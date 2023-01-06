@@ -39,3 +39,5 @@ else                                % export
     diffSpec = lcm.expt.spec - fftshift(fft(lcm.svd.fid'));
 end
 outdata  = abs(diffSpec(lcm.svd.indVec))';
+
+end

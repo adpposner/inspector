@@ -19,3 +19,5 @@ set(fm.mrsi.syncOffset,'Value',flag.mrsiSyncOffset)
 
 %--- window update ---
 SP2_MRSI_MrsiWinUpdate
+
+end

@@ -47,3 +47,5 @@ marss.basis.fileName = get(fm.marss.basisFileName,'String');
 
 %--- update display ---
 SP2_MARSS_MARSSWinUpdate
+
+end

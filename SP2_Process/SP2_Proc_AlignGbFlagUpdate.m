@@ -18,3 +18,5 @@ set(fm.proc.alignGbFlag,'Value',flag.procAlignGb)
 %--- window update ---
 SP2_Proc_ProcessWinUpdate
 
+
+end

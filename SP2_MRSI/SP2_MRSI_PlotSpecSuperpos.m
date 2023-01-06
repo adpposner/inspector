@@ -158,3 +158,5 @@ end
 xlabel('Frequency [ppm]')
 lh = legend('Spec 1','Spec 2');
 set(lh,'Location','Northwest')
+
+end

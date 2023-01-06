@@ -122,3 +122,5 @@ SP2_CheckFileExistence(data.spec2.methFile)
 
 %--- update success flag ---
 f_succ = 1;
+
+end

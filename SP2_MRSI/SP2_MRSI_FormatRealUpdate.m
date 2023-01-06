@@ -28,3 +28,5 @@ SP2_MRSI_MrsiWinUpdate
 
 %--- analysis update ---
 SP2_MRSI_ProcAndPlotUpdate
+
+end

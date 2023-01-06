@@ -18,3 +18,5 @@ flag.dataAlignFrequ = get(fm.data.alignFrequency,'Value');
 %--- window update ---
 set(fm.data.alignFrequency,'Value',flag.dataAlignFrequ)
 
+
+end

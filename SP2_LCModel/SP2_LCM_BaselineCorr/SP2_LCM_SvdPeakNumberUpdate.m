@@ -18,3 +18,5 @@ set(fm.lcm.base.svdPeakN,'String',num2str(lcm.baseSvdPeakN))
 
 %--- window update ---
 SP2_LCM_ProcessWinUpdate
+
+end

@@ -16,3 +16,5 @@ flag.dataRcvrWeight = get(fm.data.rcvrWeight,'Value');
 
 %--- window update ---
 set(fm.data.rcvrWeight,'Value',flag.dataRcvrWeight)
+
+end

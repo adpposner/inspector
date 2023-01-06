@@ -22,3 +22,5 @@ set(fm.lcm.fit.maxIter,'String',sprintf('%.0f',lcm.fit.maxIter))
 
 %--- update window ---
 SP2_LCM_FitDetailsWinUpdate
+
+end

@@ -123,3 +123,5 @@ lcm.dataPathJmrui = [lcm.dataDir lcm.dataFileJmrui];          % update .mrui pat
 
 %--- update display ---
 SP2_LCM_LCModelWinUpdate
+
+end

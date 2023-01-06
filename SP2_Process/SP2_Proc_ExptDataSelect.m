@@ -82,3 +82,5 @@ proc.expt.dataPathRaw = [proc.expt.dataDir proc.expt.dataFileRaw];          % up
 
 %--- update display ---
 SP2_Proc_ProcessWinUpdate
+
+end

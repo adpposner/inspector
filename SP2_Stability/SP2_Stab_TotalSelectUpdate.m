@@ -13,3 +13,5 @@ global fm flag
 %--- update flag parameter ---
 flag.stabTotSel = get(fm.stab.totSel,'Value');
 set(fm.stab.totSel,'Value',flag.stabTotSel)
+
+end

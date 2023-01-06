@@ -33,3 +33,4 @@ end
 
 % %--- info printout ---
 % fprintf('ndigit = %.0f\n',ndigit);
+end

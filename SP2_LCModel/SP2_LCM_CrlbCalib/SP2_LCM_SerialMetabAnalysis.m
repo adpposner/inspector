@@ -253,3 +253,5 @@ fclose(rUnit);
 %--- info printout ---
 fprintf('\n%s finished.\n\n',FCTNAME);
 
+
+end

@@ -28,3 +28,5 @@ fprintf('Spectral line broadening (%.1f Hz) applied (%s).\n',datStruct.lb,datStr
 
 %--- update success flag ---
 f_succ = 1;
+
+end

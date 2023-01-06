@@ -351,3 +351,5 @@ fm.mm.ppmShowPosAssign = uicontrol('Style','Pushbutton','String','Assign','Posit
   
 %--- window update ---                           
 SP2_MM_MacroWinUpdate
+
+end

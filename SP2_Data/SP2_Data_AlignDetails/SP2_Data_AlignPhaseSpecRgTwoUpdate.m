@@ -21,3 +21,5 @@ set(fm.data.align.phSpecRgTwo,'Value',flag.dataAlignPhSpecRg)
 %--- window update ---
 SP2_Data_AlignDetailsWinUpdate
 
+
+end

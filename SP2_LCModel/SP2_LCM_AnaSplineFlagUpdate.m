@@ -30,3 +30,5 @@ if isfield(fm.lcm,'fit')
         SP2_LCM_FitDetailsWinUpdate
     end
 end
+
+end

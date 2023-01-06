@@ -491,3 +491,5 @@ if any(find(procpar.rcvrs=='n'))
     fprintf('%s -> WARNING: Inactive receiver detected.\n',FCTNAME)
 end
 procpar.nRcvrs = length(procpar.rcvrs);       % number of receivers
+
+end

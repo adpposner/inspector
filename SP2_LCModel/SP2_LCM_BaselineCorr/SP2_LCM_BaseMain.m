@@ -120,3 +120,5 @@ fm.lcm.base.exit = uicontrol('Style','Pushbutton','String','Exit','FontWeight','
 %--- window update ---
 SP2_LCM_BaseWinUpdate
 
+
+end

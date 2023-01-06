@@ -19,3 +19,5 @@ SP2_MARSS_MARSSWinUpdate
 
 %--- analysis update ---
 SP2_MARSS_ProcAndPlotUpdate
+
+end

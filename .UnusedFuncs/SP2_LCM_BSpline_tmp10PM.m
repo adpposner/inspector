@@ -151,3 +151,4 @@ fake = 1;
 % end
 % 
 % title(['B-Spline-curve with ',num2str(n),' control points of order ',num2str(order)]);
+end

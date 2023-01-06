@@ -566,3 +566,5 @@ fm.mrsi.special      = uicontrol('Style','Pushbutton','String','SPECIAL','Positi
                              
 %--- window update ---
 SP2_MRSI_MrsiWinUpdate
+
+end

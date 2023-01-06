@@ -25,3 +25,5 @@ end
 
 
 stab.rangeMax
+
+end

@@ -47,3 +47,5 @@ set(fm.mm.mmStructPath,'String',mm.mmStructPath)
 %--- update display ---
 SP2_MM_MacroWinUpdate
 
+
+end

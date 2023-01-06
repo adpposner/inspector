@@ -28,3 +28,5 @@ SP2_LCM_BasisProcAndPlotUpdate
 
 %--- analysis update ---
 SP2_LCM_FitFigureUpdate
+
+end

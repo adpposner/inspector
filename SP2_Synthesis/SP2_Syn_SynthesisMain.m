@@ -420,3 +420,5 @@ fm.syn.ppmShowPosAssign = uicontrol('Style','Pushbutton','String','Assign','Posi
   
 %--- window update ---                           
 SP2_Syn_SynthesisWinUpdate
+
+end

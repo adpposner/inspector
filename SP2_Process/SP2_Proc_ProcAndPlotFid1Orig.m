@@ -45,3 +45,5 @@ end
 if ~SP2_Proc_PlotFid1Orig(f_new)        % forced new figure
     return
 end
+
+end

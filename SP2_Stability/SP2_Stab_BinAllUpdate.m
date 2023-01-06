@@ -13,3 +13,5 @@ global fm flag
 %--- update flag parameter ---
 flag.stabBinAll = get(fm.stab.binAll,'Value');
 set(fm.stab.binAll,'Value',flag.stabBinAll)
+
+end

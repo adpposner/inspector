@@ -27,3 +27,5 @@ end
 nThRootVec  = nthroot(value,1:100);
 nThPower    = round(SP2_BestApprox(nThRootVec,base));
 nThPowerVal = base^nThPower;
+
+end

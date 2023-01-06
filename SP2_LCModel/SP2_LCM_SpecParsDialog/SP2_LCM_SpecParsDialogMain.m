@@ -48,3 +48,5 @@ end
 fm.lcm.dialog1.exit     = uicontrol('Style','Pushbutton','String','Done','FontWeight','bold','Position',[45 20 70 20],...
                                     'FontSize',pars.fontSize,'FontName','Helvetica','Callback','SP2_LCM_SpecParsDialogExit');
 
+
+end

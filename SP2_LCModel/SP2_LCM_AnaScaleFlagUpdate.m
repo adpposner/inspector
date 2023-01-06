@@ -18,3 +18,5 @@ set(fm.lcm.anaScaleFlag,'Value',flag.lcmAnaScale)
 %--- window update ---
 SP2_LCM_LCModelWinUpdate
 
+
+end

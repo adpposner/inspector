@@ -5,3 +5,5 @@
 function f = SP2_MM_FunExp001_T1flex(a,x)
 
 f = a(1) * (1 - exp(-x/a(2)));
+
+end

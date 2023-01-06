@@ -97,3 +97,5 @@ end
 %     f_err = 1;
 %     msg = sprintf('%s -> struct sizes differ (%.0f/%.0f)\n',FCTNAME,meth1No,meth2No);
 % end
+
+end

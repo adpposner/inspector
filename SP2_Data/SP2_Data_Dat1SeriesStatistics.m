@@ -121,3 +121,5 @@ if f_plot
     xlabel('FID #')
     ylabel('FWHM [Hz]')
 end
+
+end

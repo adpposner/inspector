@@ -3687,3 +3687,4 @@ rfPulses{2} = 1.0e+03 *[
 rfPulses{3} = rfPulses{2};
 rfPulses{4} = rfPulses{2};
 rfPulses{5} = rfPulses{2};
+end

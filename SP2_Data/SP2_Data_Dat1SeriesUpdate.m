@@ -78,3 +78,5 @@ data.spec1.seriesN   = length(data.spec1.seriesVec);                    % number
 f_succ = 1;
 
 
+
+end

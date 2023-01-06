@@ -23,3 +23,5 @@ set(fm.mm.align.phModeCongr,'Value',flag.mmAlignPhMode)
 %--- window update ---
 SP2_MM_AlignDetailsWinUpdate
 
+
+end

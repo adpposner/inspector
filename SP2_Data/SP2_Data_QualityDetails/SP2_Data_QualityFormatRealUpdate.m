@@ -35,3 +35,5 @@ SP2_Data_QualitySeriesShow(0);
 %--- update of spectra superposition ---
 SP2_Data_QualitySuperposShow(0);
 
+
+end

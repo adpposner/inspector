@@ -19,3 +19,5 @@ flag.synUpdateCalc = get(fm.syn.updateCalc,'Value');
 
 %--- window update ---
 set(fm.syn.updateCalc,'Value',flag.synUpdateCalc)
+
+end

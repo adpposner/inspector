@@ -18,3 +18,5 @@ if ~SP2_Check4Str(parName)
     return
 end
 eval(['pars = ' parName])
+
+end

@@ -18,3 +18,5 @@ flag.dataAlignPhase = get(fm.data.alignPhase,'Value');
 %--- window update ---
 set(fm.data.alignPhase,'Value',flag.dataAlignPhase)
 
+
+end

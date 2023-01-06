@@ -22,3 +22,5 @@ set(fm.lcm.fit.anaShiftVarMin,'String',sprintf('%.1f',lcm.fit.shiftVarMin))
 
 %--- update window ---
 SP2_LCM_FitDetailsWinUpdate
+
+end

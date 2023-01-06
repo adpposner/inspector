@@ -16,3 +16,5 @@ lcm.sf = max(str2num(get(fm.lcm.dialog1.sf,'String')),0);
 
 %--- window update ---
 set(fm.lcm.dialog1.sf,'String',num2str(lcm.sf))
+
+end

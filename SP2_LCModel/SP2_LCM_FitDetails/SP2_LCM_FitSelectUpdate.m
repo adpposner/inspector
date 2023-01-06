@@ -36,3 +36,4 @@ lcm.fit.appliedN = length(lcm.fit.applied);
  
 %--- update window ---
 SP2_LCM_FitDetailsWinUpdate
+end

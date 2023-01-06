@@ -597,3 +597,5 @@ fprintf('Relative: %s\n',SP2_Vec2PrintStr(maxVec/max(maxVec),4));
 
 %--- update success flag ---
 f_succ = 1;
+
+end

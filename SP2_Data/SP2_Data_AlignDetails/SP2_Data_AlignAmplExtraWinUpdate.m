@@ -21,3 +21,5 @@ set(fm.data.align.amExtraWin,'Value',flag.amAlignExtraWin==1)
 %--- window update ---
 SP2_Data_AlignDetailsWinUpdate
 
+
+end

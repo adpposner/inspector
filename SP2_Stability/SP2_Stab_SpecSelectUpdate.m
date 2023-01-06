@@ -22,3 +22,4 @@ set(fm.stab.specSel,'String',sprintf('%.0f',stab.specSel))
 
 %--- window update ---
 SP2_Stab_StabilityWinUpdate
+end

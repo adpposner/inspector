@@ -16,3 +16,5 @@ flag.verbose = get(fm.lcm.verbose,'Value');
 
 %--- window update ---
 set(fm.lcm.verbose,'Value',flag.verbose)
+
+end

@@ -13,3 +13,4 @@ FCTNAME = 'SP2_LCM_AnaDoCtrlC';
 
 %--- stop computation ---                           
 error('Computation terminated.')
+end

@@ -9,3 +9,5 @@ expA = expm(A); %MATLABs is better for small tolerance with large spin systems
 %     expA = fastExpm(A,tolerance); %mine is better for relatively large tolerance or small spin systems
 % end
 pAfter = expA*p*expA';
+
+end

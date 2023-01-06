@@ -1891,3 +1891,4 @@ function f_succ = SP2_Data_DatFidFileLoad(f_winUpdate,f_loadMsgFlag)
     %--- update success flag ---
     f_succ = 1;
     
+end

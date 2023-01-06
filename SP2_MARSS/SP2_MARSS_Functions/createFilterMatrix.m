@@ -35,3 +35,5 @@ for ii = 1:(4^Nspins) %loop over all possible operators
         filterMatrix = filterMatrix + kronMulti(inputMat);
     end
 end
+
+end

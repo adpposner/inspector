@@ -18,3 +18,5 @@ flag.mmAlignFrequ = get(fm.mm.align.frequency,'Value');
 %--- window update ---
 set(fm.mm.align.frequency,'Value',flag.mmAlignFrequ)
 
+
+end

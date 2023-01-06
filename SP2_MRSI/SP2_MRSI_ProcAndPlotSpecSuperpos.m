@@ -29,3 +29,5 @@ end
 
 %--- figure creation ---
 SP2_MRSI_PlotSpecSuperpos(1)        % forced new figure
+
+end

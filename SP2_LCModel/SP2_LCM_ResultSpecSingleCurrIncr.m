@@ -23,3 +23,5 @@ SP2_LCM_LCModelWinUpdate
 
 %--- analysis update ---
 SP2_LCM_FitFigureUpdate
+
+end

@@ -19,3 +19,5 @@ set(fm.lcm.base.polyOrder,'String',sprintf('%.0f',lcm.basePolyOrder))
 
 %--- window update ---
 SP2_LCM_ProcessWinUpdate
+
+end

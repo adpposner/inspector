@@ -56,3 +56,5 @@ if isfield(lcm,'fhLcmFitSpecResid')
     end
 end
 
+
+end

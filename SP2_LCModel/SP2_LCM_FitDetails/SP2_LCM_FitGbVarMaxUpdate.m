@@ -22,3 +22,5 @@ set(fm.lcm.fit.anaGbVarMax,'String',sprintf('%.1f',lcm.fit.gbVarMax))
 
 %--- update window ---
 SP2_LCM_FitDetailsWinUpdate
+
+end

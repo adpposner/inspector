@@ -116,3 +116,5 @@ save(protFile,'pars2save','data2save','syn2save','fcalc2save','roi2save',...
                 
 %--- info printout ---
 fprintf('FMAP settings written to\n<%s>\n',data.protPathTxt);
+
+end

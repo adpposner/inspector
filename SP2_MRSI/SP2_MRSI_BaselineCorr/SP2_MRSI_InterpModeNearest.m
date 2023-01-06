@@ -23,3 +23,5 @@ set(fm.mrsi.base.interpNearest,'Value',1)
 set(fm.mrsi.base.interpLinear,'Value',0)
 set(fm.mrsi.base.interpSpline,'Value',0)
 set(fm.mrsi.base.interpCubic,'Value',0)
+
+end

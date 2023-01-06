@@ -18,3 +18,5 @@ set(fm.t1t2.anaModeFlex1Fix,'Value',flag.t1t2AnaFlex1Fix)
 %--- update window ---
 SP2_T1T2_T1T2WinUpdate
 
+
+end

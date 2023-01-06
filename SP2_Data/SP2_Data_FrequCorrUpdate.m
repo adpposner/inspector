@@ -14,3 +14,5 @@ global fm flag
 %--- update flag parameter ---
 flag.dataFrequCorr = get(fm.data.frequCorr,'Value');
 set(fm.data.frequCorr,'Value',flag.dataFrequCorr)
+
+end

@@ -650,3 +650,5 @@ fm.mrsi.showMrsiDiff  = uicontrol('Style','Pushbutton','String','D','FontWeight'
                              
 %--- window update ---
 SP2_MRSI_MrsiWinUpdate
+
+end

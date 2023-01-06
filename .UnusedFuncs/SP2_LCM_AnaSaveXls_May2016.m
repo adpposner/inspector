@@ -107,3 +107,5 @@ fprintf('LCM results written to file:\n%s\n%s\n',xlsPath);
 
 %--- update success flag ---
 f_succ = 1;
+
+end
