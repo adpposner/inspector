@@ -60,8 +60,20 @@ with open('funcsandcalls.txt','r') as infile:
 
 def fullpathforfilename(rootdir,fname):
   fname = fname + '.m'
-  
+  fullpath = None
+  #print(fname)
+  for r,ds,fs in os.walk(rootdir):
+    for f in fs:
+      #if f.endswith('.m'):
+      #  print(f)
+      if fname in f:
+        #print(r)
+        #print(f)
+        fullpath = os.path.join(r,f)
+  return fullpath
 
-import pprint
+fileslist = []
+for item in calledzero.keys():
+  #print(item)
+  fileslist.append(fullpathforfilename('.',item))
 
-pprint.pprint(calledzero)
