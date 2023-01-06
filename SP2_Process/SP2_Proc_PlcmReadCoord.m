@@ -210,6 +210,7 @@ fclose(unit);
 f_succ = 1;
 
 
+end
 
 %--------------------------------------------------------------------------
 %---    L O C A L    F U N C T I O N                                    ---
@@ -237,3 +238,4 @@ function coord = initCoord
     coord.hzppm   = 0;
     coord.deltat  = 0;
     
+end

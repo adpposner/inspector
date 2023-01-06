@@ -219,7 +219,7 @@ mm.mmStructPath = mmMmStructPath;
 %--- info printout ---
 fprintf('%s completed.\n',FCTNAME);
 
-
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%   L O C A L    F U N C T I O N S                                    %%%
@@ -262,7 +262,7 @@ end
     
 f_succ = 1;
 
-
+end
 
 
 

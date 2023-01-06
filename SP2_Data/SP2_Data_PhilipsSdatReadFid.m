@@ -44,7 +44,7 @@ fprintf('%s ->\n%s read.\n',FCTNAME,dataSpec.fidFile)
 %--- update success flag ---
 f_succ = 1;
 
-
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%    L O C A L     F U N C T I O N S                                  %%%
@@ -147,3 +147,4 @@ function [ floatVAXF ] = SP2_Loc_Uint32le_to_VAXF( uint32le )
     
 
 
+end

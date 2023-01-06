@@ -77,8 +77,8 @@ switch flag.dataManu
             % no sole number before underscore
             DisplayWarning()
         end    
+    end
 end
-
 
 
 function DisplayWarning()
@@ -86,7 +86,7 @@ function DisplayWarning()
 fprintf('\n---   WARNING   ---\nPlease number individual MRS scans (e.g. 001_etc)\n');
 fprintf('to allow the serial and sorting tools provided.\n');
 fprintf('Compare the INSPECTOR manual for details.\n\n');
-        
+end
 
 
 % 

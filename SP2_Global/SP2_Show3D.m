@@ -239,6 +239,7 @@ view(3)
 %--- update success flag ---
 f_succ = 1;
 
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%      L O C A L     F U N C T I O N                                     %%%
@@ -255,3 +256,5 @@ roiIndZ = find(roiNZ);                          % index vector of contributing s
 limX    = [roiIndX(1) roiIndX(end)];            % ROI slice limits [min max]: x-projection
 limY    = [roiIndY(1) roiIndY(end)];            % ROI slice limits [min max]: y-projection
 limZ    = [roiIndZ(1) roiIndZ(end)];            % ROI slice limits [min max]: z-projection
+
+end

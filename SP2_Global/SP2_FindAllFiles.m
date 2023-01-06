@@ -31,7 +31,7 @@ end
 f_succ = 1;
 
 
-
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%    L O C A L    F U N C T I O N S                                   %%%
@@ -56,3 +56,4 @@ for allCnt = 1:length(allStruct)
     end
 end
 
+end

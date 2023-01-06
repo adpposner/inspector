@@ -20,11 +20,11 @@ end
 
 %--- ppm limit handling ---
 if flag.mrsiPpmShow     % direct
-    ppmMin = mrsi.ppmTargetMin;
-    ppmMax = mrsi.ppmTargetMax;
-else                    % full sweep width (symmetry assumed)
-    ppmMin = -mrsi.diff.sw/2 + mrsi.ppmCalib;
-    ppmMax = mrsi.diff.sw/2  + mrsi.ppmCalib;
+        ppmMin = mrsi.ppmTargetMin;
+        ppmMax = mrsi.ppmTargetMax;
+    else                    % full sweep width (symmetry assumed)
+        ppmMin = -mrsi.diff.sw/2 + mrsi.ppmCalib;
+        ppmMax = mrsi.diff.sw/2  + mrsi.ppmCalib;
 end
 
 %--- spectral indexing ---
@@ -108,4 +108,4 @@ xlabel('P')
 ylabel('L')
 
 
-
+end

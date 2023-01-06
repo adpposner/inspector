@@ -674,7 +674,7 @@ function SP2_Loc_FitDiagnostics(exitflag,output)
     fprintf('funcCount:     %.0f\n',output.funcCount);
     fprintf('cgiterations:  %.0f\n',output.iterations);
     fprintf('algorithm:     %s\n\n',output.algorithm);
-
+end
     
 %----------------------       
 %--- error analysis ---

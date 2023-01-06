@@ -122,7 +122,7 @@ fprintf('%s finished\n',FCTNAME);
 %--- update success flag ---
 f_done = 1;
 
-
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%    L O C A L    F U N C T I O N S                                   %%%
@@ -194,7 +194,7 @@ end
 ConvDat = DatMat(DecimInd,DspfvsInd);
 
 
-
+end
 
 
 

@@ -589,8 +589,9 @@ end
 
 %--- update read flag ---
 f_succ = 1;
+end
 
-
+end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%    L O C A L    F U N C T I O N S                                   %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -626,7 +627,7 @@ function SP2_Loc_FitDiagnostics(exitflag,output)
     fprintf('cgiterations:  %.0f\n',output.iterations);
     fprintf('algorithm:     %s\n\n',output.algorithm);
 
-    
+end
 %----------------------       
 %--- error analysis ---
 %----------------------
@@ -677,3 +678,4 @@ function [coeffErr, sdErr] = SP2_Loc_ErrorAnalysis(res2norm,residual,jacobian);
     Rinv     = inv(R);
     Sigma    = Rinv*Rinv'*mse;
     coeffErr = full(sqrt(diag(Sigma)));
+end

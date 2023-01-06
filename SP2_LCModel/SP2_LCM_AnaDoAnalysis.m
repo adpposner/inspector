@@ -1750,7 +1750,7 @@ end
 
 %--- update success flag ---
 f_succ = 1;
-
+end
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1821,7 +1821,7 @@ function SP2_Loc_FitDiagnostics(exitflag,output)
     end
     
     
-    
+end
     
 %----------------------       
 %--- error analysis ---
@@ -1894,7 +1894,7 @@ function [coeffErr, sdErr] = SP2_Loc_ErrorAnalysis(res2norm,residual,jacobian,sp
 
 
 
-
+end
 
 
 

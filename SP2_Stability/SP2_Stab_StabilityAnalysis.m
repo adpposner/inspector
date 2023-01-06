@@ -311,7 +311,7 @@ fprintf('%s completed (elapsed time %.1f minutes)\n\n',FCTNAME,eTime/60);
 %--- update success flag ---
 f_succ = 1;
 
-
+end
 %--------------------------------------------------------------------------
 %---   L O C A L   F U N C T I O N S   ------------------------------------
 %--------------------------------------------------------------------------
@@ -396,7 +396,7 @@ set(gca,'xDir','reverse');
 xlabel('frequency [Hz]')
 ylabel('amplitude [a.u.]')
 
-
+end
 %--------------------------------------------------------------------------
 function StabAnaLoc_TimeDomain
 
@@ -455,7 +455,7 @@ if flag.stabVerbose
             100*(max(stab.ampl)-min(stab.ampl))/mean(stab.ampl));
 end
 
-
+end
 %---------------------------------------------------------------------------------
 function StabAnaLoc_FrequencyDomain
 
@@ -545,7 +545,7 @@ if flag.stabVerbose
 end
 
 
-
+end
 %---------------------------------------------------------------------------------
 function StabAnaLoc_FWHM_Analysis
 
@@ -582,7 +582,7 @@ stdDev = sprintf('std.dev.=%.1f, max.diff.=%.1f',std(stab.fwhmHz),max(abs(diff(s
 text(minX+(maxX-minX)/20,maxY-(maxY-minY)/10,stdDev)
 
 
-
+end
 %---------------------------------------------------------------------------------
 function StabAnaLoc_FourierAnalysis
 
@@ -713,7 +713,7 @@ if flag.stabExpFftFrequ
 	xlabel('frequency [Hz]')
     ylabel('amplitude [a.u.]')
 end
-
+end
 %---------------------------------------------------------------------------------
 function StabAnaLoc_PlotCalcTracking
 
@@ -744,7 +744,7 @@ plot(abs(stab.dbSpec))
 axis([minX maxX minY maxY])
 xlabel('magn. spectrum') 
 
-
+end
 %---------------------------------------------------------------------------------
 % plot single each acquisition to separate figure
 function StabAnaLoc_PlotSingleAcqs
@@ -807,3 +807,4 @@ if stab.ana.nr>1
 end
 
 
+end

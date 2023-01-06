@@ -20,9 +20,10 @@ def findFuncInFiles(fname,filelist):
   for filePath in filelist:
     with open(filePath, 'r') as f:
       for line in f:
-        if fname in line:
-          appearsin.append(filePath)
-          break
+        line=line.strip()
+        if fname in line and not line.startswith('#') and not line.startswith('function'):
+            appearsin.append(filePath)
+            break
   return appearsin
 
 def writecallsbyfunc(funcnames,funcfiles):
@@ -38,6 +39,8 @@ def writecallsbyfunc(funcnames,funcfiles):
     for fname,callfiles in callsByFunc.items():
       linetowrite = "{}\t{}\n".format(fname,','.join(callfiles))
       f.write(linetowrite)
+
+
 
 #writecallsbyfunc(funcnames,funcfiles)
 
@@ -72,33 +75,48 @@ def fullpathforfilename(rootdir,fname):
         fullpath = os.path.join(r,f)
   return fullpath
 
-fileslist = []
+# fileslist = []
 
-def countStartsEnds(fname):
-  openers=('if','for','while','function','switch')
-  ct=0
-  with open(fname,'r') as fin:
-    for line in fin:
-      line=line.strip()
-      if list(filter(line.startswith, openers)) != []:
-        ct=ct+1
-      elif line.startswith('end'):
-        ct=ct-1
-  return ct
+# def countStartsEnds(fname):
+#   openers=('if','for','while','function','switch','classdef','enumeration','methods','properties')
+#   ct=0
+#   lineno=1
+#   with open(fname,'r') as fin:
+#     for line in fin:
+#       lineno+=1
+#       line=line.strip().rstrip()
+#       if list(filter(line.startswith, openers)) != []:
+#         if line.endswith('end'):
+#           continue
+#         #print(str(lineno) + '++')
+#         ct=ct+1
+#       elif line.startswith('end'):
+#         #print(str(lineno) + '--' )
+#         ct=ct-1
+#   return ct
 
-def addEndsToFiles(fname):
-  f1 = open(fname, 'a+')
-  #f2 = open(secondfile, 'r')
+# def addEndsToFiles(fname):
+#   f1 = open(fname, 'a+')
+#   #f2 = open(secondfile, 'r')
  
-  # appending the contents of the second file to the first file
-  f1.write('\nend\n')
-  f1.close()
+#   # appending the contents of the second file to the first file
+#   f1.write('\nend\n')
+#   f1.close()
 
-fun,files = getFuncNamesAndFileList()
-for fil in files:
-  ct=countStartsEnds(fil)
-  if ct == 1:
-    addEndsToFiles(fil)
-    print(fil)
-  #print(countStartsEnds(fullpathforfilename('.',f)))
-countStartsEnds('SP2_Global/SP2_ReadDefaults.m')
+# fun,files = getFuncNamesAndFileList()
+# for fil in files:
+#   ct=countStartsEnds(fil)
+#   if ct != 0:
+#     #addEndsToFiles(fil)
+#     print(ct)
+#     print(fil)
+#     #break
+#   #print(countStartsEnds(fullpathforfilename('.',f)))
+# #print(countStartsEnds('SP2_Global/SP2_ReadDefaults.m'))
+import shutil
+
+for funname in calledzero.keys():
+  fullpath=fullpathforfilename('.',funname)
+  if 'Unused' in fullpath:
+    continue
+  shutil.move(fullpath,'./.UnusedFuncs')

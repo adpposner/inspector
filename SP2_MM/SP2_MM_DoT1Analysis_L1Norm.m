@@ -314,7 +314,7 @@ fprintf('%s done (%.0f s / %.1f min).\n',FCTNAME,tTotal,tTotal/60);
 
 %--- update read flag ---
 f_succ = 1;
-
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%   L O C A L    F U N C T I O N S                                    %%%
@@ -430,7 +430,7 @@ if f_debug
     legend('data','full fit','relevant','Location','SouthEast')
 end
 
-
+end
 
 
 
