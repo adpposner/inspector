@@ -9,7 +9,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-global verbose 
+global verbose flag
 
 FCTNAME = 'SP2_Data_PvParsConversion';
 
@@ -87,7 +87,7 @@ else
 end
 
 %--- njde ---
-switch dataflags.dataExpType
+switch flag.dataExpType
     case 1                      % regular data format
         dataSpecX.njde = 1;
         

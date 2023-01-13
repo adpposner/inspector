@@ -87,7 +87,6 @@ flag.dataConvdta    = 0;        % digital-to-analog conversion for Bruker data
 % note that the cell choices do not directly correspond to the flag values
 flag.dataEditNo   = 1;          % JDE(ON) data selection of combined/shuffled JDE experiment, 1: first, 2: second
 flag.dataExpType  = 1;          % data format, 1: single, 2: sat-recovery, 3: JDE, 4: stability, 5: T1/T2, 6: MRSI
-data.expTypeDisplCell  = {'Regular MRS','JDE - 1st & last','JDE - 2nd & last','JDE - Array','Sat.-Recovery','Stability (QA)','T1 / T2','MRSI'};
 SP2_Data_ExpTypePars2Display;   % assignment of data.expTypeDisplay (number) based on flag.dataEditNo and flag.dataExpType
 flag.dataBrukerFormat = 1;      % 1: old, potential multi-dimensional <fid>, 2: new, single FID in fid file, 3: new, rawdata.job0
 
@@ -1276,7 +1275,7 @@ flagDef = flag;
 %---                U S E R  /  P A T H    H A N D L I N G              ---
 %--------------------------------------------------------------------------
 %--- search for file with default settings and load/generate it ---
-fmStruct = what('INSPECTOR')
+fmStruct = what('INSPECTOR');
 if isempty(fmStruct) || ~isfield(fmStruct,'path')
     SP2_Logger.log('%s ->\nCouldn''t find the main program file\nCheck folder name/existence <INSPECTOR_v2> and software version...',FCTNAME);
     return

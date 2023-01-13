@@ -21,7 +21,7 @@ def findFuncInFiles(fname,filelist):
     with open(filePath, 'r') as f:
       for line in f:
         line=line.strip()
-        if fname in line and not line.startswith('#') and not line.startswith('function'):
+        if fname in line and not line.startswith('%') and not line.startswith('function'):
             appearsin.append(filePath)
             break
   return appearsin
@@ -115,8 +115,10 @@ def fullpathforfilename(rootdir,fname):
 # #print(countStartsEnds('SP2_Global/SP2_ReadDefaults.m'))
 import shutil
 
-for funname in calledzero.keys():
-  fullpath=fullpathforfilename('.',funname)
-  if 'Unused' in fullpath:
-    continue
-  shutil.move(fullpath,'./.UnusedFuncs')
+# for funname in calledzero.keys():
+#   fullpath=fullpathforfilename('.',funname)
+#   if 'Unused' in fullpath:
+#     continue
+#   shutil.move(fullpath,'./.UnusedFuncs')
+import pprint
+pprint.pprint(calledzero)

@@ -1,2 +1,3 @@
-All Rights Reserved
-
+SP2_CheckDirAccessR ->
+</Users/martingajdosik/Documents/MATLAB/INSPECTOR_for_MRS_Class/INSPECTOR_v2> isn't accessible at all,
+not even </Users>...

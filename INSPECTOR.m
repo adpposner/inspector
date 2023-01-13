@@ -70,6 +70,9 @@ end
 %--- compile for publishing ---
 flag.compile4publ = 1;
 
+%%%%%%%%%%%%%%%Create experimental data %%%%%%%%%%%%%%%%%%%%%
+expt = ExptData();
+
 %--- main figure creation ---
 % if flag.compile4publ
 %     fmfig = figure('CloseRequestFcn',@SP2_Exit_ExitFct);
@@ -81,7 +84,7 @@ set(fmfig,'NumberTitle','off','Position',0.999*[pars.figPos(1) pars.figPos(2) pa
 axes('Visible','off');
 
 %--- sheet creation ---
-uimenu('Label','Data','Callback','SP2_Data_DataMain');
+datatab = uimenu('Label','Data','Callback',{@SP2_Data_DataMain,expt});
 if ~flag.compile4publ
     uimenu('Label','Stability','Callback','SP2_Stab_StabilityMain');
     uimenu('Label','MM','Callback','SP2_MM_MacroMain');
@@ -111,9 +114,9 @@ end
 switch flag.fmWin
     case 1
         fm.data.fake = uicontrol('Style','RadioButton');    % fake gui init
-        SP2_Data_DataMain
+        SP2_Data_DataMain(datatab,'dummy',expt)
         set(fmfig,'Position',[pars.figPos(1) pars.figPos(2) pars.mainDims(3) pars.mainDims(4)])
-        SP2_Data_DataMain
+        %SP2_Data_DataMain
     case 2
         fm.proc.fake = uicontrol('Style','RadioButton');    % fake gui init
         SP2_Stab_StabilityMain
@@ -161,9 +164,9 @@ switch flag.fmWin
         SP2_MARSS_MARSSMain   
 end
 
-%--- function inclusion for stand-alone application ---
+%TODO--- function inclusion for stand-alone application ---
 % SP2_CreateFctList4StandAlone
-SP2_FctList4StandAlone
+%SP2_FctList4StandAlone
 
 %--- print software info at program start ---
 SP2_Logger.log('\n---   INSPECTOR   ---\n');

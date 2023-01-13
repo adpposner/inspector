@@ -24,6 +24,7 @@ function f_succ = SP2_Data_DatFidFileLoad(f_winUpdate,f_loadMsgFlag)
     
 
     %--- retrieve/update data format ---
+    % get study type
     if f_LoadMsgFlag
         fprintf('\nLoading metabolite scan (Data 1):\n');
     end
@@ -60,7 +61,7 @@ function f_succ = SP2_Data_DatFidFileLoad(f_winUpdate,f_loadMsgFlag)
     %--- warning if no scan numbering (XXX_) ---
     % SP2_Data_CheckScanIndexFormat(data.spec1)
     
-    %--- check file existence ---
+    %--- check file existence  - fid file---
     if ~SP2_CheckFileExistenceR(data.spec1.fidFile)
         return
     end
@@ -277,7 +278,7 @@ function f_succ = SP2_Data_DatFidFileLoad(f_winUpdate,f_loadMsgFlag)
         end
         
         %--- convert parameters to method structure ---
-        [ret_succ,data.spec1,flags] = SP2_Data_PvParsConversion(method,acqp,1,data.spec1,flags);
+        [ret_succ,data.spec1,flag] = SP2_Data_PvParsConversion(method,acqp,1,data.spec1,flag);
         if ~ret_succ
             fprintf('%s ->\nParaVision parameter conversion failed. Program aborted.\n',FCTNAME);
             return

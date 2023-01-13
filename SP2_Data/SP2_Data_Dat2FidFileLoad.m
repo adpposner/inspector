@@ -32,35 +32,8 @@ end
 
 %--- retrieve/update data format ---
 fprintf('\nLoading water reference (Data 2):\n');
-if strcmp(data.spec2.fidDir(end-4:end-1),'.fid')                % Varian
-    fprintf('Data format: Varian\n');
-    flag.dataManu = 1;        
-elseif strcmp(data.spec2.fidName,'fid') || strcmp(data.spec2.fidName,'fid.refscan') || ...   % Bruker
-       strcmp(data.spec2.fidName,'rawdata.job0') || strcmp(data.spec2.fidName,'rawdata.job1')  
-    fprintf('Data format: Bruker\n');
-    flag.dataManu = 2;     
-elseif strcmp(data.spec2.fidFile(end-1:end),'.7')               % GE
-    fprintf('Data format: General Electric\n');
-    flag.dataManu = 3;
-elseif strcmp(data.spec2.fidFile(end-3:end),'.rda')             % Siemens
-    fprintf('Data format: Siemens (.rda)\n');
-    flag.dataManu = 4;
-elseif strcmp(data.spec2.fidFile(end-3:end),'.dcm')             % DICOM (.dcm)
-    fprintf('Data format: DICOM\n');
-    flag.dataManu = 5;
-elseif strcmp(data.spec2.fidFile(end-3:end),'.dat')             % Siemens
-    fprintf('Data format: Siemens (.dat)\n');
-    flag.dataManu = 6;
-elseif strcmp(data.spec2.fidFile(end-3:end),'.raw')             % Philips raw
-    fprintf('Data format: Philips (.raw)\n');
-    flag.dataManu = 7;
-elseif strcmp(data.spec2.fidFile(end-4:end),'.SDAT')            % Philips collapsed
-    fprintf('Data format: Philips (.SDAT)\n');
-    flag.dataManu = 8;
-elseif strcmp(data.spec2.fidFile(end-3:end),'.IMA')             % DICOM (.IMA)
-    fprintf('Data format: DICOM (.IMA)\n');
-    flag.dataManu = 9;
-end
+flag.dataManu  = SP2_Data_StudyTypeEnum.getStudyType(data.spec2.fidFile,data.spec2.fidName,data.spec2.fidDir);
+
 
 %--- check file existence ---
 if ~SP2_CheckFileExistenceR(data.spec2.fidFile)
@@ -190,11 +163,12 @@ elseif flag.dataManu==2                                         % Bruker
     end
     
     %--- convert parameters to method structure ---
-    if ~SP2_Data_PvParsConversion(method,acqp,2)
+    [f_done,data.spec2,flag] = SP2_Data_PvParsConversion(method,acqp,2,data.spec2,flag); 
+    
+    if ~f_done
         fprintf('%s ->\nParaVision parameter conversion failed. Program aborted.\n',FCTNAME);
         return
-    end
-            
+    end            
         %--- read data file ---
     if flag.dataExpType==4                  % data format for stability analysis
         fprintf('%s ->\nThis data mode is not supported. Program aborted.\n',FCTNAME);
@@ -224,7 +198,7 @@ elseif flag.dataManu==2                                         % Bruker
         else                                    % new raw data
             [data.spec2.fid,f_done] = SP2_Data_PvReadNewRawData(data.spec2);
             if ~f_done || (length(data.spec2.fid)==1 && data.spec2.fid==0)
-                fprintf('%s -> Reading <rawdata.job0> data file failed:\n<%s>\n',FCTNAME,data.spec2.fidFile);
+                fprintf('%s:201 -> Reading <rawdata.job0> data file failed:\n<%s>\n',FCTNAME,data.spec2.fidFile);
                 return
             end
         end
@@ -264,7 +238,7 @@ elseif flag.dataManu==2                                         % Bruker
         else                                    % new raw data
             [data.spec2.fid,f_done] = SP2_Data_PvReadNewRawData(data.spec2);
             if ~f_done || (length(data.spec2.fid)==1 && data.spec2.fid==0)
-                fprintf('%s -> Reading <rawdata.job0> data file failed:\n<%s>\n',FCTNAME,data.spec2.fidFile);
+                fprintf('%s:241 -> Reading <rawdata.job0> data file failed:\n<%s>\n',FCTNAME,data.spec2.fidFile);
                 return
             end
         end

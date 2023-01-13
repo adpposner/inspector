@@ -1,13 +1,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-    function SP2_Data_DataMain
+    function SP2_Data_DataMain(src,event,experiment)
 %% 
 %%  Main window for the selection of data path(s)/file(s)
 %%
 %%  02-2008, Christoph Juchem
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+arguments
+    src
+    event
+    experiment(1,1) ExptData
+end
 global fm fmfig pars data flag
 
 
@@ -50,8 +54,9 @@ fm.data.selectLab  = text('Position',[-0.15, 0.955],'String','Data Selection','F
 
 % metabolite data set selection
 SP2_Data_ExpTypePars2Display
-fm.data.expType = uicontrol('Style','Popup','String',SP2_CellArrayToStrList(data.expTypeDisplCell,'|'),'Value',data.expTypeDisplay,...
-                            'Position',[180 623 170 12],'Callback','SP2_Data_ExpTypeUpdate','TooltipString',sprintf('Experiment type selection'),'FontSize',pars.fontSize);
+
+fm.data.expType = uicontrol('Style','Popup','String',DataExptType.experimentList(),...
+                            'Position',[180 623 170 12],'Callback',@SP2_Data_ExpTypeUpdater,'TooltipString',sprintf('Experiment type selection'),'FontSize',pars.fontSize);
 
 % fm.data.single      = uicontrol('Style','RadioButton','BackGroundColor',pars.bgColor,'Units','Normalized','Value',flag.dataExpType==1,...
 %                                 'String','Regular','Position',[0.2 0.87 .10 .03],'Callback','SP2_Data_ExpTypeSingleUpdate');
@@ -378,4 +383,13 @@ fm.data.cMapHot   = uicontrol('Style','RadioButton','BackGroundColor',pars.bgCol
 %--- window update ---                           
 SP2_Data_DataWinUpdate
 
+
+
+end
+
+
+function SP2_Data_ExpTypeUpdater(src,event)
+    display('hi');
+v = src.Value;
+display(v);
 end

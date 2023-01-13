@@ -26,12 +26,14 @@ end
 fprintf('Protocol loaded from <%s>\n',data.protPathMat);
 
 %--- load protocol ---
-if ~SP2_ReadDefaults(data.protPathMat)
-    return
+
+f_done = SP2_ReadDefaults(data.protPathMat);
+if ~f_done
+        return;
 end
 
 %--- window update ---
-SP2_Data_DataMain
+SP2_Data_DataMain;
 
 %--- update success flag ---
 f_succ = 1;
