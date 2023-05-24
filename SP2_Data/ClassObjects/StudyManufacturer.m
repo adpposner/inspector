@@ -15,39 +15,40 @@ end
     
 
     methods(Static) 
-        function sType = getStudyType(fidFile,fidName,fidDir)
-            sType = SP2_Data_StudyTypeEnum.Invalid;
-            if strcmp(fidDir(end-4:end-1),'fid')
+        function sType = getStudyType(fidFilePath)
+            [dirName,~,~] = fileparts(fidFilePath);
+            sType = StudyManufacturer.Invalid;
+            if strcmp(dirName(end-4:end-1),'fid')
                 fprintf('Data format: Varian\n');
-                sType = SP2_Data_StudyTypeEnum.Varian;
-            elseif strcmp(fidName,'fid') || strcmp(fidName,'fid.refscan') || ...  % Bruker
-                strcmp(fidName,'rawdata.job0') || strcmp(fidName,'rawdata.job1')
+                sType = StudyManufacturer.Varian;
+            elseif endsWith(fidFilePath,'fid') ||  endsWith(fidFilePath,'fid.refscan') || ...  % Bruker
+            endsWith(fidFilePath,'rawdata.job0') ||  endsWith(fidFilePath,'rawdata.job1')
                 fprintf('Data format: Bruker\n');
-                sType = SP2_Data_StudyTypeEnum.Bruker;
-            elseif endswith(fidFile,'.7')
+                sType = StudyManufacturer.Bruker;
+            elseif endsWith(fidFilePath,'.7')
                 fprintf('Data format: General Electric\n');
-                sType = SP2_Data_StudyTypeEnum.GE;
-            elseif endswith(fidFile,'.rda')             % Siemens
+                sType = StudyManufacturer.GE;
+            elseif endsWith(fidFilePath,'.rda')             % Siemens
                 fprintf('Data format: Siemens (.rda)\n');
-                sType = SP2_Data_StudyTypeEnum.SiemensRda;
-            elseif endswith(fidFile,'.dcm')             % DICOM
+                sType = StudyManufacturer.SiemensRda;
+            elseif endsWith(fidFilePath,'.dcm')             % DICOM
                 fprintf('Data format: DICOM\n');
-                sType = SP2_Data_StudyTypeEnum.DICOM;
-            elseif endswith(fidFile,'.dat')             % Siemens
+                sType = StudyManufacturer.DICOM;
+            elseif endsWith(fidFilePath,'.dat')             % Siemens
                 fprintf('Data format: Siemens (.dat)\n');
-                sType = SP2_Data_StudyTypeEnum.SiemensDat;
-            elseif endswith(fidFile,'.raw')             % Philips raw
+                sType = StudyManufacturer.SiemensDat;
+            elseif endsWith(fidFilePath,'.raw')             % Philips raw
                 fprintf('Data format: Philips (.raw)\n');
-                sType = SP2_Data_StudyTypeEnum.PhilipsRaw;
-            elseif endswith(fidFile,'.SDAT')            % Philips collapsed
+                sType = StudyManufacturer.PhilipsRaw;
+            elseif endsWith(fidFilePath,'.SDAT')            % Philips collapsed
                 fprintf('Data format: Philips (.SDAT)\n');
-                sType = SP2_Data_StudyTypeEnum.PhilipsCollapsed;
-            elseif endswith(fidFile,'.IMA')             % DICOM
+                sType = StudyManufacturer.PhilipsCollapsed;
+            elseif endsWith(fidFilePath,'.IMA')             % DICOM
                 fprintf('Data format: DICOM (.IMA)\n');
-                sType = SP2_Data_StudyTypeEnum.DICOMIMA;
+                sType = StudyManufacturer.DICOMIMA;
             else
                 fprintf('%s ->\nData format not valid. File assignment aborted.\n',FCTNAME);
-                return
+                sType = StudyManufacturer.Invalid;
             end
         end
     end

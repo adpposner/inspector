@@ -61,7 +61,7 @@ SP2_Logger.log("%s\n",inspectorroot);
 
 %--- check for open INSPECTOR ---
 % if isfield(pars,'spxOpen')
-
+screen ---
 set(0,'units','pixels');
 screenSizePix = get(0,'screensize');
 frameBufferX   = 10;           % frame only

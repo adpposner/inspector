@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-    function SP2_Data_DataMain(src,event,experiment)
+function SP2_Data_DataMain(src,event,experiment)
 %% 
 %%  Main window for the selection of data path(s)/file(s)
 %%
@@ -12,6 +12,7 @@ arguments
     event
     experiment(1,1) ExptData
 end
+
 global fm fmfig pars data flag
 
 
@@ -83,13 +84,14 @@ fm.data.spec1FidDecr      = uicontrol('Style','Pushbutton','String','-','Positio
                                       'TooltipString',sprintf('Decrease scan number of data set (FID) 1'),'FontSize',pars.fontSize);
 fm.data.spec1FidIncr      = uicontrol('Style','Pushbutton','String','+','Position',[475 612 25 18],'FontWeight','bold','Callback','SP2_Data_Dat1FidFileIncr',...
                                       'TooltipString',sprintf('Increase scan number of data set (FID) 1'),'FontSize',pars.fontSize);
-fm.data.spec1FidSelect    = uicontrol('Style','Pushbutton','String','Select','Position',[500 612 50 18],'Callback','SP2_Data_Dat1FidFileSelect',...
+fm.data.spec1FidSelect    = uicontrol('Style','Pushbutton','String','Select','Position',[500 612 50 18],'Callback',{@SP2_Data_Dat1FidFileSelect,experiment},...
                                       'TooltipString',sprintf('Select data set (FID) 1'),'FontSize',pars.fontSize);
-fm.data.spec1FidLoad      = uicontrol('Style','Pushbutton','String','Load','Position',[550 612 45 18],'Callback','SP2_Data_Dat1FidFileLoadButton;',...
+fm.data.spec1FidLoad      = uicontrol('Style','Pushbutton','String','Load','Position',[550 612 45 18],...
                                       'TooltipString',sprintf('Load data set (FID) 1'),'FontSize',pars.fontSize);
 fm.data.spec1FidFile      = uicontrol('Style','Edit','Position', [65 592 530 18],'String',data.spec1.fidFile, ...
                                       'HorizontalAlignment','Left','Callback','SP2_Data_Dat1FidFileUpdate;',...
                                       'TooltipString',sprintf('Path of data set (FID) 1'),'FontSize',pars.fontSize);
+fm.data.spec1FidLoad.Callback = {@SP2_Data_Dat1FidFileLoad,get(fm.data.spec1FidFile,'String'),experiment};
 fm.data.spec1SeriesLab    = text('Position',[-0.14, 0.880],'String','Series','FontSize',pars.fontSize);
 fm.data.spec1SeriesStr    = uicontrol('Style','Edit','Position', [65 572 385  18],'String',data.spec1.seriesStr, ...
                                       'HorizontalAlignment','Left','Callback','SP2_Data_Dat1SeriesUpdate;',...

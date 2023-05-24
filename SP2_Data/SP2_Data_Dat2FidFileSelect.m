@@ -120,7 +120,7 @@ else
 end
 
 %--- update display ---
-SP2_Data_DataWinUpdate
+SP2_Data_DataWinUpdate(~,~,data.spec1,data.spec2);
 
 %--- check pars file existence
 % Varian OR Bruker OR Philips .raw OR Philips .sdat

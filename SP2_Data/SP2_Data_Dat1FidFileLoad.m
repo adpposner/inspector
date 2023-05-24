@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-    function f_succ = SP2_Data_Dat1FidFileLoad(varargin)
+    function f_succ = SP2_Data_Dat1FidFileLoad(src,event,fidFileName,experiment)
 %% 
 %%  Function to load 
 %%  1) data set parameters for parameter files
@@ -13,6 +13,12 @@
 %%  10-2011, Christoph Juchem
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+arguments
+    src
+    event
+    fidFileName(1,:) char
+    experiment ExptData
+end
 
 global flag data procpar fm
 
@@ -22,24 +28,24 @@ FCTNAME = 'SP2_Data_Dat1FidFileLoad';
 %--- init success flag ---
 f_succ = 0;
 
-%--- argument handling ---
-nArg = nargin;
-if nArg==0
-    f_winUpdate   = 1;        % default: window update
-    f_LoadMsgFlag = 1;
-elseif nArg==1
-    f_winUpdate   = SP2_Check4FlagR(varargin{1});
-    f_LoadMsgFlag = 1;
-elseif nArg==2
-    f_winUpdate   = SP2_Check4FlagR(varargin{1});
-    f_LoadMsgFlag = SP2_Check4FlagR(varargin{2});
-end
+% %--- argument handling ---
+% nArg = nargin;
+% if nArg==0
+%     f_winUpdate   = 1;        % default: window update
+%     f_LoadMsgFlag = 1;
+% elseif nArg==1
+%     f_winUpdate   = SP2_Check4FlagR(varargin{1});
+%     f_LoadMsgFlag = 1;
+% elseif nArg==2
+%     f_winUpdate   = SP2_Check4FlagR(varargin{1});
+%     f_LoadMsgFlag = SP2_Check4FlagR(varargin{2});
+% end
 
-%--- retrieve/update data format ---
-if f_LoadMsgFlag
-    fprintf('\nLoading metabolite scan (Data 1):\n');
-end
-flag.dataManu = SP2_Data_StudyTypeEnum.getStudyType(data.spec1.fidFile,data.spec1.fidName,data.spec1.fidDir);
+% %--- retrieve/update data format ---
+% if f_LoadMsgFlag
+%     fprintf('\nLoading metabolite scan (Data 1):\n');
+% end
+flag.dataManu = SP2_Data_StudyTypeEnum.getStudyType(fidFileName);
 
 %--- warning if no scan numbering (XXX_) ---
 % SP2_Data_CheckScanIndexFormat(data.spec1)
@@ -1868,10 +1874,17 @@ if data.spec1.sf==0
 end
 
 %--- update 'Data' window display ---
-if f_winUpdate
+if isa(src,'uicontrol')
     SP2_Data_DataWinUpdate
 end
 
+
+
+
+%--- remove (old) Rx combination ---
+if ishandle(src) && isfield(data.spec1,'fidArrRxComb')
+    data.spec1 = rmfield(data.spec1,'fidArrRxComb');
+end
 %--- update success flag ---
 f_succ = 1;
 

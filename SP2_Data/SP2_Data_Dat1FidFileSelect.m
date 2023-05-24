@@ -1,12 +1,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-    function SP2_Data_Dat1FidFileSelect
+    function SP2_Data_Dat1FidFileSelect(src,event,experiment)
 %% 
 %%  Data selection of metabolite data (i.e. the fid) file
 %%
 %%  02-2008, Christoph Juchem
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+arguments
+src
+event
+experiment ExptData
+end
 
 global fm flag data
 
@@ -37,22 +42,13 @@ if ~ischar(filename)             % buffer select cancelation
         return
     end
 end
-filename
-while ~strcmp('fid',filename) && ~strcmp('.7',filename(end-1:end)) && ...
-      ~strcmp('.rda',filename(end-3:end)) && ~strcmp('.dcm',filename(end-3:end)) && ...
-      ~strcmp('.dat',filename(end-3:end)) && ~strcmp('rawdata.job0',filename) && ...
-      ~strcmp('fid.refscan',filename) && ~strcmp('rawdata.job1',filename) && ...
-      ~strcmp('.raw',filename(end-3:end)) && ~strcmp('.SDAT',filename(end-4:end)) && ...
-      ~strcmp('.IMA',filename(end-3:end))
-    fprintf('%s ->\nAssigned file does not have a valid format (<fid>, <rawdata.job0>, <.7>, <.dat>, <.rda>, <.dcm>, <.raw>, <.SDAT>, <.IMA>), try again...\n',FCTNAME);
-    [filename, pathname] = uigetfile('*.*','Select spectral data set 1',data.spec1.fidDir);   % select data file
-    if ~ischar(filename)             % buffer select cancelation
-        if ~filename            
-            fprintf('%s aborted.\n',FCTNAME);
-            return
-        end
-    end
+filePath = fullfile(pathname,filename)
+studyType = StudyManufacturer.getStudyType(filePath);
+if studyType == StudyManufacturer.Invalid 
+    warning("Invalid data format");
+    return
 end
+
 
 %--- update paths ---
 data.spec1.fidDir  = pathname;            
@@ -70,8 +66,13 @@ elseif strcmp(data.spec1.fidName,'fid') || strcmp(data.spec1.fidName,'fid.refsca
        strcmp(data.spec1.fidName,'rawdata.job0') || strcmp(data.spec1.fidName,'rawdata.job1')  % Bruker
     fprintf('Data format: Bruker\n');
     flag.dataManu = 2;     
-    data.spec1.methFile = [data.spec1.fidDir 'method'];                 % adopt method file path
-    data.spec1.acqpFile = [data.spec1.fidDir 'acqp'];                   % adopt acqp file path
+    experiment = BrukerExptData(filePath);
+    fprintf("fidfile %s\n",data.spec1.fidFile)
+
+    experiment.setFidFilePath(data.spec1.fidFile);
+    [m,a] = experiment.methAcqFile();
+    data.spec1.methFile = m;                 % adopt method file path
+    data.spec1.acqpFile = a;                   % adopt acqp file path
 elseif strcmp(data.spec1.fidFile(end-1:end),'.7')                       % GE
     fprintf('Data format: General Electric\n');
     flag.dataManu = 3;
@@ -113,7 +114,7 @@ else
 end
 
 %--- update display ---
-SP2_Data_DataWinUpdate
+SP2_Data_DataWinUpdate(src,event,experiment,ExptData())
 
 %--- check pars file existence
 % Varian OR Bruker OR Philips .raw OR Philips .sdat

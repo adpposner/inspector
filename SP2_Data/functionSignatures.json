@@ -1,0 +1,11 @@
+{
+    "AcqParams.loadFromFileData":
+    {
+      "inputs":
+      [
+        {"name":"obj", "kind":"required", "type":"AcqParams" },
+        {"name":"filename", "kind":"required", "type":"filepath" }
+      ]
+    }
+}
+    

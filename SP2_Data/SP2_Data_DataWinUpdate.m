@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-    function SP2_Data_DataWinUpdate
+    function SP2_Data_DataWinUpdate(src,event,dataSpec1,dataSpec2)
 %% 
 %%  'Data' window update
 %%
@@ -71,14 +71,14 @@ if isfield(data,'spec1')
             delete(fm.data.infoSpec1RF1)
             fm.data = rmfield(fm.data,'infoSpec1RF1');
         end
-        if iscell(data.spec1.rf1.power)
+        if iscell(dataSpec1.rf1.power)
             fm.data.infoSpec1RF1 = text('Position',[-0.13, 0.760],'String',sprintf('RF1: %s / %.1f ms / %.0f dB / %.0f Hz',...
-                                   SP2_PrVersionUscore(data.spec1.rf1.shape),data.spec1.rf1.dur,data.spec1.rf1.power{1},...
-                                   data.spec1.rf1.offset),'FontSize',pars.displFontSize);
+                                   SP2_PrVersionUscore(dataSpec1.rf1.shape),dataSpec1.rf1.dur,dataSpec1.rf1.power{1},...
+                                   dataSpec1.rf1.offset),'FontSize',pars.displFontSize);
         else
             fm.data.infoSpec1RF1 = text('Position',[-0.13, 0.760],'String',sprintf('RF1: %s / %.1f ms / %.0f dB / %.0f Hz',...
-                                   SP2_PrVersionUscore(data.spec1.rf1.shape),data.spec1.rf1.dur,data.spec1.rf1.power,...
-                                   data.spec1.rf1.offset),'FontSize',pars.displFontSize);
+                                   SP2_PrVersionUscore(dataSpec1.rf1.shape),dataSpec1.rf1.dur,dataSpec1.rf1.power,...
+                                   dataSpec1.rf1.offset),'FontSize',pars.displFontSize);
         end
         
         %--- additional acquisition parameters: RF 2 / refocusing ---
@@ -86,10 +86,10 @@ if isfield(data,'spec1')
             delete(fm.data.infoSpec1RF2)
             fm.data = rmfield(fm.data,'infoSpec1RF2');
         end
-        if ~any(strfind(data.spec1.sequence,'spuls'))    % spulse
+        if ~any(strfind(dataSpec1.sequence,'spuls'))    % spulse
             fm.data.infoSpec1RF2 = text('Position',[-0.13, 0.725],'String',sprintf('RF2: %s / %.1f ms / %.0f dB / %.0f Hz',...
-                                   SP2_PrVersionUscore(data.spec1.rf2.shape),data.spec1.rf2.dur,data.spec1.rf2.power,...
-                                   data.spec1.rf2.offset),'FontSize',pars.displFontSize);
+                                   SP2_PrVersionUscore(dataSpec1.rf2.shape),dataSpec1.rf2.dur,dataSpec1.rf2.power,...
+                                   dataSpec1.rf2.offset),'FontSize',pars.displFontSize);
         end
         
         %--- additional acquisition parameters: water suppression ---
@@ -97,17 +97,17 @@ if isfield(data,'spec1')
             delete(fm.data.infoSpec1WS)
             fm.data = rmfield(fm.data,'infoSpec1WS');
         end
-        if ~any(strfind(data.spec1.sequence,'spuls'))    % spulse
-            if iscell(data.spec1.ws.power)
+        if ~any(strfind(dataSpec1.sequence,'spuls'))    % spulse
+            if iscell(dataSpec1.ws.power)
                 fm.data.infoSpec1WS = text('Position',[-0.13, 0.690],'String',sprintf('WS:  %s / %.1f ms / array dB / %.0f Hz',...
-                                      SP2_PrVersionUscore(data.spec1.ws.shape),data.spec1.ws.dur,...
-                                      data.spec1.ws.offset),'FontSize',pars.displFontSize);
+                                      SP2_PrVersionUscore(dataSpec1.ws.shape),dataSpec1.ws.dur,...
+                                      dataSpec1.ws.offset),'FontSize',pars.displFontSize);
             else
                 fm.data.infoSpec1WS = text('Position',[-0.13, 0.690],'String',sprintf('WS:  %s / %.1f ms / %.0f dB / %.0f Hz',...
-                                      SP2_PrVersionUscore(data.spec1.ws.shape),data.spec1.ws.dur,data.spec1.ws.power,...
-                                      data.spec1.ws.offset),'FontSize',pars.displFontSize);
+                                      SP2_PrVersionUscore(dataSpec1.ws.shape),dataSpec1.ws.dur,dataSpec1.ws.power,...
+                                      dataSpec1.ws.offset),'FontSize',pars.displFontSize);
             end
-            if strcmp(data.spec1.ws.applied,'y')
+            if strcmp(dataSpec1.ws.applied,'y')
                 set(fm.data.infoSpec1WS,'Color',pars.fgTextColor)
             else
                 set(fm.data.infoSpec1WS,'Color',pars.bgTextColor)
@@ -123,57 +123,57 @@ if isfield(data,'spec1')
             delete(fm.data.infoSpec1Inv)
             fm.data = rmfield(fm.data,'infoSpec1Inv');
         end
-        if any(strfind(data.spec1.sequence,'STEAM'))    % STEAM
+        if any(strfind(dataSpec1.sequence,'STEAM'))    % STEAM
             if isfield(data.spec1,'inv')
-                if iscell(data.spec1.inv.ti)
+                if iscell(dataSpec1.inv.ti)
                     fm.data.infoSpec1Inv = text('Position',[-0.13, 0.655],'String',sprintf('Inv: %s / %.1f ms / %.0f dB / %.0f Hz / array',...
-                                           SP2_PrVersionUscore(data.spec1.inv.shape),data.spec1.inv.dur,data.spec1.inv.power,...
-                                           data.spec1.inv.offset),'FontSize',pars.displFontSize);
-                elseif iscell(data.spec1.inv.offset)
+                                           SP2_PrVersionUscore(dataSpec1.inv.shape),dataSpec1.inv.dur,dataSpec1.inv.power,...
+                                           dataSpec1.inv.offset),'FontSize',pars.displFontSize);
+                elseif iscell(dataSpec1.inv.offset)
                     fm.data.infoSpec1Inv = text('Position',[-0.13, 0.655],'String',sprintf('Inv: %s / %.1f ms / %.0f dB / array / %.3f s',...
-                                           SP2_PrVersionUscore(data.spec1.inv.shape),data.spec1.inv.dur,data.spec1.inv.power,...
-                                           data.spec1.inv.ti),'FontSize',pars.displFontSize);
+                                           SP2_PrVersionUscore(dataSpec1.inv.shape),dataSpec1.inv.dur,dataSpec1.inv.power,...
+                                           dataSpec1.inv.ti),'FontSize',pars.displFontSize);
                 else
                     fm.data.infoSpec1Inv = text('Position',[-0.13, 0.655],'String',sprintf('Inv: %s / %.1f ms / %.0f dB / %.0f Hz / %.3f s',...
-                                           SP2_PrVersionUscore(data.spec1.inv.shape),data.spec1.inv.dur,data.spec1.inv.power,...
-                                           data.spec1.inv.offset,data.spec1.inv.ti),'FontSize',pars.displFontSize);
+                                           SP2_PrVersionUscore(dataSpec1.inv.shape),dataSpec1.inv.dur,dataSpec1.inv.power,...
+                                           dataSpec1.inv.offset,dataSpec1.inv.ti),'FontSize',pars.displFontSize);
                 end
-                if strcmp(data.spec1.inv.applied,'y')
+                if strcmp(dataSpec1.inv.applied,'y')
                     set(fm.data.infoSpec1Inv,'Color',pars.fgTextColor)
                 else
                     set(fm.data.infoSpec1Inv,'Color',pars.bgTextColor)
                 end
             end
-        elseif any(strfind(data.spec1.sequence,'JDE'))  % JDE
-            if iscell(data.spec1.jde.offset)            % JDE
-                if iscell(data.spec1.jde.shape)
-                    if strcmp(data.spec1.jde.shape{1},data.spec1.jde.shape{2})
+        elseif any(strfind(dataSpec1.sequence,'JDE'))  % JDE
+            if iscell(dataSpec1.jde.offset)            % JDE
+                if iscell(dataSpec1.jde.shape)
+                    if strcmp(dataSpec1.jde.shape{1},dataSpec1.jde.shape{2})
                         fm.data.infoSpec1JDE = text('Position',[-0.13, 0.655],'String',sprintf('JDE: %s / %.1f ms / %.0f dB / %.0f/%.0f Hz',...
-                                               SP2_PrVersionUscore(data.spec1.jde.shape{1}),data.spec1.jde.dur,data.spec1.jde.power,...
-                                               data.spec1.jde.offset1,data.spec1.jde.offset2),'FontSize',pars.displFontSize);
+                                               SP2_PrVersionUscore(dataSpec1.jde.shape{1}),dataSpec1.jde.dur,dataSpec1.jde.power,...
+                                               dataSpec1.jde.offset1,dataSpec1.jde.offset2),'FontSize',pars.displFontSize);
                     else                        
                         fm.data.infoSpec1JDE = text('Position',[-0.13, 0.655],'String',sprintf('JDE: shape array / %.1f ms / %.0f dB / %.0f/%.0f Hz',...
-                                               data.spec1.jde.dur,data.spec1.jde.power,...
-                                               data.spec1.jde.offset1,data.spec1.jde.offset2),'FontSize',pars.displFontSize);
-                        fprintf('JDE RF shape array: %s / %s\n',data.spec1.jde.shape{1},data.spec1.jde.shape{2});
+                                               dataSpec1.jde.dur,dataSpec1.jde.power,...
+                                               dataSpec1.jde.offset1,dataSpec1.jde.offset2),'FontSize',pars.displFontSize);
+                        fprintf('JDE RF shape array: %s / %s\n',dataSpec1.jde.shape{1},dataSpec1.jde.shape{2});
                     end
                 else
                     fm.data.infoSpec1JDE = text('Position',[-0.13, 0.655],'String',sprintf('JDE: %s / %.1f ms / %.0f dB / %.0f/%.0f Hz',...
-                                           SP2_PrVersionUscore(data.spec1.jde.shape),data.spec1.jde.dur,data.spec1.jde.power,...
-                                           data.spec1.jde.offset1,data.spec1.jde.offset2),'FontSize',pars.displFontSize);
+                                           SP2_PrVersionUscore(dataSpec1.jde.shape),dataSpec1.jde.dur,dataSpec1.jde.power,...
+                                           dataSpec1.jde.offset1,dataSpec1.jde.offset2),'FontSize',pars.displFontSize);
                 end
-            elseif iscell(data.spec1.jde.power)         % JDE efficiency (power array)
+            elseif iscell(dataSpec1.jde.power)         % JDE efficiency (power array)
                 fm.data.infoSpec1JDE = text('Position',[-0.13, 0.655],'String',sprintf('JDE: %s / %.1f ms / array / %.0f Hz',...
-                                       SP2_PrVersionUscore(data.spec1.jde.shape),data.spec1.jde.dur,...
-                                       data.spec1.jde.offset),'FontSize',pars.displFontSize);
-                fprintf('Data 1: Power array: %s dB\n',SP2_Vec2PrintStr(cell2mat(data.spec1.jde.power)))                   
+                                       SP2_PrVersionUscore(dataSpec1.jde.shape),dataSpec1.jde.dur,...
+                                       dataSpec1.jde.offset),'FontSize',pars.displFontSize);
+                fprintf('Data 1: Power array: %s dB\n',SP2_Vec2PrintStr(cell2mat(dataSpec1.jde.power)))                   
 
             else                                    % single experiment
                 fm.data.infoSpec1JDE = text('Position',[-0.13, 0.655],'String',sprintf('JDE: %s / %.1f ms / %.0f dB / %.0f Hz',...
-                                       SP2_PrVersionUscore(data.spec1.jde.shape),data.spec1.jde.dur,data.spec1.jde.power,...
-                                       data.spec1.jde.offset),'FontSize',pars.displFontSize);
+                                       SP2_PrVersionUscore(dataSpec1.jde.shape),dataSpec1.jde.dur,dataSpec1.jde.power,...
+                                       dataSpec1.jde.offset),'FontSize',pars.displFontSize);
             end
-            if strcmp(data.spec1.jde.applied,'y')
+            if strcmp(dataSpec1.jde.applied,'y')
                 set(fm.data.infoSpec1JDE,'Color',pars.fgTextColor)
             else
                 set(fm.data.infoSpec1JDE,'Color',pars.bgTextColor)
@@ -185,11 +185,11 @@ if isfield(data,'spec1')
             delete(fm.data.infoSpec1OVS)
             fm.data = rmfield(fm.data,'infoSpec1OVS');
         end
-        if ~any(strfind(data.spec1.sequence,'spuls'))    % spulse
+        if ~any(strfind(dataSpec1.sequence,'spuls'))    % spulse
             fm.data.infoSpec1OVS = text('Position',[-0.13, 0.620],'String',sprintf('OVS: %s / %.1f ms / %.0f dB / %.0f Hz',...
-                                   SP2_PrVersionUscore(data.spec1.ovs.shape),data.spec1.ovs.dur,data.spec1.ovs.power,...
-                                   data.spec1.ovs.offset),'FontSize',pars.displFontSize);
-            if strcmp(data.spec1.ovs.applied,'y')
+                                   SP2_PrVersionUscore(dataSpec1.ovs.shape),dataSpec1.ovs.dur,dataSpec1.ovs.power,...
+                                   dataSpec1.ovs.offset),'FontSize',pars.displFontSize);
+            if strcmp(dataSpec1.ovs.applied,'y')
                 set(fm.data.infoSpec1OVS,'Color',pars.fgTextColor)
             else
                 set(fm.data.infoSpec1OVS,'Color',pars.bgTextColor)
@@ -201,40 +201,40 @@ if isfield(data,'spec1')
             delete(fm.data.infoSpec1DatDim)
             fm.data = rmfield(fm.data,'infoSpec1DatDim');
         end
-        if any(strfind(data.spec1.sequence,'JDE'))  % JDE
-            if isempty(data.spec1.seqtype)
+        if any(strfind(dataSpec1.sequence,'JDE'))  % JDE
+            if isempty(dataSpec1.seqtype)
                 fm.data.infoSpec1DatDim = text('Position',[-0.13, 0.585],'String',...
                                           sprintf('%s, spec %.0f, na %.0f, nr %.0f',...
-                                          SP2_PrVersionUscore(data.spec1.sequence),data.spec1.nspecC,...
-                                          data.spec1.na,data.spec1.nr),'FontSize',pars.displFontSize);
+                                          SP2_PrVersionUscore(dataSpec1.sequence),dataSpec1.nspecC,...
+                                          dataSpec1.na,dataSpec1.nr),'FontSize',pars.displFontSize);
             else
                 fm.data.infoSpec1DatDim = text('Position',[-0.13, 0.585],'String',...
                                           sprintf('%s (%s), spec %.0f, na %.0f, nr %.0f',...
-                                          SP2_PrVersionUscore(data.spec1.sequence),data.spec1.seqtype,data.spec1.nspecC,...
-                                          data.spec1.na,data.spec1.nr),'FontSize',pars.displFontSize);
+                                          SP2_PrVersionUscore(dataSpec1.sequence),dataSpec1.seqtype,dataSpec1.nspecC,...
+                                          dataSpec1.na,dataSpec1.nr),'FontSize',pars.displFontSize);
             end
         else                % any other case
             fm.data.infoSpec1DatDim = text('Position',[-0.13, 0.585],'String',...
                                       sprintf('%s, spec %.0f, nx %.0f, ny %.0f, na %.0f, nr %.0f',...
-                                      SP2_PrVersionUscore(data.spec1.sequence), data.spec1.nspecC,data.spec1.nx,...
-                                      data.spec1.ny,data.spec1.na(1),data.spec1.nr),'FontSize',pars.displFontSize);
+                                      SP2_PrVersionUscore(dataSpec1.sequence), dataSpec1.nspecC,dataSpec1.nx,...
+                                      dataSpec1.ny,dataSpec1.na(1),dataSpec1.nr),'FontSize',pars.displFontSize);
         end
         if isfield(fm.data,'infoSpec1AcqPars')
             delete(fm.data.infoSpec1AcqPars)
             fm.data = rmfield(fm.data,'infoSpec1AcqPars');
         end
-        if any(findstr(data.spec1.sequence,'STEAM')) || any(findstr(data.spec1.sequence,'svs_st'))        % STEAM MRS
-            if length(data.spec1.te)>1      % array
+        if any(findstr(dataSpec1.sequence,'STEAM')) || any(findstr(dataSpec1.sequence,'svs_st'))        % STEAM MRS
+            if length(dataSpec1.te)>1      % array
                 fm.data.infoSpec1AcqPars = text('Position',[-0.13, 0.550],'String',sprintf('sw %.1f kHz, sf %.1f MHz, TE array, TM %.1f ms',...
-                                           data.spec1.sw_h/1000,data.spec1.sf,data.spec1.tm),'FontSize',pars.displFontSize);
-                % fprintf('TE array: %sms\n',SP2_Vec2PrintStr(data.spec1.te));
+                                           dataSpec1.sw_h/1000,dataSpec1.sf,dataSpec1.tm),'FontSize',pars.displFontSize);
+                % fprintf('TE array: %sms\n',SP2_Vec2PrintStr(dataSpec1.te));
             else
                 fm.data.infoSpec1AcqPars = text('Position',[-0.13, 0.550],'String',sprintf('sw %.1f kHz, sf %.1f MHz, TE %.1f ms, TM %.1f ms',...
-                                           data.spec1.sw_h/1000,data.spec1.sf,data.spec1.te,data.spec1.tm),'FontSize',pars.displFontSize);
+                                           dataSpec1.sw_h/1000,dataSpec1.sf,dataSpec1.te,dataSpec1.tm),'FontSize',pars.displFontSize);
             end
         else                                                % all other sequences (e.g. PRESS)
             fm.data.infoSpec1AcqPars = text('Position',[-0.13, 0.550],'String',sprintf('sw %.1f kHz, sf %.1f MHz, TE %.1f ms',...
-                                       data.spec1.sw_h/1000,data.spec1.sf,data.spec1.te),'FontSize',pars.displFontSize);
+                                       dataSpec1.sw_h/1000,dataSpec1.sf,dataSpec1.te),'FontSize',pars.displFontSize);
         end
         
         if isfield(fm.data,'infoSpec1Rcvrs')
@@ -242,15 +242,15 @@ if isfield(data,'spec1')
             fm.data = rmfield(fm.data,'infoSpec1Rcvrs');
         end
         if isfield(data.spec1,'nRcvrs')
-            if data.spec1.nRcvrs>1
+            if dataSpec1.nRcvrs>1
                 fm.data.infoSpec1Rcvrs = text('Position',[-0.13, 0.515],'String',...
                                          sprintf('TR %.0f ms, tof %.0f Hz, %.0f rcvrs, gain %.0f',...
-                                         data.spec1.tr,data.spec1.offset,data.spec1.nRcvrs,data.spec1.gain),...
+                                         dataSpec1.tr,dataSpec1.offset,dataSpec1.nRcvrs,dataSpec1.gain),...
                                          'FontSize',pars.displFontSize);
             else
                 fm.data.infoSpec1Rcvrs = text('Position',[-0.13, 0.515],'String',...
                                          sprintf('TR %.0f ms, tof %.0f Hz, 1 rcvr, gain %.0f',...
-                                         data.spec1.tr,data.spec1.offset,data.spec1.gain),'FontSize',pars.displFontSize);
+                                         dataSpec1.tr,dataSpec1.offset,dataSpec1.gain),'FontSize',pars.displFontSize);
             end
         end
 
@@ -260,8 +260,8 @@ if isfield(data,'spec1')
             fm.data = rmfield(fm.data,'infoSpec1VoxGeo');
         end
         fm.data.infoSpec1VoxGeo = text('Position',[-0.13, 0.480],'String',...
-                                  sprintf('vox %s mm, pos %s mm',SP2_Vec2PrintStr(data.spec1.vox),...
-                                  SP2_Vec2PrintStr(data.spec1.pos)),'FontSize',pars.displFontSize);
+                                  sprintf('vox %s mm, pos %s mm',SP2_Vec2PrintStr(dataSpec1.vox),...
+                                  SP2_Vec2PrintStr(dataSpec1.pos)),'FontSize',pars.displFontSize);
                               
         %--- additional acquisition parameters: shims ---
         if isfield(fm.data,'infoSpec1ShimZeroAnd1st')
@@ -269,22 +269,22 @@ if isfield(data,'spec1')
             fm.data = rmfield(fm.data,'infoSpec1ShimZeroAnd1st');
         end
         fm.data.infoSpec1ShimZeroAnd1st = text('Position',[-0.13, 0.445],'String',sprintf('0: %.0f, 1st: %.0f, %.0f, %.0f',...
-                                   data.spec1.z0,data.spec1.x1,data.spec1.z1c,data.spec1.y1),'FontSize',pars.displFontSize);
+                                   dataSpec1.z0,dataSpec1.x1,dataSpec1.z1c,dataSpec1.y1),'FontSize',pars.displFontSize);
 
         if isfield(fm.data,'infoSpec1Shim2nd')
             delete(fm.data.infoSpec1Shim2nd)
             fm.data = rmfield(fm.data,'infoSpec1Shim2nd');
         end
         fm.data.infoSpec1Shim2nd = text('Position',[-0.13, 0.410],'String',sprintf('2nd: %.0f, %.0f, %.0f, %.0f, %.0f',...
-                                   data.spec1.x2y2,data.spec1.xz,data.spec1.z2c,data.spec1.yz,data.spec1.xy),'FontSize',pars.displFontSize);
+                                   dataSpec1.x2y2,dataSpec1.xz,dataSpec1.z2c,dataSpec1.yz,dataSpec1.xy),'FontSize',pars.displFontSize);
 
         if isfield(fm.data,'infoSpec1Shim3rd')
             delete(fm.data.infoSpec1Shim3rd)
             fm.data = rmfield(fm.data,'infoSpec1Shim3rd');
         end
         fm.data.infoSpec1Shim3rd = text('Position',[-0.13, 0.375],'String',sprintf('3rd: %.0f, %.0f, %.0f, %.0f, %.0f, %.0f, %.0f',...
-                                   data.spec1.x3,data.spec1.zx2y2,data.spec1.xz2,data.spec1.z3c,data.spec1.yz2,data.spec1.zxy,...
-                                   data.spec1.y3),'FontSize',pars.displFontSize);
+                                   dataSpec1.x3,dataSpec1.zx2y2,dataSpec1.xz2,dataSpec1.z3c,dataSpec1.yz2,dataSpec1.zxy,...
+                                   dataSpec1.y3),'FontSize',pars.displFontSize);
     end
 end
                 
@@ -299,18 +299,18 @@ if isfield(data,'spec2')
             fm.data = rmfield(fm.data,'infoSpec2RF1');
         end
         fm.data.infoSpec2RF1 = text('Position',[0.51,  0.760],'String',sprintf('RF1: %s / %.1f ms / %.0f dB / %.0f Hz',...
-                               SP2_PrVersionUscore(data.spec2.rf1.shape),data.spec2.rf1.dur,data.spec2.rf1.power,...
-                               data.spec2.rf1.offset),'FontSize',pars.displFontSize);
+                               SP2_PrVersionUscore(dataSpec2.rf1.shape),dataSpec2.rf1.dur,dataSpec2.rf1.power,...
+                               dataSpec2.rf1.offset),'FontSize',pars.displFontSize);
 
         %--- additional acquisition parameters: RF 2 / refocusing ---
         if isfield(fm.data,'infoSpec2RF2')
             delete(fm.data.infoSpec2RF2)
             fm.data = rmfield(fm.data,'infoSpec2RF2');
         end
-        if ~any(strfind(data.spec2.sequence,'spuls'))    % spulse
+        if ~any(strfind(dataSpec2.sequence,'spuls'))    % spulse
             fm.data.infoSpec2RF2 = text('Position',[0.51,  0.725],'String',sprintf('RF2: %s / %.1f ms / %.0f dB / %.0f Hz',...
-                                   SP2_PrVersionUscore(data.spec2.rf2.shape),data.spec2.rf2.dur,data.spec2.rf2.power,...
-                                   data.spec2.rf2.offset),'FontSize',pars.displFontSize);
+                                   SP2_PrVersionUscore(dataSpec2.rf2.shape),dataSpec2.rf2.dur,dataSpec2.rf2.power,...
+                                   dataSpec2.rf2.offset),'FontSize',pars.displFontSize);
         end
         
         %--- additional acquisition parameters: water suppression ---
@@ -318,11 +318,11 @@ if isfield(data,'spec2')
             delete(fm.data.infoSpec2WS)
             fm.data = rmfield(fm.data,'infoSpec2WS');
         end
-        if ~any(strfind(data.spec2.sequence,'spuls'))    % spulse
+        if ~any(strfind(dataSpec2.sequence,'spuls'))    % spulse
             fm.data.infoSpec2WS = text('Position',[0.51,  0.690],'String',sprintf('WS:  %s / %.1f ms / %.0f dB / %.0f Hz',...
-                                  SP2_PrVersionUscore(data.spec2.ws.shape),data.spec2.ws.dur,data.spec2.ws.power,...
-                                  data.spec2.ws.offset),'FontSize',pars.displFontSize);
-            if strcmp(data.spec2.ws.applied,'y')
+                                  SP2_PrVersionUscore(dataSpec2.ws.shape),dataSpec2.ws.dur,dataSpec2.ws.power,...
+                                  dataSpec2.ws.offset),'FontSize',pars.displFontSize);
+            if strcmp(dataSpec2.ws.applied,'y')
                 set(fm.data.infoSpec2WS,'Color',pars.fgTextColor)
             else
                 set(fm.data.infoSpec2WS,'Color',pars.bgTextColor)
@@ -338,90 +338,90 @@ if isfield(data,'spec2')
             delete(fm.data.infoSpec2Inv)
             fm.data = rmfield(fm.data,'infoSpec2Inv');
         end
-        if any(strfind(data.spec2.sequence,'STEAM'))    % STEAM
+        if any(strfind(dataSpec2.sequence,'STEAM'))    % STEAM
             if isfield(data.spec2,'inv')
 %             fm.data.infoSpec2Inv = text('Position',[0.51, 0.655],'String',sprintf('Inv: %s / %.1f ms / %.0f dB / %.0f Hz / %.3f s',...
-%                                    SP2_PrVersionUscore(data.spec2.inv.shape),data.spec2.inv.dur,data.spec2.inv.power,...
-%                                    data.spec2.inv.offset,data.spec2.inv.ti),'FontSize',pars.displFontSize);
+%                                    SP2_PrVersionUscore(dataSpec2.inv.shape),dataSpec2.inv.dur,dataSpec2.inv.power,...
+%                                    dataSpec2.inv.offset,dataSpec2.inv.ti),'FontSize',pars.displFontSize);
             
-                if iscell(data.spec2.inv.ti)
+                if iscell(dataSpec2.inv.ti)
                     fm.data.infoSpec2Inv = text('Position',[0.51, 0.655],'String',sprintf('Inv: %s / %.1f ms / %.0f dB / %.0f Hz / array',...
-                                           SP2_PrVersionUscore(data.spec2.inv.shape),data.spec2.inv.dur,data.spec2.inv.power,...
-                                           data.spec2.inv.offset),'FontSize',pars.displFontSize);
+                                           SP2_PrVersionUscore(dataSpec2.inv.shape),dataSpec2.inv.dur,dataSpec2.inv.power,...
+                                           dataSpec2.inv.offset),'FontSize',pars.displFontSize);
                 else
                     fm.data.infoSpec2Inv = text('Position',[0.51, 0.655],'String',sprintf('Inv: %s / %.1f ms / %.0f dB / %.0f Hz / %.3f s',...
-                                           SP2_PrVersionUscore(data.spec2.inv.shape),data.spec2.inv.dur,data.spec2.inv.power,...
-                                           data.spec2.inv.offset,data.spec2.inv.ti),'FontSize',pars.displFontSize);
+                                           SP2_PrVersionUscore(dataSpec2.inv.shape),dataSpec2.inv.dur,dataSpec2.inv.power,...
+                                           dataSpec2.inv.offset,dataSpec2.inv.ti),'FontSize',pars.displFontSize);
                 end
-                if strcmp(data.spec2.inv.applied,'y')
+                if strcmp(dataSpec2.inv.applied,'y')
                     set(fm.data.infoSpec2Inv,'Color',pars.fgTextColor)
                 else
                     set(fm.data.infoSpec2Inv,'Color',pars.bgTextColor)
                 end
             end
-        elseif any(strfind(data.spec2.sequence,'JDE'))  % JDE
+        elseif any(strfind(dataSpec2.sequence,'JDE'))  % JDE
             %--- additional acquisition parameters: JDE ---
             if isfield(fm.data,'infoSpec2JDE')
                 delete(fm.data.infoSpec2JDE)
                 fm.data = rmfield(fm.data,'infoSpec2JDE');
             end
-            if iscell(data.spec2.jde.offset)
-                switch data.spec2.nr
+            if iscell(dataSpec2.jde.offset)
+                switch dataSpec2.nr
                     case 1
                         fm.data.infoSpec2JDE = text('Position',[0.51,  0.655],'String',sprintf('JDE: %s / %.1f ms / %.0f dB / %.0f Hz',...
-                                               SP2_PrVersionUscore(data.spec2.jde.shape),data.spec2.jde.dur,data.spec2.jde.power,...
-                                               data.spec2.jde.offset{1}),'FontSize',pars.displFontSize);
+                                               SP2_PrVersionUscore(dataSpec2.jde.shape),dataSpec2.jde.dur,dataSpec2.jde.power,...
+                                               dataSpec2.jde.offset{1}),'FontSize',pars.displFontSize);
                     case 2
-                        if size(data.spec2.jde.offset,2)>1
-                            if size(data.spec2.jde.shape,2)>1
+                        if size(dataSpec2.jde.offset,2)>1
+                            if size(dataSpec2.jde.shape,2)>1
                                 fm.data.infoSpec2JDE = text('Position',[0.51,  0.655],'String',sprintf('JDE: %s / %.1f ms / %.0f dB / %.0f/%.0f Hz',...
-                                                       SP2_PrVersionUscore(data.spec2.jde.shape{1}),data.spec2.jde.dur,data.spec2.jde.power,...
-                                                       data.spec2.jde.offset{1},data.spec2.jde.offset{2}),'FontSize',pars.displFontSize);
+                                                       SP2_PrVersionUscore(dataSpec2.jde.shape{1}),dataSpec2.jde.dur,dataSpec2.jde.power,...
+                                                       dataSpec2.jde.offset{1},dataSpec2.jde.offset{2}),'FontSize',pars.displFontSize);
                             else
                                 fm.data.infoSpec2JDE = text('Position',[0.51,  0.655],'String',sprintf('JDE: %s / %.1f ms / %.0f dB / %.0f/%.0f Hz',...
-                                                       SP2_PrVersionUscore(data.spec2.jde.shape),data.spec2.jde.dur,data.spec2.jde.power,...
-                                                       data.spec2.jde.offset{1},data.spec2.jde.offset{2}),'FontSize',pars.displFontSize);
+                                                       SP2_PrVersionUscore(dataSpec2.jde.shape),dataSpec2.jde.dur,dataSpec2.jde.power,...
+                                                       dataSpec2.jde.offset{1},dataSpec2.jde.offset{2}),'FontSize',pars.displFontSize);
                             end
                         else
                             fprintf('\n*** WARNING: ***\nInconsistent number of JDE offsets found for water reference scan.\n');
                         end
                     case 3
-                        if size(data.spec2.jde.offset,2)>2
+                        if size(dataSpec2.jde.offset,2)>2
                             fm.data.infoSpec2JDE = text('Position',[0.51,  0.655],'String',sprintf('JDE: %s / %.1f ms / %.0f dB / %.0f/%.0f/%.0f Hz',...
-                                                   SP2_PrVersionUscore(data.spec2.jde.shape),data.spec2.jde.dur,data.spec2.jde.power,...
-                                                   data.spec2.jde.offset{1},data.spec2.jde.offset{2},data.spec2.jde.offset{3}),'FontSize',pars.displFontSize);
+                                                   SP2_PrVersionUscore(dataSpec2.jde.shape),dataSpec2.jde.dur,dataSpec2.jde.power,...
+                                                   dataSpec2.jde.offset{1},dataSpec2.jde.offset{2},dataSpec2.jde.offset{3}),'FontSize',pars.displFontSize);
                         else
                             fprintf('\n*** WARNING: ***\nInconsistent number of JDE offsets found for water reference scan.\n');
                         end
                     case 4
-                        if size(data.spec2.jde.offset,2)>3
+                        if size(dataSpec2.jde.offset,2)>3
                             fm.data.infoSpec2JDE = text('Position',[0.51,  0.655],'String',sprintf('JDE: %s / %.1f ms / %.0f dB / %.0f/%.0f/%.0f/%.0f Hz',...
-                                                   SP2_PrVersionUscore(data.spec2.jde.shape),data.spec2.jde.dur,data.spec2.jde.power,...
-                                                   data.spec2.jde.offset{1},data.spec2.jde.offset{2},data.spec2.jde.offset{3},data.spec2.jde.offset{4}),'FontSize',pars.displFontSize);
+                                                   SP2_PrVersionUscore(dataSpec2.jde.shape),dataSpec2.jde.dur,dataSpec2.jde.power,...
+                                                   dataSpec2.jde.offset{1},dataSpec2.jde.offset{2},dataSpec2.jde.offset{3},dataSpec2.jde.offset{4}),'FontSize',pars.displFontSize);
                         else
                             fprintf('\n*** WARNING: ***\nInconsistent number of JDE offsets found for water reference scan.\n');
                         end
                     otherwise
-                        if size(data.spec2.jde.offset,2)>3
+                        if size(dataSpec2.jde.offset,2)>3
                             fm.data.infoSpec2JDE = text('Position',[0.51,  0.655],'String',sprintf('JDE: %s / %.1f ms / %.0f dB / %.0f/%.0f/%.0f/%.0f/... Hz',...
-                                                   SP2_PrVersionUscore(data.spec2.jde.shape),data.spec2.jde.dur,data.spec2.jde.power,...
-                                                   data.spec2.jde.offset{1},data.spec2.jde.offset{2},data.spec2.jde.offset{3},data.spec2.jde.offset{4}),'FontSize',pars.displFontSize);
+                                                   SP2_PrVersionUscore(dataSpec2.jde.shape),dataSpec2.jde.dur,dataSpec2.jde.power,...
+                                                   dataSpec2.jde.offset{1},dataSpec2.jde.offset{2},dataSpec2.jde.offset{3},dataSpec2.jde.offset{4}),'FontSize',pars.displFontSize);
                         else
                             fprintf('\n*** WARNING: ***\nInconsistent number of JDE offsets found for water reference scan.\n');
                         end
                 end
-            elseif iscell(data.spec2.jde.power)         % JDE efficiency (power array)
+            elseif iscell(dataSpec2.jde.power)         % JDE efficiency (power array)
                 fm.data.infoSpec2JDE = text('Position',[0.51, 0.655],'String',sprintf('JDE: %s / %.1f ms / array / %.0f Hz',...
-                                       SP2_PrVersionUscore(data.spec2.jde.shape),data.spec2.jde.dur,...
-                                       data.spec2.jde.offset),'FontSize',pars.displFontSize);
-                fprintf('Data 2: Power array: %s dB\n',SP2_Vec2PrintStr(cell2mat(data.spec2.jde.power)))                   
+                                       SP2_PrVersionUscore(dataSpec2.jde.shape),dataSpec2.jde.dur,...
+                                       dataSpec2.jde.offset),'FontSize',pars.displFontSize);
+                fprintf('Data 2: Power array: %s dB\n',SP2_Vec2PrintStr(cell2mat(dataSpec2.jde.power)))                   
             else
                 fm.data.infoSpec2JDE = text('Position',[0.51,  0.655],'String',sprintf('JDE: %s / %.1f ms / %.0f dB / %.0f Hz',...
-                                       SP2_PrVersionUscore(data.spec2.jde.shape),data.spec2.jde.dur,data.spec2.jde.power,...
-                                       data.spec2.jde.offset),'FontSize',pars.displFontSize);
+                                       SP2_PrVersionUscore(dataSpec2.jde.shape),dataSpec2.jde.dur,dataSpec2.jde.power,...
+                                       dataSpec2.jde.offset),'FontSize',pars.displFontSize);
             end
             if isfield(fm.data,'infoSpec2JDE')
-                if strcmp(data.spec2.jde.applied,'y')
+                if strcmp(dataSpec2.jde.applied,'y')
                     set(fm.data.infoSpec2JDE,'Color',pars.fgTextColor)
                 else
                     set(fm.data.infoSpec2JDE,'Color',pars.bgTextColor)
@@ -434,11 +434,11 @@ if isfield(data,'spec2')
             delete(fm.data.infoSpec2OVS)
             fm.data = rmfield(fm.data,'infoSpec2OVS');
         end
-        if ~any(strfind(data.spec2.sequence,'spuls'))    % spulse
+        if ~any(strfind(dataSpec2.sequence,'spuls'))    % spulse
             fm.data.infoSpec2OVS = text('Position',[0.51, 0.620],'String',sprintf('OVS: %s / %.1f ms / %.0f dB / %.0f Hz',...
-                                   SP2_PrVersionUscore(data.spec2.ovs.shape),data.spec2.ovs.dur,data.spec2.ovs.power,...
-                                   data.spec2.ovs.offset),'FontSize',pars.displFontSize);
-            if strcmp(data.spec2.ovs.applied,'y')
+                                   SP2_PrVersionUscore(dataSpec2.ovs.shape),dataSpec2.ovs.dur,dataSpec2.ovs.power,...
+                                   dataSpec2.ovs.offset),'FontSize',pars.displFontSize);
+            if strcmp(dataSpec2.ovs.applied,'y')
                 set(fm.data.infoSpec2OVS,'Color',pars.fgTextColor)
             else
                 set(fm.data.infoSpec2OVS,'Color',pars.bgTextColor)
@@ -450,36 +450,36 @@ if isfield(data,'spec2')
             delete(fm.data.infoSpec2DatDim)
             fm.data = rmfield(fm.data,'infoSpec2DatDim');
         end
-        if any(strfind(data.spec2.sequence,'JDE'))  % JDE
-            if isempty(data.spec2.seqtype)
+        if any(strfind(dataSpec2.sequence,'JDE'))  % JDE
+            if isempty(dataSpec2.seqtype)
                 fm.data.infoSpec2DatDim = text('Position',[0.51, 0.585],'String',...
                                           sprintf('%s, spec %.0f, na %.0f, nr %.0f',...
-                                          SP2_PrVersionUscore(data.spec2.sequence),data.spec2.nspecC,...
-                                          data.spec2.na,data.spec2.nr),'FontSize',pars.displFontSize);
+                                          SP2_PrVersionUscore(dataSpec2.sequence),dataSpec2.nspecC,...
+                                          dataSpec2.na,dataSpec2.nr),'FontSize',pars.displFontSize);
             else
                 fm.data.infoSpec2DatDim = text('Position',[0.51, 0.585],'String',...
                                           sprintf('%s (%s), spec %.0f, na %.0f, nr %.0f',...
-                                          SP2_PrVersionUscore(data.spec2.sequence),data.spec2.seqtype,data.spec2.nspecC,...
-                                          data.spec2.na,data.spec2.nr),'FontSize',pars.displFontSize);
+                                          SP2_PrVersionUscore(dataSpec2.sequence),dataSpec2.seqtype,dataSpec2.nspecC,...
+                                          dataSpec2.na,dataSpec2.nr),'FontSize',pars.displFontSize);
             end
         else                % any other case
             fm.data.infoSpec2DatDim = text('Position',[0.51, 0.585],'String',...
                                       sprintf('%s, spec %.0f, nx %.0f, ny %.0f, na %.0f, nr %.0f',...
-                                      SP2_PrVersionUscore(data.spec2.sequence), data.spec2.nspecC,data.spec2.nx,...
-                                      data.spec2.ny,data.spec2.na(1),data.spec2.nr),'FontSize',pars.displFontSize);
+                                      SP2_PrVersionUscore(dataSpec2.sequence), dataSpec2.nspecC,dataSpec2.nx,...
+                                      dataSpec2.ny,dataSpec2.na(1),dataSpec2.nr),'FontSize',pars.displFontSize);
         end
         if isfield(fm.data,'infoSpec2AcqPars')
             delete(fm.data.infoSpec2AcqPars)
             fm.data = rmfield(fm.data,'infoSpec2AcqPars');
         end
-        if any(findstr(data.spec2.sequence,'STEAM')) || any(findstr(data.spec2.sequence,'svs_st'))      % STEAM MRS
+        if any(findstr(dataSpec2.sequence,'STEAM')) || any(findstr(dataSpec2.sequence,'svs_st'))      % STEAM MRS
             fm.data.infoSpec2AcqPars = text('Position',[0.51,  0.550],'String',...
-                                       sprintf('sw %.1f kHz, sf %.1f MHz, TE %.1f ms, TM %.1f ms',data.spec2.sw_h/1000,...
-                                       data.spec2.sf,data.spec2.te,data.spec2.tm),'FontSize',pars.displFontSize);
+                                       sprintf('sw %.1f kHz, sf %.1f MHz, TE %.1f ms, TM %.1f ms',dataSpec2.sw_h/1000,...
+                                       dataSpec2.sf,dataSpec2.te,dataSpec2.tm),'FontSize',pars.displFontSize);
         else                                                % any other sequence (e.g. PRESS)
             fm.data.infoSpec2AcqPars = text('Position',[0.51,  0.550],'String',...
-                                       sprintf('sw %.1f kHz, sf %.1f MHz, TE %.1f ms',data.spec2.sw_h/1000,...
-                                       data.spec2.sf,data.spec2.te),'FontSize',pars.displFontSize);
+                                       sprintf('sw %.1f kHz, sf %.1f MHz, TE %.1f ms',dataSpec2.sw_h/1000,...
+                                       dataSpec2.sf,dataSpec2.te),'FontSize',pars.displFontSize);
         end
         
         if isfield(fm.data,'infoSpec2Rcvrs')
@@ -487,15 +487,15 @@ if isfield(data,'spec2')
             fm.data = rmfield(fm.data,'infoSpec2Rcvrs');
         end
         if isfield(data.spec2,'nRcvrs')
-            if data.spec2.nRcvrs>1
+            if dataSpec2.nRcvrs>1
                 fm.data.infoSpec2Rcvrs = text('Position',[0.51,  0.515],'String',...
                                          sprintf('TR %.0f ms, tof %.0f Hz, %.0f rcvrs, gain %.0f',...
-                                         data.spec2.tr,data.spec2.offset,data.spec2.nRcvrs,data.spec2.gain),...
+                                         dataSpec2.tr,dataSpec2.offset,dataSpec2.nRcvrs,dataSpec2.gain),...
                                          'FontSize',pars.displFontSize);
             else
                 fm.data.infoSpec2Rcvrs = text('Position',[0.51,  0.515],'String',...
                                          sprintf('TR %.0f ms, tof %.0f Hz, 1 rcvr, gain %.0f',...
-                                         data.spec2.tr,data.spec2.offset,data.spec2.gain),...
+                                         dataSpec2.tr,dataSpec2.offset,dataSpec2.gain),...
                                          'FontSize',pars.displFontSize);
             end
         end
@@ -506,8 +506,8 @@ if isfield(data,'spec2')
             fm.data = rmfield(fm.data,'infoSpec2VoxGeo');
         end
         fm.data.infoSpec2VoxGeo = text('Position',[0.51,  0.480],'String',...
-                                  sprintf('vox %s mm, pos %s mm',SP2_Vec2PrintStr(data.spec2.vox),...
-                                  SP2_Vec2PrintStr(data.spec2.pos)),'FontSize',pars.displFontSize);
+                                  sprintf('vox %s mm, pos %s mm',SP2_Vec2PrintStr(dataSpec2.vox),...
+                                  SP2_Vec2PrintStr(dataSpec2.pos)),'FontSize',pars.displFontSize);
         
         %--- additional acquisition parameters: shims ---
         if isfield(fm.data,'infoSpec2ShimZeroAnd1st')
@@ -515,44 +515,40 @@ if isfield(data,'spec2')
             fm.data = rmfield(fm.data,'infoSpec2ShimZeroAnd1st');
         end
         fm.data.infoSpec2ShimZeroAnd1st = text('Position',[0.51,  0.445],'String',sprintf('0: %.0f, 1st: %.0f, %.0f, %.0f',...
-                                   data.spec2.z0,data.spec2.x1,data.spec2.z1c,data.spec2.y1),'FontSize',pars.displFontSize);
+                                   dataSpec2.z0,dataSpec2.x1,dataSpec2.z1c,dataSpec2.y1),'FontSize',pars.displFontSize);
 
         if isfield(fm.data,'infoSpec2Shim2nd')
             delete(fm.data.infoSpec2Shim2nd)
             fm.data = rmfield(fm.data,'infoSpec2Shim2nd');
         end
         fm.data.infoSpec2Shim2nd = text('Position',[0.51,  0.410],'String',sprintf('2nd: %.0f, %.0f, %.0f, %.0f, %.0f',...
-                                   data.spec2.x2y2,data.spec2.xz,data.spec2.z2c,data.spec2.yz,data.spec2.xy),'FontSize',pars.displFontSize);
+                                   dataSpec2.x2y2,dataSpec2.xz,dataSpec2.z2c,dataSpec2.yz,dataSpec2.xy),'FontSize',pars.displFontSize);
 
         if isfield(fm.data,'infoSpec2Shim3rd')
             delete(fm.data.infoSpec2Shim3rd)
             fm.data = rmfield(fm.data,'infoSpec2Shim3rd');
         end
         fm.data.infoSpec2Shim3rd = text('Position',[0.51,  0.375],'String',sprintf('3rd: %.0f, %.0f, %.0f, %.0f, %.0f, %.0f, %.0f',...
-                                   data.spec2.x3,data.spec2.zx2y2,data.spec2.xz2,data.spec2.z3c,data.spec2.yz2,data.spec2.zxy,...
-                                   data.spec2.y3),'FontSize',pars.displFontSize);
+                                   dataSpec2.x3,dataSpec2.zx2y2,dataSpec2.xz2,dataSpec2.z3c,dataSpec2.yz2,dataSpec2.zxy,...
+                                   dataSpec2.y3),'FontSize',pars.displFontSize);
     end
 end
 
 %--- extract water from water + metab scan ---
-if strcmp(data.spec1.fidFile,data.spec2.fidFile)
+if strcmp(dataSpec1.fidFilePath,dataSpec2.fidFilePath)
     if ~isfield(fm.data,'dat2ExtractWater')
         fm.data.dat2ExtractWater = uicontrol('Style','Pushbutton','String','Water','Position',[540 432 55 18],'Callback','SP2_Data_Dat2ExtractWater;',...
                                              'TooltipString',sprintf('Extract water reference\n(Last water scan, ECC by first water scan)'),'FontSize',pars.fontSize);
     end
+    flag.dataIdentScan = 1;
 else
+    flag.dataIdentScan = 0;
     if isfield(fm.data,'dat2ExtractWater')
         delete(fm.data.dat2ExtractWater)
         fm.data = rmfield(fm.data,'dat2ExtractWater');
     end
 end
 
-%--- set/reset identical scan flag ---
-if strcmp(data.spec1.fidFile,data.spec2.fidFile)
-    flag.dataIdentScan = 1;
-else
-    flag.dataIdentScan = 0;
-end
 
 %--- ppm calib update ---
 set(fm.data.ppmCalib,'String',sprintf('%.3f',data.ppmCalib))
